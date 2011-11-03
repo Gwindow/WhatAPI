@@ -55,7 +55,7 @@ public class UserSearch {
 	}
 
 	public boolean hasPreviousPage() {
-		if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) != 0)))
+		if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
 			return true;
 		else
 			return false;

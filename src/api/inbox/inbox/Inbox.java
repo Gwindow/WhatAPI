@@ -64,7 +64,7 @@ public class Inbox {
 	}
 
 	public boolean hasPreviousPage() {
-		if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) != 0)))
+		if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
 			return true;
 		else
 			return false;
@@ -77,9 +77,11 @@ public class Inbox {
 		return page;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Inbox [getResponse()=" + getResponse() + ", getStatus()=" + getStatus() + ", getLastPage()=" + getLastPage()
