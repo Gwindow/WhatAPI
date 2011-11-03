@@ -54,7 +54,7 @@ public class Notifications {
 	}
 
 	public boolean hasPreviousPage() {
-		if (((response.getCurrentPages().intValue()) != 1) || ((response.getCurrentPages().intValue()) != 0))
+		if (((response.getCurrentPages().intValue()) != 1) || ((response.getCurrentPages().intValue()) == 0))
 			return true;
 		else
 			return false;
