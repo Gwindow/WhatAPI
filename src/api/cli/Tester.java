@@ -11,7 +11,6 @@ public class Tester {
 		// MySoup.login("login.php", "gazelle", "123456");
 
 		MySoup.setSite("http://what.cd/");
-		MySoup.login("login.php", "Gwindow", "t2ustUdE");
 		Bookmarks b = Bookmarks.init();
 		System.out.println(b);
 		// System.out.println(MySoup.getIndex());
