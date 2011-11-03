@@ -34,7 +34,6 @@ import org.jsoup.nodes.Element;
 
 import api.forum.forumsections.ForumSections;
 import api.index.Index;
-import api.parser.RssParser;
 import api.util.CouldNotLoadException;
 import api.util.RegexTools;
 
@@ -276,7 +275,6 @@ public class MySoup {
 			userId = regex.split(d, "id=", "\" class");
 
 			// load rss feed urls
-			RssParser.loadRssFeedList(scrape);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -290,6 +288,7 @@ public class MySoup {
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
 		}
+
 		try {
 			@SuppressWarnings("unused")
 			HttpGet httpget = new HttpGet(url);
@@ -502,24 +501,34 @@ public class MySoup {
 		}
 
 		try {
-			HttpGet httpget = new HttpGet(url);
-			@SuppressWarnings("unused")
-			HttpResponse response;
-			response = httpClient.execute(httpget);
-			HttpPost httpost = new HttpPost(url);
+			HttpConnectionParams.setConnectionTimeout(httpParams, 60000);
+			HttpConnectionParams.setSoTimeout(httpParams, 60000);
 
+			HttpGet httpget = new HttpGet(url);
+			HttpResponse response = httpClient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+
+			HttpPost httpost = new HttpPost(url);
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			nvps.add(new BasicNameValuePair("action", "takecompose"));
 			nvps.add(new BasicNameValuePair("toid", id));
 			nvps.add(new BasicNameValuePair("auth", authey));
 			nvps.add(new BasicNameValuePair("subject", subject));
 			nvps.add(new BasicNameValuePair("body", body));
+
 			httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+
 			response = httpClient.execute(httpost);
+			entity = response.getEntity();
+			if (entity != null) {
+				entity.consumeContent();
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not send private message");
 		}
+
 	}
 
 	/**

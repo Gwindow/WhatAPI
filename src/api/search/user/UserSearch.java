@@ -21,6 +21,18 @@ public class UserSearch {
 			return null;
 	}
 
+	public static UserSearch userSearchFromSearchTermAndPage(String searchTerm, int page) {
+		if (searchTerm.trim().length() > 0) {
+			UserSearch.searchTerm = searchTerm;
+			UserSearch.page = page;
+			String authkey = MySoup.getAuthKey();
+			String url = "ajax.php?action=usersearch&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
+			UserSearch userSearch = (UserSearch) MySon.toObject(url, UserSearch.class);
+			return userSearch;
+		} else
+			return null;
+	}
+
 	public static UserSearch userSearchFromNextPage() {
 		page += 1;
 		String authkey = MySoup.getAuthKey();
