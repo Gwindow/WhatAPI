@@ -39,6 +39,28 @@ public class MySon {
 	}
 
 	/**
+	 * Create a java object from a json page
+	 * 
+	 * @param url
+	 *            url of the json page
+	 * @param t
+	 *            type of object to return
+	 * @return object of type t
+	 */
+	public static Object toObjectOther(String url, Type t) {
+		String json = null;
+		try {
+			json = MySoup.scrapeOther(url).text();
+			Object o = gson.fromJson(json, t);
+			return o;
+		} catch (CouldNotLoadException e) {
+			e.printStackTrace();
+			System.err.println("Couldn't create json object " + t.toString());
+			return null;
+		}
+	}
+
+	/**
 	 * Create a java object from a json string
 	 * 
 	 * @param json
