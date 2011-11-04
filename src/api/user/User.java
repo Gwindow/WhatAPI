@@ -34,7 +34,7 @@ public class User {
 	 * Add user to your friend list
 	 */
 	public void addToFriends() throws CouldNotLoadException {
-		if (!getProfile().getIsFriend()) {
+		if (!getProfile().IsFriend()) {
 			try {
 				MySoup.scrape("friends.php?action=add&friendid=" + id + "&auth=" + MySoup.getAuthKey());
 			} catch (CouldNotLoadException e) {

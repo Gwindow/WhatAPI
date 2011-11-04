@@ -26,10 +26,9 @@ public class ProductSearch {
 		return ps;
 	}
 
-	public boolean getStatus() {
-		if (totalItems.intValue() > 0) {
+	public boolean hasItems() {
+		if (totalItems.intValue() > 0)
 			return true;
-		}
 		return false;
 	}
 

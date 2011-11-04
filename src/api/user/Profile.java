@@ -23,7 +23,7 @@ public class Profile {
 		return this.community;
 	}
 
-	public boolean getIsFriend() {
+	public boolean IsFriend() {
 		return this.isFriend;
 	}
 
