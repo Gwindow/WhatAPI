@@ -119,4 +119,5 @@ public class ProductSearch {
 	public void setTotalItems(Number totalItems) {
 		this.totalItems = totalItems;
 	}
+
 }
