@@ -566,7 +566,8 @@ public class MySoup {
 		}
 	}
 
-	/* public static void post(String url) { String url = SITE + "user.php?action=rippy&id=" + id; if (isSSLEnabled()) {
+	/*
+	 * public static void post(String url) { String url = SITE + "user.php?action=rippy&id=" + id; if (isSSLEnabled()) {
 	 * url = linkToSSL(url); }
 	 * 
 	 * try { HttpGet httpget = new HttpGet(url);
@@ -578,7 +579,8 @@ public class MySoup {
 	 * nvps.add(new BasicNameValuePair("auth", authKey)); nvps.add(new BasicNameValuePair("toid", id)); nvps.add(new
 	 * BasicNameValuePair("message", message)); httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8)); response
 	 * = httpClient.execute(httpost); } catch (Exception e) { e.printStackTrace(); throw new
-	 * CouldNotLoadException("Could not send rippy"); } } */
+	 * CouldNotLoadException("Could not send rippy"); } }
+	 */
 
 	public static boolean canNotifications() {
 		return canNotifications;

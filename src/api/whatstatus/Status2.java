@@ -1,4 +1,4 @@
-package api.status;
+package api.whatstatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +18,11 @@ import api.util.Tuple;
  * 
  * @author Tim Get the status of what.cd 0 is up 1 is down 2 is maintenance
  */
-public class Status {
+public class Status2 {
 	String whatstatus = "http://whatstatus.info/";
 	Document whatDoc;
 
-	public Status() throws CouldNotLoadException {
+	public Status2() throws CouldNotLoadException {
 		try {
 			whatDoc = MySoup.scrapeOther(whatstatus);
 		} catch (Exception e) {
