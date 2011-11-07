@@ -13,7 +13,7 @@ import api.util.CouldNotLoadException;
  */
 
 public class Rippy {
-	private String id;
+	private int id;
 	private String body;
 
 	/**
@@ -24,7 +24,7 @@ public class Rippy {
 	 * @param body
 	 *            body of the message
 	 */
-	public Rippy(String id, String body) {
+	public Rippy(int id, String body) {
 		this.id = id;
 		this.body = body;
 	}
@@ -33,7 +33,7 @@ public class Rippy {
 	 * @param id
 	 *            recipent's id
 	 */
-	public Rippy(String id) {
+	public Rippy(int id) {
 		this.id = id;
 	}
 
@@ -45,7 +45,7 @@ public class Rippy {
 	public void sendRippy() throws CouldNotLoadException {
 		if (body.length() > 0) {
 			try {
-				MySoup.sendRippy(id, body);
+				MySoup.sendRippy(String.valueOf(id), body);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new CouldNotLoadException(e.getMessage());
@@ -56,7 +56,7 @@ public class Rippy {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 

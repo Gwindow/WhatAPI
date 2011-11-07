@@ -32,28 +32,54 @@ public class Torrent {
 	private String snatched;
 	private String time;
 
+	/**
+	 * 
+	 * @return torrent encoding
+	 */
 	public String getEncoding() {
 		return this.encoding;
 	}
 
-	public String getFileCount() {
-		return this.fileCount;
+	/**
+	 * 
+	 * @return number of files in torrent
+	 */
+	public int getFileCount() {
+		return Integer.parseInt(this.fileCount);
 	}
 
+	/**
+	 * 
+	 * @return format of torrent
+	 */
 	public String getFormat() {
 		return this.format;
 	}
 
+	/**
+	 * Returns true if torrent is freeleech
+	 * 
+	 * @return is free leech
+	 */
 	public boolean isFreeTorrent() {
 		if (freeTorrent.equals("1"))
 			return true;
 		return false;
 	}
 
-	public String getGroupId() {
-		return this.groupId;
+	/**
+	 * 
+	 * @return torrent group id
+	 */
+	public int getGroupId() {
+		return Integer.parseInt(this.groupId);
 	}
 
+	/**
+	 * Returns true if the torrent has a cue
+	 * 
+	 * @return has cue
+	 */
 	public boolean hasCue() {
 		if (hasCue.equals("1"))
 			return true;
@@ -61,45 +87,82 @@ public class Torrent {
 	}
 
 	public boolean hasFile() {
-		if (hasCue.equals("1"))
+		if (hasFile.equals("1"))
 			return true;
 		return false;
 	}
 
+	/**
+	 * Returns true if torrent has a log
+	 * 
+	 * @return has log
+	 */
 	public boolean hasLog() {
 		if (hasLog.equals("1"))
 			return true;
 		return false;
 	}
 
-	public String getId() {
-		return this.id;
+	/**
+	 * 
+	 * @return the id
+	 */
+	public int getId() {
+		return Integer.parseInt(this.id);
 	}
 
-	public String getLeechers() {
-		return this.leechers;
+	/**
+	 * 
+	 * @return number of leechers
+	 */
+	public int getLeechers() {
+		return Integer.parseInt(this.leechers);
 	}
 
+	/**
+	 * 
+	 * @return the log score
+	 */
 	public String getLogScore() {
 		return this.logScore;
 	}
 
+	/**
+	 * 
+	 * @return media of torrent
+	 */
 	public String getMedia() {
 		return this.media;
 	}
 
+	/**
+	 * 
+	 * @return catalogue number of remastered torrent
+	 */
 	public String getRemasterCatalogueNumber() {
 		return this.remasterCatalogueNumber;
 	}
 
+	/**
+	 * 
+	 * @return the remastered record label
+	 */
 	public String getRemasterRecordLabel() {
 		return this.remasterRecordLabel;
 	}
 
+	/**
+	 * 
+	 * @return the title of remaster
+	 */
 	public String getRemasterTitle() {
 		return this.remasterTitle;
 	}
 
+	/**
+	 * 
+	 * @return the year of remaster
+	 */
 	public String getRemasterYear() {
 		return this.remasterYear;
 	}
@@ -108,16 +171,29 @@ public class Torrent {
 		return this.remastered;
 	}
 
+	/**
+	 * Return true if torrent is a scene release
+	 * 
+	 * @return is scene release
+	 */
 	public boolean isScene() {
 		if (scene.equals("1"))
 			return true;
 		return false;
 	}
 
-	public String getSeeders() {
-		return this.seeders;
+	/**
+	 * 
+	 * @return number of seeders
+	 */
+	public int getSeeders() {
+		return Integer.valueOf(this.seeders);
 	}
 
+	/**
+	 * 
+	 * @return size of torrent
+	 */
 	public String getSize() {
 		return this.size;
 	}
@@ -126,6 +202,10 @@ public class Torrent {
 		return this.snatched;
 	}
 
+	/**
+	 * 
+	 * @return time of upload
+	 */
 	public String getTime() {
 		return this.time;
 	}
@@ -140,6 +220,11 @@ public class Torrent {
 
 	}
 
+	/**
+	 * Get the download link of the torrent
+	 * 
+	 * @return download link
+	 */
 	public String getDownloadLink() {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
@@ -148,6 +233,15 @@ public class Torrent {
 		return downloadLink;
 	}
 
+	/**
+	 * Download a file
+	 * 
+	 * @param url
+	 *            url to file
+	 * @param path
+	 *            local path to save the file
+	 * @throws IOException
+	 */
 	public void downloadFile(String url, String path) throws IOException {
 		// todo fix this
 		String name = "Unknown " + "(" + getMediaFormatEncoding() + ")";

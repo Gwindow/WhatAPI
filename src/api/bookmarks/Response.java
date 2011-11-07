@@ -5,6 +5,11 @@ import java.util.List;
 public class Response {
 	private List<BookmarksList> bookmarks;
 
+	/**
+	 * Get the list of bookmarks
+	 * 
+	 * @return the bookmarks list
+	 */
 	public List<BookmarksList> getBookmarksList() {
 		return this.bookmarks;
 	}

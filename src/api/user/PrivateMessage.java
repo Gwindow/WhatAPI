@@ -13,7 +13,7 @@ import api.util.CouldNotLoadException;
  */
 
 public class PrivateMessage {
-	private String id;
+	private int id;
 	private String subject;
 	private String body;
 
@@ -27,7 +27,7 @@ public class PrivateMessage {
 	 * @param body
 	 *            body of the message
 	 */
-	public PrivateMessage(String id, String subject, String body) {
+	public PrivateMessage(int id, String subject, String body) {
 		this.id = id;
 		this.subject = subject;
 		this.body = body;
@@ -37,7 +37,7 @@ public class PrivateMessage {
 	 * @param id
 	 *            recipent's id
 	 */
-	public PrivateMessage(String id) {
+	public PrivateMessage(int id) {
 		this.id = id;
 	}
 
@@ -49,7 +49,7 @@ public class PrivateMessage {
 	public void sendMessage() throws CouldNotLoadException {
 		if ((subject.length() > 0) && (body.length() > 0)) {
 			try {
-				MySoup.sendPrivateMessage(id, subject, body);
+				MySoup.sendPrivateMessage(String.valueOf(id), subject, body);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new CouldNotLoadException(e.getMessage());
@@ -60,7 +60,7 @@ public class PrivateMessage {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 

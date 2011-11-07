@@ -15,7 +15,7 @@ import api.util.Tuple;
 public class Torrents {
 	private Response response;
 	private String status;
-	private static transient String id;
+	private static transient int id;
 
 	/**
 	 * create the Torrents
@@ -24,7 +24,7 @@ public class Torrents {
 	 *            the id of the torrent group
 	 * @return Torrents
 	 */
-	public static Torrents torrentsFromId(String id) {
+	public static Torrents torrentsFromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=torrentgroup&id=" + id + "&auth=" + authkey;
 		Torrents torrents = (Torrents) MySon.toObject(url, Torrents.class);
@@ -37,7 +37,7 @@ public class Torrents {
 	 * 
 	 * @return the torrent group id
 	 */
-	public static String getId() {
+	public static int getId() {
 		return id;
 	}
 

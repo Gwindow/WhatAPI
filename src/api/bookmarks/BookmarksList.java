@@ -2,6 +2,11 @@ package api.bookmarks;
 
 import java.util.List;
 
+/**
+ * Each Bookmark in the bookmark list
+ * 
+ * 
+ */
 public class BookmarksList {
 	private String catalogueNumber;
 	private String id;
@@ -13,40 +18,78 @@ public class BookmarksList {
 	private String vanityHouse;
 	private String year;
 
+	/**
+	 * 
+	 * @return the catalogue number
+	 */
 	public String getCatalogueNumber() {
 		return this.catalogueNumber;
 	}
 
-	public String getId() {
-		return this.id;
+	/**
+	 * 
+	 * @return the id
+	 */
+	public int getId() {
+		return Integer.valueOf(this.id);
 	}
 
+	/**
+	 * 
+	 * @return the name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * 
+	 * @return the record label
+	 */
 	public String getRecordLabel() {
 		return this.recordLabel;
 	}
 
+	/**
+	 * 
+	 * @return the release type
+	 */
 	public String getReleaseType() {
 		return this.releaseType;
 	}
 
+	/**
+	 * 
+	 * @return the tags
+	 */
 	public String getTagList() {
 		return this.tagList;
 	}
 
+	/**
+	 * Get a list of the torrents under the bookmark
+	 * 
+	 * @return list of torrents
+	 */
 	public List<Torrent> getTorrents() {
 		return this.torrents;
 	}
 
+	/**
+	 * Returns true if bookmark is under vanity house
+	 * 
+	 * @return is under vanity house
+	 */
 	public boolean isVanityHouse() {
 		if (vanityHouse.equalsIgnoreCase("1"))
 			return true;
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return the year
+	 */
 	public String getYear() {
 		return this.year;
 	}

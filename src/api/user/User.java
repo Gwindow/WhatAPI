@@ -13,7 +13,7 @@ import api.util.CouldNotLoadException;
 public class User {
 	private Profile response;
 	private String status;
-	private static transient String id;
+	private static transient int id;
 
 	/**
 	 * Return a User object created from an id
@@ -22,7 +22,7 @@ public class User {
 	 *            id of user
 	 * @return User object
 	 */
-	public static User userFromId(String id) {
+	public static User userFromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=user&id=" + id + "&auth=" + authkey;
 		User user = (User) MySon.toObject(url, User.class);
@@ -71,7 +71,7 @@ public class User {
 	 * 
 	 * @return user id
 	 */
-	public static String getId() {
+	public static int getId() {
 		return id;
 	}
 

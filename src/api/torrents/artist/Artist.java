@@ -15,9 +15,9 @@ import api.util.Tuple;
 public class Artist {
 	private Response response;
 	private String status;
-	private static transient String id;
+	private static transient int id;
 
-	public static Artist artistFromId(String id) {
+	public static Artist artistFromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=artist&id=" + id + "&auth=" + authkey;
 		Artist artist = (Artist) MySon.toObject(url, Artist.class);
@@ -25,7 +25,7 @@ public class Artist {
 		return artist;
 	}
 
-	public static String getId() {
+	public static int getId() {
 		return id;
 	}
 

@@ -6,18 +6,38 @@ public class AnnouncementsList {
 	private String newsTime;
 	private String title;
 
+	/**
+	 * Body of the announcement
+	 * 
+	 * @return the body
+	 */
 	public String getBody() {
 		return this.body;
 	}
 
+	/**
+	 * ID of the announcement
+	 * 
+	 * @return the id
+	 */
 	public String getNewsId() {
 		return this.newsId;
 	}
 
+	/**
+	 * The at which the announcement was created
+	 * 
+	 * @return the time
+	 */
 	public String getNewsTime() {
 		return this.newsTime;
 	}
 
+	/**
+	 * The title of the announcement
+	 * 
+	 * @return the title
+	 */
 	public String getTitle() {
 		return this.title;
 	}
