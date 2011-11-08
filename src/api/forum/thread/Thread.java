@@ -52,17 +52,25 @@ public class Thread {
 	}
 
 	public boolean hasNextPage() {
-		if ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0)
-			return true;
-		else
+		try {
+			if ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
 			return false;
+		}
 	}
 
 	public boolean hasPreviousPage() {
-		if (((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0))
-			return true;
-		else
+		try {
+			if (((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0))
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
 			return false;
+		}
 	}
 
 	public String getUrl() {

@@ -23,7 +23,7 @@ public class MySon {
 
 	public static Object toObject(String url, Type t) {
 		try {
-			reader = new InputStreamReader(MySoup.retrieveStream(url));
+			reader = new InputStreamReader(MySoup.scrape(url));
 			Object o = gson.fromJson(reader, t);
 			return o;
 		} catch (Exception e) {

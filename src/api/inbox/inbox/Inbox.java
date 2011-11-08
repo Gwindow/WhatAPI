@@ -53,21 +53,33 @@ public class Inbox {
 	}
 
 	public int getLastPage() {
-		return response.getPages().intValue();
+		try {
+			return response.getPages().intValue();
+		} catch (Exception e) {
+			return 1;
+		}
 	}
 
 	public boolean hasNextPage() {
-		if ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0)
-			return true;
-		else
+		try {
+			if ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
 			return false;
+		}
 	}
 
 	public boolean hasPreviousPage() {
-		if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
-			return true;
-		else
+		try {
+			if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
 			return false;
+		}
 	}
 
 	/**
@@ -77,11 +89,9 @@ public class Inbox {
 		return page;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Inbox [getResponse()=" + getResponse() + ", getStatus()=" + getStatus() + ", getLastPage()=" + getLastPage()

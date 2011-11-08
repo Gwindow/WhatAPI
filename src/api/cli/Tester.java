@@ -10,8 +10,9 @@ public class Tester {
 		MySoup.setSite("http://127.0.0.1:8080/");
 		MySoup.login("login.php", "tester", "123456");
 
-		Section s = Section.sectionFromIdAndPage(2, 1);
+		Section s = Section.sectionFromIdAndPage(3, 1);
 		System.out.println(s);
+		// System.out.println(s.getResponse().getThreads());
 	}
 
 	public static void main(String[] args) throws CouldNotLoadException {

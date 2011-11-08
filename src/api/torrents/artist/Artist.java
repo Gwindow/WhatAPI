@@ -154,9 +154,15 @@ public class Artist {
 
 	/* public boolean getStatus() { if (status.equalsIgnoreCase("success")) return true; return false; } */
 
+	/**
+	 * Get the status of the request
+	 * 
+	 * @return true if success
+	 */
 	public boolean getStatus() {
-		// TODO Auto-generated method stub
-		return true;
+		if (status.equalsIgnoreCase("success"))
+			return true;
+		return false;
 	}
 
 }

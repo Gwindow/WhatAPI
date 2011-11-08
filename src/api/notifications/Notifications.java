@@ -43,21 +43,33 @@ public class Notifications {
 	}
 
 	public int getLastPage() {
-		return response.getPages().intValue();
+		try {
+			return response.getPages().intValue();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	public boolean hasNextPage() {
-		if ((response.getPages().intValue() - response.getCurrentPages().intValue()) > 0)
-			return true;
-		else
+		try {
+			if ((response.getPages().intValue() - response.getCurrentPages().intValue()) > 0)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
 			return false;
+		}
 	}
 
 	public boolean hasPreviousPage() {
-		if (((response.getCurrentPages().intValue()) != 1) || ((response.getCurrentPages().intValue()) == 0))
-			return true;
-		else
+		try {
+			if (((response.getCurrentPages().intValue()) != 1) || ((response.getCurrentPages().intValue()) == 0))
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
 			return false;
+		}
 	}
 
 	public void clearNotifications() {

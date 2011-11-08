@@ -78,7 +78,7 @@ public class Torrent {
 		// TODO fix this, add to json in artist.php
 		// return this.FilePath;
 
-		return "";
+		return this.FilePath;
 	}
 
 	/**

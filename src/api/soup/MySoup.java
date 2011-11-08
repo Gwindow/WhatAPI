@@ -30,7 +30,6 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import api.forum.forumsections.ForumSections;
 import api.index.Index;
@@ -218,71 +217,6 @@ public class MySoup {
 		return i;
 	}
 
-	public static void oldlogin(String url, String username, String password) throws CouldNotLoadException {
-		String index = "index.php";
-		url = SITE + url;
-		if (isSSLEnabled()) {
-			url = linkToSSL(url);
-			index = linkToSSL(index);
-		}
-		try {
-			HttpConnectionParams.setConnectionTimeout(httpParams, 60000);
-			HttpConnectionParams.setSoTimeout(httpParams, 60000);
-
-			HttpGet httpget = new HttpGet(url);
-			HttpResponse response = httpClient.execute(httpget);
-			HttpEntity entity = response.getEntity();
-
-			HttpPost httpost = new HttpPost(url);
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-			nvps.add(new BasicNameValuePair("username", username));
-			nvps.add(new BasicNameValuePair("password", password));
-
-			httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-
-			response = httpClient.execute(httpost);
-			entity = response.getEntity();
-			if (entity != null) {
-				entity.consumeContent();
-			}
-
-			cookies = httpClient.getCookieStore().getCookies();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could not login");
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could not login");
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could not login");
-
-		}
-
-		try {
-			// get the authkey and userid
-			Document scrape = scrape(index);
-			String s =
-					scrape.getElementById("header").getElementById("userinfo").getElementById("userinfo_username")
-							.getElementById("nav_logout").getElementsByTag("a").get(0).toString();
-			authey = regex.splitAuthKey(s);
-
-			Element e = scrape.getElementById("userinfo").getElementById("userinfo_username").getElementsByTag("a").get(0);
-			RegexTools regex = new RegexTools();
-			String d = e.toString();
-			userId = regex.split(d, "id=", "\" class");
-
-			// load rss feed urls
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could parse authkey");
-		}
-
-	}
-
 	public static void postReply(String url, String id, String reply) throws CouldNotLoadException {
 		url = SITE + url;
 		if (isSSLEnabled()) {
@@ -352,7 +286,7 @@ public class MySoup {
 		}
 	}
 
-	public static Document scrape(String url) throws CouldNotLoadException {
+	public static Document oldscrape(String url) throws CouldNotLoadException {
 		url = SITE + url;
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
@@ -378,7 +312,7 @@ public class MySoup {
 		return doc;
 	}
 
-	public static InputStream retrieveStream(String url) {
+	public static InputStream scrape(String url) {
 		url = SITE + url;
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
@@ -585,8 +519,7 @@ public class MySoup {
 		}
 	}
 
-	/*
-	 * public static void post(String url) { String url = SITE + "user.php?action=rippy&id=" + id; if (isSSLEnabled()) {
+	/* public static void post(String url) { String url = SITE + "user.php?action=rippy&id=" + id; if (isSSLEnabled()) {
 	 * url = linkToSSL(url); }
 	 * 
 	 * try { HttpGet httpget = new HttpGet(url);
@@ -598,8 +531,7 @@ public class MySoup {
 	 * nvps.add(new BasicNameValuePair("auth", authKey)); nvps.add(new BasicNameValuePair("toid", id)); nvps.add(new
 	 * BasicNameValuePair("message", message)); httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8)); response
 	 * = httpClient.execute(httpost); } catch (Exception e) { e.printStackTrace(); throw new
-	 * CouldNotLoadException("Could not send rippy"); } }
-	 */
+	 * CouldNotLoadException("Could not send rippy"); } } */
 
 	public static boolean canNotifications() {
 		return canNotifications;
