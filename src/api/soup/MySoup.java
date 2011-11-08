@@ -378,6 +378,25 @@ public class MySoup {
 		return doc;
 	}
 
+	public static InputStream retrieveStream(String url) {
+		url = SITE + url;
+		if (isSSLEnabled()) {
+			url = linkToSSL(url);
+		}
+		HttpConnectionParams.setConnectionTimeout(httpParams, 60000);
+		HttpConnectionParams.setSoTimeout(httpParams, 60000);
+		HttpGet httpget = new HttpGet(url);
+		HttpResponse response = null;
+		try {
+			response = httpClient.execute(httpget);
+			return response.getEntity().getContent();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
 	public static void newThread(String id, String title, String body) throws CouldNotLoadException {
 		String url = SITE + "forums.php?action=new&forumid=" + id;
 		if (isSSLEnabled()) {
