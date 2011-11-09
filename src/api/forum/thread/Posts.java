@@ -1,5 +1,7 @@
 package api.forum.thread;
 
+import org.jsoup.Jsoup;
+
 public class Posts {
 	private String addedTime;
 	private Author author;
@@ -35,6 +37,12 @@ public class Posts {
 
 	public String getPostId() {
 		return this.postId;
+	}
+
+	public String getQuotableBody() {
+		String s = "[quote=" + author.getAuthorName() + "]" + Jsoup.parse(body).text() + "[/quote]";
+		return s;
+
 	}
 
 	@Override

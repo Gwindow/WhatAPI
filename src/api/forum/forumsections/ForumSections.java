@@ -31,8 +31,10 @@ public class ForumSections {
 		return this.response;
 	}
 
-	public String getStatus() {
-		return this.status;
+	public boolean getStatus() {
+		if (status.equalsIgnoreCase("success"))
+			return true;
+		return false;
 	}
 
 	@Override

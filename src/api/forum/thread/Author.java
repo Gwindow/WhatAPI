@@ -20,8 +20,8 @@ public class Author {
 			return true;
 	}
 
-	public String getAuthorId() {
-		return this.authorId;
+	public int getAuthorId() {
+		return Integer.valueOf(this.authorId);
 	}
 
 	public String getAuthorName() {

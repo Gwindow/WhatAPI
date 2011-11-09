@@ -13,17 +13,22 @@ public class Threads {
 	private String postId;
 	private String threadId;
 	private String threadTitle;
+	private String lastReadPage;
 
-	public String getForumId() {
-		return this.forumId;
+	public int getLastReadPage() {
+		return 1;
+	}
+
+	public int getForumId() {
+		return Integer.valueOf(this.forumId);
 	}
 
 	public String getForumName() {
 		return this.forumName;
 	}
 
-	public String getLastPostId() {
-		return this.lastPostId;
+	public int getLastPostId() {
+		return Integer.valueOf(this.lastPostId);
 	}
 
 	public boolean isLocked() {
@@ -37,12 +42,12 @@ public class Threads {
 		return this.isNew;
 	}
 
-	public String getPostId() {
-		return this.postId;
+	public int getPostId() {
+		return Integer.valueOf(this.postId);
 	}
 
-	public String getThreadId() {
-		return this.threadId;
+	public int getThreadId() {
+		return Integer.valueOf(this.threadId);
 	}
 
 	public String getThreadTitle() {
@@ -61,8 +66,9 @@ public class Threads {
 
 	@Override
 	public String toString() {
-		return "Threads [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()
-				+ ", isLocked=" + isLocked() + ", isNew=" + isNew() + ", getPostId=" + getPostId() + ", getThreadId="
-				+ getThreadId() + ", getThreadTitle=" + getThreadTitle() + "]";
+		return "Threads [getLastReadPage=" + getLastReadPage() + ", getForumId=" + getForumId() + ", getForumName="
+				+ getForumName() + ", getLastPostId=" + getLastPostId() + ", isLocked=" + isLocked() + ", isNew=" + isNew()
+				+ ", getPostId=" + getPostId() + ", getThreadId=" + getThreadId() + ", getThreadTitle=" + getThreadTitle()
+				+ ", getUrl=" + getUrl() + ", getLastReadUrl=" + getLastReadUrl() + "]";
 	}
 }

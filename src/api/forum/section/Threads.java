@@ -37,48 +37,48 @@ public class Threads {
 		}
 	}
 
-	public String getAuthorId() {
-		return this.authorId;
+	public int getAuthorId() {
+		return Integer.valueOf(this.authorId);
 	}
 
 	public String getAuthorName() {
 		return this.authorName;
 	}
 
-	public String getLastAuthorId() {
-		return this.lastAuthorId;
+	public int getLastAuthorId() {
+		return Integer.valueOf(this.lastAuthorId);
 	}
 
 	public String getLastAuthorName() {
 		return this.lastAuthorName;
 	}
 
-	public String getLastID() {
-		return this.lastID;
+	public int getLastID() {
+		return Integer.valueOf(this.lastID);
 	}
 
-	public String getLastReadPage() {
-		return this.lastReadPage;
+	public int getLastReadPage() {
+		return Integer.valueOf(this.lastReadPage);
 	}
 
-	public String getLastReadPostId() {
-		return this.lastReadPostId;
+	public int getLastReadPostId() {
+		return Integer.valueOf(this.lastReadPostId);
 	}
 
 	public String getLastTime() {
 		return this.lastTime;
 	}
 
-	public String getPostCount() {
-		return this.postCount;
+	public int getPostCount() {
+		return Integer.valueOf(this.postCount);
 	}
 
 	public String getTitle() {
 		return this.title;
 	}
 
-	public String getTopicId() {
-		return this.topicId;
+	public int getTopicId() {
+		return Integer.valueOf(this.topicId);
 	}
 
 	public String getUrl() {
