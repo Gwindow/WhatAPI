@@ -40,8 +40,7 @@ public class Posts {
 	}
 
 	public String getQuotableBody() {
-		String s = "[quote=" + author.getAuthorName() + "]" + Jsoup.parse(body).text() + "[/quote]";
-		return s;
+		return "[quote=" + author.getAuthorName() + "]" + Jsoup.parse(body).text() + "[/quote]";
 
 	}
 

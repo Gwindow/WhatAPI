@@ -14,8 +14,8 @@ public class Messages {
 	private String username;
 	private String warned;
 
-	public String getConvId() {
-		return this.convId;
+	public int getConvId() {
+		return Integer.valueOf(this.convId);
 	}
 
 	public String getDate() {
@@ -32,16 +32,16 @@ public class Messages {
 		return this.enabled;
 	}
 
-	public String getForwardedId() {
-		return this.forwardedId;
+	public int getForwardedId() {
+		return Integer.valueOf(this.forwardedId);
 	}
 
 	public String getForwardedName() {
 		return this.forwardedName;
 	}
 
-	public String getSenderId() {
-		return this.senderId;
+	public int getSenderId() {
+		return Integer.valueOf(this.senderId);
 	}
 
 	public boolean isSticky() {

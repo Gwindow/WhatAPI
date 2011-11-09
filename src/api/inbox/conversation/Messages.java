@@ -1,5 +1,6 @@
 package api.inbox.conversation;
 
+import org.jsoup.Jsoup;
 
 public class Messages {
 	private String body;
@@ -12,12 +13,12 @@ public class Messages {
 		return this.body;
 	}
 
-	public String getMessageId() {
-		return this.messageId;
+	public int getMessageId() {
+		return Integer.valueOf(this.messageId);
 	}
 
-	public String getSenderId() {
-		return this.senderId;
+	public int getSenderId() {
+		return Integer.valueOf(this.senderId);
 	}
 
 	public String getSenderName() {
@@ -28,14 +29,17 @@ public class Messages {
 		return this.sentDate;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Messages [getBody()=" + getBody() + ", getMessageId()=" + getMessageId() + ", getSenderId()=" + getSenderId()
 				+ ", getSenderName()=" + getSenderName() + ", getSentDate()=" + getSentDate() + "]";
+	}
+
+	public String getQuotableBody() {
+		return "[quote=" + senderName + "]" + Jsoup.parse(body).text() + "[/quote]";
+
 	}
 }
