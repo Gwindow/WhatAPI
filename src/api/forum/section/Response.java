@@ -6,7 +6,7 @@ public class Response {
 	private Number currentPage;
 	private String forumName;
 	private Number pages;
-	private List<String> specificRules;
+	private List<SpecificRules> specificRules;
 	private List<Threads> threads;
 
 	public Number getCurrentPage() {
@@ -21,7 +21,7 @@ public class Response {
 		return this.pages;
 	}
 
-	public List<String> getSpecificRules() {
+	public List<SpecificRules> getSpecificRules() {
 		return this.specificRules;
 	}
 
