@@ -18,7 +18,10 @@ import com.google.gson.GsonBuilder;
  * 
  */
 public class MySon {
-	private static Gson gson = new GsonBuilder().serializeNulls().create();
+	private static GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Integer.class, new StringConverter());
+	private static Gson gson = builder.create();
+	// private final static Gson gson = new GsonBuilder().serializeNulls().create();
+	// private final static Gson gson = new Gson();
 	private static Reader reader;
 
 	public static Object toObject(String url, Type t) {

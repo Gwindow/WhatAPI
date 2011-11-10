@@ -1,5 +1,7 @@
 package api.forum.section;
 
+import api.son.Converter;
+
 public class Threads {
 	private String authorId;
 	private String authorName;
@@ -38,7 +40,7 @@ public class Threads {
 	}
 
 	public int getAuthorId() {
-		return Integer.valueOf(this.authorId);
+		return Integer.parseInt(this.authorId);
 	}
 
 	public String getAuthorName() {
@@ -46,7 +48,7 @@ public class Threads {
 	}
 
 	public int getLastAuthorId() {
-		return Integer.valueOf(this.lastAuthorId);
+		return Integer.parseInt(this.lastAuthorId);
 	}
 
 	public String getLastAuthorName() {
@@ -54,15 +56,16 @@ public class Threads {
 	}
 
 	public int getLastID() {
-		return Integer.valueOf(this.lastID);
+		return Integer.parseInt(this.lastID);
 	}
 
 	public int getLastReadPage() {
-		return Integer.valueOf(this.lastReadPage);
+		System.out.println(Converter.parseInt(this.lastReadPage));
+		return Converter.parseInt((this.lastReadPage));
 	}
 
 	public int getLastReadPostId() {
-		return Integer.valueOf(this.lastReadPostId);
+		return Integer.parseInt(this.lastReadPostId);
 	}
 
 	public String getLastTime() {
@@ -70,7 +73,7 @@ public class Threads {
 	}
 
 	public int getPostCount() {
-		return Integer.valueOf(this.postCount);
+		return Integer.parseInt(this.postCount);
 	}
 
 	public String getTitle() {
@@ -78,7 +81,7 @@ public class Threads {
 	}
 
 	public int getTopicId() {
-		return Integer.valueOf(this.topicId);
+		return Integer.parseInt(this.topicId);
 	}
 
 	public String getUrl() {

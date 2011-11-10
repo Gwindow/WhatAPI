@@ -22,6 +22,12 @@ public class Subscriptions {
 		return this.response;
 	}
 
+	public boolean hasUnreadThreads() {
+		if (response.getThreads().isEmpty() || (response.getThreads() == null))
+			return true;
+		return false;
+	}
+
 	public boolean getStatus() {
 		if (status.equalsIgnoreCase("success"))
 			return true;
