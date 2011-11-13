@@ -2,7 +2,9 @@ package api.torrents.torrents;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
@@ -161,9 +163,37 @@ public class Torrents {
 		System.out.println("Downloaded " + name + " to " + path);
 	}
 
-	/* (non-Javadoc)
+	public String getSpotifyUrl() {
+		try {
+			String s = "spotify:" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8");
+			return s;
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("Could not encode url");
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public String getLastFMUrl() {
+		try {
+			String s =
+					"http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8")
+							+ "&type=album";
+			return s;
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("Could not encode url");
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Torrents [id =" + id + ", response=" + response + ", status=" + status + "]";

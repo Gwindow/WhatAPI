@@ -2,7 +2,9 @@ package api.torrents.artist;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
@@ -75,20 +77,14 @@ public class Artist {
 		}
 	}
 
-	public List<Tuple<String, String>> getDownloadLinksList() {
-		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
-		for (TorrentGroup tg : response.getTorrentgroup()) {
-			for (Torrent t : tg.getTorrents()) {
-				String name = t.getFilePath();
-				if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
-					name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")";
-				}
-				list.add(new Tuple<String, String>(t.getDownloadLink(), name));
-			}
-		}
-		return list;
-	}
-
+	// TODO fix
+	/*
+	 * public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
+	 * ArrayList<Tuple<String, String>>(); for (TorrentGroup tg : response.getTorrentgroup()) { for (Torrent t :
+	 * tg.getTorrents()) { String name = t.getFilePath(); if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath() ==
+	 * null) { name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")"; }
+	 * list.add(new Tuple<String, String>(t.getDownloadLink(), name)); } } return list; }
+	 */
 	public List<Tuple<String, String>> getDownloadLinksListFor(String[] formatList) {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 		for (TorrentGroup tg : response.getTorrentgroup()) {
@@ -146,10 +142,39 @@ public class Artist {
 		System.out.println("Downloaded " + name + " to " + path);
 	}
 
+	public String getSpotifyUrl() {
+		try {
+			String s = "spotify:artist" + URLEncoder.encode(getResponse().getName(), "UTF-8");
+			return s;
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("Could not encode url");
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public String getLastFMUrl() {
+		try {
+			String s = "http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getName(), "UTF-8") + "&type=artist";
+			return s;
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("Could not encode url");
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Artist [getResponse=" + getResponse() + ", getStatus=" + getStatus() + ", getDownloadLinksList="
-				+ getDownloadLinksList() + "]";
+		return "Artist [getResponse()=" + getResponse() + ", getSpotifyUrl()=" + getSpotifyUrl() + ", getLastFMUrl()="
+				+ getLastFMUrl() + ", getStatus()=" + getStatus() + "]";
 	}
 
 	/* public boolean getStatus() { if (status.equalsIgnoreCase("success")) return true; return false; } */

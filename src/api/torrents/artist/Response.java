@@ -61,7 +61,11 @@ public class Response {
 	}
 
 	public String getVanityHouse() {
+		if (vanityHouse == null) {
+			return "0";
+		}
 		return this.vanityHouse;
+
 	}
 
 	@Override

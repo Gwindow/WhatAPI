@@ -1,13 +1,14 @@
 package api.cli;
 
-import api.son.TestObject;
+import api.soup.MySoup;
+import api.torrents.torrents.Torrents;
 import api.util.CouldNotLoadException;
 
 public class Tester {
 	public Tester() throws CouldNotLoadException {
-		TestObject to = TestObject.init();
-		System.out.println(to.toString());
-
+		MySoup.setSite("http://what.cd/");
+		MySoup.login("login.php", "Gwindow", "t2ustUdE");
+		System.out.println(Torrents.torrentsFromId(72031284));
 	}
 
 	public static void main(String[] args) throws CouldNotLoadException {
