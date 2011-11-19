@@ -112,14 +112,11 @@ public class Threads {
 		return url;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "Threads [getLastReadPage=" + getLastReadPage() + ", getForumId=" + getForumId() + ", getForumName="
-				+ getForumName() + ", getLastPostId=" + getLastPostId() + ", isLocked=" + isLocked() + ", isNew=" + isNew()
-				+ ", getPostId=" + getPostId() + ", getThreadId=" + getThreadId() + ", getThreadTitle=" + getThreadTitle()
-				+ ", getUrl=" + getUrl() + ", getLastReadUrl=" + getLastReadUrl() + "]";
+		return "Threads [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()
+				+ ", isLocked=" + isLocked() + ", isNew=" + isNew() + ", getPostId=" + getPostId() + ", getThreadId="
+				+ getThreadId() + ", getThreadTitle=" + getThreadTitle() + ", getUrl=" + getUrl() + ", getLastReadUrl="
+				+ getLastReadUrl() + "]";
 	}
 }

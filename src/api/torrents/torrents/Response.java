@@ -9,7 +9,7 @@ import java.util.List;
  * The Class Response.
  */
 public class Response {
-	private TorrentGroup group;
+	private Group group;
 	private List<Torrent> torrents;
 
 	/**
@@ -17,7 +17,7 @@ public class Response {
 	 * 
 	 * @return the group
 	 */
-	public TorrentGroup getGroup() {
+	public Group getGroup() {
 		return this.group;
 	}
 

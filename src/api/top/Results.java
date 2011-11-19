@@ -17,140 +17,31 @@ public class Results {
 	private String artist;
 	private String encoding;
 	private String format;
-	private String groupId;
+	private Number groupId;
 	private String groupYear;
-	private String hasCue;
-	private String hasLog;
-	private String leechers;
+	private boolean hasCue;
+	private boolean hasLog;
+	private Number leechers;
 	private String media;
-	private String scene;
-	private String seeders;
-	private String snatched;
+	private boolean scene;
+	private Number seeders;
+	private Number snatched;
 	private List<String> tags;
-	private String torrentId;
+	private Number torrentId;
 	private String year;
 	// tags
 	private String name;
-	private String negVotes;
-	private String posVotes;
-	private String uses;
+	private Number negVotes;
+	private Number posVotes;
+	private Number uses;
 	// users
-	private String downSpeed;
-	private String downloaded;
-	private String id;
+	private Number downSpeed;
+	private Number downloaded;
+	private Number id;
 	private String joinDate;
-	private String numUploads;
-	private String upSpeed;
-	private String uploaded;
-	private String username;
-
-	/**
-	 * Gets the down speed.
-	 * 
-	 * @return the down speed
-	 */
-	public String getDownSpeed() {
-		return this.downSpeed;
-	}
-
-	/**
-	 * Gets the downloaded.
-	 * 
-	 * @return the downloaded
-	 */
-	public String getDownloaded() {
-		return this.downloaded;
-	}
-
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	public String getId() {
-		return this.id;
-	}
-
-	/**
-	 * Gets the join date.
-	 * 
-	 * @return the join date
-	 */
-	public String getJoinDate() {
-		return this.joinDate;
-	}
-
-	/**
-	 * Gets the num uploads.
-	 * 
-	 * @return the num uploads
-	 */
-	public String getNumUploads() {
-		return this.numUploads;
-	}
-
-	/**
-	 * Gets the up speed.
-	 * 
-	 * @return the up speed
-	 */
-	public String getUpSpeed() {
-		return this.upSpeed;
-	}
-
-	/**
-	 * Gets the uploaded.
-	 * 
-	 * @return the uploaded
-	 */
-	public String getUploaded() {
-		return this.uploaded;
-	}
-
-	/**
-	 * Gets the username.
-	 * 
-	 * @return the username
-	 */
-	public String getUsername() {
-		return this.username;
-	}
-
-	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
-	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * Gets the neg votes.
-	 * 
-	 * @return the neg votes
-	 */
-	public String getNegVotes() {
-		return this.negVotes;
-	}
-
-	/**
-	 * Gets the pos votes.
-	 * 
-	 * @return the pos votes
-	 */
-	public String getPosVotes() {
-		return this.posVotes;
-	}
-
-	/**
-	 * Gets the uses.
-	 * 
-	 * @return the uses
-	 */
-	public String getUses() {
-		return this.uses;
-	}
+	private Number numUploads;
+	private Number upSpeed;
+	private Number uploaded;
 
 	/**
 	 * Gets the artist.
@@ -158,7 +49,7 @@ public class Results {
 	 * @return the artist
 	 */
 	public String getArtist() {
-		return this.artist;
+		return artist;
 	}
 
 	/**
@@ -167,7 +58,7 @@ public class Results {
 	 * @return the encoding
 	 */
 	public String getEncoding() {
-		return this.encoding;
+		return encoding;
 	}
 
 	/**
@@ -176,7 +67,7 @@ public class Results {
 	 * @return the format
 	 */
 	public String getFormat() {
-		return this.format;
+		return format;
 	}
 
 	/**
@@ -184,8 +75,8 @@ public class Results {
 	 * 
 	 * @return the group id
 	 */
-	public String getGroupId() {
-		return this.groupId;
+	public Number getGroupId() {
+		return groupId;
 	}
 
 	/**
@@ -194,25 +85,25 @@ public class Results {
 	 * @return the group year
 	 */
 	public String getGroupYear() {
-		return this.groupYear;
+		return groupYear;
 	}
 
 	/**
-	 * Gets the checks for cue.
+	 * Checks if is checks for cue.
 	 * 
-	 * @return the checks for cue
+	 * @return true, if is checks for cue
 	 */
-	public String getHasCue() {
-		return this.hasCue;
+	public boolean hasCue() {
+		return hasCue;
 	}
 
 	/**
-	 * Gets the checks for log.
+	 * Checks if is checks for log.
 	 * 
-	 * @return the checks for log
+	 * @return true, if is checks for log
 	 */
-	public String getHasLog() {
-		return this.hasLog;
+	public boolean hasLog() {
+		return hasLog;
 	}
 
 	/**
@@ -220,8 +111,8 @@ public class Results {
 	 * 
 	 * @return the leechers
 	 */
-	public String getLeechers() {
-		return this.leechers;
+	public Number getLeechers() {
+		return leechers;
 	}
 
 	/**
@@ -230,16 +121,16 @@ public class Results {
 	 * @return the media
 	 */
 	public String getMedia() {
-		return this.media;
+		return media;
 	}
 
 	/**
-	 * Gets the scene.
+	 * Checks if is scene.
 	 * 
-	 * @return the scene
+	 * @return true, if is scene
 	 */
-	public String getScene() {
-		return this.scene;
+	public boolean isScene() {
+		return scene;
 	}
 
 	/**
@@ -247,8 +138,8 @@ public class Results {
 	 * 
 	 * @return the seeders
 	 */
-	public String getSeeders() {
-		return this.seeders;
+	public Number getSeeders() {
+		return seeders;
 	}
 
 	/**
@@ -256,8 +147,8 @@ public class Results {
 	 * 
 	 * @return the snatched
 	 */
-	public String getSnatched() {
-		return this.snatched;
+	public Number getSnatched() {
+		return snatched;
 	}
 
 	/**
@@ -266,7 +157,7 @@ public class Results {
 	 * @return the tags
 	 */
 	public List<String> getTags() {
-		return this.tags;
+		return tags;
 	}
 
 	/**
@@ -274,8 +165,8 @@ public class Results {
 	 * 
 	 * @return the torrent id
 	 */
-	public String getTorrentId() {
-		return this.torrentId;
+	public Number getTorrentId() {
+		return torrentId;
 	}
 
 	/**
@@ -284,10 +175,119 @@ public class Results {
 	 * @return the year
 	 */
 	public String getYear() {
-		return this.year;
+		return year;
 	}
 
-	// TODO finish by adding passkey
+	/**
+	 * Gets the name.
+	 * 
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Gets the neg votes.
+	 * 
+	 * @return the neg votes
+	 */
+	public Number getNegVotes() {
+		return negVotes;
+	}
+
+	/**
+	 * Gets the pos votes.
+	 * 
+	 * @return the pos votes
+	 */
+	public Number getPosVotes() {
+		return posVotes;
+	}
+
+	/**
+	 * Gets the uses.
+	 * 
+	 * @return the uses
+	 */
+	public Number getUses() {
+		return uses;
+	}
+
+	/**
+	 * Gets the down speed.
+	 * 
+	 * @return the down speed
+	 */
+	public Number getDownSpeed() {
+		return downSpeed;
+	}
+
+	/**
+	 * Gets the downloaded.
+	 * 
+	 * @return the downloaded
+	 */
+	public Number getDownloaded() {
+		return downloaded;
+	}
+
+	/**
+	 * Gets the id.
+	 * 
+	 * @return the id
+	 */
+	public Number getId() {
+		return id;
+	}
+
+	/**
+	 * Gets the join date.
+	 * 
+	 * @return the join date
+	 */
+	public String getJoinDate() {
+		return joinDate;
+	}
+
+	/**
+	 * Gets the num uploads.
+	 * 
+	 * @return the num uploads
+	 */
+	public Number getNumUploads() {
+		return numUploads;
+	}
+
+	/**
+	 * Gets the up speed.
+	 * 
+	 * @return the up speed
+	 */
+	public Number getUpSpeed() {
+		return upSpeed;
+	}
+
+	/**
+	 * Gets the uploaded.
+	 * 
+	 * @return the uploaded
+	 */
+	public Number getUploaded() {
+		return uploaded;
+	}
+
+	/**
+	 * Gets the username.
+	 * 
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	private String username;
+
 	// TODO return SSL link
 	/**
 	 * Gets the download link.
@@ -297,7 +297,10 @@ public class Results {
 	public String getDownloadLink() {
 		String link;
 		String authkey = MySoup.getAuthKey();
-		link = MySoup.getSite() + "torrents.php?action=download&id=" + torrentId + "5&authkey=" + authkey + "&torrent_pass=";
+		String passkey = MySoup.getPassKey();
+		link =
+				MySoup.getSite() + "torrents.php?action=download&id=" + torrentId + "5&authkey=" + authkey + "&torrent_pass="
+						+ passkey;
 		return link;
 	}
 
@@ -306,12 +309,15 @@ public class Results {
 	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "Results [artist=" + artist + ", encoding=" + encoding + ", format=" + format + ", groupId=" + groupId
-				+ ", groupYear=" + groupYear + ", hasCue=" + hasCue + ", hasLog=" + hasLog + ", leechers=" + leechers
-				+ ", media=" + media + ", scene=" + scene + ", seeders=" + seeders + ", snatched=" + snatched + ", tags=" + tags
-				+ ", torrentId=" + torrentId + ", year=" + year + ", name=" + name + ", negVotes=" + negVotes + ", posVotes="
-				+ posVotes + ", uses=" + uses + ", downSpeed=" + downSpeed + ", downloaded=" + downloaded + ", id=" + id
-				+ ", joinDate=" + joinDate + ", numUploads=" + numUploads + ", upSpeed=" + upSpeed + ", uploaded=" + uploaded
-				+ ", username=" + username + "]";
+		return "Results [getArtist=" + getArtist() + ", getEncoding=" + getEncoding() + ", getFormat=" + getFormat()
+				+ ", getGroupId=" + getGroupId() + ", getGroupYear=" + getGroupYear() + ", hasCue=" + hasCue() + ", hasLog="
+				+ hasLog() + ", getLeechers=" + getLeechers() + ", getMedia=" + getMedia() + ", isScene=" + isScene()
+				+ ", getSeeders=" + getSeeders() + ", getSnatched=" + getSnatched() + ", getTags=" + getTags()
+				+ ", getTorrentId=" + getTorrentId() + ", getYear=" + getYear() + ", getName=" + getName() + ", getNegVotes="
+				+ getNegVotes() + ", getPosVotes=" + getPosVotes() + ", getUses=" + getUses() + ", getDownSpeed="
+				+ getDownSpeed() + ", getDownloaded=" + getDownloaded() + ", getId=" + getId() + ", getJoinDate=" + getJoinDate()
+				+ ", getNumUploads=" + getNumUploads() + ", getUpSpeed=" + getUpSpeed() + ", getUploaded=" + getUploaded()
+				+ ", getUsername=" + getUsername() + ", getDownloadLink=" + getDownloadLink() + "]";
 	}
+
 }

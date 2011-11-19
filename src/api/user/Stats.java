@@ -9,19 +9,19 @@ package api.user;
  * @author Tim
  */
 public class Stats {
-	private String downloaded;
+	private Number downloaded;
 	private String joinedDate;
 	private String lastAccess;
 	private Number ratio;
-	private String requiredRatio;
-	private String uploaded;
+	private Number requiredRatio;
+	private Number uploaded;
 
 	/**
 	 * Gets the downloaded.
 	 * 
 	 * @return the downloaded
 	 */
-	public String getDownloaded() {
+	public Number getDownloaded() {
 		return this.downloaded;
 	}
 
@@ -57,7 +57,7 @@ public class Stats {
 	 * 
 	 * @return the required ratio
 	 */
-	public String getRequiredRatio() {
+	public Number getRequiredRatio() {
 		return this.requiredRatio;
 	}
 
@@ -66,16 +66,23 @@ public class Stats {
 	 * 
 	 * @return the uploaded
 	 */
-	public String getUploaded() {
+	public Number getUploaded() {
 		return this.uploaded;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Gets the buffer.
+	 * 
+	 * @return the buffer
 	 */
+	public double getBuffer() {
+		return getUploaded().doubleValue() - getDownloaded().doubleValue();
+	}
+
 	@Override
 	public String toString() {
-		return "Stats [downloaded=" + downloaded + ", joinedDate=" + joinedDate + ", lastAccess=" + lastAccess + ", ratio="
-				+ ratio + ", requiredRatio=" + requiredRatio + ", uploaded=" + uploaded + "]";
+		return "Stats [getDownloaded=" + getDownloaded() + ", getJoinedDate=" + getJoinedDate() + ", getLastAccess="
+				+ getLastAccess() + ", getRatio=" + getRatio() + ", getRequiredRatio=" + getRequiredRatio() + ", getUploaded="
+				+ getUploaded() + ", getBuffer=" + getBuffer() + "]";
 	}
 }

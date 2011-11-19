@@ -7,17 +7,17 @@ package api.torrents.artist;
  * The Class SimilarArtists.
  */
 public class SimilarArtists {
-	private String artistId;
+	private Number artistId;
 	private String name;
-	private String score;
-	private String similarId;
+	private Number score;
+	private Number similarId;
 
 	/**
 	 * Gets the artist id.
 	 * 
 	 * @return the artist id
 	 */
-	public String getArtistId() {
+	public Number getArtistId() {
 		return this.artistId;
 	}
 
@@ -35,7 +35,7 @@ public class SimilarArtists {
 	 * 
 	 * @return the score
 	 */
-	public String getScore() {
+	public Number getScore() {
 		return this.score;
 	}
 
@@ -44,13 +44,13 @@ public class SimilarArtists {
 	 * 
 	 * @return the similar id
 	 */
-	public String getSimilarId() {
+	public Number getSimilarId() {
 		return this.similarId;
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "SimilarArtists [getArtistId=" + getArtistId() + ", getName=" + getName() + ", getScore=" + getScore()

@@ -11,7 +11,7 @@ import java.util.List;
  * @author Tim
  * 
  */
-public class Section {
+public class Response {
 	private String caption;
 	private Number limit;
 	private List<Results> results;
@@ -60,6 +60,6 @@ public class Section {
 	 */
 	@Override
 	public String toString() {
-		return "Section [caption=" + caption + ", limit=" + limit + ", results=" + results + ", tag=" + tag + "]";
+		return "Response [caption=" + caption + ", limit=" + limit + ", results=" + results + ", tag=" + tag + "]";
 	}
 }

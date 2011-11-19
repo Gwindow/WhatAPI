@@ -1,5 +1,6 @@
 /**
  * @author Gwindow
+ * 
  */
 package api.torrents.artist;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class Response {
 	private String body;
 	private boolean hasBookmarked;
-	private String id;
+	private Number id;
 	private String image;
 	private String name;
 	private boolean notificationsEnabled;
@@ -20,7 +21,7 @@ public class Response {
 	private Statistics statistics;
 	private List<Tags> tags;
 	private List<TorrentGroup> torrentgroup;
-	private String vanityHouse;
+	private boolean vanityHouse;
 
 	/**
 	 * Gets the body.
@@ -28,7 +29,7 @@ public class Response {
 	 * @return the body
 	 */
 	public String getBody() {
-		return this.body;
+		return body;
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class Response {
 	 * @return true, if is bookmarked
 	 */
 	public boolean isBookmarked() {
-		return this.hasBookmarked;
+		return hasBookmarked;
 	}
 
 	/**
@@ -45,8 +46,8 @@ public class Response {
 	 * 
 	 * @return the id
 	 */
-	public String getId() {
-		return this.id;
+	public Number getId() {
+		return id;
 	}
 
 	/**
@@ -55,7 +56,7 @@ public class Response {
 	 * @return the image
 	 */
 	public String getImage() {
-		return this.image;
+		return image;
 	}
 
 	/**
@@ -64,16 +65,16 @@ public class Response {
 	 * @return the name
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
-	 * Checks if is notifications enabled.
+	 * Checks for notifications enabled.
 	 * 
-	 * @return true, if is notifications enabled
+	 * @return true, if successful
 	 */
-	public boolean isNotificationsEnabled() {
-		return this.notificationsEnabled;
+	public boolean hasNotificationsEnabled() {
+		return notificationsEnabled;
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class Response {
 	 * @return the requests
 	 */
 	public List<Requests> getRequests() {
-		return this.requests;
+		return requests;
 	}
 
 	/**
@@ -91,7 +92,7 @@ public class Response {
 	 * @return the similar artists
 	 */
 	public List<SimilarArtists> getSimilarArtists() {
-		return this.similarArtists;
+		return similarArtists;
 	}
 
 	/**
@@ -100,7 +101,7 @@ public class Response {
 	 * @return the statistics
 	 */
 	public Statistics getStatistics() {
-		return this.statistics;
+		return statistics;
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class Response {
 	 * @return the tags
 	 */
 	public List<Tags> getTags() {
-		return this.tags;
+		return tags;
 	}
 
 	/**
@@ -118,31 +119,28 @@ public class Response {
 	 * @return the torrentgroup
 	 */
 	public List<TorrentGroup> getTorrentgroup() {
-		return this.torrentgroup;
+		return torrentgroup;
 	}
 
 	/**
-	 * Gets the vanity house.
+	 * Checks if is vanity house.
 	 * 
-	 * @return the vanity house
+	 * @return true, if is vanity house
 	 */
-	public String getVanityHouse() {
-		if (vanityHouse == null) {
-			return "0";
-		}
-		return this.vanityHouse;
-
+	public boolean isVanityHouse() {
+		return vanityHouse;
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Response [getBody=" + getBody() + ", isBookmarked=" + isBookmarked() + ", getId=" + getId() + ", getImage="
-				+ getImage() + ", getName=" + getName() + ", isNotificationsEnabled=" + isNotificationsEnabled()
+				+ getImage() + ", getName=" + getName() + ", hasNotificationsEnabled=" + hasNotificationsEnabled()
 				+ ", getRequests=" + getRequests() + ", getSimilarArtists=" + getSimilarArtists() + ", getStatistics="
-				+ getStatistics() + ", getTags=" + getTags() + ", getTorrentgroup=" + getTorrentgroup() + ", getVanityHouse="
-				+ getVanityHouse() + "]";
+				+ getStatistics() + ", getTags=" + getTags() + ", getTorrentgroup=" + getTorrentgroup() + ", isVanityHouse="
+				+ isVanityHouse() + "]";
 	}
+
 }

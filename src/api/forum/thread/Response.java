@@ -121,12 +121,12 @@ public class Response {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Response [isSticky=" + isSticky() + ", isLocked=" + isLocked() + ", getCurrentPage=" + getCurrentPage()
-				+ ", getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLocked=" + getLocked()
+				+ ", getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLocked=" + isLocked()
 				+ ", getPages=" + getPages() + ", getPoll=" + getPoll() + ", getPosts=" + getPosts() + ", isSubscribed="
 				+ isSubscribed() + ", getThreadId=" + getThreadId() + ", getThreadTitle=" + getThreadTitle() + "]";
 	}

@@ -89,7 +89,7 @@ public class Artist {
 	 */
 	public void enableNotifications() {
 		String authkey = MySoup.getAuthKey();
-		if (response.isNotificationsEnabled() == false) {
+		if (response.hasNotificationsEnabled() == false) {
 			// TODO take care of people who don't have notification privileges
 			MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
 			System.out.println("Notifications enabled");
@@ -103,7 +103,7 @@ public class Artist {
 	 */
 	public void disbaleNotifications() {
 		String authkey = MySoup.getAuthKey();
-		if (response.isNotificationsEnabled() == true) {
+		if (response.hasNotificationsEnabled() == true) {
 			// TODO take care of people who don't have notification privileges
 			MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
 			System.out.println("Notifications disabled");
@@ -113,13 +113,11 @@ public class Artist {
 	}
 
 	// TODO fix
-	/*
-	 * public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
+	/* public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
 	 * ArrayList<Tuple<String, String>>(); for (TorrentGroup tg : response.getTorrentgroup()) { for (Torrent t :
 	 * tg.getTorrents()) { String name = t.getFilePath(); if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath() ==
 	 * null) { name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")"; }
-	 * list.add(new Tuple<String, String>(t.getDownloadLink(), name)); } } return list; }
-	 */
+	 * list.add(new Tuple<String, String>(t.getDownloadLink(), name)); } } return list; } */
 	/**
 	 * Gets the download links list for.
 	 * 
@@ -133,10 +131,7 @@ public class Artist {
 			for (Torrent t : tg.getTorrents()) {
 				for (int i = 0; i < formatList.length; i++) {
 					if (formatList[i].equalsIgnoreCase(t.getFormat())) {
-						String name = t.getFilePath();
-						if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
-							name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")";
-						}
+						String name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")";
 						list.add(new Tuple<String, String>(t.getDownloadLink(), name));
 					}
 				}
@@ -158,10 +153,7 @@ public class Artist {
 			for (Torrent t : tg.getTorrents()) {
 				for (int i = 0; i < formatList.length; i++) {
 					if (!formatList[i].equalsIgnoreCase(t.getFormat())) {
-						String name = t.getFilePath();
-						if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
-							name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")";
-						}
+						String name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")";
 						list.add(new Tuple<String, String>(t.getDownloadLink(), name));
 					}
 				}
@@ -245,11 +237,9 @@ public class Artist {
 
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Artist [getResponse()=" + getResponse() + ", getSpotifyUrl()=" + getSpotifyUrl() + ", getLastFMUrl()="

@@ -14,7 +14,7 @@ public class Personal {
 	// so java doesn't get confused with the "class" keyword
 	@SerializedName("class")
 	private String userClass;
-	private String donor;
+	private boolean donor;
 	private boolean enabled;
 	private Number paranoia;
 	private String paranoiaText;
@@ -30,20 +30,20 @@ public class Personal {
 	}
 
 	/**
-	 * Gets the donor.
+	 * Checks if is donor.
 	 * 
-	 * @return the donor
+	 * @return true, if is donor
 	 */
-	public String getDonor() {
+	public boolean isDonor() {
 		return this.donor;
 	}
 
 	/**
-	 * Gets the enabled.
+	 * Checks if is enabled.
 	 * 
-	 * @return the enabled
+	 * @return true, if is enabled
 	 */
-	public boolean getEnabled() {
+	public boolean isEnabled() {
 		return this.enabled;
 	}
 
@@ -66,20 +66,18 @@ public class Personal {
 	}
 
 	/**
-	 * Gets the warned.
+	 * Checks if is warned.
 	 * 
-	 * @return the warned
+	 * @return true, if is warned
 	 */
-	public boolean getWarned() {
+	public boolean isWarned() {
 		return this.warned;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Personal [userClass=" + userClass + ", donor=" + donor + ", enabled=" + enabled + ", paranoia=" + paranoia
-				+ ", paranoiaText=" + paranoiaText + ", warned=" + warned + "]";
+		return "Personal [getUserClass=" + getUserClass() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled()
+				+ ", getParanoia=" + getParanoia() + ", getParanoiaText=" + getParanoiaText() + ", isWarned=" + isWarned() + "]";
 	}
+
 }

@@ -53,7 +53,7 @@ public class MySoup {
 	private static RegexTools regex = new RegexTools();
 	private static HttpParams httpParams = httpClient.getParams();
 	private static String username;
-	private static String userId;
+	private static int userId;
 	private static String SITE;
 	private static boolean canNotifications = true;
 	private static ForumSections forumSections;
@@ -309,7 +309,7 @@ public class MySoup {
 	public static void loadIndex() {
 		i = Index.init();
 		MySoup.username = i.getResponse().getUsername();
-		MySoup.userId = i.getResponse().getId();
+		MySoup.userId = i.getResponse().getId().intValue();
 		MySoup.authey = i.getResponse().getAuthkey();
 		MySoup.passkey = i.getResponse().getPasskey();
 		if (!i.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
@@ -603,7 +603,7 @@ public class MySoup {
 	 * 
 	 * @return the user id
 	 */
-	public static String getUserId() {
+	public static int getUserId() {
 		return userId;
 	}
 

@@ -7,12 +7,12 @@ package api.torrents.artist;
  * The Class Requests.
  */
 public class Requests {
-	private String bounty;
-	private String categoryId;
-	private String requestId;
+	private Number bounty;
+	private Number categoryId;
+	private Number requestId;
 	private String timeAdded;
 	private String title;
-	private String votes;
+	private Number votes;
 	private String year;
 
 	/**
@@ -20,7 +20,7 @@ public class Requests {
 	 * 
 	 * @return the bounty
 	 */
-	public String getBounty() {
+	public Number getBounty() {
 		return this.bounty;
 	}
 
@@ -29,7 +29,7 @@ public class Requests {
 	 * 
 	 * @return the category id
 	 */
-	public String getCategoryId() {
+	public Number getCategoryId() {
 		return this.categoryId;
 	}
 
@@ -38,7 +38,7 @@ public class Requests {
 	 * 
 	 * @return the request id
 	 */
-	public String getRequestId() {
+	public Number getRequestId() {
 		return this.requestId;
 	}
 
@@ -65,7 +65,7 @@ public class Requests {
 	 * 
 	 * @return the votes
 	 */
-	public String getVotes() {
+	public Number getVotes() {
 		return this.votes;
 	}
 
@@ -79,8 +79,8 @@ public class Requests {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Requests [getBounty=" + getBounty() + ", getCategoryId=" + getCategoryId() + ", getRequestId=" + getRequestId()

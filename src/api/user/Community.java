@@ -9,25 +9,25 @@ package api.user;
  * @author Tim
  */
 public class Community {
-	private String collagesContrib;
-	private String collagesStarted;
-	private String groups;
-	private String invited;
-	private String leeching;
-	private String posts;
-	private String requestsFilled;
-	private String requestsVoted;
-	private String seeding;
-	private String snatched;
-	private String torrentComments;
-	private String uploaded;
+	private Number collagesContrib;
+	private Number collagesStarted;
+	private Number groups;
+	private Number invited;
+	private Number leeching;
+	private Number posts;
+	private Number requestsFilled;
+	private Number requestsVoted;
+	private Number seeding;
+	private Number snatched;
+	private Number torrentComments;
+	private Number uploaded;
 
 	/**
 	 * Gets the collages contrib.
 	 * 
 	 * @return the collages contrib
 	 */
-	public String getCollagesContrib() {
+	public Number getCollagesContrib() {
 		return this.collagesContrib;
 	}
 
@@ -36,7 +36,7 @@ public class Community {
 	 * 
 	 * @return the collages started
 	 */
-	public String getCollagesStarted() {
+	public Number getCollagesStarted() {
 		return this.collagesStarted;
 	}
 
@@ -45,7 +45,7 @@ public class Community {
 	 * 
 	 * @return the groups
 	 */
-	public String getGroups() {
+	public Number getGroups() {
 		return this.groups;
 	}
 
@@ -54,7 +54,7 @@ public class Community {
 	 * 
 	 * @return the invited
 	 */
-	public String getInvited() {
+	public Number getInvited() {
 		return this.invited;
 	}
 
@@ -63,7 +63,7 @@ public class Community {
 	 * 
 	 * @return the leeching
 	 */
-	public String getLeeching() {
+	public Number getLeeching() {
 		return this.leeching;
 	}
 
@@ -72,7 +72,7 @@ public class Community {
 	 * 
 	 * @return the posts
 	 */
-	public String getPosts() {
+	public Number getPosts() {
 		return this.posts;
 	}
 
@@ -81,7 +81,7 @@ public class Community {
 	 * 
 	 * @return the requests filled
 	 */
-	public String getRequestsFilled() {
+	public Number getRequestsFilled() {
 		return this.requestsFilled;
 	}
 
@@ -90,7 +90,7 @@ public class Community {
 	 * 
 	 * @return the requests voted
 	 */
-	public String getRequestsVoted() {
+	public Number getRequestsVoted() {
 		return this.requestsVoted;
 	}
 
@@ -99,7 +99,7 @@ public class Community {
 	 * 
 	 * @return the seeding
 	 */
-	public String getSeeding() {
+	public Number getSeeding() {
 		return this.seeding;
 	}
 
@@ -108,7 +108,7 @@ public class Community {
 	 * 
 	 * @return the snatched
 	 */
-	public String getSnatched() {
+	public Number getSnatched() {
 		return this.snatched;
 	}
 
@@ -117,7 +117,7 @@ public class Community {
 	 * 
 	 * @return the torrent comments
 	 */
-	public String getTorrentComments() {
+	public Number getTorrentComments() {
 		return this.torrentComments;
 	}
 
@@ -126,18 +126,17 @@ public class Community {
 	 * 
 	 * @return the uploaded
 	 */
-	public String getUploaded() {
+	public Number getUploaded() {
 		return this.uploaded;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Community [collagesContrib=" + collagesContrib + ", collagesStarted=" + collagesStarted + ", groups=" + groups
-				+ ", invited=" + invited + ", leeching=" + leeching + ", posts=" + posts + ", requestsFilled=" + requestsFilled
-				+ ", requestsVoted=" + requestsVoted + ", seeding=" + seeding + ", snatched=" + snatched + ", torrentComments="
-				+ torrentComments + ", uploaded=" + uploaded + "]";
+		return "Community [getCollagesContrib=" + getCollagesContrib() + ", getCollagesStarted=" + getCollagesStarted()
+				+ ", getGroups=" + getGroups() + ", getInvited=" + getInvited() + ", getLeeching=" + getLeeching()
+				+ ", getPosts=" + getPosts() + ", getRequestsFilled=" + getRequestsFilled() + ", getRequestsVoted="
+				+ getRequestsVoted() + ", getSeeding=" + getSeeding() + ", getSnatched=" + getSnatched()
+				+ ", getTorrentComments=" + getTorrentComments() + ", getUploaded=" + getUploaded() + "]";
 	}
+
 }

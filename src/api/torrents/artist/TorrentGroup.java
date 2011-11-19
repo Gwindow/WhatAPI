@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class TorrentGroup {
 	private String groupCatalogueNumber;
-	private String groupId;
+	private Number groupId;
 	private String groupName;
 	private String groupRecordLabel;
-	private String groupVanityHouse;
+	private boolean groupVanityHouse;
 	private String groupYear;
 	private boolean isBookmarked;
-	private String releaseType;
+	private Number releaseType;
 	private List<String> tags;
 	private List<Torrent> torrent;
 
@@ -34,7 +34,7 @@ public class TorrentGroup {
 	 * 
 	 * @return the group id
 	 */
-	public String getGroupId() {
+	public Number getGroupId() {
 		return this.groupId;
 	}
 
@@ -57,11 +57,11 @@ public class TorrentGroup {
 	}
 
 	/**
-	 * Gets the group vanity house.
+	 * Checks if is group vanity house.
 	 * 
-	 * @return the group vanity house
+	 * @return true, if is group vanity house
 	 */
-	public String getGroupVanityHouse() {
+	public boolean isGroupVanityHouse() {
 		return this.groupVanityHouse;
 	}
 
@@ -88,30 +88,30 @@ public class TorrentGroup {
 	 * 
 	 * @return the release type
 	 */
-	public String getReleaseType() {
-		if (releaseType.equalsIgnoreCase("1"))
+	public String getreleaseType() {
+		if (releaseType.toString().equalsIgnoreCase("1"))
 			return "Album";
-		else if (releaseType.equalsIgnoreCase("3"))
+		else if (releaseType.toString().equalsIgnoreCase("3"))
 			return "Soundtrack";
-		else if (releaseType.equalsIgnoreCase("5"))
+		else if (releaseType.toString().equalsIgnoreCase("5"))
 			return "EP";
-		else if (releaseType.equalsIgnoreCase("6"))
+		else if (releaseType.toString().equalsIgnoreCase("6"))
 			return "Anthology";
-		else if (releaseType.equalsIgnoreCase("7"))
+		else if (releaseType.toString().equalsIgnoreCase("7"))
 			return "Compilation";
-		else if (releaseType.equalsIgnoreCase("9"))
+		else if (releaseType.toString().equalsIgnoreCase("9"))
 			return "Single";
-		else if (releaseType.equalsIgnoreCase("11"))
+		else if (releaseType.toString().equalsIgnoreCase("11"))
 			return "Live Album";
-		else if (releaseType.equalsIgnoreCase("13"))
+		else if (releaseType.toString().equalsIgnoreCase("13"))
 			return "Remix";
-		else if (releaseType.equalsIgnoreCase("14"))
+		else if (releaseType.toString().equalsIgnoreCase("14"))
 			return "Bootleg";
-		else if (releaseType.equalsIgnoreCase("15"))
+		else if (releaseType.toString().equalsIgnoreCase("15"))
 			return "Interview";
-		else if (releaseType.equalsIgnoreCase("16"))
+		else if (releaseType.toString().equalsIgnoreCase("16"))
 			return "Mixtape";
-		else if (releaseType.equalsIgnoreCase("21"))
+		else if (releaseType.toString().equalsIgnoreCase("21"))
 			return "Unknown";
 		else
 			return "API Error";
@@ -137,14 +137,14 @@ public class TorrentGroup {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Torrentgroup [getGroupCatalogueNumber=" + getGroupCatalogueNumber() + ", getGroupId=" + getGroupId()
 				+ ", getGroupName=" + getGroupName() + ", getGroupRecordLabel=" + getGroupRecordLabel()
-				+ ", getGroupVanityHouse=" + getGroupVanityHouse() + ", getGroupYear=" + getGroupYear() + ", isBookmarked="
-				+ isBookmarked() + ", getReleaseType=" + getReleaseType() + ", getTags=" + getTags() + ", getTorrents="
-				+ getTorrents() + "]";
+				+ ", getGroupVanityHouse=" + isGroupVanityHouse() + ", getGroupYear=" + getGroupYear() + ", isBookmarked="
+				+ isBookmarked() + ", getreleaseType.toString()=" + getreleaseType() + ", getTags=" + getTags()
+				+ ", getTorrents=" + getTorrents() + "]";
 	}
 }

@@ -15,78 +15,44 @@ import api.soup.MySoup;
  * The Class Torrent.
  */
 public class Torrent {
-	private String Description;
-	private String Encoding;
-	private String FileCount;
-	private String FileList;
-	private String FilePath;
-	private String Format;
-	private String FreeTorrent;
-	private String HasCue;
-	private String HasLog;
-	private String ID;
-	private String Leechers;
-	private String LogScore;
-	private String Media;
-	private String RemasterCatalogueNumber;
-	private String RemasterRecordLabel;
-	private String RemasterTitle;
-	private String RemasterYear;
-	private String Remastered;
-	private String Scene;
-	private String Seeders;
-	private String Size;
-	private String Snatched;
-	private String Time;
-	private String UserID;
-	private String Username;
+	private String encoding;
+	private Number fileCount;
+	private String format;
+	private boolean freeTorrent;
+	private Number groupId;
+	private boolean hasCue;
+	private Number hasFile;
+	private boolean hasLog;
+	private Number id;
+	private Number leechers;
+	private Number logScore;
+	private String media;
+	private String remasterRecordLabel;
+	private String remasterTitle;
+	private String remasterYear;
+	private boolean remastered;
+	private boolean scene;
+	private Number seeders;
+	private Number size;
+	private Number snatched;
+	private String time;
 
 	/**
-	 * Description of torrent.
+	 * Gets the encoding.
 	 * 
-	 * @return description
-	 */
-	public String getDescription() {
-		return this.Description;
-	}
-
-	/**
-	 * Encoding of torrent.
-	 * 
-	 * @return encoding
+	 * @return the encoding
 	 */
 	public String getEncoding() {
-		return this.Encoding;
+		return this.encoding;
 	}
 
 	/**
-	 * Number of files in torrent.
+	 * Gets the file count.
 	 * 
-	 * @return number of files in torrent
+	 * @return the file count
 	 */
-	public String getFileCount() {
-		return this.FileCount;
-	}
-
-	/**
-	 * Get the list of files in a torrent.
-	 * 
-	 * @return file list
-	 */
-	public String getFileList() {
-		return this.FileList;
-	}
-
-	/**
-	 * Gets the file path.
-	 * 
-	 * @return the file path
-	 */
-	public String getFilePath() {
-		// TODO fix this, add to json in artist.php
-		// return this.FilePath;
-
-		return this.FilePath;
+	public Number getFileCount() {
+		return this.fileCount;
 	}
 
 	/**
@@ -95,7 +61,7 @@ public class Torrent {
 	 * @return the format
 	 */
 	public String getFormat() {
-		return this.Format;
+		return this.format;
 	}
 
 	/**
@@ -104,9 +70,16 @@ public class Torrent {
 	 * @return true, if is free torrent
 	 */
 	public boolean isFreeTorrent() {
-		if (FreeTorrent.equals("1"))
-			return true;
-		return false;
+		return this.freeTorrent;
+	}
+
+	/**
+	 * Gets the group id.
+	 * 
+	 * @return the group id
+	 */
+	public Number getGroupId() {
+		return this.groupId;
 	}
 
 	/**
@@ -115,9 +88,16 @@ public class Torrent {
 	 * @return true, if successful
 	 */
 	public boolean hasCue() {
-		if (HasCue.equals("1"))
-			return true;
-		return false;
+		return this.hasCue;
+	}
+
+	/**
+	 * Gets the checks for file.
+	 * 
+	 * @return the checks for file
+	 */
+	public Number getHasFile() {
+		return this.hasFile;
 	}
 
 	/**
@@ -126,18 +106,16 @@ public class Torrent {
 	 * @return true, if successful
 	 */
 	public boolean hasLog() {
-		if (HasLog.equals("1"))
-			return true;
-		return false;
+		return this.hasLog;
 	}
 
 	/**
-	 * Gets the iD.
+	 * Gets the id.
 	 * 
-	 * @return the iD
+	 * @return the id
 	 */
-	public String getID() {
-		return this.ID;
+	public Number getId() {
+		return this.id;
 	}
 
 	/**
@@ -145,8 +123,8 @@ public class Torrent {
 	 * 
 	 * @return the leechers
 	 */
-	public String getLeechers() {
-		return this.Leechers;
+	public Number getLeechers() {
+		return this.leechers;
 	}
 
 	/**
@@ -154,8 +132,8 @@ public class Torrent {
 	 * 
 	 * @return the log score
 	 */
-	public String getLogScore() {
-		return this.LogScore;
+	public Number getLogScore() {
+		return this.logScore;
 	}
 
 	/**
@@ -164,16 +142,7 @@ public class Torrent {
 	 * @return the media
 	 */
 	public String getMedia() {
-		return this.Media;
-	}
-
-	/**
-	 * Gets the remaster catalogue number.
-	 * 
-	 * @return the remaster catalogue number
-	 */
-	public String getRemasterCatalogueNumber() {
-		return this.RemasterCatalogueNumber;
+		return this.media;
 	}
 
 	/**
@@ -182,7 +151,7 @@ public class Torrent {
 	 * @return the remaster record label
 	 */
 	public String getRemasterRecordLabel() {
-		return this.RemasterRecordLabel;
+		return this.remasterRecordLabel;
 	}
 
 	/**
@@ -191,7 +160,7 @@ public class Torrent {
 	 * @return the remaster title
 	 */
 	public String getRemasterTitle() {
-		return this.RemasterTitle;
+		return this.remasterTitle;
 	}
 
 	/**
@@ -200,18 +169,16 @@ public class Torrent {
 	 * @return the remaster year
 	 */
 	public String getRemasterYear() {
-		return this.RemasterYear;
+		return this.remasterYear;
 	}
 
 	/**
-	 * Checks if is remastered.
+	 * Gets the remastered.
 	 * 
-	 * @return true, if is remastered
+	 * @return the remastered
 	 */
-	public boolean isRemastered() {
-		if (Remastered.equals("1"))
-			return true;
-		return false;
+	public boolean getRemastered() {
+		return this.remastered;
 	}
 
 	/**
@@ -220,9 +187,7 @@ public class Torrent {
 	 * @return true, if is scene
 	 */
 	public boolean isScene() {
-		if (Scene.equals("1"))
-			return true;
-		return false;
+		return this.scene;
 	}
 
 	/**
@@ -230,8 +195,8 @@ public class Torrent {
 	 * 
 	 * @return the seeders
 	 */
-	public String getSeeders() {
-		return this.Seeders;
+	public Number getSeeders() {
+		return this.seeders;
 	}
 
 	/**
@@ -239,8 +204,8 @@ public class Torrent {
 	 * 
 	 * @return the size
 	 */
-	public String getSize() {
-		return this.Size;
+	public Number getSize() {
+		return this.size;
 	}
 
 	/**
@@ -248,8 +213,8 @@ public class Torrent {
 	 * 
 	 * @return the snatched
 	 */
-	public String getSnatched() {
-		return this.Snatched;
+	public Number getSnatched() {
+		return this.snatched;
 	}
 
 	/**
@@ -258,25 +223,7 @@ public class Torrent {
 	 * @return the time
 	 */
 	public String getTime() {
-		return this.Time;
-	}
-
-	/**
-	 * Gets the user id.
-	 * 
-	 * @return the user id
-	 */
-	public String getUserID() {
-		return this.UserID;
-	}
-
-	/**
-	 * Gets the username.
-	 * 
-	 * @return the username
-	 */
-	public String getUsername() {
-		return this.Username;
+		return this.time;
 	}
 
 	/**
@@ -298,7 +245,8 @@ public class Torrent {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
 		String passKey = MySoup.getPassKey();
-		String downloadLink = site + "torrents.php?action=download&id=" + ID + "&authkey=" + authKey + "&torrent_pass=" + passKey;
+		String downloadLink =
+				site + "torrents.php?action=download&id=" + this.getId() + "&authkey=" + authKey + "&torrent_pass=" + passKey;
 		return downloadLink;
 	}
 
@@ -313,11 +261,7 @@ public class Torrent {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void downloadFile(String url, String path) throws IOException {
-		String name = getFilePath();
-		if (getFilePath().equalsIgnoreCase("") || getFilePath().equals(null)) {
-			// todo fix this
-			name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
-		}
+		String name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
 		URL u;
 		u = new URL(getDownloadLink());
 		ReadableByteChannel rbc = Channels.newChannel(u.openStream());
@@ -332,16 +276,14 @@ public class Torrent {
 	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "Torrent [getDescription=" + getDescription() + ", getEncoding=" + getEncoding() + ", getFileCount="
-				+ getFileCount() + ", getFileList=" + getFileList() + ", getFilePath=" + getFilePath() + ", getFormat="
-				+ getFormat() + ", isFreeTorrent=" + isFreeTorrent() + ", hasCue=" + hasCue() + ", hasLog=" + hasLog()
-				+ ", getID=" + getID() + ", getLeechers=" + getLeechers() + ", getLogScore=" + getLogScore() + ", getMedia="
-				+ getMedia() + ", getRemasterCatalogueNumber=" + getRemasterCatalogueNumber() + ", getRemasterRecordLabel="
+		return "Torrent [getEncoding=" + getEncoding() + ", getFileCount=" + getFileCount() + ", getFormat=" + getFormat()
+				+ ", getFreeTorrent=" + isFreeTorrent() + ", getGroupId=" + getGroupId() + ", getHasCue=" + getHasFile()
+				+ ", getHasFile=" + getHasFile() + ", getHasLog=" + getHasFile() + ", getId=" + getId() + ", getLeechers="
+				+ getLeechers() + ", getLogScore=" + getLogScore() + ", getMedia=" + getMedia() + ", getRemasterRecordLabel="
 				+ getRemasterRecordLabel() + ", getRemasterTitle=" + getRemasterTitle() + ", getRemasterYear="
-				+ getRemasterYear() + ", isRemastered=" + isRemastered() + ", isScene=" + isScene() + ", getSeeders="
+				+ getRemasterYear() + ", getRemastered=" + getRemastered() + ", getScene=" + getSize() + ", getSeeders="
 				+ getSeeders() + ", getSize=" + getSize() + ", getSnatched=" + getSnatched() + ", getTime=" + getTime()
-				+ ", getUserID=" + getUserID() + ", getUsername=" + getUsername() + ", getDownloadLink=" + getDownloadLink()
-				+ "]";
+				+ ", getMediaFormatEncoding=" + getMediaFormatEncoding() + ", getDownloadLink=" + getDownloadLink() + "]";
 	}
 
 }

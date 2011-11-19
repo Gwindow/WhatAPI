@@ -3,169 +3,249 @@
  */
 package api.torrents.torrents;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.util.ArrayList;
+import java.util.List;
+
+import api.son.MySon;
+import api.soup.MySoup;
+import api.util.Tuple;
+
 /**
- * The Class TorrentGroup.
+ * The Class Torrents.
  */
 public class TorrentGroup {
-	private String CatalogueNumber;
-	private String CategoryID;
-	private String ID;
-	private String Name;
-	private String RecordLabel;
-	private String ReleaseType;
-	private String Time;
-	private String VanityHouse;
-	private String WikiBody;
-	private String WikiImage;
-	private String Year;
-	private boolean hasBookmarked;
+	private Response response;
+	private String status;
+	private static transient int id;
 
 	/**
-	 * Gets the catalogue number.
+	 * create the Torrents.
 	 * 
-	 * @return the catalogue number
+	 * @param id
+	 *            the id of the torrent group
+	 * @return Torrents
 	 */
-	public String getCatalogueNumber() {
-		return this.CatalogueNumber;
+	public static TorrentGroup torrentGroupFromId(int id) {
+		String authkey = MySoup.getAuthKey();
+		String url = "ajax.php?action=torrentgroup&id=" + id + "&auth=" + authkey;
+		TorrentGroup torrents = (TorrentGroup) MySon.toObject(url, TorrentGroup.class);
+		TorrentGroup.id = id;
+		return torrents;
 	}
 
 	/**
-	 * Gets the category id.
+	 * the id of the torrent group.
 	 * 
-	 * @return the category id
+	 * @return the torrent group id
 	 */
-	public String getCategoryID() {
-		return this.CategoryID;
+	public static int getId() {
+		return id;
 	}
 
 	/**
-	 * Gets the iD.
+	 * Checks for free leech.
 	 * 
-	 * @return the iD
+	 * @return true, if successful
 	 */
-	public String getID() {
-		return this.ID;
+	public boolean hasFreeLeech() {
+		for (int i = 0; i < getResponse().getTorrents().size(); i++) {
+			if (getResponse().getTorrents().get(i).isFreeTorrent())
+				return true;
+		}
+		return false;
 	}
 
 	/**
-	 * Gets the name.
+	 * Get the response containing the torrentgroup information.
 	 * 
-	 * @return the name
+	 * @return response
 	 */
-	public String getName() {
-		return this.Name;
+	public Response getResponse() {
+		return this.response;
 	}
 
 	/**
-	 * Gets the record label.
-	 * 
-	 * @return the record label
+	 * Adds the bookmark.
 	 */
-	public String getRecordLabel() {
-		return this.RecordLabel;
-	}
-
+	/*public void addBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() == false)
+	 * { MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
+	 * System.out.println("Bookmarked"); } else { System.err.println("Already bookmarked"); } } *//**
+	 * Removes the
+	 * bookmark.
+	 */
+	/*public void removeBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
+	 * true) { MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
+	 * System.out.println("Removed bookmark"); } else { System.err.println("Already isn't bookmarked"); } } */
 	/**
-	 * Checks if is bookmarked.
+	 * Get the status of the request.
 	 * 
-	 * @return true, if is bookmarked
+	 * @return true if success
 	 */
-	public boolean isBookmarked() {
-		return this.hasBookmarked;
-	}
-
-	/**
-	 * Gets the release type.
-	 * 
-	 * @return the release type
-	 */
-	public String getReleaseType() {
-		if (ReleaseType.equalsIgnoreCase("1"))
-			return "Album";
-		else if (ReleaseType.equalsIgnoreCase("3"))
-			return "Soundtrack";
-		else if (ReleaseType.equalsIgnoreCase("5"))
-			return "EP";
-		else if (ReleaseType.equalsIgnoreCase("6"))
-			return "Anthology";
-		else if (ReleaseType.equalsIgnoreCase("7"))
-			return "Compilation";
-		else if (ReleaseType.equalsIgnoreCase("9"))
-			return "Single";
-		else if (ReleaseType.equalsIgnoreCase("11"))
-			return "Live Album";
-		else if (ReleaseType.equalsIgnoreCase("13"))
-			return "Remix";
-		else if (ReleaseType.equalsIgnoreCase("14"))
-			return "Bootleg";
-		else if (ReleaseType.equalsIgnoreCase("15"))
-			return "Interview";
-		else if (ReleaseType.equalsIgnoreCase("16"))
-			return "Mixtape";
-		else if (ReleaseType.equalsIgnoreCase("21"))
-			return "Unknown";
-		else
-			return "API Error";
-
-	}
-
-	/**
-	 * Gets the time.
-	 * 
-	 * @return the time
-	 */
-	public String getTime() {
-		return this.Time;
-	}
-
-	/**
-	 * Checks if is vanity house.
-	 * 
-	 * @return true, if is vanity house
-	 */
-	public boolean isVanityHouse() {
-		if (VanityHouse.equals("1"))
+	public boolean getStatus() {
+		if (status.equalsIgnoreCase("success"))
 			return true;
 		return false;
 	}
 
 	/**
-	 * Gets the wiki body.
+	 * Gets the download links list.
 	 * 
-	 * @return the wiki body
+	 * @return the download links list
 	 */
-	public String getWikiBody() {
-		return this.WikiBody;
+	public List<Tuple<String, String>> getDownloadLinksList() {
+		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+		for (Torrent t : response.getTorrents()) {
+			String name = t.getFilePath();
+			if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
+				name =
+						response.getGroup().getName() + " - " + response.getGroup().getYear() + " (" + t.getMediaFormatEncoding()
+								+ ")";
+			}
+			list.add(new Tuple<String, String>(t.getDownloadLink(), name));
+		}
+		return list;
 	}
 
 	/**
-	 * Gets the wiki image.
+	 * Gets the download links list for.
 	 * 
-	 * @return the wiki image
+	 * @param formatList
+	 *            the format list
+	 * @return the download links list for
 	 */
-	public String getWikiImage() {
-		return this.WikiImage;
+	public List<Tuple<String, String>> getDownloadLinksListFor(String[] formatList) {
+		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+		for (Torrent t : response.getTorrents()) {
+			for (int i = 0; i < formatList.length; i++) {
+				if (formatList[i].equalsIgnoreCase(t.getFormat())) {
+					String name = t.getFilePath();
+					if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
+						name =
+								response.getGroup().getName() + " - " + response.getGroup().getYear() + " ("
+										+ t.getMediaFormatEncoding() + ")";
+					}
+					list.add(new Tuple<String, String>(t.getDownloadLink(), name));
+				}
+			}
+		}
+		return list;
+
 	}
 
 	/**
-	 * Gets the year.
+	 * Gets the download links list except.
 	 * 
-	 * @return the year
+	 * @param formatList
+	 *            the format list
+	 * @return the download links list except
 	 */
-	public String getYear() {
-		return this.Year;
+	public List<Tuple<String, String>> getDownloadLinksListExcept(String[] formatList) {
+		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+		for (Torrent t : response.getTorrents()) {
+			for (int i = 0; i < formatList.length; i++) {
+				if (!formatList[i].equalsIgnoreCase(t.getFormat())) {
+					String name = t.getFilePath();
+					if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
+						name =
+								response.getGroup().getName() + " - " + response.getGroup().getYear() + " ("
+										+ t.getMediaFormatEncoding() + ")";
+					}
+					list.add(new Tuple<String, String>(t.getDownloadLink(), name));
+				}
+			}
+		}
+		return list;
+
+	}
+
+	/**
+	 * Download list.
+	 * 
+	 * @param list
+	 *            the list
+	 * @param path
+	 *            the path
+	 */
+	public void downloadList(List<Tuple<String, String>> list, String path) {
+		for (Tuple<String, String> t : list) {
+			try {
+				downloadTorrent(t.getA(), path, t.getB());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Download torrent.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param path
+	 *            the path
+	 * @param name
+	 *            the name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	private void downloadTorrent(String url, String path, String name) throws IOException {
+		URL u;
+		u = new URL(url);
+		ReadableByteChannel rbc = Channels.newChannel(u.openStream());
+		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
+		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
+		System.out.println("Downloaded " + name + " to " + path);
+	}
+
+	/**
+	 * Gets the spotify url.
+	 * 
+	 * @return the spotify url
+	 */
+	public String getSpotifyUrl() {
+		try {
+			String s = "spotify:" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8");
+			return s;
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("Could not encode url");
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	/**
+	 * Gets the last fm url.
+	 * 
+	 * @return the last fm url
+	 */
+	public String getLastFMUrl() {
+		try {
+			String s =
+					"http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8")
+							+ "&type=album";
+			return s;
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("Could not encode url");
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "TorrentGroup [getCatalogueNumber=" + getCatalogueNumber() + ", getCategoryID=" + getCategoryID() + ", getID="
-				+ getID() + ", getName=" + getName() + ", getRecordLabel=" + getRecordLabel() + ", isBookmarked="
-				+ isBookmarked() + ", getReleaseType=" + getReleaseType() + ", getTime=" + getTime() + ", isVanityHouse="
-				+ isVanityHouse() + ", getWikiBody=" + getWikiBody() + ", getWikiImage=" + getWikiImage() + ", getYear="
-				+ getYear() + "]";
+		return "Torrents [id =" + id + ", response=" + response + ", status=" + status + "]";
 	}
-
 }

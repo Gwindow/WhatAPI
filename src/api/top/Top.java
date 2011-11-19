@@ -14,7 +14,7 @@ import api.soup.MySoup;
  * @author Tim
  */
 public class Top {
-	private List<Section> response;
+	private List<Response> response;
 	private String status;
 
 	/**
@@ -93,7 +93,7 @@ public class Top {
 	 * 
 	 * @return list with Section objects
 	 */
-	public List<Section> getSections() {
+	public List<Response> getResponse() {
 		return this.response;
 	}
 
@@ -108,11 +108,9 @@ public class Top {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Top [response=" + response + ", status=" + status + "]";

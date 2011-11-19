@@ -106,8 +106,8 @@ public class User {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", response=" + response + ", status=" + status + "]";

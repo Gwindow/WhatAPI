@@ -12,7 +12,7 @@ public class Ranks {
 	private Number artists;
 	private Number bounty;
 	private Number downloaded;
-	private String overall;
+	private Number overall;
 	private Number posts;
 	private Number requests;
 	private Number uploaded;
@@ -50,7 +50,7 @@ public class Ranks {
 	 * 
 	 * @return the overall
 	 */
-	public String getOverall() {
+	public Number getOverall() {
 		return this.overall;
 	}
 
@@ -90,26 +90,10 @@ public class Ranks {
 		return this.uploads;
 	}
 
-	/**
-	 * Gets the buffer.
-	 * 
-	 * @return the buffer
-	 */
-	public String getBuffer() {
-		double up = uploaded.doubleValue();
-		double down = downloaded.doubleValue();
-		double buffer = up - down;
-		return String.valueOf(buffer);
-
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Ranks [getArtists=" + getArtists() + ", getBounty=" + getBounty() + ", getDownloaded=" + getDownloaded()
 				+ ", getOverall=" + getOverall() + ", getPosts=" + getPosts() + ", getRequests=" + getRequests()
-				+ ", getUploaded=" + getUploaded() + ", getUploads=" + getUploads() + ", getBuffer=" + getBuffer() + "]";
+				+ ", getUploaded=" + getUploaded() + ", getUploads=" + getUploads() + "]";
 	}
 }
