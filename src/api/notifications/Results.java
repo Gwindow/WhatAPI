@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.notifications;
 
 import java.io.FileOutputStream;
@@ -8,136 +11,249 @@ import java.nio.channels.ReadableByteChannel;
 
 import api.soup.MySoup;
 
+/**
+ * The Class Results.
+ */
 public class Results {
 	private String encoding;
-	private String fileCount;
+	private Number fileCount;
 	private String format;
-	private String freeTorrent;
-	private String groupCategoryId;
-	private String groupId;
+	private Boolean freeTorrent;
+	private Number groupCategoryId;
+	private Number groupId;
 	private String groupName;
 	private String groupYear;
-	private String hasCue;
-	private String hasLog;
-	private String leechers;
+	private Boolean hasCue;
+	private Boolean hasLog;
+	private Number leechers;
 	private String logInDb;
-	private String logScore;
+	private Number logScore;
 	private String media;
 	private String notificationTime;
 	private String remasterTitle;
 	private String remasterYear;
-	private String scene;
-	private String seeders;
-	private String size;
-	private String snatched;
-	private String torrentId;
+	private Boolean scene;
+	private Number seeders;
+	private Number size;
+	private Number snatched;
+	private Number torrentId;
 	private String torrentTags;
-	private String unread;
+	private Boolean unread;
 
+	/**
+	 * Gets the encoding.
+	 * 
+	 * @return the encoding
+	 */
 	public String getEncoding() {
-		return this.encoding;
+		return encoding;
 	}
 
-	public String getFileCount() {
-		return this.fileCount;
+	/**
+	 * Gets the file count.
+	 * 
+	 * @return the file count
+	 */
+	public Number getFileCount() {
+		return fileCount;
 	}
 
+	/**
+	 * Gets the format.
+	 * 
+	 * @return the format
+	 */
 	public String getFormat() {
-		return this.format;
+		return format;
 	}
 
-	public boolean isFreeTorrent() {
-		if (freeTorrent.equalsIgnoreCase("1"))
-			return true;
-		return false;
+	/**
+	 * Checks if is free torrent.
+	 * 
+	 * @return the boolean
+	 */
+	public Boolean isFreeTorrent() {
+		return freeTorrent;
 	}
 
-	public String getGroupCategoryId() {
-		return this.groupCategoryId;
+	/**
+	 * Gets the group category id.
+	 * 
+	 * @return the group category id
+	 */
+	public Number getGroupCategoryId() {
+		return groupCategoryId;
 	}
 
-	public String getGroupId() {
-		return this.groupId;
+	/**
+	 * Gets the group id.
+	 * 
+	 * @return the group id
+	 */
+	public Number getGroupId() {
+		return groupId;
 	}
 
+	/**
+	 * Gets the group name.
+	 * 
+	 * @return the group name
+	 */
 	public String getGroupName() {
-		return this.groupName;
+		return groupName;
 	}
 
+	/**
+	 * Gets the group year.
+	 * 
+	 * @return the group year
+	 */
 	public String getGroupYear() {
-		return this.groupYear;
+		return groupYear;
 	}
 
-	public boolean hasCue() {
-		if (hasCue.equalsIgnoreCase("1"))
-			return true;
-		return false;
+	/**
+	 * Checks for cue.
+	 * 
+	 * @return the checks for cue
+	 */
+	public Boolean hasCue() {
+		return hasCue;
 	}
 
-	public boolean hasLog() {
-		if (hasLog.equalsIgnoreCase("1"))
-			return true;
-		return false;
+	/**
+	 * Checks for log.
+	 * 
+	 * @return the checks for log
+	 */
+	public Boolean hasLog() {
+		return hasLog;
 	}
 
-	public String getLeechers() {
-		return this.leechers;
+	/**
+	 * Gets the leechers.
+	 * 
+	 * @return the leechers
+	 */
+	public Number getLeechers() {
+		return leechers;
 	}
 
+	/**
+	 * Gets the log in db.
+	 * 
+	 * @return the log in db
+	 */
 	public String getLogInDb() {
-		return this.logInDb;
+		return logInDb;
 	}
 
-	public String getLogScore() {
-		return this.logScore;
+	/**
+	 * Gets the log score.
+	 * 
+	 * @return the log score
+	 */
+	public Number getLogScore() {
+		return logScore;
 	}
 
+	/**
+	 * Gets the media.
+	 * 
+	 * @return the media
+	 */
 	public String getMedia() {
-		return this.media;
+		return media;
 	}
 
+	/**
+	 * Gets the notification time.
+	 * 
+	 * @return the notification time
+	 */
 	public String getNotificationTime() {
-		return this.notificationTime;
+		return notificationTime;
 	}
 
+	/**
+	 * Gets the remaster title.
+	 * 
+	 * @return the remaster title
+	 */
 	public String getRemasterTitle() {
-		return this.remasterTitle;
+		return remasterTitle;
 	}
 
+	/**
+	 * Gets the remaster year.
+	 * 
+	 * @return the remaster year
+	 */
 	public String getRemasterYear() {
-		return this.remasterYear;
+		return remasterYear;
 	}
 
-	public boolean isScene() {
-		if (scene.equalsIgnoreCase("1"))
-			return true;
-		return false;
+	/**
+	 * Checks if is scene.
+	 * 
+	 * @return the boolean
+	 */
+	public Boolean isScene() {
+		return scene;
 	}
 
-	public String getSeeders() {
-		return this.seeders;
+	/**
+	 * Gets the seeders.
+	 * 
+	 * @return the seeders
+	 */
+	public Number getSeeders() {
+		return seeders;
 	}
 
-	public String getSize() {
-		return this.size;
+	/**
+	 * Gets the size.
+	 * 
+	 * @return the size
+	 */
+	public Number getSize() {
+		return size;
 	}
 
-	public String getSnatched() {
-		return this.snatched;
+	/**
+	 * Gets the snatched.
+	 * 
+	 * @return the snatched
+	 */
+	public Number getSnatched() {
+		return snatched;
 	}
 
-	public String getTorrentId() {
-		return this.torrentId;
+	/**
+	 * Gets the torrent id.
+	 * 
+	 * @return the torrent id
+	 */
+	public Number getTorrentId() {
+		return torrentId;
 	}
 
+	/**
+	 * Gets the torrent tags.
+	 * 
+	 * @return the torrent tags
+	 */
 	public String getTorrentTags() {
-		return this.torrentTags;
+		return torrentTags;
 	}
 
-	public boolean isUnread() {
-		if (unread.equalsIgnoreCase("1"))
-			return true;
-		return false;
+	/**
+	 * Checks if is unread.
+	 * 
+	 * @return the boolean
+	 */
+	public Boolean isUnread() {
+		return unread;
 	}
 
 	/**
@@ -160,6 +276,11 @@ public class Results {
 
 	}
 
+	/**
+	 * Gets the download link.
+	 * 
+	 * @return the download link
+	 */
 	public String getDownloadLink() {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
@@ -169,6 +290,16 @@ public class Results {
 		return downloadLink;
 	}
 
+	/**
+	 * Download file.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param path
+	 *            the path
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public void downloadFile(String url, String path) throws IOException {
 		// todo fix this
 		String name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
@@ -190,6 +321,8 @@ public class Results {
 				+ getLogScore() + ", getMedia=" + getMedia() + ", getNotificationTime=" + getNotificationTime()
 				+ ", getRemasterTitle=" + getRemasterTitle() + ", getRemasterYear=" + getRemasterYear() + ", isScene="
 				+ isScene() + ", getSeeders=" + getSeeders() + ", getSize=" + getSize() + ", getSnatched=" + getSnatched()
-				+ ", getTorrentId=" + getTorrentId() + ", getTorrentTags=" + getTorrentTags() + ", isUnread=" + isUnread() + "]";
+				+ ", getTorrentId=" + getTorrentId() + ", getTorrentTags=" + getTorrentTags() + ", isUnread=" + isUnread()
+				+ ", getMediaFormatEncoding=" + getMediaFormatEncoding() + ", getYearMediaFormatEncoding="
+				+ getYearMediaFormatEncoding() + ", getDownloadLink=" + getDownloadLink() + "]";
 	}
 }

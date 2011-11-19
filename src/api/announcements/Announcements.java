@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.announcements;
 
 /**
@@ -8,12 +11,15 @@ package api.announcements;
 import api.son.MySon;
 import api.soup.MySoup;
 
+/**
+ * The Class Announcements.
+ */
 public class Announcements {
 	private Response response;
 	private String status;
 
 	/**
-	 * Initialize the Announcements
+	 * Initialize the Announcements.
 	 * 
 	 * @return an Announcements object
 	 */
@@ -25,18 +31,18 @@ public class Announcements {
 	}
 
 	/**
-	 * Get the response
+	 * Get the response.
 	 * 
-	 * @return
+	 * @return the response
 	 */
 	public Response getResponse() {
 		return this.response;
 	}
 
 	/**
-	 * Get the status of the request
+	 * Get the status of the request.
 	 * 
-	 * @return
+	 * @return the status
 	 */
 	public boolean getStatus() {
 		if (status.equalsIgnoreCase("success"))
@@ -44,6 +50,9 @@ public class Announcements {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Announcements [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

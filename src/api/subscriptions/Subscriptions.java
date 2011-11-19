@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.subscriptions;
 
 import java.util.ArrayList;
@@ -7,10 +10,18 @@ import java.util.HashMap;
 import api.son.MySon;
 import api.soup.MySoup;
 
+/**
+ * The Class Subscriptions.
+ */
 public class Subscriptions {
 	private Response response;
 	private String status;
 
+	/**
+	 * Inits the.
+	 * 
+	 * @return the subscriptions
+	 */
 	public static Subscriptions init() {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=subscriptions&auth=" + authkey;
@@ -18,16 +29,31 @@ public class Subscriptions {
 		return subscriptions;
 	}
 
+	/**
+	 * Gets the response.
+	 * 
+	 * @return the response
+	 */
 	public Response getResponse() {
 		return this.response;
 	}
 
+	/**
+	 * Checks for unread threads.
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean hasUnreadThreads() {
 		if (response.getThreads().isEmpty() || (response.getThreads() == null))
 			return true;
 		return false;
 	}
 
+	/**
+	 * Gets the status.
+	 * 
+	 * @return the status
+	 */
 	public boolean getStatus() {
 		if (status.equalsIgnoreCase("success"))
 			return true;
@@ -36,9 +62,9 @@ public class Subscriptions {
 
 	// TODO needs to be tested
 	/**
-	 * Dont call me just yet!
+	 * Dont call me just yet!.
 	 * 
-	 * @return
+	 * @return the hash map
 	 */
 	public HashMap<String, Threads> sortThreadsBySection() {
 		HashMap<String, Threads> map = new HashMap<String, Threads>();
@@ -50,6 +76,9 @@ public class Subscriptions {
 		return map;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Subscriptions [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

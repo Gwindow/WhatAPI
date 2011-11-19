@@ -1,7 +1,13 @@
+/**
+ * @author Gwindow
+ */
 package api.forum.thread;
 
 import java.util.List;
 
+/**
+ * The Class Author.
+ */
 public class Author {
 	private boolean artist;
 	private Number authorId;
@@ -15,6 +21,8 @@ public class Author {
 	private boolean warned;
 
 	/**
+	 * Checks if is artist.
+	 * 
 	 * @return the artist
 	 */
 	public boolean isArtist() {
@@ -22,6 +30,8 @@ public class Author {
 	}
 
 	/**
+	 * Gets the author id.
+	 * 
 	 * @return the authorId
 	 */
 	public Number getAuthorId() {
@@ -29,6 +39,8 @@ public class Author {
 	}
 
 	/**
+	 * Gets the author name.
+	 * 
 	 * @return the authorName
 	 */
 	public String getAuthorName() {
@@ -36,6 +48,8 @@ public class Author {
 	}
 
 	/**
+	 * Gets the avatar.
+	 * 
 	 * @return the avatar
 	 */
 	public String getAvatar() {
@@ -43,6 +57,8 @@ public class Author {
 	}
 
 	/**
+	 * Checks if is donor.
+	 * 
 	 * @return the donor
 	 */
 	public boolean isDonor() {
@@ -50,6 +66,8 @@ public class Author {
 	}
 
 	/**
+	 * Checks if is enabled.
+	 * 
 	 * @return the enabled
 	 */
 	public boolean isEnabled() {
@@ -57,6 +75,8 @@ public class Author {
 	}
 
 	/**
+	 * Gets the paranoia.
+	 * 
 	 * @return the paranoia
 	 */
 	public List<String> getParanoia() {
@@ -64,6 +84,8 @@ public class Author {
 	}
 
 	/**
+	 * Gets the user title.
+	 * 
 	 * @return the userTitle
 	 */
 	public String getUserTitle() {
@@ -71,12 +93,17 @@ public class Author {
 	}
 
 	/**
+	 * Checks if is warned.
+	 * 
 	 * @return the warned
 	 */
 	public boolean isWarned() {
 		return warned;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Author [isArtist=" + isArtist() + ", getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName()

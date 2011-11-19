@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.top;
 
 import java.util.List;
@@ -6,17 +9,16 @@ import api.son.MySon;
 import api.soup.MySoup;
 
 /**
- * The top torrents,tags,users
+ * The top torrents,tags,users.
  * 
  * @author Tim
- * 
  */
 public class Top {
 	private List<Section> response;
 	private String status;
 
 	/**
-	 * Load the top torrents
+	 * Load the top torrents.
 	 * 
 	 * @param limit
 	 *            how many to load, 10, 100, 250
@@ -35,7 +37,7 @@ public class Top {
 	}
 
 	/**
-	 * Load the top tags
+	 * Load the top tags.
 	 * 
 	 * @param limit
 	 *            how many to load, 10, 100, 250
@@ -54,7 +56,7 @@ public class Top {
 	}
 
 	/**
-	 * Load the top users
+	 * Load the top users.
 	 * 
 	 * @param limit
 	 *            how many to load, 10, 100, 250
@@ -73,7 +75,7 @@ public class Top {
 	}
 
 	/**
-	 * Check if a valid limit
+	 * Check if a valid limit.
 	 * 
 	 * @param limit
 	 *            10, 100, 250
@@ -87,7 +89,7 @@ public class Top {
 	}
 
 	/**
-	 * Get a list of Sections
+	 * Get a list of Sections.
 	 * 
 	 * @return list with Section objects
 	 */
@@ -95,6 +97,11 @@ public class Top {
 		return this.response;
 	}
 
+	/**
+	 * Gets the status.
+	 * 
+	 * @return the status
+	 */
 	public boolean getStatus() {
 		if (status.equalsIgnoreCase("success"))
 			return true;

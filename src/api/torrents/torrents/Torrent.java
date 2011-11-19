@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.torrents.torrents;
 
 import java.io.FileOutputStream;
@@ -8,6 +11,9 @@ import java.nio.channels.ReadableByteChannel;
 
 import api.soup.MySoup;
 
+/**
+ * The Class Torrent.
+ */
 public class Torrent {
 	private String Description;
 	private String Encoding;
@@ -36,7 +42,7 @@ public class Torrent {
 	private String Username;
 
 	/**
-	 * Description of torrent
+	 * Description of torrent.
 	 * 
 	 * @return description
 	 */
@@ -45,7 +51,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Encoding of torrent
+	 * Encoding of torrent.
 	 * 
 	 * @return encoding
 	 */
@@ -54,7 +60,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Number of files in torrent
+	 * Number of files in torrent.
 	 * 
 	 * @return number of files in torrent
 	 */
@@ -63,7 +69,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Get the list of files in a torrent
+	 * Get the list of files in a torrent.
 	 * 
 	 * @return file list
 	 */
@@ -72,21 +78,27 @@ public class Torrent {
 	}
 
 	/**
-	 * @return
+	 * Gets the file path.
+	 * 
+	 * @return the file path
 	 */
 	public String getFilePath() {
 		return this.FilePath;
 	}
 
 	/**
-	 * @return
+	 * Gets the format.
+	 * 
+	 * @return the format
 	 */
 	public String getFormat() {
 		return this.Format;
 	}
 
 	/**
-	 * @return
+	 * Checks if is free torrent.
+	 * 
+	 * @return true, if is free torrent
 	 */
 	public boolean isFreeTorrent() {
 		if (FreeTorrent.equals("1"))
@@ -95,7 +107,9 @@ public class Torrent {
 	}
 
 	/**
-	 * @return
+	 * Checks for cue.
+	 * 
+	 * @return true, if successful
 	 */
 	public boolean hasCue() {
 		if (HasCue.equals("1"))
@@ -104,7 +118,9 @@ public class Torrent {
 	}
 
 	/**
-	 * @return
+	 * Checks for log.
+	 * 
+	 * @return true, if successful
 	 */
 	public boolean hasLog() {
 		if (HasLog.equals("1"))
@@ -113,63 +129,81 @@ public class Torrent {
 	}
 
 	/**
-	 * @return
+	 * Gets the iD.
+	 * 
+	 * @return the iD
 	 */
 	public String getID() {
 		return this.ID;
 	}
 
 	/**
-	 * @return
+	 * Gets the leechers.
+	 * 
+	 * @return the leechers
 	 */
 	public String getLeechers() {
 		return this.Leechers;
 	}
 
 	/**
-	 * @return
+	 * Gets the log score.
+	 * 
+	 * @return the log score
 	 */
 	public String getLogScore() {
 		return this.LogScore;
 	}
 
 	/**
-	 * @return
+	 * Gets the media.
+	 * 
+	 * @return the media
 	 */
 	public String getMedia() {
 		return this.Media;
 	}
 
 	/**
-	 * @return
+	 * Gets the remaster catalogue number.
+	 * 
+	 * @return the remaster catalogue number
 	 */
 	public String getRemasterCatalogueNumber() {
 		return this.RemasterCatalogueNumber;
 	}
 
 	/**
-	 * @return
+	 * Gets the remaster record label.
+	 * 
+	 * @return the remaster record label
 	 */
 	public String getRemasterRecordLabel() {
 		return this.RemasterRecordLabel;
 	}
 
 	/**
-	 * @return
+	 * Gets the remaster title.
+	 * 
+	 * @return the remaster title
 	 */
 	public String getRemasterTitle() {
 		return this.RemasterTitle;
 	}
 
 	/**
-	 * @return
+	 * Gets the remaster year.
+	 * 
+	 * @return the remaster year
 	 */
 	public String getRemasterYear() {
 		return this.RemasterYear;
 	}
 
 	/**
-	 * @return
+	 * Checks if is remastered.
+	 * 
+	 * @return true, if is remastered
 	 */
 	public boolean isRemastered() {
 		if (Remastered.equals("1"))
@@ -178,7 +212,9 @@ public class Torrent {
 	}
 
 	/**
-	 * @return
+	 * Checks if is scene.
+	 * 
+	 * @return true, if is scene
 	 */
 	public boolean isScene() {
 		if (Scene.equals("1"))
@@ -187,42 +223,54 @@ public class Torrent {
 	}
 
 	/**
-	 * @return
+	 * Gets the seeders.
+	 * 
+	 * @return the seeders
 	 */
 	public String getSeeders() {
 		return this.Seeders;
 	}
 
 	/**
-	 * @return
+	 * Gets the size.
+	 * 
+	 * @return the size
 	 */
 	public String getSize() {
 		return this.Size;
 	}
 
 	/**
-	 * @return
+	 * Gets the snatched.
+	 * 
+	 * @return the snatched
 	 */
 	public String getSnatched() {
 		return this.Snatched;
 	}
 
 	/**
-	 * @return
+	 * Gets the time.
+	 * 
+	 * @return the time
 	 */
 	public String getTime() {
 		return this.Time;
 	}
 
 	/**
-	 * @return
+	 * Gets the user id.
+	 * 
+	 * @return the user id
 	 */
 	public String getUserID() {
 		return this.UserID;
 	}
 
 	/**
-	 * @return
+	 * Gets the username.
+	 * 
+	 * @return the username
 	 */
 	public String getUsername() {
 		return this.Username;
@@ -238,6 +286,11 @@ public class Torrent {
 
 	}
 
+	/**
+	 * Gets the download link.
+	 * 
+	 * @return the download link
+	 */
 	public String getDownloadLink() {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
@@ -246,6 +299,16 @@ public class Torrent {
 		return downloadLink;
 	}
 
+	/**
+	 * Download file.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param path
+	 *            the path
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public void downloadFile(String url, String path) throws IOException {
 		String name = getFilePath();
 		if (getFilePath().equalsIgnoreCase("") || getFilePath().equals(null)) {

@@ -1,69 +1,120 @@
+/**
+ * @author Gwindow
+ */
 package api.subscriptions;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * The Class Threads.
+ */
 public class Threads {
-	private String forumId;
+	private Number forumId;
 	private String forumName;
-	private String lastPostId;
-	private String locked;
+	private Number lastPostId;
+	private boolean locked;
 	// so java doesn't get confused
 	@SerializedName("new")
 	private boolean isNew;
-	private String postId;
-	private String threadId;
+	private Number postId;
+	private Number threadId;
 	private String threadTitle;
-	private String lastReadPage;
 
-	public int getLastReadPage() {
-		return 1;
+	/**
+	 * Gets the forum id.
+	 * 
+	 * @return the forum id
+	 */
+	public Number getForumId() {
+		return forumId;
 	}
 
-	public int getForumId() {
-		return Integer.valueOf(this.forumId);
-	}
-
+	/**
+	 * Gets the forum name.
+	 * 
+	 * @return the forum name
+	 */
 	public String getForumName() {
-		return this.forumName;
+		return forumName;
 	}
 
-	public int getLastPostId() {
-		return Integer.valueOf(this.lastPostId);
+	/**
+	 * Gets the last post id.
+	 * 
+	 * @return the last post id
+	 */
+	public Number getLastPostId() {
+		return lastPostId;
 	}
 
+	/**
+	 * Checks if is locked.
+	 * 
+	 * @return true, if is locked
+	 */
 	public boolean isLocked() {
-		if (locked.equalsIgnoreCase("0"))
-			return false;
-		else
-			return true;
+		return locked;
 	}
 
+	/**
+	 * Checks if is new.
+	 * 
+	 * @return true, if is new
+	 */
 	public boolean isNew() {
-		return this.isNew;
+		return isNew;
 	}
 
-	public int getPostId() {
-		return Integer.valueOf(this.postId);
+	/**
+	 * Gets the post id.
+	 * 
+	 * @return the post id
+	 */
+	public Number getPostId() {
+		return postId;
 	}
 
-	public int getThreadId() {
-		return Integer.valueOf(this.threadId);
+	/**
+	 * Gets the thread id.
+	 * 
+	 * @return the thread id
+	 */
+	public Number getThreadId() {
+		return threadId;
 	}
 
+	/**
+	 * Gets the thread title.
+	 * 
+	 * @return the thread title
+	 */
 	public String getThreadTitle() {
-		return this.threadTitle;
+		return threadTitle;
 	}
 
+	/**
+	 * Gets the url.
+	 * 
+	 * @return the url
+	 */
 	public String getUrl() {
 		String url = "forums.php?action=viewthread&threadid=" + threadId;
 		return url;
 	}
 
+	/**
+	 * Gets the last read url.
+	 * 
+	 * @return the last read url
+	 */
 	public String getLastReadUrl() {
 		String url = "forums.php?action=viewthread&threadid=" + threadId + "&postid=" + lastPostId;
 		return url;
 	}
 
+	/* (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Threads [getLastReadPage=" + getLastReadPage() + ", getForumId=" + getForumId() + ", getForumName="

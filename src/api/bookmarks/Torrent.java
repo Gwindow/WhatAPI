@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.bookmarks;
 
 import java.io.FileOutputStream;
@@ -8,6 +11,9 @@ import java.nio.channels.ReadableByteChannel;
 
 import api.soup.MySoup;
 
+/**
+ * The Class Torrent.
+ */
 public class Torrent {
 	private String encoding;
 	private Number fileCount;
@@ -33,6 +39,7 @@ public class Torrent {
 	private String time;
 
 	/**
+	 * Gets the encoding.
 	 * 
 	 * @return torrent encoding
 	 */
@@ -41,6 +48,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the file count.
 	 * 
 	 * @return number of files in torrent
 	 */
@@ -49,6 +57,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the format.
 	 * 
 	 * @return format of torrent
 	 */
@@ -57,7 +66,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Returns true if torrent is freeleech
+	 * Returns true if torrent is freeleech.
 	 * 
 	 * @return is free leech
 	 */
@@ -66,6 +75,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the group id.
 	 * 
 	 * @return torrent group id
 	 */
@@ -74,7 +84,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Returns true if the torrent has a cue
+	 * Returns true if the torrent has a cue.
 	 * 
 	 * @return has cue
 	 */
@@ -82,12 +92,17 @@ public class Torrent {
 		return hasCue;
 	}
 
+	/**
+	 * Checks for file.
+	 * 
+	 * @return the number
+	 */
 	public Number hasFile() {
 		return hasFile;
 	}
 
 	/**
-	 * Returns true if torrent has a log
+	 * Returns true if torrent has a log.
 	 * 
 	 * @return has log
 	 */
@@ -96,6 +111,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the id.
 	 * 
 	 * @return the id
 	 */
@@ -104,6 +120,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the leechers.
 	 * 
 	 * @return number of leechers
 	 */
@@ -112,6 +129,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the log score.
 	 * 
 	 * @return the log score
 	 */
@@ -120,6 +138,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the media.
 	 * 
 	 * @return media of torrent
 	 */
@@ -128,6 +147,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the remaster catalogue number.
 	 * 
 	 * @return catalogue number of remastered torrent
 	 */
@@ -136,6 +156,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the remaster record label.
 	 * 
 	 * @return the remastered record label
 	 */
@@ -144,6 +165,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the remaster title.
 	 * 
 	 * @return the title of remaster
 	 */
@@ -152,6 +174,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the remaster year.
 	 * 
 	 * @return the year of remaster
 	 */
@@ -160,6 +183,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Checks if is remastered.
 	 * 
 	 * @return true if remastered
 	 */
@@ -168,7 +192,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Return true if torrent is a scene release
+	 * Return true if torrent is a scene release.
 	 * 
 	 * @return is scene release
 	 */
@@ -177,6 +201,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the seeders.
 	 * 
 	 * @return number of seeders
 	 */
@@ -185,6 +210,7 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the size.
 	 * 
 	 * @return size of torrent
 	 */
@@ -192,11 +218,17 @@ public class Torrent {
 		return this.size;
 	}
 
+	/**
+	 * Gets the snatched.
+	 * 
+	 * @return the snatched
+	 */
 	public Number getSnatched() {
 		return this.snatched;
 	}
 
 	/**
+	 * Gets the time.
 	 * 
 	 * @return time of upload
 	 */
@@ -215,7 +247,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Get the download link of the torrent
+	 * Get the download link of the torrent.
 	 * 
 	 * @return download link
 	 */
@@ -228,13 +260,14 @@ public class Torrent {
 	}
 
 	/**
-	 * Download a file
+	 * Download a file.
 	 * 
 	 * @param url
 	 *            url to file
 	 * @param path
 	 *            local path to save the file
 	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void downloadFile(String url, String path) throws IOException {
 		// todo fix this
@@ -248,6 +281,9 @@ public class Torrent {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Torrent [getEncoding=" + getEncoding() + ", getFileCount=" + getFileCount() + ", getFormat=" + getFormat()

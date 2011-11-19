@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.user;
 
 import api.son.MySon;
@@ -5,10 +8,9 @@ import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 /**
- * A User, needs to be created using userFromId contains the user profile
+ * A User, needs to be created using userFromId contains the user profile.
  * 
  * @author Tim
- * 
  */
 public class User {
 	private Profile response;
@@ -16,7 +18,7 @@ public class User {
 	private static transient int id;
 
 	/**
-	 * Return a User object created from an id
+	 * Return a User object created from an id.
 	 * 
 	 * @param id
 	 *            id of user
@@ -31,7 +33,10 @@ public class User {
 	}
 
 	/**
-	 * Add user to your friend list
+	 * Add user to your friend list.
+	 * 
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public void addToFriends() throws CouldNotLoadException {
 		if (!getProfile().IsFriend()) {
@@ -41,16 +46,26 @@ public class User {
 
 	// TODO test sending messages
 	/**
-	 * Send message to the user
+	 * Send message to the user.
 	 * 
-	 * @param
+	 * @param subject
+	 *            the subject
+	 * @param body
+	 *            the body
 	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public void sendMessage(String subject, String body) throws CouldNotLoadException {
 		PrivateMessage pm = new PrivateMessage(id, subject, body);
 		pm.sendMessage();
 	}
 
+	/**
+	 * Send rippy.
+	 * 
+	 * @param body
+	 *            the body
+	 */
 	public void sendRippy(String body) {
 		Rippy rippy = new Rippy(id, body);
 		try {
@@ -62,7 +77,7 @@ public class User {
 	}
 
 	/**
-	 * Get the user's id
+	 * Get the user's id.
 	 * 
 	 * @return user id
 	 */
@@ -70,16 +85,29 @@ public class User {
 		return id;
 	}
 
+	/**
+	 * Gets the profile.
+	 * 
+	 * @return the profile
+	 */
 	public Profile getProfile() {
 		return response;
 	}
 
+	/**
+	 * Gets the status.
+	 * 
+	 * @return the status
+	 */
 	public boolean getStatus() {
 		if (status.equalsIgnoreCase("success"))
 			return true;
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", response=" + response + ", status=" + status + "]";

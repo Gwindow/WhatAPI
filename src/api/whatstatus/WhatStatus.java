@@ -1,16 +1,32 @@
+/**
+ * @author Gwindow
+ */
 package api.whatstatus;
 
 import api.son.MySon;
 
+/**
+ * The Class WhatStatus.
+ */
 public class WhatStatus {
 	private Status status;
 
+	/**
+	 * Inits the.
+	 * 
+	 * @return the what status
+	 */
 	public static WhatStatus init() {
 		String url = "http://whatstatus.info/json.php";
 		WhatStatus ws = (WhatStatus) MySon.toObjectOther(url, WhatStatus.class);
 		return ws;
 	}
 
+	/**
+	 * Gets the status.
+	 * 
+	 * @return the status
+	 */
 	public Status getStatus() {
 		return this.status;
 	}

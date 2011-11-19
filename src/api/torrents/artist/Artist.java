@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.torrents.artist;
 
 import java.io.FileOutputStream;
@@ -14,11 +17,21 @@ import api.son.MySon;
 import api.soup.MySoup;
 import api.util.Tuple;
 
+/**
+ * The Class Artist.
+ */
 public class Artist {
 	private Response response;
 	private String status;
 	private static transient int id;
 
+	/**
+	 * Artist from id.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the artist
+	 */
 	public static Artist artistFromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=artist&id=" + id + "&auth=" + authkey;
@@ -27,14 +40,27 @@ public class Artist {
 		return artist;
 	}
 
+	/**
+	 * Gets the id.
+	 * 
+	 * @return the id
+	 */
 	public static int getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the response.
+	 * 
+	 * @return the response
+	 */
 	public Response getResponse() {
 		return this.response;
 	}
 
+	/**
+	 * Adds the bookmark.
+	 */
 	public void addBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.isBookmarked() == false) {
@@ -45,6 +71,9 @@ public class Artist {
 		}
 	}
 
+	/**
+	 * Removes the bookmark.
+	 */
 	public void removeBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.isBookmarked() == true) {
@@ -55,6 +84,9 @@ public class Artist {
 		}
 	}
 
+	/**
+	 * Enable notifications.
+	 */
 	public void enableNotifications() {
 		String authkey = MySoup.getAuthKey();
 		if (response.isNotificationsEnabled() == false) {
@@ -66,6 +98,9 @@ public class Artist {
 		}
 	}
 
+	/**
+	 * Disbale notifications.
+	 */
 	public void disbaleNotifications() {
 		String authkey = MySoup.getAuthKey();
 		if (response.isNotificationsEnabled() == true) {
@@ -85,6 +120,13 @@ public class Artist {
 	 * null) { name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")"; }
 	 * list.add(new Tuple<String, String>(t.getDownloadLink(), name)); } } return list; }
 	 */
+	/**
+	 * Gets the download links list for.
+	 * 
+	 * @param formatList
+	 *            the format list
+	 * @return the download links list for
+	 */
 	public List<Tuple<String, String>> getDownloadLinksListFor(String[] formatList) {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 		for (TorrentGroup tg : response.getTorrentgroup()) {
@@ -103,6 +145,13 @@ public class Artist {
 		return list;
 	}
 
+	/**
+	 * Gets the download links list except.
+	 * 
+	 * @param formatList
+	 *            the format list
+	 * @return the download links list except
+	 */
 	public List<Tuple<String, String>> getDownloadLinksListExcept(String[] formatList) {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 		for (TorrentGroup tg : response.getTorrentgroup()) {
@@ -122,6 +171,14 @@ public class Artist {
 
 	}
 
+	/**
+	 * Download list.
+	 * 
+	 * @param list
+	 *            the list
+	 * @param path
+	 *            the path
+	 */
 	public void downloadList(List<Tuple<String, String>> list, String path) {
 		for (Tuple<String, String> t : list) {
 			try {
@@ -133,6 +190,18 @@ public class Artist {
 		}
 	}
 
+	/**
+	 * Download torrent.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param path
+	 *            the path
+	 * @param name
+	 *            the name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private void downloadTorrent(String url, String path, String name) throws IOException {
 		URL u;
 		u = new URL(url);
@@ -142,6 +211,11 @@ public class Artist {
 		System.out.println("Downloaded " + name + " to " + path);
 	}
 
+	/**
+	 * Gets the spotify url.
+	 * 
+	 * @return the spotify url
+	 */
 	public String getSpotifyUrl() {
 		try {
 			String s = "spotify:artist" + URLEncoder.encode(getResponse().getName(), "UTF-8");
@@ -154,6 +228,11 @@ public class Artist {
 
 	}
 
+	/**
+	 * Gets the last fm url.
+	 * 
+	 * @return the last fm url
+	 */
 	public String getLastFMUrl() {
 		try {
 			String s = "http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getName(), "UTF-8") + "&type=artist";
@@ -180,7 +259,7 @@ public class Artist {
 	/* public boolean getStatus() { if (status.equalsIgnoreCase("success")) return true; return false; } */
 
 	/**
-	 * Get the status of the request
+	 * Get the status of the request.
 	 * 
 	 * @return true if success
 	 */

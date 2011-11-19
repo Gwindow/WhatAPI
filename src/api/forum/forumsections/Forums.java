@@ -1,7 +1,13 @@
+/**
+ * @author Gwindow
+ */
 package api.forum.forumsections;
 
 import java.util.List;
 
+/**
+ * The Class Forums.
+ */
 public class Forums {
 	private String forumDescription;
 	private Number forumId;
@@ -20,6 +26,8 @@ public class Forums {
 	private boolean sticky;
 
 	/**
+	 * Gets the forum description.
+	 * 
 	 * @return the forumDescription
 	 */
 	public String getForumDescription() {
@@ -27,6 +35,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the forum id.
+	 * 
 	 * @return the forumId
 	 */
 	public Number getForumId() {
@@ -34,6 +44,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the forum name.
+	 * 
 	 * @return the forumName
 	 */
 	public String getForumName() {
@@ -41,6 +53,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the last author id.
+	 * 
 	 * @return the lastAuthorId
 	 */
 	public Number getLastAuthorId() {
@@ -48,6 +62,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the last post author name.
+	 * 
 	 * @return the lastPostAuthorName
 	 */
 	public String getLastPostAuthorName() {
@@ -55,6 +71,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the last post id.
+	 * 
 	 * @return the lastPostId
 	 */
 	public Number getLastPostId() {
@@ -62,6 +80,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the last time.
+	 * 
 	 * @return the lastTime
 	 */
 	public String getLastTime() {
@@ -69,6 +89,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the last topic.
+	 * 
 	 * @return the lastTopic
 	 */
 	public String getLastTopic() {
@@ -76,6 +98,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the last topic id.
+	 * 
 	 * @return the lastTopicId
 	 */
 	public Number getLastTopicId() {
@@ -83,6 +107,8 @@ public class Forums {
 	}
 
 	/**
+	 * Checks if is locked.
+	 * 
 	 * @return the locked
 	 */
 	public boolean isLocked() {
@@ -90,6 +116,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the num posts.
+	 * 
 	 * @return the numPosts
 	 */
 	public Number getNumPosts() {
@@ -97,6 +125,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the num topics.
+	 * 
 	 * @return the numTopics
 	 */
 	public Number getNumTopics() {
@@ -104,6 +134,8 @@ public class Forums {
 	}
 
 	/**
+	 * Checks if is read.
+	 * 
 	 * @return the read
 	 */
 	public boolean isRead() {
@@ -111,6 +143,8 @@ public class Forums {
 	}
 
 	/**
+	 * Gets the specific rules.
+	 * 
 	 * @return the specificRules
 	 */
 	public List<String> getSpecificRules() {
@@ -118,12 +152,17 @@ public class Forums {
 	}
 
 	/**
+	 * Checks if is sticky.
+	 * 
 	 * @return the sticky
 	 */
 	public boolean isSticky() {
 		return sticky;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Forums [getForumDescription=" + getForumDescription() + ", getForumId=" + getForumId() + ", getForumName="

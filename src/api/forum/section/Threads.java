@@ -1,6 +1,12 @@
+/**
+ * @author Gwindow
+ */
 package api.forum.section;
 
 
+/**
+ * The Class Threads.
+ */
 public class Threads {
 	private Number authorId;
 	private String authorName;
@@ -17,6 +23,8 @@ public class Threads {
 	private Number topicId;
 
 	/**
+	 * Gets the author id.
+	 * 
 	 * @return the authorId
 	 */
 	public Number getAuthorId() {
@@ -24,6 +32,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the author name.
+	 * 
 	 * @return the authorName
 	 */
 	public String getAuthorName() {
@@ -31,6 +41,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the last author id.
+	 * 
 	 * @return the lastAuthorId
 	 */
 	public Number getLastAuthorId() {
@@ -38,6 +50,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the last author name.
+	 * 
 	 * @return the lastAuthorName
 	 */
 	public String getLastAuthorName() {
@@ -45,6 +59,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the last id.
+	 * 
 	 * @return the lastID
 	 */
 	public Number getLastID() {
@@ -52,6 +68,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the last read page.
+	 * 
 	 * @return the lastReadPage
 	 */
 	public Number getLastReadPage() {
@@ -59,6 +77,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the last read post id.
+	 * 
 	 * @return the lastReadPostId
 	 */
 	public Number getLastReadPostId() {
@@ -66,6 +86,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the last time.
+	 * 
 	 * @return the lastTime
 	 */
 	public String getLastTime() {
@@ -73,6 +95,8 @@ public class Threads {
 	}
 
 	/**
+	 * Checks if is locked.
+	 * 
 	 * @return the locked
 	 */
 	public boolean isLocked() {
@@ -80,6 +104,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the post count.
+	 * 
 	 * @return the postCount
 	 */
 	public Number getPostCount() {
@@ -87,6 +113,8 @@ public class Threads {
 	}
 
 	/**
+	 * Checks if is sticky.
+	 * 
 	 * @return the sticky
 	 */
 	public boolean isSticky() {
@@ -94,6 +122,8 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the title.
+	 * 
 	 * @return the title
 	 */
 	public String getTitle() {
@@ -101,22 +131,37 @@ public class Threads {
 	}
 
 	/**
+	 * Gets the topic id.
+	 * 
 	 * @return the topicId
 	 */
 	public Number getTopicId() {
 		return topicId;
 	}
 
+	/**
+	 * Gets the url.
+	 * 
+	 * @return the url
+	 */
 	public String getUrl() {
 		String url = "forums.php?action=viewthread&threadid=" + topicId;
 		return url;
 	}
 
+	/**
+	 * Gets the last read url.
+	 * 
+	 * @return the last read url
+	 */
 	public String getLastReadUrl() {
 		String url = "forums.php?action=viewthread&threadid=" + topicId + "&page=" + lastReadPage;
 		return url;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Threads [isSticky=" + isSticky() + ", isLocked=" + isLocked() + ", getAuthorId=" + getAuthorId()

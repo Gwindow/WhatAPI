@@ -1,5 +1,11 @@
+/**
+ * @author Gwindow
+ */
 package api.announcements;
 
+/**
+ * The Class AnnouncementsList.
+ */
 public class AnnouncementsList {
 	private String body;
 	private Number newsId;
@@ -7,7 +13,7 @@ public class AnnouncementsList {
 	private String title;
 
 	/**
-	 * Body of the announcement
+	 * Body of the announcement.
 	 * 
 	 * @return the body
 	 */
@@ -16,7 +22,7 @@ public class AnnouncementsList {
 	}
 
 	/**
-	 * ID of the announcement
+	 * ID of the announcement.
 	 * 
 	 * @return the id
 	 */
@@ -25,7 +31,7 @@ public class AnnouncementsList {
 	}
 
 	/**
-	 * The at which the announcement was created
+	 * The at which the announcement was created.
 	 * 
 	 * @return the time
 	 */
@@ -34,7 +40,7 @@ public class AnnouncementsList {
 	}
 
 	/**
-	 * The title of the announcement
+	 * The title of the announcement.
 	 * 
 	 * @return the title
 	 */
@@ -42,6 +48,9 @@ public class AnnouncementsList {
 		return this.title;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "AnnouncementsList [getBody=" + getBody() + ", getNewsId=" + getNewsId() + ", getNewsTime=" + getNewsTime()

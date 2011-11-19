@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.cli;
 
 /**
@@ -101,6 +104,8 @@ public class FileClassLoader extends URLClassLoader {
 	 * @param file
 	 *            the file to be loaded as a class
 	 * @return The Class object that was created from the file, or null if any exception was encountered
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see #createClass(byte[])
 	 */
 	public Class<?> createClass(File file) throws IOException {

@@ -1,11 +1,12 @@
+/**
+ * @author Gwindow
+ */
 package api.bookmarks;
 
 import java.util.List;
 
 /**
- * Each Bookmark in the bookmark list
- * 
- * 
+ * Each Bookmark in the bookmark list.
  */
 public class BookmarksList {
 	private Number catalogueNumber;
@@ -19,6 +20,7 @@ public class BookmarksList {
 	private String year;
 
 	/**
+	 * Gets the catalogue number.
 	 * 
 	 * @return the catalogue number
 	 */
@@ -27,6 +29,7 @@ public class BookmarksList {
 	}
 
 	/**
+	 * Gets the id.
 	 * 
 	 * @return the id
 	 */
@@ -35,6 +38,7 @@ public class BookmarksList {
 	}
 
 	/**
+	 * Gets the name.
 	 * 
 	 * @return the name
 	 */
@@ -43,6 +47,7 @@ public class BookmarksList {
 	}
 
 	/**
+	 * Gets the record label.
 	 * 
 	 * @return the record label
 	 */
@@ -51,6 +56,7 @@ public class BookmarksList {
 	}
 
 	/**
+	 * Gets the release type.
 	 * 
 	 * @return the release type
 	 */
@@ -59,6 +65,7 @@ public class BookmarksList {
 	}
 
 	/**
+	 * Gets the tag list.
 	 * 
 	 * @return the tags
 	 */
@@ -67,7 +74,7 @@ public class BookmarksList {
 	}
 
 	/**
-	 * Get a list of the torrents under the bookmark
+	 * Get a list of the torrents under the bookmark.
 	 * 
 	 * @return list of torrents
 	 */
@@ -76,7 +83,7 @@ public class BookmarksList {
 	}
 
 	/**
-	 * Returns true if bookmark is under vanity house
+	 * Returns true if bookmark is under vanity house.
 	 * 
 	 * @return is under vanity house
 	 */
@@ -85,6 +92,7 @@ public class BookmarksList {
 	}
 
 	/**
+	 * Gets the year.
 	 * 
 	 * @return the year
 	 */
@@ -92,6 +100,9 @@ public class BookmarksList {
 		return this.year;
 	}
 
+	/* (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "BookmarksList [getCatalogueNumber=" + getCatalogueNumber() + ", getId=" + getId() + ", getName=" + getName()

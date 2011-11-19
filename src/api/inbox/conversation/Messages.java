@@ -1,32 +1,73 @@
+/**
+ * @author Gwindow
+ */
 package api.inbox.conversation;
 
 import org.jsoup.Jsoup;
 
+/**
+ * The Class Messages.
+ */
 public class Messages {
 	private String body;
-	private String messageId;
-	private String senderId;
+	private Number messageId;
+	private Number senderId;
 	private String senderName;
 	private String sentDate;
 
+	/**
+	 * Gets the body.
+	 * 
+	 * @return the body
+	 */
 	public String getBody() {
 		return this.body;
 	}
 
-	public int getMessageId() {
-		return Integer.valueOf(this.messageId);
+	/**
+	 * Gets the message id.
+	 * 
+	 * @return the message id
+	 */
+	public Number getMessageId() {
+		return messageId;
 	}
 
-	public int getSenderId() {
-		return Integer.valueOf(this.senderId);
+	/**
+	 * Gets the sender id.
+	 * 
+	 * @return the sender id
+	 */
+	public Number getSenderId() {
+		return senderId;
 	}
 
+	/**
+	 * Gets the sender name.
+	 * 
+	 * @return the sender name
+	 */
 	public String getSenderName() {
 		return this.senderName;
 	}
 
+	/**
+	 * Gets the sent date.
+	 * 
+	 * @return the sent date
+	 */
 	public String getSentDate() {
 		return this.sentDate;
+	}
+
+	/**
+	 * Gets the quotable body.
+	 * 
+	 * @return the quotable body
+	 */
+	public String getQuotableBody() {
+		return "[quote=" + senderName + "]" + Jsoup.parse(body).text() + "[/quote]";
+
 	}
 
 	/* (non-Javadoc)
@@ -38,8 +79,4 @@ public class Messages {
 				+ ", getSenderName()=" + getSenderName() + ", getSentDate()=" + getSentDate() + "]";
 	}
 
-	public String getQuotableBody() {
-		return "[quote=" + senderName + "]" + Jsoup.parse(body).text() + "[/quote]";
-
-	}
 }

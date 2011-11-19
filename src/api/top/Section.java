@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.top;
 
 import java.util.List;
@@ -15,7 +18,7 @@ public class Section {
 	private String tag;
 
 	/**
-	 * Name of the section
+	 * Name of the section.
 	 * 
 	 * @return section name
 	 */
@@ -24,7 +27,7 @@ public class Section {
 	}
 
 	/**
-	 * The number of results displayed
+	 * The number of results displayed.
 	 * 
 	 * @return number of results
 	 */
@@ -33,7 +36,7 @@ public class Section {
 	}
 
 	/**
-	 * List of Results
+	 * List of Results.
 	 * 
 	 * @return List of Results
 	 */
@@ -42,7 +45,7 @@ public class Section {
 	}
 
 	/**
-	 * The tag of the section
+	 * The tag of the section.
 	 * 
 	 * @return tag
 	 */

@@ -1,10 +1,21 @@
+/**
+ * @author Gwindow
+ */
 package api.forum.thread;
 
+/**
+ * The Class Answers.
+ */
 public class Answers {
 	private String answer;
 	private Number percent;
 	private Number ratio;
 
+	/**
+	 * Gets the answer.
+	 * 
+	 * @return the answer
+	 */
 	public String getAnswer() {
 		try {
 			return this.answer;
@@ -14,6 +25,11 @@ public class Answers {
 		}
 	}
 
+	/**
+	 * Gets the percent.
+	 * 
+	 * @return the percent
+	 */
 	public Number getPercent() {
 		try {
 			return this.percent;
@@ -23,6 +39,11 @@ public class Answers {
 		}
 	}
 
+	/**
+	 * Gets the ratio.
+	 * 
+	 * @return the ratio
+	 */
 	public Number getRatio() {
 		try {
 			return this.ratio;
@@ -32,6 +53,9 @@ public class Answers {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Answers [getAnswer=" + getAnswer() + ", getPercent=" + getPercent() + ", getRatio=" + getRatio() + "]";

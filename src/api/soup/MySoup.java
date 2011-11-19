@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.soup;
 
 import java.io.BufferedReader;
@@ -36,6 +39,9 @@ import api.index.Index;
 import api.util.CouldNotLoadException;
 import api.util.RegexTools;
 
+/**
+ * The Class MySoup.
+ */
 public class MySoup {
 	private static DefaultHttpClient httpClient = getHttpClient();
 	private static boolean SSL;
@@ -64,11 +70,21 @@ public class MySoup {
 		SITE = s;
 	}
 
+	/**
+	 * Gets the site.
+	 * 
+	 * @return the site
+	 */
 	public static String getSite() {
 		return SITE;
 
 	}
 
+	/**
+	 * Gets the http client.
+	 * 
+	 * @return the http client
+	 */
 	private static DefaultHttpClient getHttpClient() {
 		DefaultHttpClient client = new DefaultHttpClient();
 		ClientConnectionManager mgr = client.getConnectionManager();
@@ -80,7 +96,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Called statically from MySoup because forum section titles never change
+	 * Called statically from MySoup because forum section titles never change.
 	 */
 	public static void loadForumSections() {
 		if (forumSectionsLoaded == false) {
@@ -89,6 +105,9 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Load forum sections2.
+	 */
 	public static void loadForumSections2() {
 		if (forumSectionsLoaded == false) {
 			forumSections = ForumSections.init();
@@ -96,38 +115,81 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Gets the forum sections2.
+	 * 
+	 * @return the forum sections2
+	 */
 	public static ForumSections getForumSections2() {
 		return forumSections;
 	}
 
+	/**
+	 * Gets the forum sections.
+	 * 
+	 * @return the forum sections
+	 */
 	public static ForumSections getForumSections() {
 		return forumSections;
 	}
 
+	/**
+	 * Enable ssl.
+	 */
 	public static void enableSSL() {
 		SSL = true;
 	}
 
+	/**
+	 * Checks if is sSL enabled.
+	 * 
+	 * @return true, if is sSL enabled
+	 */
 	public static boolean isSSLEnabled() {
 		return SSL;
 	}
 
+	/**
+	 * Gets the auth key.
+	 * 
+	 * @return the auth key
+	 */
 	public static String getAuthKey() {
 		return authey;
 	}
 
+	/**
+	 * Gets the pass key.
+	 * 
+	 * @return the pass key
+	 */
 	public static String getPassKey() {
 		return passkey;
 	}
 
+	/**
+	 * Gets the session id.
+	 * 
+	 * @return the session id
+	 */
 	public static String getSessionId() {
 		return cookies.get(0).getValue();
 	}
 
+	/**
+	 * Gets the cookies.
+	 * 
+	 * @return the cookies
+	 */
 	public static List<Cookie> getCookies() {
 		return cookies;
 	}
 
+	/**
+	 * Checks if is logged in.
+	 * 
+	 * @return true, if is logged in
+	 */
 	public static boolean isLoggedIn() {
 		if ((cookies != null) && !cookies.isEmpty())
 			return true;
@@ -135,11 +197,25 @@ public class MySoup {
 			return false;
 	}
 
+	/**
+	 * Link to ssl.
+	 * 
+	 * @param link
+	 *            the link
+	 * @return the string
+	 */
 	private static String linkToSSL(String link) {
 		link = link.replace("http://", "https://ssl.");
 		return link;
 	}
 
+	/**
+	 * Gets the update link.
+	 * 
+	 * @param page
+	 *            the page
+	 * @return the update link
+	 */
 	public static String getUpdateLink(String page) {
 		Document doc = null;
 		try {
@@ -150,6 +226,13 @@ public class MySoup {
 		return doc.getElementsByTag("b").text();
 	}
 
+	/**
+	 * Gets the update version.
+	 * 
+	 * @param page
+	 *            the page
+	 * @return the update version
+	 */
 	public static String getUpdateVersion(String page) {
 		Document doc = null;
 		try {
@@ -160,10 +243,29 @@ public class MySoup {
 		return doc.getElementsByTag("h1").text();
 	}
 
+	/**
+	 * To quotable string.
+	 * 
+	 * @param html
+	 *            the html
+	 * @return the string
+	 */
 	public static String toQuotableString(String html) {
 		return Jsoup.parse(html).text();
 	}
 
+	/**
+	 * Login.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param username
+	 *            the username
+	 * @param password
+	 *            the password
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public static void login(String url, String username, String password) throws CouldNotLoadException {
 		String index = "index.php";
 		url = SITE + url;
@@ -201,6 +303,9 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Load index.
+	 */
 	public static void loadIndex() {
 		i = Index.init();
 		MySoup.username = i.getResponse().getUsername();
@@ -213,10 +318,27 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Gets the index.
+	 * 
+	 * @return the index
+	 */
 	public static Index getIndex() {
 		return i;
 	}
 
+	/**
+	 * Post reply.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param id
+	 *            the id
+	 * @param reply
+	 *            the reply
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public static void postReply(String url, String id, String reply) throws CouldNotLoadException {
 		url = SITE + url;
 		if (isSSLEnabled()) {
@@ -251,6 +373,16 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Oldpost reply.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param reply
+	 *            the reply
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public static void oldpostReply(String url, String reply) throws CouldNotLoadException {
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
@@ -286,6 +418,15 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Oldscrape.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the document
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public static Document oldscrape(String url) throws CouldNotLoadException {
 		url = SITE + url;
 		if (isSSLEnabled()) {
@@ -312,6 +453,13 @@ public class MySoup {
 		return doc;
 	}
 
+	/**
+	 * Scrape.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the input stream
+	 */
 	public static InputStream scrape(String url) {
 		url = SITE + url;
 		if (isSSLEnabled()) {
@@ -331,6 +479,18 @@ public class MySoup {
 
 	}
 
+	/**
+	 * New thread.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param title
+	 *            the title
+	 * @param body
+	 *            the body
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public static void newThread(String id, String title, String body) throws CouldNotLoadException {
 		String url = SITE + "forums.php?action=new&forumid=" + id;
 		if (isSSLEnabled()) {
@@ -365,6 +525,13 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Input stream to string.
+	 * 
+	 * @param is
+	 *            the is
+	 * @return the string
+	 */
 	private static String inputStreamToString(InputStream is) {
 		String line = "";
 		StringBuilder total = new StringBuilder();
@@ -382,6 +549,12 @@ public class MySoup {
 		return total.toString();
 	}
 
+	/**
+	 * Press link.
+	 * 
+	 * @param url
+	 *            the url
+	 */
 	public static void pressLink(String url) {
 		url = SITE + url;
 		if (isSSLEnabled()) {
@@ -399,6 +572,15 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Scrape other.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the document
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public static Document scrapeOther(String url) throws CouldNotLoadException {
 		HttpGet httpget = new HttpGet(url);
 		HttpResponse response = null;
@@ -416,14 +598,30 @@ public class MySoup {
 		return doc;
 	}
 
+	/**
+	 * Gets the user id.
+	 * 
+	 * @return the user id
+	 */
 	public static String getUserId() {
 		return userId;
 	}
 
+	/**
+	 * Gets the username.
+	 * 
+	 * @return the username
+	 */
 	public static String getUsername() {
 		return username;
 	}
 
+	/**
+	 * Sets the session id.
+	 * 
+	 * @param sessionId
+	 *            the new session id
+	 */
 	public static void setSessionId(String sessionId) {
 		Cookie cookie = new BasicClientCookie("", sessionId);
 		CookieStore cs = new BasicCookieStore();
@@ -432,12 +630,19 @@ public class MySoup {
 		cookies = httpClient.getCookieStore().getCookies();
 	}
 
+	/**
+	 * To plain text.
+	 * 
+	 * @param s
+	 *            the s
+	 * @return the string
+	 */
 	public static String toPlainText(String s) {
 		return Jsoup.parse(s).text();
 	}
 
 	/**
-	 * Send private message
+	 * Send private message.
 	 * 
 	 * @param id
 	 *            recipent's id
@@ -446,6 +651,7 @@ public class MySoup {
 	 * @param body
 	 *            body of message
 	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public static void sendPrivateMessage(String id, String subject, String body) throws CouldNotLoadException {
 		String url = SITE + "inbox.php?action=compose&to=" + id;
@@ -485,13 +691,14 @@ public class MySoup {
 	}
 
 	/**
-	 * Send rippy to user
+	 * Send rippy to user.
 	 * 
 	 * @param id
 	 *            recipent's id
 	 * @param message
 	 *            body of message
 	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public static void sendRippy(String id, String message) throws CouldNotLoadException {
 		String url = SITE + "user.php?action=rippy&id=" + id;
@@ -533,6 +740,11 @@ public class MySoup {
 	 * = httpClient.execute(httpost); } catch (Exception e) { e.printStackTrace(); throw new
 	 * CouldNotLoadException("Could not send rippy"); } } */
 
+	/**
+	 * Can notifications.
+	 * 
+	 * @return true, if successful
+	 */
 	public static boolean canNotifications() {
 		return canNotifications;
 	}

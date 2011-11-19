@@ -1,10 +1,21 @@
+/**
+ * @author Gwindow
+ */
 package api.whatstatus;
 
+/**
+ * The Class Status.
+ */
 public class Status {
 	private String irc;
 	private String site;
 	private String tracker;
 
+	/**
+	 * Gets the irc.
+	 * 
+	 * @return the irc
+	 */
 	public int getIrc() {
 		if ((irc.equalsIgnoreCase("up"))) {
 			System.out.println("IRC Up");
@@ -18,6 +29,11 @@ public class Status {
 		}
 	}
 
+	/**
+	 * Gets the site.
+	 * 
+	 * @return the site
+	 */
 	public int getSite() {
 		if ((site.equalsIgnoreCase("up"))) {
 			System.out.println("Site Up");
@@ -31,6 +47,11 @@ public class Status {
 		}
 	}
 
+	/**
+	 * Gets the tracker.
+	 * 
+	 * @return the tracker
+	 */
 	public int getTracker() {
 		if ((tracker.equalsIgnoreCase("up"))) {
 			System.out.println("Tracker Up");

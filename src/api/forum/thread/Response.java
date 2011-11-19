@@ -1,7 +1,13 @@
+/**
+ * @author Gwindow
+ */
 package api.forum.thread;
 
 import java.util.List;
 
+/**
+ * The Class Response.
+ */
 public class Response {
 	private Number currentPage;
 	private Number forumId;
@@ -16,6 +22,8 @@ public class Response {
 	private boolean sticky;
 
 	/**
+	 * Gets the current page.
+	 * 
 	 * @return the currentPage
 	 */
 	public Number getCurrentPage() {
@@ -23,6 +31,8 @@ public class Response {
 	}
 
 	/**
+	 * Gets the forum id.
+	 * 
 	 * @return the forumId
 	 */
 	public Number getForumId() {
@@ -30,6 +40,8 @@ public class Response {
 	}
 
 	/**
+	 * Gets the forum name.
+	 * 
 	 * @return the forumName
 	 */
 	public String getForumName() {
@@ -37,6 +49,8 @@ public class Response {
 	}
 
 	/**
+	 * Checks if is locked.
+	 * 
 	 * @return the locked
 	 */
 	public boolean isLocked() {
@@ -44,6 +58,8 @@ public class Response {
 	}
 
 	/**
+	 * Gets the pages.
+	 * 
 	 * @return the pages
 	 */
 	public Number getPages() {
@@ -51,6 +67,8 @@ public class Response {
 	}
 
 	/**
+	 * Gets the poll.
+	 * 
 	 * @return the poll
 	 */
 	public Poll getPoll() {
@@ -58,6 +76,8 @@ public class Response {
 	}
 
 	/**
+	 * Gets the posts.
+	 * 
 	 * @return the posts
 	 */
 	public List<Posts> getPosts() {
@@ -65,6 +85,8 @@ public class Response {
 	}
 
 	/**
+	 * Checks if is subscribed.
+	 * 
 	 * @return the subscribed
 	 */
 	public boolean isSubscribed() {
@@ -72,6 +94,8 @@ public class Response {
 	}
 
 	/**
+	 * Gets the thread id.
+	 * 
 	 * @return the threadId
 	 */
 	public Number getThreadId() {
@@ -79,6 +103,8 @@ public class Response {
 	}
 
 	/**
+	 * Gets the thread title.
+	 * 
 	 * @return the threadTitle
 	 */
 	public String getThreadTitle() {
@@ -86,12 +112,17 @@ public class Response {
 	}
 
 	/**
+	 * Checks if is sticky.
+	 * 
 	 * @return the sticky
 	 */
 	public boolean isSticky() {
 		return sticky;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Response [isSticky=" + isSticky() + ", isLocked=" + isLocked() + ", getCurrentPage=" + getCurrentPage()

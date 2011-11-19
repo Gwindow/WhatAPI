@@ -1,44 +1,80 @@
+/**
+ * @author Gwindow
+ */
 package api.search.user;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * The Class Results.
+ */
 public class Results {
 	// so java doesn't get confused with the "class" keyword
 	@SerializedName("class")
 	private String userClass;
-	private String donor;
+	private boolean donor;
 	private boolean enabled;
-	private String userId;
+	private Number userId;
 	private String username;
-	private String warned;
+	private Number warned;
 
+	/**
+	 * Gets the user class.
+	 * 
+	 * @return the user class
+	 */
 	public String getUserClass() {
-		return this.userClass;
+		return userClass;
 	}
 
-	public String getDonor() {
-		return this.donor;
+	/**
+	 * Checks if is donor.
+	 * 
+	 * @return true, if is donor
+	 */
+	public boolean isDonor() {
+		return donor;
 	}
 
-	public boolean getEnabled() {
-		return this.enabled;
+	/**
+	 * Checks if is enabled.
+	 * 
+	 * @return true, if is enabled
+	 */
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public String getUserId() {
-		return this.userId;
+	/**
+	 * Gets the user id.
+	 * 
+	 * @return the user id
+	 */
+	public Number getUserId() {
+		return userId;
 	}
 
+	/**
+	 * Gets the username.
+	 * 
+	 * @return the username
+	 */
 	public String getUsername() {
-		return this.username;
+		return username;
 	}
 
-	public String getWarned() {
-		return this.warned;
+	/**
+	 * Gets the warned.
+	 * 
+	 * @return the warned
+	 */
+	public Number getWarned() {
+		return warned;
 	}
 
 	@Override
 	public String toString() {
-		return "Results [getUserClass=" + getUserClass() + ", getDonor=" + getDonor() + ", getEnabled=" + getEnabled()
+		return "Results [getUserClass=" + getUserClass() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled()
 				+ ", getUserId=" + getUserId() + ", getUsername=" + getUsername() + ", getWarned=" + getWarned() + "]";
 	}
 }

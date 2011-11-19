@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.son;
 
 import java.io.IOException;
@@ -12,10 +15,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * Convert JSON to a Java object
+ * Convert JSON to a Java object.
  * 
  * @author Tim
- * 
  */
 public class MySon {
 	private static GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Integer.class, new StringConverter());
@@ -24,6 +26,15 @@ public class MySon {
 	// private final static Gson gson = new Gson();
 	private static Reader reader;
 
+	/**
+	 * To object.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param t
+	 *            the t
+	 * @return the object
+	 */
 	public static Object toObject(String url, Type t) {
 		try {
 			reader = new InputStreamReader(MySoup.scrape(url));
@@ -36,6 +47,12 @@ public class MySon {
 		}
 	}
 
+	/**
+	 * Prints the stream.
+	 * 
+	 * @param reader
+	 *            the reader
+	 */
 	@SuppressWarnings("unused")
 	private void printStream(Reader reader) {
 		char[] arr = new char[8 * 1024]; // 8K at a time
@@ -55,7 +72,7 @@ public class MySon {
 	}
 
 	/**
-	 * Create a java object from a json page
+	 * Create a java object from a json page.
 	 * 
 	 * @param url
 	 *            url of the json page
@@ -77,7 +94,7 @@ public class MySon {
 	}
 
 	/**
-	 * Create a java object from a json string
+	 * Create a java object from a json string.
 	 * 
 	 * @param json
 	 *            json string

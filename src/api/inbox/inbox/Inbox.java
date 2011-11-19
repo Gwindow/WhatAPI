@@ -1,13 +1,26 @@
+/**
+ * @author Gwindow
+ */
 package api.inbox.inbox;
 
 import api.son.MySon;
 import api.soup.MySoup;
 
+/**
+ * The Class Inbox.
+ */
 public class Inbox {
 	private Response response;
 	private String status;
 	private static int page;
 
+	/**
+	 * Inbox from page.
+	 * 
+	 * @param page
+	 *            the page
+	 * @return the inbox
+	 */
 	public static Inbox inboxFromPage(int page) {
 		String authkey = MySoup.getAuthKey();
 		Inbox.page = page;
@@ -17,9 +30,9 @@ public class Inbox {
 	}
 
 	/**
-	 * Should only be called if hasNextPage() returned true
+	 * Should only be called if hasNextPage() returned true.
 	 * 
-	 * @return
+	 * @return the inbox
 	 */
 	public static Inbox inboxFromNextPage() {
 		page += 1;
@@ -30,9 +43,9 @@ public class Inbox {
 	}
 
 	/**
-	 * Should only be called if hasPreviousPage() returned true
+	 * Should only be called if hasPreviousPage() returned true.
 	 * 
-	 * @return
+	 * @return the inbox
 	 */
 	public static Inbox inboxFromPreviousPage() {
 		page -= 1;
@@ -42,16 +55,31 @@ public class Inbox {
 		return inbox;
 	}
 
+	/**
+	 * Gets the response.
+	 * 
+	 * @return the response
+	 */
 	public Response getResponse() {
 		return this.response;
 	}
 
+	/**
+	 * Gets the status.
+	 * 
+	 * @return the status
+	 */
 	public boolean getStatus() {
 		if (status.equalsIgnoreCase("success"))
 			return true;
 		return false;
 	}
 
+	/**
+	 * Gets the last page.
+	 * 
+	 * @return the last page
+	 */
 	public int getLastPage() {
 		try {
 			return response.getPages().intValue();
@@ -60,6 +88,11 @@ public class Inbox {
 		}
 	}
 
+	/**
+	 * Checks for next page.
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean hasNextPage() {
 		try {
 			if ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0)
@@ -71,6 +104,11 @@ public class Inbox {
 		}
 	}
 
+	/**
+	 * Checks for previous page.
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean hasPreviousPage() {
 		try {
 			if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
@@ -83,6 +121,8 @@ public class Inbox {
 	}
 
 	/**
+	 * Gets the page.
+	 * 
 	 * @return the page
 	 */
 	public static int getPage() {

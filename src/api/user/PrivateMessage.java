@@ -1,5 +1,5 @@
 /**
- * 
+ * @author Gwindow
  */
 package api.user;
 
@@ -7,7 +7,7 @@ import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 /**
- * A private message
+ * A private message.
  * 
  * @author Tim
  */
@@ -18,7 +18,7 @@ public class PrivateMessage {
 	private String body;
 
 	/**
-	 * A new message
+	 * A new message.
 	 * 
 	 * @param id
 	 *            recipent's id
@@ -34,6 +34,8 @@ public class PrivateMessage {
 	}
 
 	/**
+	 * Instantiates a new private message.
+	 * 
 	 * @param id
 	 *            recipent's id
 	 */
@@ -42,9 +44,10 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * Send the message
+	 * Send the message.
 	 * 
 	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public void sendMessage() throws CouldNotLoadException {
 		if ((subject.length() > 0) && (body.length() > 0)) {
@@ -58,6 +61,8 @@ public class PrivateMessage {
 	}
 
 	/**
+	 * Gets the id.
+	 * 
 	 * @return the id
 	 */
 	public int getId() {
@@ -65,6 +70,8 @@ public class PrivateMessage {
 	}
 
 	/**
+	 * Gets the subject.
+	 * 
 	 * @return the subject
 	 */
 	public String getSubject() {
@@ -72,7 +79,7 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * Set the subject line of the message
+	 * Set the subject line of the message.
 	 * 
 	 * @param s
 	 *            subject line
@@ -82,6 +89,8 @@ public class PrivateMessage {
 	}
 
 	/**
+	 * Gets the body.
+	 * 
 	 * @return the body
 	 */
 	public String getBody() {
@@ -89,7 +98,7 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * Set message body
+	 * Set message body.
 	 * 
 	 * @param s
 	 *            body

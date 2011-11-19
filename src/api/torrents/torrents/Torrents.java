@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.torrents.torrents;
 
 import java.io.FileOutputStream;
@@ -14,13 +17,16 @@ import api.son.MySon;
 import api.soup.MySoup;
 import api.util.Tuple;
 
+/**
+ * The Class Torrents.
+ */
 public class Torrents {
 	private Response response;
 	private String status;
 	private static transient int id;
 
 	/**
-	 * create the Torrents
+	 * create the Torrents.
 	 * 
 	 * @param id
 	 *            the id of the torrent group
@@ -35,7 +41,7 @@ public class Torrents {
 	}
 
 	/**
-	 * the id of the torrent group
+	 * the id of the torrent group.
 	 * 
 	 * @return the torrent group id
 	 */
@@ -43,6 +49,11 @@ public class Torrents {
 		return id;
 	}
 
+	/**
+	 * Checks for free leech.
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean hasFreeLeech() {
 		for (int i = 0; i < getResponse().getTorrents().size(); i++) {
 			if (getResponse().getTorrents().get(i).isFreeTorrent())
@@ -52,7 +63,7 @@ public class Torrents {
 	}
 
 	/**
-	 * Get the response containing the torrentgroup information
+	 * Get the response containing the torrentgroup information.
 	 * 
 	 * @return response
 	 */
@@ -60,6 +71,9 @@ public class Torrents {
 		return this.response;
 	}
 
+	/**
+	 * Adds the bookmark.
+	 */
 	public void addBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.getGroup().isBookmarked() == false) {
@@ -70,6 +84,9 @@ public class Torrents {
 		}
 	}
 
+	/**
+	 * Removes the bookmark.
+	 */
 	public void removeBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.getGroup().isBookmarked() == true) {
@@ -81,7 +98,7 @@ public class Torrents {
 	}
 
 	/**
-	 * Get the status of the request
+	 * Get the status of the request.
 	 * 
 	 * @return true if success
 	 */
@@ -91,6 +108,11 @@ public class Torrents {
 		return false;
 	}
 
+	/**
+	 * Gets the download links list.
+	 * 
+	 * @return the download links list
+	 */
 	public List<Tuple<String, String>> getDownloadLinksList() {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 		for (Torrent t : response.getTorrents()) {
@@ -105,6 +127,13 @@ public class Torrents {
 		return list;
 	}
 
+	/**
+	 * Gets the download links list for.
+	 * 
+	 * @param formatList
+	 *            the format list
+	 * @return the download links list for
+	 */
 	public List<Tuple<String, String>> getDownloadLinksListFor(String[] formatList) {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 		for (Torrent t : response.getTorrents()) {
@@ -124,6 +153,13 @@ public class Torrents {
 
 	}
 
+	/**
+	 * Gets the download links list except.
+	 * 
+	 * @param formatList
+	 *            the format list
+	 * @return the download links list except
+	 */
 	public List<Tuple<String, String>> getDownloadLinksListExcept(String[] formatList) {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 		for (Torrent t : response.getTorrents()) {
@@ -143,6 +179,14 @@ public class Torrents {
 
 	}
 
+	/**
+	 * Download list.
+	 * 
+	 * @param list
+	 *            the list
+	 * @param path
+	 *            the path
+	 */
 	public void downloadList(List<Tuple<String, String>> list, String path) {
 		for (Tuple<String, String> t : list) {
 			try {
@@ -154,6 +198,18 @@ public class Torrents {
 		}
 	}
 
+	/**
+	 * Download torrent.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param path
+	 *            the path
+	 * @param name
+	 *            the name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private void downloadTorrent(String url, String path, String name) throws IOException {
 		URL u;
 		u = new URL(url);
@@ -163,6 +219,11 @@ public class Torrents {
 		System.out.println("Downloaded " + name + " to " + path);
 	}
 
+	/**
+	 * Gets the spotify url.
+	 * 
+	 * @return the spotify url
+	 */
 	public String getSpotifyUrl() {
 		try {
 			String s = "spotify:" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8");
@@ -175,6 +236,11 @@ public class Torrents {
 
 	}
 
+	/**
+	 * Gets the last fm url.
+	 * 
+	 * @return the last fm url
+	 */
 	public String getLastFMUrl() {
 		try {
 			String s =

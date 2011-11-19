@@ -1,5 +1,11 @@
+/**
+ * @author Gwindow
+ */
 package api.announcements;
 
+/**
+ * The Class BlogPosts.
+ */
 public class BlogPosts {
 	private String author;
 	private Number blogId;
@@ -9,7 +15,7 @@ public class BlogPosts {
 	private String title;
 
 	/**
-	 * Get the author of the blog post
+	 * Get the author of the blog post.
 	 * 
 	 * @return the author
 	 */
@@ -18,7 +24,7 @@ public class BlogPosts {
 	}
 
 	/**
-	 * The id of the blog post
+	 * The id of the blog post.
 	 * 
 	 * @return the id
 	 */
@@ -27,7 +33,7 @@ public class BlogPosts {
 	}
 
 	/**
-	 * The time at which the blog post was created
+	 * The time at which the blog post was created.
 	 * 
 	 * @return the time
 	 */
@@ -36,7 +42,7 @@ public class BlogPosts {
 	}
 
 	/**
-	 * The body of the blog post
+	 * The body of the blog post.
 	 * 
 	 * @return the body
 	 */
@@ -45,7 +51,7 @@ public class BlogPosts {
 	}
 
 	/**
-	 * The id of the thread associated with this blog post
+	 * The id of the thread associated with this blog post.
 	 * 
 	 * @return the id
 	 */
@@ -54,7 +60,7 @@ public class BlogPosts {
 	}
 
 	/**
-	 * The title of the blog post
+	 * The title of the blog post.
 	 * 
 	 * @return the title
 	 */
@@ -62,6 +68,9 @@ public class BlogPosts {
 		return this.title;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "BlogPosts [getAuthor=" + getAuthor() + ", getBlogId=" + getBlogId() + ", getBlogTime=" + getBlogTime()

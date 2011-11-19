@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.announcements;
 
 /**
@@ -5,12 +8,15 @@ package api.announcements;
  */
 import java.util.List;
 
+/**
+ * The Class Response.
+ */
 public class Response {
 	private List<AnnouncementsList> announcements;
 	private List<BlogPosts> blogPosts;
 
 	/**
-	 * Get the list of announcements
+	 * Get the list of announcements.
 	 * 
 	 * @return the announcements list
 	 */
@@ -19,7 +25,7 @@ public class Response {
 	}
 
 	/**
-	 * Get the list of blog posts
+	 * Get the list of blog posts.
 	 * 
 	 * @return the blog posts list
 	 */
@@ -28,7 +34,7 @@ public class Response {
 	}
 
 	/**
-	 * Get number of announcements
+	 * Get number of announcements.
 	 * 
 	 * @return the number of announcements
 	 */
@@ -37,7 +43,7 @@ public class Response {
 	}
 
 	/**
-	 * Get number of blog posts
+	 * Get number of blog posts.
 	 * 
 	 * @return the number of blog posts
 	 */
@@ -45,6 +51,9 @@ public class Response {
 		return blogPosts.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Response [getAnnouncements=" + getAnnouncements() + ", getBlogPosts=" + getBlogPosts() + "]";

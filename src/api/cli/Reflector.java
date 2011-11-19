@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.cli;
 
 import java.lang.reflect.Constructor;
@@ -12,11 +15,20 @@ import java.util.regex.Pattern;
 
 import api.util.Tuple;
 
+/**
+ * The Class Reflector.
+ */
 public class Reflector {
 	private Stack<Class<?>> classStack = new Stack<Class<?>>();
 	private Stack<Object> objectStack = new Stack<Object>();
 	private StringTokenizer tokenizer;
 
+	/**
+	 * Invoke.
+	 * 
+	 * @param input
+	 *            the input
+	 */
 	public void invoke(String input) {
 		if (input.startsWith("new")) {
 			String className = splitClassName(input);
@@ -40,27 +52,68 @@ public class Reflector {
 		}
 	}
 
+	/**
+	 * Split class name.
+	 * 
+	 * @param input
+	 *            the input
+	 * @return the string
+	 */
 	private String splitClassName(String input) {
 		String className = input.replace("new", "").trim();
 		className = className.replaceAll("\\((.*?)\\)", "");
 		return className;
 	}
 
+	/**
+	 * Split method name.
+	 * 
+	 * @param input
+	 *            the input
+	 * @return the string
+	 */
 	private String splitMethodName(String input) {
 		String methodName = input.replaceAll("\\((.*?)\\)", "").trim();
 		return methodName;
 	}
 
+	/**
+	 * Invoke constructor.
+	 * 
+	 * @param className
+	 *            the class name
+	 * @param params
+	 *            the params
+	 * @throws Exception
+	 *             the exception
+	 */
 	private void invokeConstructor(String className, List<String> params) throws Exception {
 		Tuple<Class<?>[], Object[]> tuple = translateToParams(params);
 		invokeConstructor(className, tuple.getA(), tuple.getB());
 	}
 
+	/**
+	 * Invoke method.
+	 * 
+	 * @param methodName
+	 *            the method name
+	 * @param params
+	 *            the params
+	 * @throws Exception
+	 *             the exception
+	 */
 	private void invokeMethod(String methodName, List<String> params) throws Exception {
 		Tuple<Class<?>[], Object[]> tuple = translateToParams(params);
 		invokeMethod(methodName, tuple.getA(), tuple.getB());
 	}
 
+	/**
+	 * Split parameters list.
+	 * 
+	 * @param input
+	 *            the input
+	 * @return the array list
+	 */
 	private ArrayList<String> splitParametersList(String input) {
 		ArrayList<String> parametersList = new ArrayList<String>();
 		Pattern pattern = Pattern.compile("\\((.*?)\\)", Pattern.DOTALL);
@@ -75,6 +128,13 @@ public class Reflector {
 		return null;
 	}
 
+	/**
+	 * Translate to params.
+	 * 
+	 * @param parametersList
+	 *            the parameters list
+	 * @return the tuple
+	 */
 	private Tuple<Class<?>[], Object[]> translateToParams(List<String> parametersList) {
 		Class<?>[] classParams = new Class[parametersList.size()];
 		Object[] methodParams = new Object[parametersList.size()];
@@ -106,6 +166,30 @@ public class Reflector {
 		return new Tuple<Class<?>[], Object[]>(classParams, methodParams);
 	}
 
+	/**
+	 * Invoke constructor.
+	 * 
+	 * @param className
+	 *            the class name
+	 * @param classParams
+	 *            the class params
+	 * @param constructorParams
+	 *            the constructor params
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 * @throws SecurityException
+	 *             the security exception
+	 * @throws NoSuchMethodException
+	 *             the no such method exception
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
+	 * @throws InstantiationException
+	 *             the instantiation exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 * @throws InvocationTargetException
+	 *             the invocation target exception
+	 */
 	private void invokeConstructor(String className, Class<?>[] classParams, Object[] constructorParams)
 			throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException,
 			InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -115,6 +199,26 @@ public class Reflector {
 
 	}
 
+	/**
+	 * Invoke method.
+	 * 
+	 * @param methodName
+	 *            the method name
+	 * @param classParams
+	 *            the class params
+	 * @param methodParams
+	 *            the method params
+	 * @throws SecurityException
+	 *             the security exception
+	 * @throws NoSuchMethodException
+	 *             the no such method exception
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 * @throws InvocationTargetException
+	 *             the invocation target exception
+	 */
 	private void invokeMethod(String methodName, Class<?>[] classParams, Object[] methodParams) throws SecurityException,
 			NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Method method = classStack.peek().getMethod(methodName, classParams);
@@ -125,11 +229,17 @@ public class Reflector {
 		System.out.println(method.getGenericReturnType());
 	}
 
+	/**
+	 * Prints the classes.
+	 */
 	public void printClasses() {
 		Utils.print("List of classes");
 		Utils.printSingleIndent(ClassLoader.getClassMap().keySet());
 	}
 
+	/**
+	 * Prints the methods.
+	 */
 	public void printMethods() {
 		if (!classStack.isEmpty()) {
 			Utils.print("List of methods");
@@ -147,6 +257,11 @@ public class Reflector {
 		}
 	}
 
+	/**
+	 * Checks if is stacks empty.
+	 * 
+	 * @return true, if is stacks empty
+	 */
 	public boolean isStacksEmpty() {
 		if (classStack.isEmpty() || objectStack.isEmpty())
 			return true;
@@ -154,12 +269,18 @@ public class Reflector {
 			return false;
 	}
 
+	/**
+	 * Clear stacks.
+	 */
 	public void clearStacks() {
 		classStack.clear();
 		objectStack.clear();
 		Utils.print("Cleared");
 	}
 
+	/**
+	 * Pop stacks.
+	 */
 	public void popStacks() {
 		try {
 			classStack.pop();
@@ -170,6 +291,9 @@ public class Reflector {
 		}
 	}
 
+	/**
+	 * Prints the stack.
+	 */
 	public void printStack() {
 		try {
 			Utils.print(classStack.peek().toString());

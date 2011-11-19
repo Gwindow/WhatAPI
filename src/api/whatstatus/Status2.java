@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.whatstatus;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 /**
+ * The Class Status2.
  * 
  * @author Tim Get the status of what.cd 0 is up 1 is down 2 is maintenance
  */
@@ -22,6 +26,12 @@ public class Status2 {
 	String whatstatus = "http://whatstatus.info/";
 	Document whatDoc;
 
+	/**
+	 * Instantiates a new status2.
+	 * 
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public Status2() throws CouldNotLoadException {
 		try {
 			whatDoc = MySoup.scrapeOther(whatstatus);
@@ -32,7 +42,7 @@ public class Status2 {
 	}
 
 	/**
-	 * Get status of the site
+	 * Get status of the site.
 	 * 
 	 * @return 0 is up 1 is down 2 is maintenance
 	 */
@@ -53,7 +63,7 @@ public class Status2 {
 	}
 
 	/**
-	 * Get status of tracker
+	 * Get status of tracker.
 	 * 
 	 * @return 0 is up 1 is down 2 is maintenance
 	 */
@@ -73,7 +83,7 @@ public class Status2 {
 	}
 
 	/**
-	 * Get status of irc network
+	 * Get status of irc network.
 	 * 
 	 * @return 0 is up 1 is down 2 is maintenance
 	 */
@@ -93,10 +103,11 @@ public class Status2 {
 	}
 
 	/**
-	 * Get a list of tweets containing the text and date
+	 * Get a list of tweets containing the text and date.
 	 * 
 	 * @return list of tweets
 	 * @throws TwitterException
+	 *             the twitter exception
 	 */
 	public ArrayList<Tuple<String, String>> getTweets() throws TwitterException {
 		Twitter unauthenticatedTwitter = new TwitterFactory().getInstance();

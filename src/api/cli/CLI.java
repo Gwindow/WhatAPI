@@ -1,17 +1,32 @@
+/**
+ * @author Gwindow
+ */
 package api.cli;
 
 import java.util.Scanner;
 
+/**
+ * The Class CLI.
+ */
 public class CLI {
 	private Scanner scanner = new Scanner(System.in);
 	private Reflector reflector = new Reflector();
 
+	/**
+	 * Inits the.
+	 * 
+	 * @param path
+	 *            the path
+	 */
 	public void init(String path) {
 		ClassLoader.setRootPath(path);
 		ClassLoader.loadClassFiles();
 		inputListener();
 	}
 
+	/**
+	 * Input listener.
+	 */
 	private void inputListener() {
 		while (true) {
 			String s = scanner.nextLine();
@@ -38,6 +53,9 @@ public class CLI {
 		}
 	}
 
+	/**
+	 * Show help menu.
+	 */
 	private void showHelpMenu() {
 		Utils.print("Type /exit at anytime to exit help");
 		Class<?> myClass;

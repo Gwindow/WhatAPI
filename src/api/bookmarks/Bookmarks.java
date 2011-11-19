@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.bookmarks;
 
 /**
@@ -14,12 +17,15 @@ import api.son.MySon;
 import api.soup.MySoup;
 import api.util.Tuple;
 
+/**
+ * The Class Bookmarks.
+ */
 public class Bookmarks {
 	private Response response;
 	private String status;
 
 	/**
-	 * Initialize the bookmarks
+	 * Initialize the bookmarks.
 	 * 
 	 * @return a Bookmarks object
 	 */
@@ -31,7 +37,7 @@ public class Bookmarks {
 	}
 
 	/**
-	 * Get the response
+	 * Get the response.
 	 * 
 	 * @return the response
 	 */
@@ -40,7 +46,7 @@ public class Bookmarks {
 	}
 
 	/**
-	 * Get the status of the request
+	 * Get the status of the request.
 	 * 
 	 * @return true if success
 	 */
@@ -51,7 +57,7 @@ public class Bookmarks {
 	}
 
 	/**
-	 * Download a list of torrents
+	 * Download a list of torrents.
 	 * 
 	 * @param list
 	 *            list of torrents
@@ -70,7 +76,7 @@ public class Bookmarks {
 	}
 
 	/**
-	 * Download a torrent
+	 * Download a torrent.
 	 * 
 	 * @param url
 	 *            the url of the torrent
@@ -79,6 +85,7 @@ public class Bookmarks {
 	 * @param name
 	 *            the name to save it as
 	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void downloadTorrent(String url, String path, String name) throws IOException {
 		URL u;
@@ -89,6 +96,9 @@ public class Bookmarks {
 		System.out.println("Downloaded " + name + " to " + path);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Bookmarks [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

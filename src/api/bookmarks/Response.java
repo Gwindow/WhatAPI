@@ -1,12 +1,18 @@
+/**
+ * @author Gwindow
+ */
 package api.bookmarks;
 
 import java.util.List;
 
+/**
+ * The Class Response.
+ */
 public class Response {
 	private List<BookmarksList> bookmarks;
 
 	/**
-	 * Get the list of bookmarks
+	 * Get the list of bookmarks.
 	 * 
 	 * @return the bookmarks list
 	 */
@@ -14,6 +20,9 @@ public class Response {
 		return this.bookmarks;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Response [getBookmarksList=" + getBookmarksList() + "]";

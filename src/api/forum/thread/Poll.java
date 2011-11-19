@@ -1,7 +1,13 @@
+/**
+ * @author Gwindow
+ */
 package api.forum.thread;
 
 import java.util.List;
 
+/**
+ * The Class Poll.
+ */
 public class Poll {
 	private List<Answers> answers;
 	private boolean closed;
@@ -12,6 +18,7 @@ public class Poll {
 	private boolean voted;
 
 	/**
+	 * Checks if is featured.
 	 * 
 	 * @return true if featured
 	 */
@@ -23,6 +30,8 @@ public class Poll {
 	}
 
 	/**
+	 * Gets the answers.
+	 * 
 	 * @return the answers
 	 */
 	public List<Answers> getAnswers() {
@@ -30,6 +39,8 @@ public class Poll {
 	}
 
 	/**
+	 * Checks if is closed.
+	 * 
 	 * @return the closed
 	 */
 	public boolean isClosed() {
@@ -37,6 +48,8 @@ public class Poll {
 	}
 
 	/**
+	 * Gets the max votes.
+	 * 
 	 * @return the maxVotes
 	 */
 	public Number getMaxVotes() {
@@ -44,6 +57,8 @@ public class Poll {
 	}
 
 	/**
+	 * Gets the question.
+	 * 
 	 * @return the question
 	 */
 	public String getQuestion() {
@@ -51,6 +66,8 @@ public class Poll {
 	}
 
 	/**
+	 * Gets the total votes.
+	 * 
 	 * @return the totalVotes
 	 */
 	public Number getTotalVotes() {
@@ -58,12 +75,17 @@ public class Poll {
 	}
 
 	/**
+	 * Checks for voted.
+	 * 
 	 * @return the voted
 	 */
 	public boolean hasVoted() {
 		return voted;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Poll [getAnswers=" + getAnswers() + ", isClosed=" + isClosed() + ", isFeatured=" + isFeatured()

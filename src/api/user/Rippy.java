@@ -1,5 +1,5 @@
 /**
- * 
+ * @author Gwindow
  */
 package api.user;
 
@@ -7,7 +7,7 @@ import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 /**
- * A Rippy to a user
+ * A Rippy to a user.
  * 
  * @author Tim
  */
@@ -17,7 +17,7 @@ public class Rippy {
 	private String body;
 
 	/**
-	 * A new message
+	 * A new message.
 	 * 
 	 * @param id
 	 *            recipent's id
@@ -30,6 +30,8 @@ public class Rippy {
 	}
 
 	/**
+	 * Instantiates a new rippy.
+	 * 
 	 * @param id
 	 *            recipent's id
 	 */
@@ -38,9 +40,10 @@ public class Rippy {
 	}
 
 	/**
-	 * Send the rippy
+	 * Send the rippy.
 	 * 
 	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public void sendRippy() throws CouldNotLoadException {
 		if (body.length() > 0) {
@@ -54,6 +57,8 @@ public class Rippy {
 	}
 
 	/**
+	 * Gets the id.
+	 * 
 	 * @return the id
 	 */
 	public int getId() {
@@ -61,6 +66,8 @@ public class Rippy {
 	}
 
 	/**
+	 * Gets the body.
+	 * 
 	 * @return the body
 	 */
 	public String getBody() {
@@ -68,7 +75,7 @@ public class Rippy {
 	}
 
 	/**
-	 * Set message body
+	 * Set message body.
 	 * 
 	 * @param s
 	 *            body

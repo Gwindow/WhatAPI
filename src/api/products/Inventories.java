@@ -1,5 +1,11 @@
+/**
+ * @author Gwindow
+ */
 package api.products;
 
+/**
+ * The Class Inventories.
+ */
 public class Inventories {
 	private String availability;
 	private String channel;
@@ -8,50 +14,116 @@ public class Inventories {
 	private Number shipping;
 	private Number tax;
 
+	/**
+	 * Gets the availability.
+	 * 
+	 * @return the availability
+	 */
 	public String getAvailability() {
 		return this.availability;
 	}
 
+	/**
+	 * Sets the availability.
+	 * 
+	 * @param availability
+	 *            the new availability
+	 */
 	public void setAvailability(String availability) {
 		this.availability = availability;
 	}
 
+	/**
+	 * Gets the channel.
+	 * 
+	 * @return the channel
+	 */
 	public String getChannel() {
 		return this.channel;
 	}
 
+	/**
+	 * Sets the channel.
+	 * 
+	 * @param channel
+	 *            the new channel
+	 */
 	public void setChannel(String channel) {
 		this.channel = channel;
 	}
 
+	/**
+	 * Gets the currency.
+	 * 
+	 * @return the currency
+	 */
 	public String getCurrency() {
 		return this.currency;
 	}
 
+	/**
+	 * Sets the currency.
+	 * 
+	 * @param currency
+	 *            the new currency
+	 */
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
 
+	/**
+	 * Gets the price.
+	 * 
+	 * @return the price
+	 */
 	public Number getPrice() {
 		return this.price;
 	}
 
+	/**
+	 * Sets the price.
+	 * 
+	 * @param price
+	 *            the new price
+	 */
 	public void setPrice(Number price) {
 		this.price = price;
 	}
 
+	/**
+	 * Gets the shipping.
+	 * 
+	 * @return the shipping
+	 */
 	public Number getShipping() {
 		return this.shipping;
 	}
 
+	/**
+	 * Sets the shipping.
+	 * 
+	 * @param shipping
+	 *            the new shipping
+	 */
 	public void setShipping(Number shipping) {
 		this.shipping = shipping;
 	}
 
+	/**
+	 * Gets the tax.
+	 * 
+	 * @return the tax
+	 */
 	public Number getTax() {
 		return this.tax;
 	}
 
+	/**
+	 * Sets the tax.
+	 * 
+	 * @param tax
+	 *            the new tax
+	 */
 	public void setTax(Number tax) {
 		this.tax = tax;
 	}

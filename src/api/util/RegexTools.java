@@ -1,5 +1,5 @@
 /**
- * 
+ * @author Gwindow
  */
 package api.util;
 
@@ -7,14 +7,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * All the methods needed to assist in splitting strings from html
+ * All the methods needed to assist in splitting strings from html.
  * 
  * @author Tim
- * 
  */
 // <a href="forums.php?action=viewthread&amp;threadid=71&amp;page=95#post3358125"></a>
 public class RegexTools {
 
+	/**
+	 * Split album year.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitAlbumYear(String string) {
 		Pattern intsOnly = Pattern.compile("\\[\\d+\\]");
 		Matcher makeMatch = intsOnly.matcher(string);
@@ -25,6 +31,13 @@ public class RegexTools {
 		return inputInt;
 	}
 
+	/**
+	 * Split artist image url.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitArtistImageUrl(String string) {
 		Pattern pattern = Pattern.compile(".*src=\"(.*)\" alt.*");
 		Matcher matcher = pattern.matcher(string);
@@ -35,6 +48,13 @@ public class RegexTools {
 		return null;
 	}
 
+	/**
+	 * Split album url.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitAlbumUrl(String string) {
 		Pattern pattern = Pattern.compile(".*<a href=\"(.*)\" title.*");
 		Matcher matcher = pattern.matcher(string);
@@ -47,6 +67,13 @@ public class RegexTools {
 		return null;
 	}
 
+	/**
+	 * Split album id.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitAlbumId(String string) {
 		Pattern pattern = Pattern.compile(".*id=(.*)\" title.*");
 		Matcher matcher = pattern.matcher(string);
@@ -57,6 +84,13 @@ public class RegexTools {
 		return null;
 	}
 
+	/**
+	 * Split artist id.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitArtistId(String string) {
 		Pattern pattern = Pattern.compile(".*id=(.*)\">.*");
 		Matcher matcher = pattern.matcher(string);
@@ -67,6 +101,13 @@ public class RegexTools {
 		return null;
 	}
 
+	/**
+	 * Split artist url.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitArtistUrl(String string) {
 		Pattern pattern = Pattern.compile(".*<a href=\"(.*)\">.*");
 		Matcher matcher = pattern.matcher(string);
@@ -79,6 +120,13 @@ public class RegexTools {
 		return null;
 	}
 
+	/**
+	 * Split artist url2.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitArtistUrl2(String string) {
 		Pattern pattern = Pattern.compile(".*<a href=\"(.*)\" style.*");
 		Matcher matcher = pattern.matcher(string);
@@ -92,9 +140,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the id of the format
+	 * Split the id of the format.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return format id
 	 */
 	public String splitFormatId(String string) {
@@ -108,9 +157,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the url of the format
+	 * Split the url of the format.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return format id
 	 */
 	public String splitFormatUrl(String string) {
@@ -126,9 +176,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the download link of the format
+	 * Split the download link of the format.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return format id
 	 */
 	public String splitFormatDownloadLink(String string) {
@@ -144,9 +195,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the url of a thread in a section
+	 * Split the url of a thread in a section.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return url of thread
 	 */
 	public String splitThreadUrl(String string) {
@@ -162,9 +214,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the url of a section
+	 * Split the url of a section.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return url of section
 	 */
 	public String splitSectionUrl(String string) {
@@ -180,9 +233,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the title of a section
+	 * Split the title of a section.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return tile of section
 	 */
 	public String splitSectionTitle(String string) {
@@ -194,9 +248,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the last read url of a thread in a section
+	 * Split the last read url of a thread in a section.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return url of thread
 	 */
 	public String splitLastReadThreadUrl(String string) {
@@ -212,9 +267,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split the user in a section
+	 * Split the user in a section.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return user name
 	 */
 	public String splitUser(String string) {
@@ -226,7 +282,7 @@ public class RegexTools {
 	}
 
 	/**
-	 * Split a string
+	 * Split a string.
 	 * 
 	 * @param string
 	 *            String to split
@@ -245,9 +301,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Splits title of a thread
+	 * Splits title of a thread.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return title of thread
 	 */
 	public String splitTitle(String string) {
@@ -262,9 +319,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Gets the poster's name and id
+	 * Gets the poster's name and id.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return name and id
 	 */
 	public String[] splitPoster(String string) {
@@ -285,9 +343,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Splits the profile text of a user
+	 * Splits the profile text of a user.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return profile text
 	 */
 	public String splitProfileText(String string) {
@@ -302,9 +361,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Gets the post body
+	 * Gets the post body.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return the post body
 	 */
 	public String splitPostBody(String string) {
@@ -316,9 +376,10 @@ public class RegexTools {
 	}
 
 	/**
-	 * Splits the avatar
+	 * Splits the avatar.
 	 * 
 	 * @param string
+	 *            the string
 	 * @return the avatar url
 	 */
 	public String splitAvatar(String string) {
@@ -331,6 +392,13 @@ public class RegexTools {
 		return "FAILED";
 	}
 
+	/**
+	 * Split thread id.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the string
+	 */
 	public String splitThreadID(String url) {
 		Pattern pattern = Pattern.compile(".*&threadid=(.*)&.*");
 		Matcher matcher = pattern.matcher(url);
@@ -345,6 +413,13 @@ public class RegexTools {
 		return null;
 	}
 
+	/**
+	 * Split auth key.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the string
+	 */
 	public String splitAuthKey(String url) {
 		Pattern pattern = Pattern.compile(".*auth=(.*)\">.*");
 		Matcher matcher = pattern.matcher(url);
@@ -354,6 +429,13 @@ public class RegexTools {
 	}
 
 	// TODO fix
+	/**
+	 * Split user id.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the string
+	 */
 	public String splitUserID(String url) {
 		Pattern pattern = Pattern.compile(".*<li id=\"nav_userinfo\"><a href=\"user.php?id(.*)\".*");
 		Matcher matcher = pattern.matcher(url);
@@ -362,6 +444,13 @@ public class RegexTools {
 		return null;
 	}
 
+	/**
+	 * Split album year2.
+	 * 
+	 * @param string
+	 *            the string
+	 * @return the string
+	 */
 	public String splitAlbumYear2(String string) {
 		Pattern pattern = Pattern.compile(".*<strong>(.*) - .*");
 		Matcher matcher = pattern.matcher(string);

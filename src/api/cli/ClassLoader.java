@@ -1,3 +1,6 @@
+/**
+ * @author Gwindow
+ */
 package api.cli;
 
 import java.io.File;
@@ -5,14 +8,26 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
+/**
+ * The Class ClassLoader.
+ */
 public class ClassLoader {
 	private static final HashMap<String, Class<?>> classMap = new HashMap<String, Class<?>>();
 	private static File root;
 
+	/**
+	 * Sets the root path.
+	 * 
+	 * @param path
+	 *            the new root path
+	 */
 	public static void setRootPath(String path) {
 		root = new File(path);
 	}
 
+	/**
+	 * Load class files.
+	 */
 	public static void loadClassFiles() {
 		File[] list = root.listFiles();
 		for (int i = 0; i < list.length; i++) {
@@ -25,6 +40,12 @@ public class ClassLoader {
 		}
 	}
 
+	/**
+	 * Recursive directory search.
+	 * 
+	 * @param dir
+	 *            the dir
+	 */
 	private static void recursiveDirectorySearch(File dir) {
 		File[] list = dir.listFiles();
 		for (int i = 0; i < list.length; i++) {
@@ -37,6 +58,12 @@ public class ClassLoader {
 		}
 	}
 
+	/**
+	 * Adds the file to map.
+	 * 
+	 * @param file
+	 *            the file
+	 */
 	private static void addFileToMap(File file) {
 		FileClassLoader loader = new FileClassLoader();
 		Class<?> clazz;
@@ -60,6 +87,13 @@ public class ClassLoader {
 
 	}
 
+	/**
+	 * Checks if is class file.
+	 * 
+	 * @param file
+	 *            the file
+	 * @return true, if is class file
+	 */
 	private static boolean isClassFile(File file) {
 		if (file.isFile()) {
 			String fileName = file.getName();
@@ -73,6 +107,13 @@ public class ClassLoader {
 			return false;
 	}
 
+	/**
+	 * Gets the class for key.
+	 * 
+	 * @param key
+	 *            the key
+	 * @return the class for key
+	 */
 	public static Class<?> getClassForKey(Object key) {
 		if (classMap.containsKey(key))
 			return classMap.get(key);
@@ -80,6 +121,11 @@ public class ClassLoader {
 			return null;
 	}
 
+	/**
+	 * Gets the class map.
+	 * 
+	 * @return the class map
+	 */
 	public static HashMap<String, Class<?>> getClassMap() {
 		return classMap;
 	}
