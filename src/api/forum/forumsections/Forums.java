@@ -4,100 +4,124 @@ import java.util.List;
 
 public class Forums {
 	private String forumDescription;
-	private String forumId;
+	private Number forumId;
 	private String forumName;
-	private String lastAuthorId;
+	private Number lastAuthorId;
 	private String lastPostAuthorName;
-	private String lastPostId;
+	private Number lastPostId;
 	private String lastTime;
 	private String lastTopic;
-	private String lastTopicId;
-	private String locked;
-	private String numPosts;
-	private String numTopics;
-	private String read;
+	private Number lastTopicId;
+	private boolean locked;
+	private Number numPosts;
+	private Number numTopics;
+	private boolean read;
 	private List<String> specificRules;
-	private String sticky;
+	private boolean sticky;
 
+	/**
+	 * @return the forumDescription
+	 */
 	public String getForumDescription() {
-		return this.forumDescription;
+		return forumDescription;
 	}
 
-	public String getForumId() {
-		return this.forumId;
+	/**
+	 * @return the forumId
+	 */
+	public Number getForumId() {
+		return forumId;
 	}
 
+	/**
+	 * @return the forumName
+	 */
 	public String getForumName() {
-		return this.forumName;
+		return forumName;
 	}
 
-	public String getLastAuthorId() {
-		return this.lastAuthorId;
+	/**
+	 * @return the lastAuthorId
+	 */
+	public Number getLastAuthorId() {
+		return lastAuthorId;
 	}
 
+	/**
+	 * @return the lastPostAuthorName
+	 */
 	public String getLastPostAuthorName() {
-		return this.lastPostAuthorName;
+		return lastPostAuthorName;
 	}
 
-	public String getLastPostId() {
-		return this.lastPostId;
+	/**
+	 * @return the lastPostId
+	 */
+	public Number getLastPostId() {
+		return lastPostId;
 	}
 
+	/**
+	 * @return the lastTime
+	 */
 	public String getLastTime() {
-		return this.lastTime;
+		return lastTime;
 	}
 
+	/**
+	 * @return the lastTopic
+	 */
 	public String getLastTopic() {
-		return this.lastTopic;
+		return lastTopic;
 	}
 
-	public String getLastTopicId() {
-		return this.lastTopicId;
+	/**
+	 * @return the lastTopicId
+	 */
+	public Number getLastTopicId() {
+		return lastTopicId;
 	}
 
+	/**
+	 * @return the locked
+	 */
 	public boolean isLocked() {
-		try {
-			if (locked.equalsIgnoreCase("0"))
-				return false;
-			else
-				return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return locked;
 	}
 
-	public String getNumPosts() {
-		return this.numPosts;
+	/**
+	 * @return the numPosts
+	 */
+	public Number getNumPosts() {
+		return numPosts;
 	}
 
-	public String getNumTopics() {
-		return this.numTopics;
+	/**
+	 * @return the numTopics
+	 */
+	public Number getNumTopics() {
+		return numTopics;
 	}
 
+	/**
+	 * @return the read
+	 */
 	public boolean isRead() {
-		try {
-			if (read.equalsIgnoreCase("read"))
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
+		return read;
 	}
 
+	/**
+	 * @return the specificRules
+	 */
 	public List<String> getSpecificRules() {
-		return this.specificRules;
+		return specificRules;
 	}
 
+	/**
+	 * @return the sticky
+	 */
 	public boolean isSticky() {
-		try {
-			if (sticky.equalsIgnoreCase("0"))
-				return false;
-			else
-				return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return sticky;
 	}
 
 	@Override

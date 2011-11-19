@@ -10,26 +10,26 @@ import api.soup.MySoup;
 
 public class Torrent {
 	private String encoding;
-	private String fileCount;
+	private Number fileCount;
 	private String format;
-	private String freeTorrent;
-	private String groupId;
-	private String hasCue;
-	private String hasFile;
-	private String hasLog;
-	private String id;
-	private String leechers;
-	private String logScore;
+	private boolean freeTorrent;
+	private Number groupId;
+	private boolean hasCue;
+	private Number hasFile;
+	private boolean hasLog;
+	private Number id;
+	private Number leechers;
+	private Number logScore;
 	private String media;
 	private String remasterCatalogueNumber;
 	private String remasterRecordLabel;
 	private String remasterTitle;
 	private String remasterYear;
-	private String remastered;
-	private String scene;
-	private String seeders;
-	private String size;
-	private String snatched;
+	private boolean remastered;
+	private boolean scene;
+	private Number seeders;
+	private Number size;
+	private Number snatched;
 	private String time;
 
 	/**
@@ -44,8 +44,8 @@ public class Torrent {
 	 * 
 	 * @return number of files in torrent
 	 */
-	public int getFileCount() {
-		return Integer.parseInt(this.fileCount);
+	public Number getFileCount() {
+		return (this.fileCount);
 	}
 
 	/**
@@ -62,17 +62,15 @@ public class Torrent {
 	 * @return is free leech
 	 */
 	public boolean isFreeTorrent() {
-		if (freeTorrent.equals("1"))
-			return true;
-		return false;
+		return freeTorrent;
 	}
 
 	/**
 	 * 
 	 * @return torrent group id
 	 */
-	public int getGroupId() {
-		return Integer.parseInt(this.groupId);
+	public Number getGroupId() {
+		return (this.groupId);
 	}
 
 	/**
@@ -81,15 +79,11 @@ public class Torrent {
 	 * @return has cue
 	 */
 	public boolean hasCue() {
-		if (hasCue.equals("1"))
-			return true;
-		return false;
+		return hasCue;
 	}
 
-	public boolean hasFile() {
-		if (hasFile.equals("1"))
-			return true;
-		return false;
+	public Number hasFile() {
+		return hasFile;
 	}
 
 	/**
@@ -98,32 +92,30 @@ public class Torrent {
 	 * @return has log
 	 */
 	public boolean hasLog() {
-		if (hasLog.equals("1"))
-			return true;
-		return false;
+		return hasLog;
 	}
 
 	/**
 	 * 
 	 * @return the id
 	 */
-	public int getId() {
-		return Integer.parseInt(this.id);
+	public Number getId() {
+		return (this.id);
 	}
 
 	/**
 	 * 
 	 * @return number of leechers
 	 */
-	public int getLeechers() {
-		return Integer.parseInt(this.leechers);
+	public Number getLeechers() {
+		return (this.leechers);
 	}
 
 	/**
 	 * 
 	 * @return the log score
 	 */
-	public String getLogScore() {
+	public Number getLogScore() {
 		return this.logScore;
 	}
 
@@ -167,7 +159,11 @@ public class Torrent {
 		return this.remasterYear;
 	}
 
-	public String getRemastered() {
+	/**
+	 * 
+	 * @return true if remastered
+	 */
+	public boolean isRemastered() {
 		return this.remastered;
 	}
 
@@ -177,28 +173,26 @@ public class Torrent {
 	 * @return is scene release
 	 */
 	public boolean isScene() {
-		if (scene.equals("1"))
-			return true;
-		return false;
+		return scene;
 	}
 
 	/**
 	 * 
 	 * @return number of seeders
 	 */
-	public int getSeeders() {
-		return Integer.valueOf(this.seeders);
+	public Number getSeeders() {
+		return (this.seeders);
 	}
 
 	/**
 	 * 
 	 * @return size of torrent
 	 */
-	public String getSize() {
+	public Number getSize() {
 		return this.size;
 	}
 
-	public String getSnatched() {
+	public Number getSnatched() {
 		return this.snatched;
 	}
 
@@ -261,7 +255,7 @@ public class Torrent {
 				+ hasFile() + ", hasLog=" + hasLog() + ", getId=" + getId() + ", getLeechers=" + getLeechers() + ", getLogScore="
 				+ getLogScore() + ", getMedia=" + getMedia() + ", getRemasterCatalogueNumber=" + getRemasterCatalogueNumber()
 				+ ", getRemasterRecordLabel=" + getRemasterRecordLabel() + ", getRemasterTitle=" + getRemasterTitle()
-				+ ", getRemasterYear=" + getRemasterYear() + ", getRemastered=" + getRemastered() + ", isScene=" + isScene()
+				+ ", getRemasterYear=" + getRemasterYear() + ", getRemastered=" + isRemastered() + ", isScene=" + isScene()
 				+ ", getSeeders=" + getSeeders() + ", getSize=" + getSize() + ", getSnatched=" + getSnatched() + ", getTime="
 				+ getTime() + ", getMediaFormatEncoding=" + getMediaFormatEncoding() + ", getDownloadLink=" + getDownloadLink()
 				+ "]";

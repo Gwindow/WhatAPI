@@ -1,18 +1,18 @@
 package api.inbox.inbox;
 
 public class Messages {
-	private String convId;
+	private Number convId;
 	private String date;
-	private String donor;
+	private boolean donor;
 	private boolean enabled;
-	private String forwardedId;
+	private Number forwardedId;
 	private String forwardedName;
-	private String senderId;
-	private String sticky;
+	private Number senderId;
+	private boolean sticky;
 	private String subject;
-	private String unread;
+	private boolean unread;
 	private String username;
-	private String warned;
+	private boolean warned;
 
 	public int getConvId() {
 		return Integer.valueOf(this.convId);
@@ -70,9 +70,11 @@ public class Messages {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Messages [getConvId()=" + getConvId() + ", getDate()=" + getDate() + ", isDonor()=" + isDonor()

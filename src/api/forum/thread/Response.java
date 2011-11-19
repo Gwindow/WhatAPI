@@ -4,77 +4,92 @@ import java.util.List;
 
 public class Response {
 	private Number currentPage;
-	private String forumId;
+	private Number forumId;
 	private String forumName;
-	private String locked;
+	private boolean locked;
 	private Number pages;
 	private Poll poll;
 	private List<Posts> posts;
 	private boolean subscribed;
-	private String threadId;
+	private Number threadId;
 	private String threadTitle;
-	private String sticky;
+	private boolean sticky;
 
-	public boolean isSticky() {
-		try {
-			if (sticky.equalsIgnoreCase("0"))
-				return false;
-			else
-				return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	public boolean isLocked() {
-		try {
-			if (locked.equalsIgnoreCase("0"))
-				return false;
-			else
-				return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
+	/**
+	 * @return the currentPage
+	 */
 	public Number getCurrentPage() {
-		return this.currentPage;
+		return currentPage;
 	}
 
-	public String getForumId() {
-		return this.forumId;
+	/**
+	 * @return the forumId
+	 */
+	public Number getForumId() {
+		return forumId;
 	}
 
+	/**
+	 * @return the forumName
+	 */
 	public String getForumName() {
-		return this.forumName;
+		return forumName;
 	}
 
-	public String getLocked() {
-		return this.locked;
+	/**
+	 * @return the locked
+	 */
+	public boolean isLocked() {
+		return locked;
 	}
 
+	/**
+	 * @return the pages
+	 */
 	public Number getPages() {
-		return this.pages;
+		return pages;
 	}
 
+	/**
+	 * @return the poll
+	 */
 	public Poll getPoll() {
-		return this.poll;
+		return poll;
 	}
 
+	/**
+	 * @return the posts
+	 */
 	public List<Posts> getPosts() {
-		return this.posts;
+		return posts;
 	}
 
+	/**
+	 * @return the subscribed
+	 */
 	public boolean isSubscribed() {
-		return this.subscribed;
+		return subscribed;
 	}
 
-	public String getThreadId() {
-		return this.threadId;
+	/**
+	 * @return the threadId
+	 */
+	public Number getThreadId() {
+		return threadId;
 	}
 
+	/**
+	 * @return the threadTitle
+	 */
 	public String getThreadTitle() {
-		return this.threadTitle;
+		return threadTitle;
+	}
+
+	/**
+	 * @return the sticky
+	 */
+	public boolean isSticky() {
+		return sticky;
 	}
 
 	@Override

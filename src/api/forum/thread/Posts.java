@@ -7,9 +7,9 @@ public class Posts {
 	private Author author;
 	private String body;
 	private String editedTime;
-	private String editedUserId;
+	private Number editedUserId;
 	private String editedUsername;
-	private String postId;
+	private Number postId;
 
 	public String getAddedTime() {
 		return this.addedTime;
@@ -27,7 +27,7 @@ public class Posts {
 		return this.editedTime;
 	}
 
-	public String getEditedUserId() {
+	public Number getEditedUserId() {
 		return this.editedUserId;
 	}
 
@@ -35,7 +35,7 @@ public class Posts {
 		return this.editedUsername;
 	}
 
-	public String getPostId() {
+	public Number getPostId() {
 		return this.postId;
 	}
 

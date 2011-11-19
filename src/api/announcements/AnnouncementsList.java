@@ -2,7 +2,7 @@ package api.announcements;
 
 public class AnnouncementsList {
 	private String body;
-	private String newsId;
+	private Number newsId;
 	private String newsTime;
 	private String title;
 
@@ -20,7 +20,7 @@ public class AnnouncementsList {
 	 * 
 	 * @return the id
 	 */
-	public String getNewsId() {
+	public Number getNewsId() {
 		return this.newsId;
 	}
 

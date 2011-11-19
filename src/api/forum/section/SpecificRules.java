@@ -1,10 +1,10 @@
 package api.forum.section;
 
 public class SpecificRules {
-	private String threadId;
+	private Number threadId;
 	private String thread;
 
-	public String getThreadId() {
+	public Number getThreadId() {
 		return threadId;
 	}
 

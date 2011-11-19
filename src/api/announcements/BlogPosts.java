@@ -2,10 +2,10 @@ package api.announcements;
 
 public class BlogPosts {
 	private String author;
-	private String blogId;
+	private Number blogId;
 	private String blogTime;
 	private String body;
-	private String threadId;
+	private Number threadId;
 	private String title;
 
 	/**
@@ -22,7 +22,7 @@ public class BlogPosts {
 	 * 
 	 * @return the id
 	 */
-	public String getBlogId() {
+	public Number getBlogId() {
 		return this.blogId;
 	}
 
@@ -49,8 +49,8 @@ public class BlogPosts {
 	 * 
 	 * @return the id
 	 */
-	public int getThreadId() {
-		return Integer.parseInt(threadId);
+	public Number getThreadId() {
+		return threadId;
 	}
 
 	/**

@@ -3,11 +3,11 @@ package api.forum.forumsections;
 import java.util.List;
 
 public class Categories {
-	private String categoryID;
+	private Number categoryID;
 	private String categoryName;
 	private List<Forums> forums;
 
-	public String getCategoryID() {
+	public Number getCategoryID() {
 		return this.categoryID;
 	}
 

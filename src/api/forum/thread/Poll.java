@@ -4,24 +4,17 @@ import java.util.List;
 
 public class Poll {
 	private List<Answers> answers;
-	private String closed;
+	private boolean closed;
 	private String featured;
-	private String maxVotes;
+	private Number maxVotes;
 	private String question;
 	private Number totalVotes;
 	private boolean voted;
 
-	public List<Answers> getAnswers() {
-		return this.answers;
-	}
-
-	public boolean isClosed() {
-		if (closed.equalsIgnoreCase("0"))
-			return false;
-		else
-			return true;
-	}
-
+	/**
+	 * 
+	 * @return true if featured
+	 */
 	public boolean isFeatured() {
 		if (featured.equalsIgnoreCase("0000-00-00 00:00:00"))
 			return false;
@@ -29,20 +22,46 @@ public class Poll {
 			return true;
 	}
 
-	public String getMaxVotes() {
-		return this.maxVotes;
+	/**
+	 * @return the answers
+	 */
+	public List<Answers> getAnswers() {
+		return answers;
 	}
 
+	/**
+	 * @return the closed
+	 */
+	public boolean isClosed() {
+		return closed;
+	}
+
+	/**
+	 * @return the maxVotes
+	 */
+	public Number getMaxVotes() {
+		return maxVotes;
+	}
+
+	/**
+	 * @return the question
+	 */
 	public String getQuestion() {
-		return this.question;
+		return question;
 	}
 
+	/**
+	 * @return the totalVotes
+	 */
 	public Number getTotalVotes() {
-		return this.totalVotes;
+		return totalVotes;
 	}
 
+	/**
+	 * @return the voted
+	 */
 	public boolean hasVoted() {
-		return this.voted;
+		return voted;
 	}
 
 	@Override

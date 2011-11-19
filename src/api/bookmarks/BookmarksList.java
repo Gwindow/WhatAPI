@@ -8,21 +8,21 @@ import java.util.List;
  * 
  */
 public class BookmarksList {
-	private String catalogueNumber;
-	private String id;
+	private Number catalogueNumber;
+	private Number id;
 	private String name;
 	private String recordLabel;
 	private String releaseType;
 	private String tagList;
 	private List<Torrent> torrents;
-	private String vanityHouse;
+	private boolean vanityHouse;
 	private String year;
 
 	/**
 	 * 
 	 * @return the catalogue number
 	 */
-	public String getCatalogueNumber() {
+	public Number getCatalogueNumber() {
 		return this.catalogueNumber;
 	}
 
@@ -30,8 +30,8 @@ public class BookmarksList {
 	 * 
 	 * @return the id
 	 */
-	public int getId() {
-		return Integer.valueOf(this.id);
+	public Number getId() {
+		return this.id;
 	}
 
 	/**
@@ -81,9 +81,7 @@ public class BookmarksList {
 	 * @return is under vanity house
 	 */
 	public boolean isVanityHouse() {
-		if (vanityHouse.equalsIgnoreCase("1"))
-			return true;
-		return false;
+		return vanityHouse;
 	}
 
 	/**

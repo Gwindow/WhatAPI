@@ -1,87 +1,110 @@
 package api.forum.section;
 
-import api.son.Converter;
 
 public class Threads {
-	private String authorId;
+	private Number authorId;
 	private String authorName;
-	private String lastAuthorId;
+	private Number lastAuthorId;
 	private String lastAuthorName;
-	private String lastID;
-	private String lastReadPage;
-	private String lastReadPostId;
+	private Number lastID;
+	private Number lastReadPage;
+	private Number lastReadPostId;
 	private String lastTime;
-	private String locked;
-	private String postCount;
-	private String sticky;
+	private boolean locked;
+	private Number postCount;
+	private boolean sticky;
 	private String title;
-	private String topicId;
+	private Number topicId;
 
-	public boolean isSticky() {
-		try {
-			if (sticky.equalsIgnoreCase("0"))
-				return false;
-			else
-				return true;
-		} catch (Exception e) {
-			return false;
-		}
+	/**
+	 * @return the authorId
+	 */
+	public Number getAuthorId() {
+		return authorId;
 	}
 
-	public boolean isLocked() {
-		try {
-			if (locked.equalsIgnoreCase("0"))
-				return false;
-			else
-				return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	public int getAuthorId() {
-		return Integer.parseInt(this.authorId);
-	}
-
+	/**
+	 * @return the authorName
+	 */
 	public String getAuthorName() {
-		return this.authorName;
+		return authorName;
 	}
 
-	public int getLastAuthorId() {
-		return Integer.parseInt(this.lastAuthorId);
+	/**
+	 * @return the lastAuthorId
+	 */
+	public Number getLastAuthorId() {
+		return lastAuthorId;
 	}
 
+	/**
+	 * @return the lastAuthorName
+	 */
 	public String getLastAuthorName() {
-		return this.lastAuthorName;
+		return lastAuthorName;
 	}
 
-	public int getLastID() {
-		return Integer.parseInt(this.lastID);
+	/**
+	 * @return the lastID
+	 */
+	public Number getLastID() {
+		return lastID;
 	}
 
-	public int getLastReadPage() {
-		System.out.println(Converter.parseInt(this.lastReadPage));
-		return Converter.parseInt((this.lastReadPage));
+	/**
+	 * @return the lastReadPage
+	 */
+	public Number getLastReadPage() {
+		return lastReadPage;
 	}
 
-	public int getLastReadPostId() {
-		return Integer.parseInt(this.lastReadPostId);
+	/**
+	 * @return the lastReadPostId
+	 */
+	public Number getLastReadPostId() {
+		return lastReadPostId;
 	}
 
+	/**
+	 * @return the lastTime
+	 */
 	public String getLastTime() {
-		return this.lastTime;
+		return lastTime;
 	}
 
-	public int getPostCount() {
-		return Integer.parseInt(this.postCount);
+	/**
+	 * @return the locked
+	 */
+	public boolean isLocked() {
+		return locked;
 	}
 
+	/**
+	 * @return the postCount
+	 */
+	public Number getPostCount() {
+		return postCount;
+	}
+
+	/**
+	 * @return the sticky
+	 */
+	public boolean isSticky() {
+		return sticky;
+	}
+
+	/**
+	 * @return the title
+	 */
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
-	public int getTopicId() {
-		return Integer.parseInt(this.topicId);
+	/**
+	 * @return the topicId
+	 */
+	public Number getTopicId() {
+		return topicId;
 	}
 
 	public String getUrl() {

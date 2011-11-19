@@ -3,59 +3,78 @@ package api.forum.thread;
 import java.util.List;
 
 public class Author {
-	private String artist;
-	private String authorId;
+	private boolean artist;
+	private Number authorId;
 	private String authorName;
 	private String avatar;
-	private String donor;
+	private boolean donor;
 	private boolean enabled;
 	private List<String> paranoia;
 	private String userTitle;
-	private String warned;
+	// TODO investigate warned in php
+	private boolean warned;
 
+	/**
+	 * @return the artist
+	 */
 	public boolean isArtist() {
-		if (artist.equalsIgnoreCase("0"))
-			return false;
-		else
-			return true;
+		return artist;
 	}
 
-	public int getAuthorId() {
-		return Integer.valueOf(this.authorId);
+	/**
+	 * @return the authorId
+	 */
+	public Number getAuthorId() {
+		return authorId;
 	}
 
+	/**
+	 * @return the authorName
+	 */
 	public String getAuthorName() {
-		return this.authorName;
+		return authorName;
 	}
 
+	/**
+	 * @return the avatar
+	 */
 	public String getAvatar() {
-		return this.avatar;
+		return avatar;
 	}
 
+	/**
+	 * @return the donor
+	 */
 	public boolean isDonor() {
-		if (donor.equalsIgnoreCase("0"))
-			return false;
-		else
-			return true;
+		return donor;
 	}
 
+	/**
+	 * @return the enabled
+	 */
 	public boolean isEnabled() {
-		return this.enabled;
+		return enabled;
 	}
 
+	/**
+	 * @return the paranoia
+	 */
 	public List<String> getParanoia() {
-		return this.paranoia;
+		return paranoia;
 	}
 
+	/**
+	 * @return the userTitle
+	 */
 	public String getUserTitle() {
-		return this.userTitle;
+		return userTitle;
 	}
 
+	/**
+	 * @return the warned
+	 */
 	public boolean isWarned() {
-		if (warned.equalsIgnoreCase("0000-00-00 00:00:00"))
-			return false;
-		else
-			return true;
+		return warned;
 	}
 
 	@Override
