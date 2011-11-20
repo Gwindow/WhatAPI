@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.inbox.conversation;
 
 import org.jsoup.Jsoup;
 
 /**
  * The Class Messages.
+ * 
+ * @author Gwindow
  */
 public class Messages {
 	private String body;

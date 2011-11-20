@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.inbox.inbox;
 
 import api.son.MySon;
@@ -8,6 +8,8 @@ import api.soup.MySoup;
 
 /**
  * The Class Inbox.
+ * 
+ * @author Gwindow
  */
 public class Inbox {
 	private Response response;

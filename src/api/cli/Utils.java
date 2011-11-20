@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.cli;
 
 import java.util.regex.Matcher;
@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 /**
  * The Class Utils.
+ * 
+ * @author Gwindow
  */
 public class Utils {
 	

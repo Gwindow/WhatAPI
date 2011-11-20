@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.cli;
 
 import java.io.File;
@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 /**
  * The Class ClassLoader.
+ * 
+ * @author Gwindow
  */
 public class ClassLoader {
 	private static final HashMap<String, Class<?>> classMap = new HashMap<String, Class<?>>();

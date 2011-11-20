@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.index;
 
 /**
  * The Class Response.
+ * 
+ * @author Gwindow
  */
 public class Response {
 	private String authkey;

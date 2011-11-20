@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.son;
 
 import java.lang.reflect.Type;
@@ -12,6 +12,8 @@ import com.google.gson.JsonParseException;
 
 /**
  * The Class StringConverter.
+ * 
+ * @author Gwindow
  */
 public class StringConverter implements JsonDeserializer<Integer> {
 	

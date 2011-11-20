@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.forumsections;
 
 import java.util.List;
 
 /**
  * The Class Categories.
+ * 
+ * @author Gwindow
  */
 public class Categories {
 	private Number categoryID;

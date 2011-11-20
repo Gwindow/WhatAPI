@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.section;
 
 import api.son.MySon;
@@ -9,6 +9,8 @@ import api.util.CouldNotLoadException;
 
 /**
  * The Class Section.
+ * 
+ * @author Gwindow
  */
 public class Section {
 	private Response response;

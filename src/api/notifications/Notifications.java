@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.notifications;
 
 import api.son.MySon;
@@ -8,6 +8,8 @@ import api.soup.MySoup;
 
 /**
  * The Class Notifications.
+ * 
+ * @author Gwindow
  */
 public class Notifications {
 	private Response response;

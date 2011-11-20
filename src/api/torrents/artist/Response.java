@@ -1,13 +1,14 @@
-/**
- * @author Gwindow
- * 
- */
+
+
+
 package api.torrents.artist;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * 
+ * @author Gwindow
  */
 public class Response {
 	private String body;

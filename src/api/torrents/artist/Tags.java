@@ -1,11 +1,13 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.artist;
 
 
 /**
  * The Class Tags.
+ * 
+ * @author Gwindow
  */
 public class Tags {
 	private Number count;

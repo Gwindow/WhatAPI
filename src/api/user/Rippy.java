@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.user;
 
 import api.soup.MySoup;

@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.thread;
 
 /**
  * The Class Answers.
+ * 
+ * @author Gwindow
  */
 public class Answers {
 	private String answer;

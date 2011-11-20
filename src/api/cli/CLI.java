@@ -1,12 +1,11 @@
-/**
- * @author Gwindow
- */
 package api.cli;
 
 import java.util.Scanner;
 
 /**
  * The Class CLI.
+ * 
+ * @author Gwindow
  */
 public class CLI {
 	private Scanner scanner = new Scanner(System.in);

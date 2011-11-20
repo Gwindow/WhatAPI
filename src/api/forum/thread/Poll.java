@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.thread;
 
 import java.util.List;
 
 /**
  * The Class Poll.
+ * 
+ * @author Gwindow
  */
 public class Poll {
 	private List<Answers> answers;

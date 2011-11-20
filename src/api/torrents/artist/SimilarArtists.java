@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.artist;
 
 /**
  * The Class SimilarArtists.
+ * 
+ * @author Gwindow
  */
 public class SimilarArtists {
 	private Number artistId;

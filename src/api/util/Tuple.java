@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.util;
 
 /**
@@ -10,6 +10,7 @@ package api.util;
  *            the generic type
  * @param <B>
  *            the generic type
+ * @author Gwindow
  */
 public class Tuple<A,B> {
 	private A a;

@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.inbox.conversation;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * 
+ * @author Gwindow
  */
 public class Response {
 	private Number convId;

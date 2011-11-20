@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.subscriptions;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * 
+ * @author Gwindow
  */
 public class Response {
 	private List<Threads> threads;

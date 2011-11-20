@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.products;
 
 /**
  * The Class Inventories.
+ * 
+ * @author Gwindow
  */
 public class Inventories {
 	private String availability;

@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.user;
 
 /**
@@ -79,6 +79,9 @@ public class Stats {
 		return getUploaded().doubleValue() - getDownloaded().doubleValue();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Stats [getDownloaded=" + getDownloaded() + ", getJoinedDate=" + getJoinedDate() + ", getLastAccess="

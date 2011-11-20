@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.products;
 
 /**
  * The Class Images.
+ * 
+ * @author Gwindow
  */
 public class Images {
 	private String link;

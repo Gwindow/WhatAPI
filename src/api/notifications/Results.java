@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.notifications;
 
 import java.io.FileOutputStream;
@@ -13,6 +13,8 @@ import api.soup.MySoup;
 
 /**
  * The Class Results.
+ * 
+ * @author Gwindow
  */
 public class Results {
 	private String encoding;
@@ -312,6 +314,9 @@ public class Results {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Results [getEncoding=" + getEncoding() + ", getFileCount=" + getFileCount() + ", getFormat=" + getFormat()

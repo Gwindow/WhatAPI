@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.forumsections;
 
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import api.soup.MySoup;
 
 /**
  * The Class ForumSections.
+ * 
+ * @author Gwindow
  */
 public class ForumSections {
 	private Response response;

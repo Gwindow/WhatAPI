@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.artist;
 
 import java.io.FileOutputStream;
@@ -13,6 +13,8 @@ import api.soup.MySoup;
 
 /**
  * The Class Torrent.
+ * 
+ * @author Gwindow
  */
 public class Torrent {
 	private String encoding;

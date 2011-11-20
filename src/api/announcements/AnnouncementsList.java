@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.announcements;
 
 /**
  * The Class AnnouncementsList.
+ * 
+ * @author Gwindow
  */
 public class AnnouncementsList {
 	private String body;

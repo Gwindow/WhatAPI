@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.util;
 
 /**
@@ -20,6 +20,7 @@ package api.util;
  *            the generic type
  * @param <G>
  *            the generic type
+ * @author Gwindow
  */
 public class Septuple<A, B, C, D, E, F, G> {
 	private A a;

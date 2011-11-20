@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.announcements;
 
 /**
  * The Class BlogPosts.
+ * 
+ * @author Gwindow
  */
 public class BlogPosts {
 	private String author;

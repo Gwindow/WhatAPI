@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.torrents;
 
 import java.io.FileOutputStream;
@@ -19,6 +19,8 @@ import api.util.Tuple;
 
 /**
  * The Class Torrents.
+ * 
+ * @author Gwindow
  */
 public class TorrentGroup {
 	private Response response;
@@ -73,6 +75,8 @@ public class TorrentGroup {
 
 	/**
 	 * Adds the bookmark.
+	 * 
+	 * @return the status
 	 */
 	/*public void addBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() == false)
 	 * { MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);

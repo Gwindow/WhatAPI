@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.util;
 
 /**
@@ -16,6 +16,7 @@ package api.util;
  *            the generic type
  * @param <E>
  *            the element type
+ * @author Gwindow
  */
 public class Quintuple<A, B, C, D, E> {
 	private A a;

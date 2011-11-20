@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.index;
 
 import api.son.MySon;
 
 /**
  * The Class Index.
+ * 
+ * @author Gwindow
  */
 public class Index {
 	private Response response;

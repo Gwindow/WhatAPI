@@ -1,6 +1,3 @@
-/**
- * @author Gwindow
- */
 package api.announcements;
 
 /**
@@ -10,6 +7,8 @@ import java.util.List;
 
 /**
  * The Class Response.
+ * 
+ * @author Gwindow
  */
 public class Response {
 	private List<AnnouncementsList> announcements;
@@ -52,8 +51,8 @@ public class Response {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Response [getAnnouncements=" + getAnnouncements() + ", getBlogPosts=" + getBlogPosts() + "]";

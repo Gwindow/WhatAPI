@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.thread;
 
 import org.jsoup.Jsoup;
 
 /**
  * The Class Posts.
+ * 
+ * @author Gwindow
  */
 public class Posts {
 	private String addedTime;

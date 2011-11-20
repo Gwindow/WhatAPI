@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.search.user;
 
 import api.son.MySon;
@@ -8,6 +8,8 @@ import api.soup.MySoup;
 
 /**
  * The Class UserSearch.
+ * 
+ * @author Gwindow
  */
 public class UserSearch {
 	private Response response;

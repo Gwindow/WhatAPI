@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.thread;
 
 import api.son.MySon;
@@ -9,6 +9,8 @@ import api.util.CouldNotLoadException;
 
 /**
  * The Class Thread.
+ * 
+ * @author Gwindow
  */
 public class Thread {
 	// TODO voting on polls

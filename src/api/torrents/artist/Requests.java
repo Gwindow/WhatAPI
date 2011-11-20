@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.artist;
 
 /**
  * The Class Requests.
+ * 
+ * @author Gwindow
  */
 public class Requests {
 	private Number bounty;

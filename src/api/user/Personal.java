@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.user;
 
 import com.google.gson.annotations.SerializedName;
@@ -74,6 +74,9 @@ public class Personal {
 		return this.warned;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Personal [getUserClass=" + getUserClass() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled()

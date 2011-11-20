@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.artist;
 
 import java.io.FileOutputStream;
@@ -19,6 +19,8 @@ import api.util.Tuple;
 
 /**
  * The Class Artist.
+ * 
+ * @author Gwindow
  */
 public class Artist {
 	private Response response;

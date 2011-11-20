@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.util;
 
 /**
@@ -12,6 +12,7 @@ package api.util;
  *            the generic type
  * @param <C>
  *            the generic type
+ * @author Gwindow
  */
 public class Triple<A,B,C> {
 	private A a;

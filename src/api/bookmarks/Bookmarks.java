@@ -1,6 +1,3 @@
-/**
- * @author Gwindow
- */
 package api.bookmarks;
 
 /**
@@ -19,6 +16,8 @@ import api.util.Tuple;
 
 /**
  * The Class Bookmarks.
+ * 
+ * @author Gwindow
  */
 public class Bookmarks {
 	private Response response;
@@ -97,8 +96,8 @@ public class Bookmarks {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Bookmarks [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

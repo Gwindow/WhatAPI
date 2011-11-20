@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.products;
 
 /**
  * The Class Items.
+ * 
+ * @author Gwindow
  */
 public class Items {
 	private String id;

@@ -1,11 +1,9 @@
-/**
- * @author Gwindow
- */
-
 package api.torrents.torrents;
 
 /**
  * The Class Group.
+ * 
+ * @author Gwindow
  */
 public class Group {
 	private String catalogueNumber;

@@ -1,10 +1,9 @@
-/**
- * @author Gwindow
- */
 package api.products;
 
 /**
  * The Class Author.
+ * 
+ * @author Gwindow
  */
 public class Author {
 	private String accountId;

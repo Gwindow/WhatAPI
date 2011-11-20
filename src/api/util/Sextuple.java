@@ -1,6 +1,3 @@
-/**
- * @author Gwindow
- */
 package api.util;
 
 /**
@@ -18,6 +15,7 @@ package api.util;
  *            the element type
  * @param <F>
  *            the generic type
+ * @author Gwindow
  */
 public class Sextuple<A, B, C, D, E, F> {
 	private A a;
@@ -167,8 +165,8 @@ public class Sextuple<A, B, C, D, E, F> {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return a + "," + b + "," + c + "," + d + "," + e + "," + f;

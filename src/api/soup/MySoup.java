@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.soup;
 
 import java.io.BufferedReader;
@@ -41,6 +41,8 @@ import api.util.RegexTools;
 
 /**
  * The Class MySoup.
+ * 
+ * @author Gwindow
  */
 public class MySoup {
 	private static DefaultHttpClient httpClient = getHttpClient();

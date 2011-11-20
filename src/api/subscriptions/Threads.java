@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.subscriptions;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
  * The Class Threads.
+ * 
+ * @author Gwindow
  */
 public class Threads {
 	private Number forumId;
@@ -112,6 +114,9 @@ public class Threads {
 		return url;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Threads [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()

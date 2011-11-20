@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.forumsections;
 
 import java.util.List;
 
 /**
  * The Class Forums.
+ * 
+ * @author Gwindow
  */
 public class Forums {
 	private String forumDescription;

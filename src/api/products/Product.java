@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.products;
 
 import java.util.List;
 
 /**
  * The Class Product.
+ * 
+ * @author Gwindow
  */
 public class Product {
 	private Author author;

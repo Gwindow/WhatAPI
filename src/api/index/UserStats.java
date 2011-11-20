@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.index;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
  * The Class UserStats.
+ * 
+ * @author Gwindow
  */
 public class UserStats {
 	private Number downloaded;

@@ -1,6 +1,3 @@
-/**
- * @author Gwindow
- */
 package api.announcements;
 
 /**
@@ -13,6 +10,8 @@ import api.soup.MySoup;
 
 /**
  * The Class Announcements.
+ * 
+ * @author Gwindow
  */
 public class Announcements {
 	private Response response;
@@ -51,8 +50,8 @@ public class Announcements {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Announcements [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.search.user;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
  * The Class Results.
+ * 
+ * @author Gwindow
  */
 public class Results {
 	// so java doesn't get confused with the "class" keyword
@@ -72,6 +74,9 @@ public class Results {
 		return warned;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Results [getUserClass=" + getUserClass() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled()

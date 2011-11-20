@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.section;
 
 /**
  * The Class SpecificRules.
+ * 
+ * @author Gwindow
  */
 public class SpecificRules {
 	private Number threadId;

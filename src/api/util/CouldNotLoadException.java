@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.util;
 
 /**
  * The Class CouldNotLoadException.
+ * 
+ * @author Gwindow
  */
 @SuppressWarnings("serial")
 public class CouldNotLoadException extends Exception {

@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.thread;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * 
+ * @author Gwindow
  */
 public class Response {
 	private Number currentPage;

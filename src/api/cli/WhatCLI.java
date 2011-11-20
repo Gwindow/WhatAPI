@@ -1,6 +1,3 @@
-/**
- * @author Gwindow
- */
 package api.cli;
 
 import api.soup.MySoup;
@@ -8,9 +5,11 @@ import api.util.CouldNotLoadException;
 
 /**
  * The Class WhatCLI.
+ * 
+ * @author Gwindow
  */
 public class WhatCLI extends CLI {
-	
+
 	/**
 	 * Instantiates a new what cli.
 	 */

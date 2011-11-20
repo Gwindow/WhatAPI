@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.products;
 
 import java.util.List;
@@ -9,6 +9,8 @@ import api.son.MySon;
 
 /**
  * The Class ProductSearch.
+ * 
+ * @author Gwindow
  */
 public class ProductSearch {
 	private Number currentItemCount;

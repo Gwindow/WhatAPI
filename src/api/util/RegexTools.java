@@ -1,6 +1,3 @@
-/**
- * @author Gwindow
- */
 package api.util;
 
 import java.util.regex.Matcher;
@@ -9,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * All the methods needed to assist in splitting strings from html.
  * 
- * @author Tim
+ * @author Gwindow
  */
 // <a href="forums.php?action=viewthread&amp;threadid=71&amp;page=95#post3358125"></a>
 public class RegexTools {

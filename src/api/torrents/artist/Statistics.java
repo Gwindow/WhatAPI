@@ -1,11 +1,13 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.artist;
 
 
 /**
  * The Class Statistics.
+ * 
+ * @author Gwindow
  */
 public class Statistics {
 	private Number numGroups;

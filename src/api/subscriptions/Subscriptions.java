@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.subscriptions;
 
 import java.util.ArrayList;
@@ -12,6 +12,8 @@ import api.soup.MySoup;
 
 /**
  * The Class Subscriptions.
+ * 
+ * @author Gwindow
  */
 public class Subscriptions {
 	private Response response;

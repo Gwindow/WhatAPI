@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.son;
 
 /**
  * The Class TestObject.
+ * 
+ * @author Gwindow
  */
 public class TestObject {
 	int site;

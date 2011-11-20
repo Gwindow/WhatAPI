@@ -1,11 +1,13 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.section;
 
 
 /**
  * The Class Threads.
+ * 
+ * @author Gwindow
  */
 public class Threads {
 	private Number authorId;

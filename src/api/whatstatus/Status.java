@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.whatstatus;
 
 /**
  * The Class Status.
+ * 
+ * @author Gwindow
  */
 public class Status {
 	private String irc;

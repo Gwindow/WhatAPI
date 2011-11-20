@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.torrents.artist;
 
 import java.util.List;
 
 /**
  * The Class TorrentGroup.
+ * 
+ * @author Gwindow
  */
 public class TorrentGroup {
 	private String groupCatalogueNumber;

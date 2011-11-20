@@ -1,6 +1,6 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.cli;
 
 import java.lang.reflect.Constructor;
@@ -17,6 +17,8 @@ import api.util.Tuple;
 
 /**
  * The Class Reflector.
+ * 
+ * @author Gwindow
  */
 public class Reflector {
 	private Stack<Class<?>> classStack = new Stack<Class<?>>();

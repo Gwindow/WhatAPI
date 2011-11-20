@@ -1,6 +1,3 @@
-/**
- * @author Gwindow
- */
 package api.util;
 
 /**
@@ -17,12 +14,12 @@ package api.util;
  * @author Tim
  */
 
-public class Quadruple<A,B,C,D> {
+public class Quadruple<A, B, C, D> {
 	private A a;
 	private B b;
 	private C c;
 	private D d;
-	
+
 	/**
 	 * Instantiates a new quadruple.
 	 * 
@@ -35,13 +32,13 @@ public class Quadruple<A,B,C,D> {
 	 * @param d
 	 *            the d
 	 */
-	public Quadruple(A a, B b,C c, D d) {
+	public Quadruple(A a, B b, C c, D d) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
 		this.d = d;
 	}
-	
+
 	/**
 	 * Gets the a.
 	 * 
@@ -50,7 +47,7 @@ public class Quadruple<A,B,C,D> {
 	public A getA() {
 		return a;
 	}
-	
+
 	/**
 	 * Gets the b.
 	 * 
@@ -59,7 +56,7 @@ public class Quadruple<A,B,C,D> {
 	public B getB() {
 		return b;
 	}
-	
+
 	/**
 	 * Gets the c.
 	 * 
@@ -68,7 +65,7 @@ public class Quadruple<A,B,C,D> {
 	public C getC() {
 		return c;
 	}
-	
+
 	/**
 	 * Gets the d.
 	 * 
@@ -77,7 +74,7 @@ public class Quadruple<A,B,C,D> {
 	public D getD() {
 		return d;
 	}
-	
+
 	/**
 	 * Sets the a.
 	 * 
@@ -87,7 +84,7 @@ public class Quadruple<A,B,C,D> {
 	public void setA(A a) {
 		this.a = a;
 	}
-	
+
 	/**
 	 * Sets the b.
 	 * 
@@ -97,7 +94,7 @@ public class Quadruple<A,B,C,D> {
 	public void setB(B b) {
 		this.b = b;
 	}
-	
+
 	/**
 	 * Sets the c.
 	 * 
@@ -107,7 +104,7 @@ public class Quadruple<A,B,C,D> {
 	public void setC(C c) {
 		this.c = c;
 	}
-	
+
 	/**
 	 * Sets the d.
 	 * 
@@ -117,10 +114,11 @@ public class Quadruple<A,B,C,D> {
 	public void setD(D d) {
 		this.d = d;
 	}
-	
+
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
+	@Override
 	public String toString() {
 		return a + "," + b + "," + c + "," + d;
 	}

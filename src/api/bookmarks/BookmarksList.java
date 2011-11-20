@@ -1,15 +1,14 @@
-/**
- * @author Gwindow
- */
 package api.bookmarks;
 
 import java.util.List;
 
 /**
  * Each Bookmark in the bookmark list.
+ * 
+ * @author Gwindow
  */
 public class BookmarksList {
-	private Number catalogueNumber;
+	private String catalogueNumber;
 	private Number id;
 	private String name;
 	private String recordLabel;
@@ -24,7 +23,7 @@ public class BookmarksList {
 	 * 
 	 * @return the catalogue number
 	 */
-	public Number getCatalogueNumber() {
+	public String getCatalogueNumber() {
 		return this.catalogueNumber;
 	}
 

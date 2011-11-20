@@ -1,12 +1,14 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.forum.thread;
 
 import java.util.List;
 
 /**
  * The Class Author.
+ * 
+ * @author Gwindow
  */
 public class Author {
 	private boolean artist;

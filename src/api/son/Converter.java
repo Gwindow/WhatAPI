@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.son;
 
 /**
  * The Class Converter.
+ * 
+ * @author Gwindow
  */
 public class Converter {
 

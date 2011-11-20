@@ -1,10 +1,12 @@
-/**
- * @author Gwindow
- */
+
+
+
 package api.inbox.inbox;
 
 /**
  * The Class Messages.
+ * 
+ * @author Gwindow
  */
 public class Messages {
 	private Number convId;
