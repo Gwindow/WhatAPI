@@ -1,6 +1,3 @@
-
-
-
 package api.son;
 
 import java.io.IOException;
@@ -12,7 +9,6 @@ import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 /**
  * Convert JSON to a Java object.
@@ -20,10 +16,12 @@ import com.google.gson.GsonBuilder;
  * @author Tim
  */
 public class MySon {
-	private static GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Integer.class, new StringConverter());
-	private static Gson gson = builder.create();
+	// private static GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Integer.class, new StringConverter());
+	// private static Gson gson = builder.create();
+
+	// TODO is serializeNulls needed?
 	// private final static Gson gson = new GsonBuilder().serializeNulls().create();
-	// private final static Gson gson = new Gson();
+	private final static Gson gson = new Gson();
 	private static Reader reader;
 
 	/**

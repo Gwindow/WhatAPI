@@ -1,10 +1,10 @@
-
-
-
 package api.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import api.soup.MySoup;
-import api.util.CouldNotLoadException;
+import api.util.Tuple;
 
 /**
  * A Rippy to a user.
@@ -42,16 +42,20 @@ public class Rippy {
 	/**
 	 * Send the rippy.
 	 * 
-	 * @throws CouldNotLoadException
-	 *             the could not load exception
 	 */
-	public void sendRippy() throws CouldNotLoadException {
+	public void sendRippy() {
 		if (body.length() > 0) {
 			try {
-				MySoup.sendRippy(String.valueOf(id), body);
+				String url = "user.php?action=rippy&id=" + id;
+				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+				list.add(new Tuple<String, String>("action", "takecompose"));
+				list.add(new Tuple<String, String>("toid", String.valueOf(id)));
+				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+				list.add(new Tuple<String, String>("body", body));
+				MySoup.postMethod(url, list);
+				System.out.println("Rippy sent");
 			} catch (Exception e) {
 				e.printStackTrace();
-				throw new CouldNotLoadException(e.getMessage());
 			}
 		}
 	}

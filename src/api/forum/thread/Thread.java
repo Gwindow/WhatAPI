@@ -1,11 +1,11 @@
-
-
-
 package api.forum.thread;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import api.son.MySon;
 import api.soup.MySoup;
-import api.util.CouldNotLoadException;
+import api.util.Tuple;
 
 /**
  * The Class Thread.
@@ -35,6 +35,61 @@ public class Thread {
 		Thread.id = id;
 		Thread.page = page;
 
+		return thread;
+	}
+
+	/**
+	 * Thread from id and post id.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param postId
+	 *            the post id
+	 * @return the thread
+	 */
+	public static Thread threadFromIdAndPostId(int id, int postId) {
+		String authkey = MySoup.getAuthKey();
+		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid" + postId + "&auth=" + authkey;
+		Thread thread = (Thread) MySon.toObject(url, Thread.class);
+		Thread.id = id;
+		Thread.page = thread.getResponse().getCurrentPage().intValue();
+		return thread;
+	}
+
+	/**
+	 * Thread from first page.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the thread
+	 */
+	public static Thread threadFromFirstPage(int id) {
+		String authkey = MySoup.getAuthKey();
+		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&auth=" + authkey;
+		Thread thread = (Thread) MySon.toObject(url, Thread.class);
+		Thread.id = id;
+		Thread.page = 1;
+		return thread;
+	}
+
+	/**
+	 * Thread from last page. Note: This method is slow since it needs to access the thread twice, once to get max
+	 * number of pages and once to create the Thread object from the last page
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the thread
+	 */
+	public static Thread threadFromLastPage(int id) {
+		String authkey = MySoup.getAuthKey();
+		// get the number of pages
+		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&auth=" + authkey;
+		Thread thread = (Thread) MySon.toObject(url, Thread.class);
+		// create thread from last page
+		url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + thread.getLastPage() + "&auth=" + authkey;
+		thread = (Thread) MySon.toObject(url, Thread.class);
+		Thread.id = id;
+		Thread.page = thread.getLastPage();
 		return thread;
 	}
 
@@ -118,15 +173,48 @@ public class Thread {
 	/**
 	 * Post reply.
 	 * 
-	 * @param reply
-	 *            the reply
+	 * @param body
+	 *            the body
 	 */
-	public void postReply(String reply) {
-		try {
-			MySoup.postReply(getUrl(), String.valueOf(id), reply);
-		} catch (CouldNotLoadException e) {
-			System.err.println("Couldnt't post reply");
+	public void postReply(String body) {
+		if (body.length() > 0) {
+			try {
+				String url = "forums.php?action=new&forumid=" + id;
+				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+				list.add(new Tuple<String, String>("action", "reply"));
+				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+				list.add(new Tuple<String, String>("thread", String.valueOf(id)));
+				list.add(new Tuple<String, String>("body", body));
+				MySoup.postMethod(url, list);
+				System.out.println("Reply posted");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+	}
+
+	/**
+	 * Subscribe to thread
+	 */
+	public void subscribe() {
+		if (!getResponse().isSubscribed()) {
+			System.out.println("Subscribed");
+		} else {
+			System.out.println("Already subscribed");
+		}
+
+	}
+
+	/**
+	 * unsubscribe to thread
+	 */
+	public void unsubscribe() {
+		if (getResponse().isSubscribed()) {
+			System.out.println("Unsubscribed");
+		} else {
+			System.out.println("Already unsubscribed");
+		}
+
 	}
 
 	/**
@@ -150,8 +238,8 @@ public class Thread {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Thread [id = " + id + ", page = " + page + "  hasNextPage=" + hasNextPage() + ", getUrl=" + getUrl()

@@ -1,11 +1,11 @@
-
-
-
 package api.forum.section;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import api.son.MySon;
 import api.soup.MySoup;
-import api.util.CouldNotLoadException;
+import api.util.Tuple;
 
 /**
  * The Class Section.
@@ -59,6 +59,22 @@ public class Section {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + page + "&auth=" + authkey;
 		Section section = (Section) MySon.toObject(url, Section.class);
+		return section;
+	}
+
+	/**
+	 * Section from first page.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the section
+	 */
+	public static Section sectionFromFirstPage(int id) {
+		String authkey = MySoup.getAuthKey();
+		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + 1 + "&auth=" + authkey;
+		Section section = (Section) MySon.toObject(url, Section.class);
+		Section.id = id;
+		Section.page = 1;
 		return section;
 	}
 
@@ -150,16 +166,26 @@ public class Section {
 	 *            the body
 	 */
 	public void createNewThread(String title, String body) {
-		try {
-			MySoup.newThread(String.valueOf(id), title, body);
-		} catch (CouldNotLoadException e) {
-			System.err.println("Could not create thread");
+		if ((title.length() > 0) && (body.length() > 0)) {
+			try {
+				String url = "forums.php?action=new&forumid=" + id;
+				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+				list.add(new Tuple<String, String>("action", "new"));
+				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+				list.add(new Tuple<String, String>("forum", String.valueOf(id)));
+				list.add(new Tuple<String, String>("title", title));
+				list.add(new Tuple<String, String>("body", body));
+				MySoup.postMethod(url, list);
+				System.out.println("Thread created");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Section [id = " + id + ", page = " + page + ", hasNextPage=" + hasNextPage() + ", getResponse=" + getResponse()

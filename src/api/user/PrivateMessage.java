@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import api.soup.MySoup;
-import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 /**
@@ -48,10 +47,8 @@ public class PrivateMessage {
 	/**
 	 * Send the message.
 	 * 
-	 * @throws CouldNotLoadException
-	 *             the could not load exception
 	 */
-	public void sendMessage() throws CouldNotLoadException {
+	public void sendMessage() {
 		if ((subject.length() > 0) && (body.length() > 0)) {
 			try {
 				String url = "inbox.php?action=compose&to=" + id;
@@ -65,7 +62,6 @@ public class PrivateMessage {
 				System.out.println("Message sent");
 			} catch (Exception e) {
 				e.printStackTrace();
-				throw new CouldNotLoadException(e.getMessage());
 			}
 		}
 	}

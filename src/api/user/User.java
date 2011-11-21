@@ -72,12 +72,7 @@ public class User {
 	 */
 	public void sendRippy(String body) {
 		Rippy rippy = new Rippy(id, body);
-		try {
-			rippy.sendRippy();
-		} catch (CouldNotLoadException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		rippy.sendRippy();
 	}
 
 	/**
