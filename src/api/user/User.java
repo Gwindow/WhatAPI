@@ -1,6 +1,3 @@
-
-
-
 package api.user;
 
 import api.son.MySon;
@@ -10,7 +7,7 @@ import api.util.CouldNotLoadException;
 /**
  * A User, needs to be created using userFromId contains the user profile.
  * 
- * @author Tim
+ * @author Gwindow
  */
 public class User {
 	private Profile response;
@@ -38,9 +35,16 @@ public class User {
 	 * @throws CouldNotLoadException
 	 *             the could not load exception
 	 */
-	public void addToFriends() throws CouldNotLoadException {
+	public void addToFriends() {
 		if (!getProfile().IsFriend()) {
-			MySoup.scrape("friends.php?action=add&friendid=" + id + "&auth=" + MySoup.getAuthKey());
+			try {
+				MySoup.pressLink("friends.php?action=add&friendid=" + id + "&auth=" + MySoup.getAuthKey());
+				System.out.println("Added to friends");
+			} catch (CouldNotLoadException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Already added as friend");
 		}
 	}
 

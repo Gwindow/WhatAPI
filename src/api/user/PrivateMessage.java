@@ -1,17 +1,19 @@
-
-
-
 package api.user;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
+import api.util.Tuple;
 
 /**
- * A private message.
+ * The Class PrivateMessage.
  * 
- * @author Tim
+ * //TODO description
+ * 
+ * @author Gwindow
  */
-
 public class PrivateMessage {
 	private int id;
 	private String subject;
@@ -52,7 +54,15 @@ public class PrivateMessage {
 	public void sendMessage() throws CouldNotLoadException {
 		if ((subject.length() > 0) && (body.length() > 0)) {
 			try {
-				MySoup.sendPrivateMessage(String.valueOf(id), subject, body);
+				String url = "inbox.php?action=compose&to=" + id;
+				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+				list.add(new Tuple<String, String>("action", "takecompose"));
+				list.add(new Tuple<String, String>("toid", String.valueOf(id)));
+				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+				list.add(new Tuple<String, String>("subject", subject));
+				list.add(new Tuple<String, String>("body", body));
+				MySoup.postMethod(url, list);
+				System.out.println("Message sent");
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new CouldNotLoadException(e.getMessage());

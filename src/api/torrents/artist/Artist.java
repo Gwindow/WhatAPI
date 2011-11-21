@@ -1,6 +1,3 @@
-
-
-
 package api.torrents.artist;
 
 import java.io.FileOutputStream;
@@ -15,6 +12,7 @@ import java.util.List;
 
 import api.son.MySon;
 import api.soup.MySoup;
+import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 /**
@@ -66,8 +64,12 @@ public class Artist {
 	public void addBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.isBookmarked() == false) {
-			MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
-			System.out.println("Bookmarked");
+			try {
+				MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
+				System.out.println("Bookmarked");
+			} catch (CouldNotLoadException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.err.println("Already bookmarked");
 		}
@@ -79,8 +81,12 @@ public class Artist {
 	public void removeBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.isBookmarked() == true) {
-			MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
-			System.out.println("Removed bookmark");
+			try {
+				MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
+				System.out.println("Removed bookmark");
+			} catch (CouldNotLoadException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.err.println("Already isn't bookmarked");
 		}
@@ -93,8 +99,12 @@ public class Artist {
 		String authkey = MySoup.getAuthKey();
 		if (response.hasNotificationsEnabled() == false) {
 			// TODO take care of people who don't have notification privileges
-			MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
-			System.out.println("Notifications enabled");
+			try {
+				MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
+				System.out.println("Notifications enabled");
+			} catch (CouldNotLoadException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.err.println("Notifications already enabled");
 		}
@@ -107,8 +117,12 @@ public class Artist {
 		String authkey = MySoup.getAuthKey();
 		if (response.hasNotificationsEnabled() == true) {
 			// TODO take care of people who don't have notification privileges
-			MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
-			System.out.println("Notifications disabled");
+			try {
+				MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
+				System.out.println("Notifications disabled");
+			} catch (CouldNotLoadException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.err.println("Notifications already disabled");
 		}

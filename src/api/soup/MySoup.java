@@ -1,6 +1,3 @@
-
-
-
 package api.soup;
 
 import java.io.BufferedReader;
@@ -38,6 +35,7 @@ import api.forum.forumsections.ForumSections;
 import api.index.Index;
 import api.util.CouldNotLoadException;
 import api.util.RegexTools;
+import api.util.Tuple;
 
 /**
  * The Class MySoup.
@@ -330,6 +328,42 @@ public class MySoup {
 	}
 
 	/**
+	 * Post method.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param list
+	 *            the list
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static void postMethod(String url, List<Tuple<String, String>> list) throws Exception {
+		url = SITE + url;
+		if (isSSLEnabled()) {
+			url = linkToSSL(url);
+		}
+		try {
+			@SuppressWarnings("unused")
+			HttpGet httpget = new HttpGet(url);
+			@SuppressWarnings("unused")
+			HttpResponse response;
+
+			HttpPost httpost = new HttpPost(url);
+
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+			for (Tuple<String, String> t : list) {
+				nvps.add(new BasicNameValuePair(t.getA(), t.getB()));
+			}
+			httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+			response = httpClient.execute(httpost);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not post data");
+		}
+
+	}
+
+	/**
 	 * Post reply.
 	 * 
 	 * @param url
@@ -556,8 +590,9 @@ public class MySoup {
 	 * 
 	 * @param url
 	 *            the url
+	 * @throws CouldNotLoadException
 	 */
-	public static void pressLink(String url) {
+	public static void pressLink(String url) throws CouldNotLoadException {
 		url = SITE + url;
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
@@ -570,7 +605,7 @@ public class MySoup {
 			response = httpClient.execute(httpget);
 			response.getEntity().getContent();
 		} catch (Exception e) {
-			// todo pretty this up
+			throw new CouldNotLoadException("Could not press link");
 		}
 	}
 
