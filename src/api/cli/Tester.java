@@ -1,6 +1,6 @@
 package api.cli;
 
-import api.forum.section.Section;
+import api.index.Index;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -20,9 +20,8 @@ public class Tester {
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("http://127.0.0.1:8080/");
 		MySoup.login("login.php", "gazelle", "123456");
-		// User u = User.userFromId(5);
-		Section s = Section.sectionFromIdAndPage(2, 1);
-		s.createNewThread("this is a very important thread", "with a very important body");
+		Index i = Index.init();
+		System.out.println(i.getResponse().getId().toString());
 	}
 
 	/**

@@ -1,6 +1,3 @@
-
-
-
 package api.torrents.artist;
 
 import java.util.List;
@@ -90,7 +87,7 @@ public class TorrentGroup {
 	 * 
 	 * @return the release type
 	 */
-	public String getreleaseType() {
+	public String getReleaseType() {
 		if (releaseType.toString().equalsIgnoreCase("1"))
 			return "Album";
 		else if (releaseType.toString().equalsIgnoreCase("3"))

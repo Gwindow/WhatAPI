@@ -5,6 +5,7 @@ import java.util.List;
 
 import api.son.MySon;
 import api.soup.MySoup;
+import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 /**
@@ -198,7 +199,12 @@ public class Thread {
 	 */
 	public void subscribe() {
 		if (!getResponse().isSubscribed()) {
-			System.out.println("Subscribed");
+			try {
+				MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
+				System.out.println("Subscribed");
+			} catch (CouldNotLoadException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.out.println("Already subscribed");
 		}
@@ -210,7 +216,12 @@ public class Thread {
 	 */
 	public void unsubscribe() {
 		if (getResponse().isSubscribed()) {
-			System.out.println("Unsubscribed");
+			try {
+				MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
+				System.out.println("Unsubscribed");
+			} catch (CouldNotLoadException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.out.println("Already unsubscribed");
 		}

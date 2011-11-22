@@ -23,7 +23,7 @@ public class WhatCLI extends CLI {
 			System.out.println("login failed");
 			e.printStackTrace();
 		}
-		this.init("/home/tim/workspace/api-testing/bin/");
+		this.init("/home/tim/workspace/WhatAPI/bin/");
 	}
 
 	/**
