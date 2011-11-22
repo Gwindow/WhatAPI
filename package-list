@@ -1,9 +1,11 @@
 api.announcements
 api.bookmarks
 api.cli
+api.forum
 api.forum.forumsections
 api.forum.section
 api.forum.thread
+api.inbox
 api.inbox.conversation
 api.inbox.inbox
 api.index
@@ -14,6 +16,7 @@ api.son
 api.soup
 api.subscriptions
 api.top
+api.torrents
 api.torrents.artist
 api.torrents.torrents
 api.user
