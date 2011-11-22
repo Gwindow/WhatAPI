@@ -143,7 +143,7 @@ public class TorrentGroup {
 		return "Torrentgroup [getGroupCatalogueNumber=" + getGroupCatalogueNumber() + ", getGroupId=" + getGroupId()
 				+ ", getGroupName=" + getGroupName() + ", getGroupRecordLabel=" + getGroupRecordLabel()
 				+ ", getGroupVanityHouse=" + isGroupVanityHouse() + ", getGroupYear=" + getGroupYear() + ", isBookmarked="
-				+ isBookmarked() + ", getreleaseType.toString()=" + getreleaseType() + ", getTags=" + getTags()
+				+ isBookmarked() + ", getreleaseType.toString()=" + getReleaseType() + ", getTags=" + getTags()
 				+ ", getTorrents=" + getTorrents() + "]";
 	}
 }

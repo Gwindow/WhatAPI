@@ -98,29 +98,11 @@ public class MySoup {
 	/**
 	 * Called statically from MySoup because forum section titles never change.
 	 */
-	public static void loadForumSections() {
+	public static ForumSections loadForumSections() {
 		if (forumSectionsLoaded == false) {
 			forumSections = ForumSections.init();
 			forumSectionsLoaded = true;
 		}
-	}
-
-	/**
-	 * Load forum sections2.
-	 */
-	public static void loadForumSections2() {
-		if (forumSectionsLoaded == false) {
-			forumSections = ForumSections.init();
-			forumSectionsLoaded = true;
-		}
-	}
-
-	/**
-	 * Gets the forum sections2.
-	 * 
-	 * @return the forum sections2
-	 */
-	public static ForumSections getForumSections2() {
 		return forumSections;
 	}
 
@@ -224,23 +206,6 @@ public class MySoup {
 			e.printStackTrace();
 		}
 		return doc.getElementsByTag("b").text();
-	}
-
-	/**
-	 * Gets the update version.
-	 * 
-	 * @param page
-	 *            the page
-	 * @return the update version
-	 */
-	public static String getUpdateVersion(String page) {
-		Document doc = null;
-		try {
-			doc = scrapeOther(page);
-		} catch (CouldNotLoadException e) {
-			e.printStackTrace();
-		}
-		return doc.getElementsByTag("h1").text();
 	}
 
 	/**

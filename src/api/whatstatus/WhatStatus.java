@@ -24,12 +24,12 @@ public class WhatStatus {
 	}
 
 	/**
-	 * Gets the status.
+	 * Gets the status
 	 * 
 	 * @return the status
 	 */
 	public Status getStatus() {
-		return this.status;
+		return status;
 	}
 
 	/* public ArrayList<Tuple<String, String>> getTweets() { ArrayList<Tuple<String, String>> tweetList = new
