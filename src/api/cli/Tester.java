@@ -1,6 +1,5 @@
 package api.cli;
 
-import api.index.Index;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -20,8 +19,8 @@ public class Tester {
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("http://127.0.0.1:8080/");
 		MySoup.login("login.php", "gazelle", "123456");
-		Index i = Index.init();
-		System.out.println(i.getResponse().getId().toString());
+		api.forum.thread.Thread t = api.forum.thread.Thread.threadFromIdAndPostId(3, 50);
+		t.postReply("more giebersish");
 	}
 
 	/**
