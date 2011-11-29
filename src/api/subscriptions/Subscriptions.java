@@ -1,6 +1,3 @@
-
-
-
 package api.subscriptions;
 
 import java.util.ArrayList;
@@ -47,8 +44,8 @@ public class Subscriptions {
 	 */
 	public boolean hasUnreadThreads() {
 		if (response.getThreads().isEmpty() || (response.getThreads() == null))
-			return true;
-		return false;
+			return false;
+		return true;
 	}
 
 	/**
@@ -78,11 +75,14 @@ public class Subscriptions {
 		return map;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Subscriptions [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
+		return "Subscriptions [getResponse()=" + getResponse() + ", hasUnreadThreads()=" + hasUnreadThreads() + ", getStatus()="
+				+ getStatus() + ", sortThreadsBySection()=" + sortThreadsBySection() + "]";
 	}
 }

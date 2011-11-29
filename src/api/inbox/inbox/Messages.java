@@ -1,6 +1,3 @@
-
-
-
 package api.inbox.inbox;
 
 /**
@@ -130,9 +127,11 @@ public class Messages {
 		return warned;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Messages [getConvId()=" + getConvId() + ", getDate()=" + getDate() + ", isDonor()=" + isDonor()

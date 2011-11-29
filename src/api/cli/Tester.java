@@ -1,6 +1,7 @@
 package api.cli;
 
 import api.soup.MySoup;
+import api.torrents.artist.Artist;
 import api.util.CouldNotLoadException;
 
 /**
@@ -19,6 +20,8 @@ public class Tester {
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("http://what.cd/");
 
+		MySoup.setSite("http://127.0.0.1:8080/");
+		MySoup.login("login.php", "gazelle", "123456");
 	}
 
 	/**
