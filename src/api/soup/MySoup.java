@@ -23,18 +23,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import api.forum.forumsections.ForumSections;
 import api.index.Index;
 import api.util.CouldNotLoadException;
-import api.util.RegexTools;
 import api.util.Tuple;
 
 /**
@@ -48,9 +45,6 @@ public class MySoup {
 	private static String authey;
 	private static String passkey;
 	private static List<Cookie> cookies;
-	private static CookieStore cookieStore = new BasicCookieStore();
-	private static HttpContext localContext = new BasicHttpContext();
-	private static RegexTools regex = new RegexTools();
 	private static HttpParams httpParams = httpClient.getParams();
 	private static String username;
 	private static int userId;
@@ -59,6 +53,11 @@ public class MySoup {
 	private static ForumSections forumSections;
 	private static boolean forumSectionsLoaded = false;
 	private static Index i;
+
+	private static HttpGet httpget;
+	private static HttpResponse response;
+	private static HttpEntity entity;
+	private static HttpPost httpost;
 
 	/**
 	 * Set the url of the gazelle site. Nothing will work if this isn't called when first starting the program
@@ -91,7 +90,6 @@ public class MySoup {
 		HttpParams params = client.getParams();
 
 		client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
-
 		return client;
 	}
 
@@ -239,14 +237,12 @@ public class MySoup {
 			index = linkToSSL(index);
 		}
 		try {
-			HttpConnectionParams.setConnectionTimeout(httpParams, 60000);
-			HttpConnectionParams.setSoTimeout(httpParams, 60000);
 
-			HttpGet httpget = new HttpGet(url);
-			HttpResponse response = httpClient.execute(httpget);
-			HttpEntity entity = response.getEntity();
+			httpget = new HttpGet(url);
+			response = httpClient.execute(httpget);
+			entity = response.getEntity();
 
-			HttpPost httpost = new HttpPost(url);
+			httpost = new HttpPost(url);
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			nvps.add(new BasicNameValuePair("username", username));
 			nvps.add(new BasicNameValuePair("password", password));
@@ -255,11 +251,12 @@ public class MySoup {
 
 			response = httpClient.execute(httpost);
 			entity = response.getEntity();
-			if (entity != null) {
-				entity.consumeContent();
-			}
+			// if (entity != null) {
+			// entity.consumeContent();
+			// }
 			cookies = httpClient.getCookieStore().getCookies();
 
+			EntityUtils.consume(entity);
 			loadIndex();
 
 		} catch (Exception e) {
@@ -308,12 +305,9 @@ public class MySoup {
 			url = linkToSSL(url);
 		}
 		try {
-			@SuppressWarnings("unused")
-			HttpGet httpget = new HttpGet(url);
-			@SuppressWarnings("unused")
-			HttpResponse response;
+			httpget = new HttpGet(url);
 
-			HttpPost httpost = new HttpPost(url);
+			httpost = new HttpPost(url);
 
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			for (Tuple<String, String> t : list) {
@@ -340,18 +334,28 @@ public class MySoup {
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
 		}
-		HttpConnectionParams.setConnectionTimeout(httpParams, 60000);
-		HttpConnectionParams.setSoTimeout(httpParams, 60000);
-		HttpGet httpget = new HttpGet(url);
-		HttpResponse response = null;
+		httpget = new HttpGet(url);
+		response = null;
 		try {
 			response = httpClient.execute(httpget);
-			return response.getEntity().getContent();
+			entity = response.getEntity();
+			InputStream s = entity.getContent();
+			return s;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 
+	}
+
+	public static void consume() {
+		try {
+			httpget.abort();
+			EntityUtils.consume(entity);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -390,13 +394,12 @@ public class MySoup {
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
 		}
-		HttpConnectionParams.setConnectionTimeout(httpParams, 60000);
-		HttpConnectionParams.setSoTimeout(httpParams, 60000);
-		HttpGet httpget = new HttpGet(url);
-		HttpResponse response = null;
+		httpget = new HttpGet(url);
+		response = null;
 		try {
 			response = httpClient.execute(httpget);
 			response.getEntity().getContent();
+
 		} catch (Exception e) {
 			throw new CouldNotLoadException("Could not press link");
 		}
@@ -412,8 +415,8 @@ public class MySoup {
 	 *             the could not load exception
 	 */
 	public static Document scrapeOther(String url) throws CouldNotLoadException {
-		HttpGet httpget = new HttpGet(url);
-		HttpResponse response = null;
+		httpget = new HttpGet(url);
+		response = null;
 		Document doc = null;
 		try {
 			response = httpClient.execute(httpget);

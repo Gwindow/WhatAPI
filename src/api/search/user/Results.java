@@ -1,6 +1,3 @@
-
-
-
 package api.search.user;
 
 import com.google.gson.annotations.SerializedName;
@@ -18,7 +15,7 @@ public class Results {
 	private boolean enabled;
 	private Number userId;
 	private String username;
-	private Number warned;
+	private boolean warned;
 
 	/**
 	 * Gets the user class.
@@ -70,13 +67,13 @@ public class Results {
 	 * 
 	 * @return the warned
 	 */
-	public Number getWarned() {
+	public Boolean getWarned() {
 		return warned;
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Results [getUserClass=" + getUserClass() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled()

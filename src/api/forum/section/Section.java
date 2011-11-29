@@ -165,7 +165,7 @@ public class Section {
 	 * @param body
 	 *            the body
 	 */
-	public void createNewThread(String title, String body) {
+	public static void createNewThread(int id, String title, String body) {
 		if ((title.length() > 0) && (body.length() > 0)) {
 			try {
 				String url = "forums.php?action=new&forumid=" + id;

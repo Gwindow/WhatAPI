@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 /**
  * Convert JSON to a Java object.
  * 
- * @author Tim
  */
 public class MySon {
 	// private static GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Integer.class, new StringConverter());
@@ -37,6 +36,7 @@ public class MySon {
 		try {
 			reader = new InputStreamReader(MySoup.scrape(url));
 			Object o = gson.fromJson(reader, t);
+			MySoup.consume();
 			return o;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,9 +1,4 @@
-
-
-
 package api.forum.thread;
-
-import java.util.List;
 
 /**
  * The Class Author.
@@ -17,7 +12,8 @@ public class Author {
 	private String avatar;
 	private boolean donor;
 	private boolean enabled;
-	private List<String> paranoia;
+	// TODO paranoi crashes for some reason
+	// private List<String> paranoia;
 	private String userTitle;
 	// TODO investigate warned in php
 	private boolean warned;
@@ -81,9 +77,7 @@ public class Author {
 	 * 
 	 * @return the paranoia
 	 */
-	public List<String> getParanoia() {
-		return paranoia;
-	}
+	/* public List<String> getParanoia() { return paranoia; } */
 
 	/**
 	 * Gets the user title.
@@ -104,12 +98,12 @@ public class Author {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Author [isArtist=" + isArtist() + ", getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName()
 				+ ", getAvatar=" + getAvatar() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled() + ", getParanoia="
-				+ getParanoia() + ", getUserTitle=" + getUserTitle() + ", isWarned=" + isWarned() + "]";
+				+ /* getParanoia() + */", getUserTitle=" + getUserTitle() + ", isWarned=" + isWarned() + "]";
 	}
 }

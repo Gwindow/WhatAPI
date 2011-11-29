@@ -1,6 +1,3 @@
-
-
-
 package api.index;
 
 import api.son.MySon;
@@ -15,7 +12,7 @@ public class Index {
 	private String status;
 
 	/**
-	 * Inits the.
+	 * Inits the index
 	 * 
 	 * @return the index
 	 */
@@ -51,6 +48,6 @@ public class Index {
 	@Override
 	public String toString() {
 		return "Index [response=" + response + ", status=" + status + ", getResponse=" + getResponse() + ", getStatus="
-				+ getStatus() + ", getStatus" + getStatus() + "]";
+				+ getStatus() + "]";
 	}
 }
