@@ -215,6 +215,23 @@ public class Thread {
 		}
 	}
 
+	public static void postReply(int id, String body) {
+		if (body.length() > 0) {
+			try {
+				String url = "forums.php?action=new&forumid=" + id;
+				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+				list.add(new Tuple<String, String>("action", "reply"));
+				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+				list.add(new Tuple<String, String>("thread", String.valueOf(id)));
+				list.add(new Tuple<String, String>("body", body));
+				MySoup.postMethod(url, list);
+				System.out.println("Reply posted");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	/**
 	 * Subscribe to thread.
 	 */
@@ -269,11 +286,9 @@ public class Thread {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Thread [id = " + id + ", page = " + page + "  hasNextPage=" + hasNextPage() + ", getUrl=" + getUrl()
@@ -297,4 +312,5 @@ public class Thread {
 	public static int getPage() {
 		return page;
 	}
+
 }
