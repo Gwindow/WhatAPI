@@ -25,7 +25,6 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -256,7 +255,6 @@ public class MySoup {
 			// }
 			cookies = httpClient.getCookieStore().getCookies();
 
-			EntityUtils.consume(entity);
 			loadIndex();
 
 		} catch (Exception e) {
@@ -348,15 +346,10 @@ public class MySoup {
 
 	}
 
-	public static void consume() {
-		try {
-			httpget.abort();
-			EntityUtils.consume(entity);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	/*
+	 * // TODO remove? public static void consume() { try { httpget.abort(); EntityUtils.consume(entity); } catch
+	 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); } }
+	 */
 
 	/**
 	 * Input stream to string.

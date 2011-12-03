@@ -36,7 +36,7 @@ public class MySon {
 		try {
 			reader = new InputStreamReader(MySoup.scrape(url));
 			Object o = gson.fromJson(reader, t);
-			MySoup.consume();
+			// MySoup.consume();
 			return o;
 		} catch (Exception e) {
 			e.printStackTrace();
