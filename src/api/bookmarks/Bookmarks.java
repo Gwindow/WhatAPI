@@ -28,9 +28,9 @@ public class Bookmarks {
 	 * 
 	 * @return a Bookmarks object
 	 */
-	public static Bookmarks init() {
+	public static Bookmarks initTorrentBookmarks() {
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=bookmarks&auth=&auth=" + authkey;
+		String url = "ajax.php?action=bookmarks&type=torrents&auth=&auth=" + authkey;
 		Bookmarks bookmarks = (Bookmarks) MySon.toObject(url, Bookmarks.class);
 		return bookmarks;
 	}
@@ -96,9 +96,11 @@ public class Bookmarks {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Bookmarks [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

@@ -16,7 +16,8 @@ ajax.php?action=inbox&auth=<Authkey>
 ajax.php?action=inbox&type=viewconv&id=<Message Id>&auth=<Authkey>
 
 Bookmarks
-ajax.php?action=bookmarks&auth=<Authkey>
+ajax.php?action=bookmarks&type=<Type>&auth=<Authkey>
+Type = torrents, artists
 
 Top 10
 ajax.php?action=top10&type=<Type>&limit=<Limit>&auth=<Authkey>;
