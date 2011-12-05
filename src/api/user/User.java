@@ -37,12 +37,8 @@ public class User {
 	 */
 	public void addToFriends() {
 		if (!getProfile().IsFriend()) {
-			try {
-				MySoup.pressLink("friends.php?action=add&friendid=" + id + "&auth=" + MySoup.getAuthKey());
-				System.out.println("Added to friends");
-			} catch (CouldNotLoadException e) {
-				e.printStackTrace();
-			}
+			MySoup.pressLink("friends.php?action=add&friendid=" + id + "&auth=" + MySoup.getAuthKey());
+			System.out.println("Added to friends");
 		} else {
 			System.out.println("Already added as friend");
 		}

@@ -12,20 +12,20 @@ public class Response {
 	private List<Artist> artists;
 
 	/**
-	 * Gets the artists.
+	 * Gets the list of artist bookmarks.
 	 * 
-	 * @return the artists
+	 * @return the artist bookmarks
 	 */
 	public List<Artist> getArtists() {
 		return this.artists;
 	}
 
 	/**
-	 * Get the list of bookmarks.
+	 * Get the list of torrent bookmarks.
 	 * 
-	 * @return the bookmarks list
+	 * @return the torrent bookmarks
 	 */
-	public List<Torrents> getBookmarksList() {
+	public List<Torrents> getTorrents() {
 		return this.bookmarks;
 	}
 
@@ -34,6 +34,6 @@ public class Response {
 	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "Response [getBookmarksList=" + getBookmarksList() + "]";
+		return "Response [getArtists=" + getArtists() + ", getBookmarksList=" + getTorrents() + "]";
 	}
 }

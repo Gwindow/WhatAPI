@@ -250,9 +250,9 @@ public class MySoup {
 
 			response = httpClient.execute(httpost);
 			entity = response.getEntity();
-			// if (entity != null) {
-			// entity.consumeContent();
-			// }
+			if (entity != null) {
+				entity.consumeContent();
+			}
 			cookies = httpClient.getCookieStore().getCookies();
 
 			loadIndex();
@@ -346,11 +346,6 @@ public class MySoup {
 
 	}
 
-	/*
-	 * // TODO remove? public static void consume() { try { httpget.abort(); EntityUtils.consume(entity); } catch
-	 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); } }
-	 */
-
 	/**
 	 * Input stream to string.
 	 * 
@@ -382,7 +377,7 @@ public class MySoup {
 	 *            the url
 	 * @throws CouldNotLoadException
 	 */
-	public static void pressLink(String url) throws CouldNotLoadException {
+	public static void pressLink(String url) {
 		url = SITE + url;
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
@@ -394,7 +389,7 @@ public class MySoup {
 			response.getEntity().getContent();
 
 		} catch (Exception e) {
-			throw new CouldNotLoadException("Could not press link");
+			e.printStackTrace();
 		}
 	}
 

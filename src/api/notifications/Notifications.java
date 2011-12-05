@@ -2,7 +2,6 @@ package api.notifications;
 
 import api.son.MySon;
 import api.soup.MySoup;
-import api.util.CouldNotLoadException;
 
 /**
  * The Class Notifications.
@@ -106,13 +105,9 @@ public class Notifications {
 	public void clearNotifications() {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=notifications&auth=" + authkey + "$clear=1";
-		try {
-			MySoup.pressLink(url);
-			response.clear();
-			System.out.println("Notifications cleared");
-		} catch (CouldNotLoadException e) {
-			e.printStackTrace();
-		}
+		MySoup.pressLink(url);
+		response.clear();
+		System.out.println("Notifications cleared");
 	}
 
 	/**

@@ -23,7 +23,9 @@ public class Tester {
 		MySoup.login("login.php", "gazelle", "123456");
 		Index i = Index.init();
 		System.out.println(i);
-		System.out.println(Bookmarks.initArtistBookmarks());
+		Bookmarks b = Bookmarks.initArtistBookmarks();
+		System.out.println(b);
+		b.getResponse().getArtists().get(0).removeBookmark();
 
 	}
 

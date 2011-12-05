@@ -220,12 +220,8 @@ public class Thread {
 	 */
 	public void subscribe() {
 		if (!getResponse().isSubscribed()) {
-			try {
-				MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
-				System.out.println("Subscribed");
-			} catch (CouldNotLoadException e) {
-				e.printStackTrace();
-			}
+			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
+			System.out.println("Subscribed");
 		} else {
 			System.out.println("Already subscribed");
 		}
@@ -237,12 +233,8 @@ public class Thread {
 	 */
 	public void unsubscribe() {
 		if (getResponse().isSubscribed()) {
-			try {
-				MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
-				System.out.println("Unsubscribed");
-			} catch (CouldNotLoadException e) {
-				e.printStackTrace();
-			}
+			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
+			System.out.println("Unsubscribed");
 		} else {
 			System.out.println("Already unsubscribed");
 		}

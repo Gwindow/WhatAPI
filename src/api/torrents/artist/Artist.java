@@ -12,7 +12,6 @@ import java.util.List;
 
 import api.son.MySon;
 import api.soup.MySoup;
-import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 /**
@@ -64,12 +63,8 @@ public class Artist {
 	public void addBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.isBookmarked() == false) {
-			try {
-				MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
-				System.out.println("Bookmarked");
-			} catch (CouldNotLoadException e) {
-				e.printStackTrace();
-			}
+			MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
+			System.out.println("Bookmarked");
 		} else {
 			System.err.println("Already bookmarked");
 		}
@@ -81,12 +76,8 @@ public class Artist {
 	public void removeBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.isBookmarked() == true) {
-			try {
-				MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
-				System.out.println("Removed bookmark");
-			} catch (CouldNotLoadException e) {
-				e.printStackTrace();
-			}
+			MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
+			System.out.println("Removed bookmark");
 		} else {
 			System.err.println("Already isn't bookmarked");
 		}
@@ -98,13 +89,8 @@ public class Artist {
 	public void enableNotifications() {
 		String authkey = MySoup.getAuthKey();
 		if (response.hasNotificationsEnabled() == false) {
-			// TODO take care of people who don't have notification privileges
-			try {
-				MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
-				System.out.println("Notifications enabled");
-			} catch (CouldNotLoadException e) {
-				e.printStackTrace();
-			}
+			MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
+			System.out.println("Notifications enabled");
 		} else {
 			System.err.println("Notifications already enabled");
 		}
@@ -116,13 +102,8 @@ public class Artist {
 	public void disbaleNotifications() {
 		String authkey = MySoup.getAuthKey();
 		if (response.hasNotificationsEnabled() == true) {
-			// TODO take care of people who don't have notification privileges
-			try {
-				MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
-				System.out.println("Notifications disabled");
-			} catch (CouldNotLoadException e) {
-				e.printStackTrace();
-			}
+			MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
+			System.out.println("Notifications disabled");
 		} else {
 			System.err.println("Notifications already disabled");
 		}
