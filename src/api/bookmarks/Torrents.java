@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * @author Gwindow
  */
-public class BookmarksList {
+public class Torrents {
 	private String catalogueNumber;
 	private Number id;
 	private String name;

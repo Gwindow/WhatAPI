@@ -1,5 +1,8 @@
 package api.cli;
 
+import api.bookmarks.Bookmarks;
+import api.index.Index;
+import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 /**
@@ -16,8 +19,11 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		// MySoup.setSite("http://127.0.0.1:8080/");
-		// MySoup.login("login.php", "gazelle", "123456");
+		MySoup.setSite("http://127.0.0.1:8080/");
+		MySoup.login("login.php", "gazelle", "123456");
+		Index i = Index.init();
+		System.out.println(i);
+		System.out.println(Bookmarks.initArtistBookmarks());
 
 	}
 

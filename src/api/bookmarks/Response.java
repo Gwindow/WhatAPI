@@ -8,14 +8,24 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
-	private List<BookmarksList> bookmarks;
+	private List<Torrents> bookmarks;
+	private List<Artist> artists;
+
+	/**
+	 * Gets the artists.
+	 * 
+	 * @return the artists
+	 */
+	public List<Artist> getArtists() {
+		return this.artists;
+	}
 
 	/**
 	 * Get the list of bookmarks.
 	 * 
 	 * @return the bookmarks list
 	 */
-	public List<BookmarksList> getBookmarksList() {
+	public List<Torrents> getBookmarksList() {
 		return this.bookmarks;
 	}
 
