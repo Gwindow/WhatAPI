@@ -1,7 +1,6 @@
 package api.cli;
 
-import api.bookmarks.Bookmarks;
-import api.index.Index;
+import api.forum.forumsections.ForumSections;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -20,11 +19,8 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("http://127.0.0.1:8080/");
-		MySoup.login("login.php", "gazelle", "123456");
-		Index i = Index.init();
-		System.out.println(i);
-		Bookmarks b = Bookmarks.initArtistBookmarks();
-		System.out.println(b);
+		MySoup.login("login.php", "tester", "123456");
+		System.out.println(ForumSections.init());
 
 	}
 

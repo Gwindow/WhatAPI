@@ -1,6 +1,3 @@
-
-
-
 package api.forum.section;
 
 
@@ -161,15 +158,19 @@ public class Threads {
 		return url;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public boolean isRead() {
+		if (getLastReadPage().intValue() > 0)
+			return true;
+		return false;
+	}
+
 	@Override
 	public String toString() {
-		return "Threads [isSticky=" + isSticky() + ", isLocked=" + isLocked() + ", getAuthorId=" + getAuthorId()
-				+ ", getAuthorName=" + getAuthorName() + ", getLastAuthorId=" + getLastAuthorId() + ", getLastAuthorName="
-				+ getLastAuthorName() + ", getLastID=" + getLastID() + ", getLastReadPage=" + getLastReadPage()
-				+ ", getLastReadPostId=" + getLastReadPostId() + ", getLastTime=" + getLastTime() + ", getPostCount="
-				+ getPostCount() + ", getTitle=" + getTitle() + ", getTopicId=" + getTopicId() + "]";
+		return "Threads [getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName() + ", getLastAuthorId="
+				+ getLastAuthorId() + ", getLastAuthorName=" + getLastAuthorName() + ", getLastID=" + getLastID()
+				+ ", getLastReadPage=" + getLastReadPage() + ", getLastReadPostId=" + getLastReadPostId() + ", getLastTime="
+				+ getLastTime() + ", isLocked=" + isLocked() + ", getPostCount=" + getPostCount() + ", isSticky=" + isSticky()
+				+ ", getTitle=" + getTitle() + ", getTopicId=" + getTopicId() + ", getUrl=" + getUrl() + ", getLastReadUrl="
+				+ getLastReadUrl() + ", isRead=" + isRead() + "]";
 	}
 }
