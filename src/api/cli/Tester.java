@@ -25,7 +25,6 @@ public class Tester {
 		System.out.println(i);
 		Bookmarks b = Bookmarks.initArtistBookmarks();
 		System.out.println(b);
-		b.getResponse().getArtists().get(0).removeBookmark();
 
 	}
 

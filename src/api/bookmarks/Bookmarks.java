@@ -42,6 +42,20 @@ public class Bookmarks {
 		return bookmarks;
 	}
 
+	public boolean hasTorrentBookmarks() {
+		if (response.getTorrents().isEmpty() || response.getTorrents() == null) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean hasArtistBookmarks() {
+		if (response.getArtists().isEmpty() || response.getArtists() == null) {
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Get the response.
 	 * 
@@ -103,9 +117,11 @@ public class Bookmarks {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Bookmarks [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
