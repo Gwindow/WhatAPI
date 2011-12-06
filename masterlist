@@ -1,0 +1,39 @@
+Index, basic info such as passkey, authkey, and U/D/R
+ajax.php?action=index
+
+User Profile
+ajax.php?action=user&id=<User ID>&auth=<Authkey>
+
+Inbox and Conversation
+ajax.php?action=inbox&auth=<Authkey>
+ajax.php?action=inbox&type=viewconv&id=<Message Id>&auth=<Authkey>
+
+Bookmarks
+ajax.php?action=bookmarks&auth=<Authkey>
+
+Top 10
+ajax.php?action=top10&type=<Type>&limit=<Limit>&auth=<Authkey>;
+Type = torrents, tags, users.
+Limit = 10,25,100; if no limit is specified defaults to 25.
+
+User Search
+ajax.php?action=usersearch&search=<Search Term>&auth=<Authkey>
+
+Subscriptions
+ajax.php?action=subscriptions&auth=<Authkey>
+
+Forums
+ajax.php?action=forum&type=main&authkey=<Authkey>
+ajax.php?action=forum&type=viewforum&forumid=<Forum Id>&auth=<Authkey>
+ajax.php?action=forum&type=viewthread&threadid=<Thread Id>&page=<Page>&authkey=<Authkey>
+ajax.php?action=forum&type=viewthread&threadid=<Thread Id>&postid=<Post Id>&authkey=<Authkey>
+
+Artist
+ajax.php?action=artist&id=<Artist Id>&auth=<Authkey>
+
+Torrent Group
+ajax.php?action=torrentgroup&id=<Torrent Group Id>&auth=<Authkey>
+
+
+Rippy
+ajax.php?action=rippy
