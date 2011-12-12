@@ -11,6 +11,7 @@ api.inbox.inbox
 api.index
 api.notifications
 api.products
+api.requests
 api.search.user
 api.son
 api.soup
