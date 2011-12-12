@@ -11,20 +11,50 @@ import java.util.List;
  * @author Gwindow
  */
 public class Forums {
+	
+	/** The forum description. */
 	private String forumDescription;
+	
+	/** The forum id. */
 	private Number forumId;
+	
+	/** The forum name. */
 	private String forumName;
+	
+	/** The last author id. */
 	private Number lastAuthorId;
+	
+	/** The last post author name. */
 	private String lastPostAuthorName;
+	
+	/** The last post id. */
 	private Number lastPostId;
+	
+	/** The last time. */
 	private String lastTime;
+	
+	/** The last topic. */
 	private String lastTopic;
+	
+	/** The last topic id. */
 	private Number lastTopicId;
+	
+	/** The locked. */
 	private boolean locked;
+	
+	/** The num posts. */
 	private Number numPosts;
+	
+	/** The num topics. */
 	private Number numTopics;
+	
+	/** The read. */
 	private boolean read;
+	
+	/** The specific rules. */
 	private List<String> specificRules;
+	
+	/** The sticky. */
 	private boolean sticky;
 
 	/**

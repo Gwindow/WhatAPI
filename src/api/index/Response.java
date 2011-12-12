@@ -9,10 +9,20 @@ package api.index;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The authkey. */
 	private String authkey;
+	
+	/** The id. */
 	private Number id;
+	
+	/** The passkey. */
 	private String passkey;
+	
+	/** The username. */
 	private String username;
+	
+	/** The userstats. */
 	private UserStats userstats;
 
 	/**

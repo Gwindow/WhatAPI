@@ -11,12 +11,26 @@ import org.jsoup.Jsoup;
  * @author Gwindow
  */
 public class Posts {
+	
+	/** The added time. */
 	private String addedTime;
+	
+	/** The author. */
 	private Author author;
+	
+	/** The body. */
 	private String body;
+	
+	/** The edited time. */
 	private String editedTime;
+	
+	/** The edited user id. */
 	private Number editedUserId;
+	
+	/** The edited username. */
 	private String editedUsername;
+	
+	/** The post id. */
 	private Number postId;
 
 	/**

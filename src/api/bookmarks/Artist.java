@@ -11,7 +11,10 @@ import api.soup.MySoup;
  */
 public class Artist {
 	// TODO enable/disable notifications for artist
+	/** The artist id. */
 	private Number artistId;
+	
+	/** The artist name. */
 	private String artistName;
 
 	/**
@@ -32,6 +35,9 @@ public class Artist {
 		return this.artistName;
 	}
 
+	/**
+	 * Removes the bookmark.
+	 */
 	public void removeBookmark() {
 		String authKey = MySoup.getAuthKey();
 		MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + getArtistId().intValue());

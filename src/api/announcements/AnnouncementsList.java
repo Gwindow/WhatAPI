@@ -9,9 +9,17 @@ package api.announcements;
  * @author Gwindow
  */
 public class AnnouncementsList {
+	
+	/** The body. */
 	private String body;
+	
+	/** The news id. */
 	private Number newsId;
+	
+	/** The news time. */
 	private String newsTime;
+	
+	/** The title. */
 	private String title;
 
 	/**

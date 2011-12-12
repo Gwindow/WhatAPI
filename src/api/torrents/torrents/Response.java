@@ -11,7 +11,11 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The group. */
 	private Group group;
+	
+	/** The torrents. */
 	private List<Torrent> torrents;
 
 	/**

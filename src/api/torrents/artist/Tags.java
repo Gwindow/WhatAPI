@@ -10,7 +10,11 @@ package api.torrents.artist;
  * @author Gwindow
  */
 public class Tags {
+	
+	/** The count. */
 	private Number count;
+	
+	/** The name. */
 	private String name;
 
 	/**

@@ -9,12 +9,23 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Results {
 	// so java doesn't get confused with the "class" keyword
+	/** The user class. */
 	@SerializedName("class")
 	private String userClass;
+	
+	/** The donor. */
 	private boolean donor;
+	
+	/** The enabled. */
 	private boolean enabled;
+	
+	/** The user id. */
 	private Number userId;
+	
+	/** The username. */
 	private String username;
+	
+	/** The warned. */
 	private boolean warned;
 
 	/**

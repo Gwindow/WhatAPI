@@ -11,10 +11,20 @@ import org.jsoup.Jsoup;
  * @author Gwindow
  */
 public class Messages {
+	
+	/** The body. */
 	private String body;
+	
+	/** The message id. */
 	private Number messageId;
+	
+	/** The sender id. */
 	private Number senderId;
+	
+	/** The sender name. */
 	private String senderName;
+	
+	/** The sent date. */
 	private String sentDate;
 
 	/**

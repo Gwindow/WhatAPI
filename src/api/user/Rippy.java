@@ -13,7 +13,11 @@ import api.util.Tuple;
  */
 
 public class Rippy {
+	
+	/** The id. */
 	private int id;
+	
+	/** The body. */
 	private String body;
 
 	/**

@@ -9,6 +9,8 @@ package api.products;
  * @author Gwindow
  */
 public class Images {
+	
+	/** The link. */
 	private String link;
 
 	/**

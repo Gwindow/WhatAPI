@@ -20,8 +20,14 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class Artist {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
+	
+	/** The id. */
 	private static transient int id;
 
 	/**

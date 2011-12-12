@@ -1,6 +1,3 @@
-
-
-
 package api.user;
 
 import com.google.gson.annotations.SerializedName;
@@ -8,16 +5,27 @@ import com.google.gson.annotations.SerializedName;
 /**
  * The personal section of a user's profile.
  * 
- * @author Tim
+ * @author Gwindow
  */
 public class Personal {
 	// so java doesn't get confused with the "class" keyword
+	/** The user class. */
 	@SerializedName("class")
 	private String userClass;
+	
+	/** The donor. */
 	private boolean donor;
+	
+	/** The enabled. */
 	private boolean enabled;
+	
+	/** The paranoia. */
 	private Number paranoia;
+	
+	/** The paranoia text. */
 	private String paranoiaText;
+	
+	/** The warned. */
 	private boolean warned;
 
 	/**
@@ -75,8 +83,8 @@ public class Personal {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Personal [getUserClass=" + getUserClass() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled()

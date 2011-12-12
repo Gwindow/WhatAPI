@@ -13,7 +13,11 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Subscriptions {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
 
 	/**

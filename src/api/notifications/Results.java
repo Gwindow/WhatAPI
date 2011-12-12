@@ -17,29 +17,77 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Results {
+	
+	/** The encoding. */
 	private String encoding;
+	
+	/** The file count. */
 	private Number fileCount;
+	
+	/** The format. */
 	private String format;
+	
+	/** The free torrent. */
 	private Boolean freeTorrent;
+	
+	/** The group category id. */
 	private Number groupCategoryId;
+	
+	/** The group id. */
 	private Number groupId;
+	
+	/** The group name. */
 	private String groupName;
+	
+	/** The group year. */
 	private String groupYear;
+	
+	/** The has cue. */
 	private Boolean hasCue;
+	
+	/** The has log. */
 	private Boolean hasLog;
+	
+	/** The leechers. */
 	private Number leechers;
+	
+	/** The log in db. */
 	private String logInDb;
+	
+	/** The log score. */
 	private Number logScore;
+	
+	/** The media. */
 	private String media;
+	
+	/** The notification time. */
 	private String notificationTime;
+	
+	/** The remaster title. */
 	private String remasterTitle;
+	
+	/** The remaster year. */
 	private String remasterYear;
+	
+	/** The scene. */
 	private Boolean scene;
+	
+	/** The seeders. */
 	private Number seeders;
+	
+	/** The size. */
 	private Number size;
+	
+	/** The snatched. */
 	private Number snatched;
+	
+	/** The torrent id. */
 	private Number torrentId;
+	
+	/** The torrent tags. */
 	private String torrentTags;
+	
+	/** The unread. */
 	private Boolean unread;
 
 	/**

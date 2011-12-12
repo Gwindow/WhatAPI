@@ -12,8 +12,14 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Inbox {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
+	
+	/** The page. */
 	private static int page;
 
 	/**

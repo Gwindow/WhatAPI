@@ -14,33 +14,82 @@ import api.soup.MySoup;
  */
 public class Results {
 	// torrents
+	/** The artist. */
 	private String artist;
+	
+	/** The encoding. */
 	private String encoding;
+	
+	/** The format. */
 	private String format;
+	
+	/** The group id. */
 	private Number groupId;
+	
+	/** The group year. */
 	private String groupYear;
+	
+	/** The has cue. */
 	private boolean hasCue;
+	
+	/** The has log. */
 	private boolean hasLog;
+	
+	/** The leechers. */
 	private Number leechers;
+	
+	/** The media. */
 	private String media;
+	
+	/** The scene. */
 	private boolean scene;
+	
+	/** The seeders. */
 	private Number seeders;
+	
+	/** The snatched. */
 	private Number snatched;
+	
+	/** The tags. */
 	private List<String> tags;
+	
+	/** The torrent id. */
 	private Number torrentId;
+	
+	/** The year. */
 	private String year;
 	// tags
+	/** The name. */
 	private String name;
+	
+	/** The neg votes. */
 	private Number negVotes;
+	
+	/** The pos votes. */
 	private Number posVotes;
+	
+	/** The uses. */
 	private Number uses;
 	// users
+	/** The down speed. */
 	private Number downSpeed;
+	
+	/** The downloaded. */
 	private Number downloaded;
+	
+	/** The id. */
 	private Number id;
+	
+	/** The join date. */
 	private String joinDate;
+	
+	/** The num uploads. */
 	private Number numUploads;
+	
+	/** The up speed. */
 	private Number upSpeed;
+	
+	/** The uploaded. */
 	private Number uploaded;
 
 	/**
@@ -286,6 +335,7 @@ public class Results {
 		return username;
 	}
 
+	/** The username. */
 	private String username;
 
 	// TODO return SSL link

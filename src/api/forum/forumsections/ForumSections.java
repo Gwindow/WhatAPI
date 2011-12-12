@@ -15,8 +15,14 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class ForumSections {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
+	
+	/** The forums list. */
 	private ArrayList<Forums> forumsList;
 
 	/**

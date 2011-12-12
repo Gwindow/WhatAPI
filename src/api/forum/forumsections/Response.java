@@ -11,6 +11,8 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The categories. */
 	private List<Categories> categories;
 
 	/**

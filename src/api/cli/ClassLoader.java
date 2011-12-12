@@ -14,7 +14,11 @@ import java.util.HashMap;
  * @author Gwindow
  */
 public class ClassLoader {
+	
+	/** The Constant classMap. */
 	private static final HashMap<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+	
+	/** The root. */
 	private static File root;
 
 	/**

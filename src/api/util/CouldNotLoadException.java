@@ -10,6 +10,8 @@ package api.util;
  */
 @SuppressWarnings("serial")
 public class CouldNotLoadException extends Exception {
+	
+	/** The error. */
 	String error;
 
 	/**

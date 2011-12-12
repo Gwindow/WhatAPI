@@ -9,11 +9,23 @@ package api.announcements;
  * @author Gwindow
  */
 public class BlogPosts {
+	
+	/** The author. */
 	private String author;
+	
+	/** The blog id. */
 	private Number blogId;
+	
+	/** The blog time. */
 	private String blogTime;
+	
+	/** The body. */
 	private String body;
+	
+	/** The thread id. */
 	private Number threadId;
+	
+	/** The title. */
 	private String title;
 
 	/**

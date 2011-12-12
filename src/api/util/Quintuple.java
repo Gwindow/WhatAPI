@@ -19,10 +19,20 @@ package api.util;
  * @author Gwindow
  */
 public class Quintuple<A, B, C, D, E> {
+	
+	/** The a. */
 	private A a;
+	
+	/** The b. */
 	private B b;
+	
+	/** The c. */
 	private C c;
+	
+	/** The d. */
 	private D d;
+	
+	/** The e. */
 	private E e;
 
 	/**

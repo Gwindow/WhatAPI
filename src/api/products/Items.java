@@ -9,9 +9,17 @@ package api.products;
  * @author Gwindow
  */
 public class Items {
+	
+	/** The id. */
 	private String id;
+	
+	/** The kind. */
 	private String kind;
+	
+	/** The product. */
 	private Product product;
+	
+	/** The self link. */
 	private String selfLink;
 
 	/**

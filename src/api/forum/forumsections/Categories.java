@@ -11,8 +11,14 @@ import java.util.List;
  * @author Gwindow
  */
 public class Categories {
+	
+	/** The category id. */
 	private Number categoryID;
+	
+	/** The category name. */
 	private String categoryName;
+	
+	/** The forums. */
 	private List<Forums> forums;
 
 	/**

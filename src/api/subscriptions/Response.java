@@ -11,6 +11,8 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The threads. */
 	private List<Threads> threads;
 
 	/**

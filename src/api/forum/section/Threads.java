@@ -7,18 +7,44 @@ package api.forum.section;
  * @author Gwindow
  */
 public class Threads {
+	
+	/** The author id. */
 	private Number authorId;
+	
+	/** The author name. */
 	private String authorName;
+	
+	/** The last author id. */
 	private Number lastAuthorId;
+	
+	/** The last author name. */
 	private String lastAuthorName;
+	
+	/** The last id. */
 	private Number lastID;
+	
+	/** The last read page. */
 	private Number lastReadPage;
+	
+	/** The last read post id. */
 	private Number lastReadPostId;
+	
+	/** The last time. */
 	private String lastTime;
+	
+	/** The locked. */
 	private boolean locked;
+	
+	/** The post count. */
 	private Number postCount;
+	
+	/** The sticky. */
 	private boolean sticky;
+	
+	/** The title. */
 	private String title;
+	
+	/** The topic id. */
 	private Number topicId;
 
 	/**
@@ -158,12 +184,20 @@ public class Threads {
 		return url;
 	}
 
+	/**
+	 * Checks if is read.
+	 * 
+	 * @return true, if is read
+	 */
 	public boolean isRead() {
 		if (getLastReadPage().intValue() > 0)
 			return true;
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Threads [getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName() + ", getLastAuthorId="

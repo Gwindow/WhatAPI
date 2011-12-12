@@ -20,7 +20,11 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class Bookmarks {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
 
 	/**
@@ -35,6 +39,11 @@ public class Bookmarks {
 		return bookmarks;
 	}
 
+	/**
+	 * Inits the artist bookmarks.
+	 * 
+	 * @return the bookmarks
+	 */
 	public static Bookmarks initArtistBookmarks() {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=bookmarks&type=artists&auth=&auth=" + authkey;
@@ -42,6 +51,11 @@ public class Bookmarks {
 		return bookmarks;
 	}
 
+	/**
+	 * Checks for torrent bookmarks.
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean hasTorrentBookmarks() {
 		if (response.getTorrents().isEmpty() || response.getTorrents() == null) {
 			return false;
@@ -49,6 +63,11 @@ public class Bookmarks {
 		return true;
 	}
 
+	/**
+	 * Checks for artist bookmarks.
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean hasArtistBookmarks() {
 		if (response.getArtists().isEmpty() || response.getArtists() == null) {
 			return false;

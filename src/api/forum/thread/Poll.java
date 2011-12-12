@@ -11,12 +11,26 @@ import java.util.List;
  * @author Gwindow
  */
 public class Poll {
+	
+	/** The answers. */
 	private List<Answers> answers;
+	
+	/** The closed. */
 	private boolean closed;
+	
+	/** The featured. */
 	private String featured;
+	
+	/** The max votes. */
 	private Number maxVotes;
+	
+	/** The question. */
 	private String question;
+	
+	/** The total votes. */
 	private Number totalVotes;
+	
+	/** The voted. */
 	private boolean voted;
 
 	/**

@@ -8,7 +8,11 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The bookmarks. */
 	private List<Torrents> bookmarks;
+	
+	/** The artists. */
 	private List<Artist> artists;
 
 	/**

@@ -21,8 +21,14 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class Reflector {
+	
+	/** The class stack. */
 	private Stack<Class<?>> classStack = new Stack<Class<?>>();
+	
+	/** The object stack. */
 	private Stack<Object> objectStack = new Stack<Object>();
+	
+	/** The tokenizer. */
 	private StringTokenizer tokenizer;
 
 	/**

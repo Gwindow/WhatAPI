@@ -42,6 +42,8 @@ ajax.php?action=artist&id=<Artist Id>&auth=<Authkey>
 Torrent Group
 ajax.php?action=torrentgroup&id=<Torrent Group Id>&auth=<Authkey>
 
+Request
+ajax.php?action=request&id=<Request Id>&auth=<Authkey>
 
 Rippy
 ajax.php?action=rippy

@@ -6,16 +6,30 @@ package api.forum.thread;
  * @author Gwindow
  */
 public class Author {
+	
+	/** The artist. */
 	private boolean artist;
+	
+	/** The author id. */
 	private Number authorId;
+	
+	/** The author name. */
 	private String authorName;
+	
+	/** The avatar. */
 	private String avatar;
+	
+	/** The donor. */
 	private boolean donor;
+	
+	/** The enabled. */
 	private boolean enabled;
 	// TODO paranoi crashes for some reason
 	// private List<String> paranoia;
+	/** The user title. */
 	private String userTitle;
 	// TODO investigate warned in php
+	/** The warned. */
 	private boolean warned;
 
 	/**

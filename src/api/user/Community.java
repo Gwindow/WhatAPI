@@ -1,25 +1,46 @@
-
-
-
 package api.user;
 
 /**
  * The community section of a user's profile.
  * 
- * @author Tim
+ * @author Gwindow
  */
 public class Community {
+	
+	/** The collages contrib. */
 	private Number collagesContrib;
+	
+	/** The collages started. */
 	private Number collagesStarted;
+	
+	/** The groups. */
 	private Number groups;
+	
+	/** The invited. */
 	private Number invited;
+	
+	/** The leeching. */
 	private Number leeching;
+	
+	/** The posts. */
 	private Number posts;
+	
+	/** The requests filled. */
 	private Number requestsFilled;
+	
+	/** The requests voted. */
 	private Number requestsVoted;
+	
+	/** The seeding. */
 	private Number seeding;
+	
+	/** The snatched. */
 	private Number snatched;
+	
+	/** The torrent comments. */
 	private Number torrentComments;
+	
+	/** The uploaded. */
 	private Number uploaded;
 
 	/**
@@ -131,8 +152,8 @@ public class Community {
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Community [getCollagesContrib=" + getCollagesContrib() + ", getCollagesStarted=" + getCollagesStarted()

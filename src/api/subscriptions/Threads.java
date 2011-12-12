@@ -11,15 +11,30 @@ import com.google.gson.annotations.SerializedName;
  * @author Gwindow
  */
 public class Threads {
+	
+	/** The forum id. */
 	private Number forumId;
+	
+	/** The forum name. */
 	private String forumName;
+	
+	/** The last post id. */
 	private Number lastPostId;
+	
+	/** The locked. */
 	private boolean locked;
 	// so java doesn't get confused
+	/** The is new. */
 	@SerializedName("new")
 	private boolean isNew;
+	
+	/** The post id. */
 	private Number postId;
+	
+	/** The thread id. */
 	private Number threadId;
+	
+	/** The thread title. */
 	private String threadTitle;
 
 	/**

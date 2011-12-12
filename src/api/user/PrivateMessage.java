@@ -14,8 +14,14 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class PrivateMessage {
+	
+	/** The id. */
 	private int id;
+	
+	/** The subject. */
 	private String subject;
+	
+	/** The body. */
 	private String body;
 
 	/**

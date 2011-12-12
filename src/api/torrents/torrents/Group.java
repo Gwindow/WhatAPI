@@ -6,16 +6,38 @@ package api.torrents.torrents;
  * @author Gwindow
  */
 public class Group {
+	
+	/** The catalogue number. */
 	private String catalogueNumber;
+	
+	/** The category id. */
 	private Number categoryId;
+	
+	/** The id. */
 	private Number id;
+	
+	/** The name. */
 	private String name;
+	
+	/** The record label. */
 	private String recordLabel;
+	
+	/** The release type. */
 	private Number releaseType;
+	
+	/** The time. */
 	private String time;
+	
+	/** The vanity house. */
 	private boolean vanityHouse;
+	
+	/** The wiki body. */
 	private String wikiBody;
+	
+	/** The wiki image. */
 	private String wikiImage;
+	
+	/** The year. */
 	private String year;
 
 	/**

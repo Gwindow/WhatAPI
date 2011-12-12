@@ -14,7 +14,11 @@ import api.soup.MySoup;
  * @author Tim
  */
 public class Top {
+	
+	/** The response. */
 	private List<Response> response;
+	
+	/** The status. */
 	private String status;
 
 	/**

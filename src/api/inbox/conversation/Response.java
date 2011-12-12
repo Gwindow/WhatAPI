@@ -11,9 +11,17 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The conv id. */
 	private Number convId;
+	
+	/** The messages. */
 	private List<Messages> messages;
+	
+	/** The sticky. */
 	private boolean sticky;
+	
+	/** The subject. */
 	private String subject;
 
 	/**

@@ -9,7 +9,11 @@ package api.forum.section;
  * @author Gwindow
  */
 public class SpecificRules {
+	
+	/** The thread id. */
 	private Number threadId;
+	
+	/** The thread. */
 	private String thread;
 
 	/**

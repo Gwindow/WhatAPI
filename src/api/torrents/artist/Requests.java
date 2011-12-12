@@ -9,12 +9,26 @@ package api.torrents.artist;
  * @author Gwindow
  */
 public class Requests {
+	
+	/** The bounty. */
 	private Number bounty;
+	
+	/** The category id. */
 	private Number categoryId;
+	
+	/** The request id. */
 	private Number requestId;
+	
+	/** The time added. */
 	private String timeAdded;
+	
+	/** The title. */
 	private String title;
+	
+	/** The votes. */
 	private Number votes;
+	
+	/** The year. */
 	private String year;
 
 	/**

@@ -1,6 +1,3 @@
-
-
-
 package api.products;
 
 import java.util.List;
@@ -13,17 +10,41 @@ import api.son.MySon;
  * @author Gwindow
  */
 public class ProductSearch {
+
+	/** The current item count. */
 	private Number currentItemCount;
+
+	/** The etag. */
 	private String etag;
+
+	/** The id. */
 	private String id;
+
+	/** The items. */
 	private List<Items> items;
+
+	/** The items per page. */
 	private Number itemsPerPage;
+
+	/** The kind. */
 	private String kind;
+
+	/** The next link. */
 	private String nextLink;
+
+	/** The request id. */
 	private String requestId;
+
+	/** The self link. */
 	private String selfLink;
+
+	/** The start index. */
 	private Number startIndex;
+
+	/** The total items. */
 	private Number totalItems;
+
+	/** The Constant KEY. */
 	private static final String KEY = "AIzaSyDOPEJep1GSxaWylXm7Tvdytozve8odmuo";
 
 	/**
@@ -33,12 +54,28 @@ public class ProductSearch {
 	 *            the upc
 	 * @return the product search
 	 */
-	public static ProductSearch ProductSearchFromUPC(String upc) {
+	public static ProductSearch productSearchFromUPC(String upc) {
 		String url =
 				"https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&restrictBy=gtin=" + upc
 						+ "&alt=json";
 		ProductSearch ps = (ProductSearch) MySon.toObjectOther(url, ProductSearch.class);
 		return ps;
+	}
+
+	/**
+	 * Product search from title.
+	 * 
+	 * @param title
+	 *            the title
+	 * @return the product search
+	 */
+	public static ProductSearch productSearchFromTitle(String title) {
+		String url =
+				"https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&q=" + title
+						+ "&alt=json";
+		ProductSearch ps = (ProductSearch) MySon.toObjectOther(url, ProductSearch.class);
+		return ps;
+
 	}
 
 	/**

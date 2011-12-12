@@ -23,12 +23,26 @@ package api.util;
  * @author Gwindow
  */
 public class Septuple<A, B, C, D, E, F, G> {
+	
+	/** The a. */
 	private A a;
+	
+	/** The b. */
 	private B b;
+	
+	/** The c. */
 	private C c;
+	
+	/** The d. */
 	private D d;
+	
+	/** The e. */
 	private E e;
+	
+	/** The f. */
 	private F f;
+	
+	/** The g. */
 	private G g;
 
 	/**

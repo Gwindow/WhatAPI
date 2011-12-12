@@ -10,8 +10,14 @@ import api.util.CouldNotLoadException;
  * @author Gwindow
  */
 public class User {
+	
+	/** The response. */
 	private Profile response;
+	
+	/** The status. */
 	private String status;
+	
+	/** The id. */
 	private static transient int id;
 
 	/**
@@ -32,8 +38,6 @@ public class User {
 	/**
 	 * Add user to your friend list.
 	 * 
-	 * @throws CouldNotLoadException
-	 *             the could not load exception
 	 */
 	public void addToFriends() {
 		if (!getProfile().IsFriend()) {

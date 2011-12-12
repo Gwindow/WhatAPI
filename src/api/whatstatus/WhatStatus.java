@@ -10,6 +10,8 @@ import api.son.MySon;
  * @author Gwindow
  */
 public class WhatStatus {
+	
+	/** The status. */
 	private Status status;
 
 	/**
@@ -24,7 +26,7 @@ public class WhatStatus {
 	}
 
 	/**
-	 * Gets the status
+	 * Gets the status.
 	 * 
 	 * @return the status
 	 */

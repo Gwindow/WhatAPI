@@ -9,13 +9,29 @@ package api.user;
  * @author Tim
  */
 public class Ranks {
+	
+	/** The artists. */
 	private Number artists;
+	
+	/** The bounty. */
 	private Number bounty;
+	
+	/** The downloaded. */
 	private Number downloaded;
+	
+	/** The overall. */
 	private Number overall;
+	
+	/** The posts. */
 	private Number posts;
+	
+	/** The requests. */
 	private Number requests;
+	
+	/** The uploaded. */
 	private Number uploaded;
+	
+	/** The uploads. */
 	private Number uploads;
 
 	/**

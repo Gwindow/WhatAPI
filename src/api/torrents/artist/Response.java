@@ -11,17 +11,41 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The body. */
 	private String body;
+	
+	/** The has bookmarked. */
 	private boolean hasBookmarked;
+	
+	/** The id. */
 	private Number id;
+	
+	/** The image. */
 	private String image;
+	
+	/** The name. */
 	private String name;
+	
+	/** The notifications enabled. */
 	private boolean notificationsEnabled;
+	
+	/** The requests. */
 	private List<Requests> requests;
+	
+	/** The similar artists. */
 	private List<SimilarArtists> similarArtists;
+	
+	/** The statistics. */
 	private Statistics statistics;
+	
+	/** The tags. */
 	private List<Tags> tags;
+	
+	/** The torrentgroup. */
 	private List<TorrentGroup> torrentgroup;
+	
+	/** The vanity house. */
 	private boolean vanityHouse;
 
 	/**

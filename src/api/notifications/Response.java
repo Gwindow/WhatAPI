@@ -11,9 +11,17 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The current pages. */
 	private Number currentPages;
+	
+	/** The num new. */
 	private Number numNew;
+	
+	/** The pages. */
 	private Number pages;
+	
+	/** The results. */
 	private List<Results> results;
 
 	/**

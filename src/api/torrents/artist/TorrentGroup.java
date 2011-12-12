@@ -8,15 +8,35 @@ import java.util.List;
  * @author Gwindow
  */
 public class TorrentGroup {
+	
+	/** The group catalogue number. */
 	private String groupCatalogueNumber;
+	
+	/** The group id. */
 	private Number groupId;
+	
+	/** The group name. */
 	private String groupName;
+	
+	/** The group record label. */
 	private String groupRecordLabel;
+	
+	/** The group vanity house. */
 	private boolean groupVanityHouse;
+	
+	/** The group year. */
 	private String groupYear;
+	
+	/** The is bookmarked. */
 	private boolean isBookmarked;
+	
+	/** The release type. */
 	private Number releaseType;
+	
+	/** The tags. */
 	private List<String> tags;
+	
+	/** The torrent. */
 	private List<Torrent> torrent;
 
 	/**

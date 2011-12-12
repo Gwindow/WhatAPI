@@ -9,8 +9,14 @@ package api.whatstatus;
  * @author Gwindow
  */
 public class Status {
+	
+	/** The irc. */
 	private String irc;
+	
+	/** The site. */
 	private String site;
+	
+	/** The tracker. */
 	private String tracker;
 
 	/**

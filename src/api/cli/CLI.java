@@ -8,7 +8,11 @@ import java.util.Scanner;
  * @author Gwindow
  */
 public class CLI {
+	
+	/** The scanner. */
 	private Scanner scanner = new Scanner(System.in);
+	
+	/** The reflector. */
 	private Reflector reflector = new Reflector();
 
 	/**

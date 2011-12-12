@@ -9,12 +9,26 @@ package api.user;
  * @author Tim
  */
 public class Profile {
+	
+	/** The avatar. */
 	private String avatar;
+	
+	/** The community. */
 	private Community community;
+	
+	/** The is friend. */
 	private boolean isFriend;
+	
+	/** The personal. */
 	private Personal personal;
+	
+	/** The ranks. */
 	private Ranks ranks;
+	
+	/** The stats. */
 	private Stats stats;
+	
+	/** The username. */
 	private String username;
 
 	/**

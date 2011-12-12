@@ -8,11 +8,15 @@ import api.son.MySon;
  * @author Gwindow
  */
 public class Index {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
 
 	/**
-	 * Inits the index
+	 * Inits the index.
 	 * 
 	 * @return the index
 	 */

@@ -18,11 +18,23 @@ package api.util;
  * @author Gwindow
  */
 public class Sextuple<A, B, C, D, E, F> {
+	
+	/** The a. */
 	private A a;
+	
+	/** The b. */
 	private B b;
+	
+	/** The c. */
 	private C c;
+	
+	/** The d. */
 	private D d;
+	
+	/** The e. */
 	private E e;
+	
+	/** The f. */
 	private F f;
 
 	/**

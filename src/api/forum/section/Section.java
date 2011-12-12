@@ -13,9 +13,17 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class Section {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
+	
+	/** The id. */
 	private transient static int id;
+	
+	/** The page. */
 	private transient static int page;
 
 	/**
@@ -160,6 +168,8 @@ public class Section {
 	/**
 	 * Creates the new thread.
 	 * 
+	 * @param id
+	 *            the id
 	 * @param title
 	 *            the title
 	 * @param body

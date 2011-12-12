@@ -39,23 +39,56 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class MySoup {
+	
+	/** The http client. */
 	private static DefaultHttpClient httpClient = getHttpClient();
+	
+	/** The SSL. */
 	private static boolean SSL;
+	
+	/** The authey. */
 	private static String authey;
+	
+	/** The passkey. */
 	private static String passkey;
+	
+	/** The cookies. */
 	private static List<Cookie> cookies;
+	
+	/** The http params. */
 	private static HttpParams httpParams = httpClient.getParams();
+	
+	/** The username. */
 	private static String username;
+	
+	/** The user id. */
 	private static int userId;
+	
+	/** The SITE. */
 	private static String SITE;
+	
+	/** The can notifications. */
 	private static boolean canNotifications = true;
+	
+	/** The forum sections. */
 	private static ForumSections forumSections;
+	
+	/** The forum sections loaded. */
 	private static boolean forumSectionsLoaded = false;
+	
+	/** The i. */
 	private static Index i;
 
+	/** The httpget. */
 	private static HttpGet httpget;
+	
+	/** The response. */
 	private static HttpResponse response;
+	
+	/** The entity. */
 	private static HttpEntity entity;
+	
+	/** The httpost. */
 	private static HttpPost httpost;
 
 	/**
@@ -94,6 +127,8 @@ public class MySoup {
 
 	/**
 	 * Called statically from MySoup because forum section titles never change.
+	 * 
+	 * @return the forum sections
 	 */
 	public static ForumSections loadForumSections() {
 		if (forumSectionsLoaded == false) {
@@ -375,7 +410,6 @@ public class MySoup {
 	 * 
 	 * @param url
 	 *            the url
-	 * @throws CouldNotLoadException
 	 */
 	public static void pressLink(String url) {
 		url = SITE + url;

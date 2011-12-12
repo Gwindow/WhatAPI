@@ -9,11 +9,23 @@ package api.products;
  * @author Gwindow
  */
 public class Inventories {
+	
+	/** The availability. */
 	private String availability;
+	
+	/** The channel. */
 	private String channel;
+	
+	/** The currency. */
 	private String currency;
+	
+	/** The price. */
 	private Number price;
+	
+	/** The shipping. */
 	private Number shipping;
+	
+	/** The tax. */
 	private Number tax;
 
 	/**

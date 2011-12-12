@@ -9,9 +9,17 @@ package api.torrents.artist;
  * @author Gwindow
  */
 public class SimilarArtists {
+	
+	/** The artist id. */
 	private Number artistId;
+	
+	/** The name. */
 	private String name;
+	
+	/** The score. */
 	private Number score;
+	
+	/** The similar id. */
 	private Number similarId;
 
 	/**

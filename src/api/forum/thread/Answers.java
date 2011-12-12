@@ -9,8 +9,14 @@ package api.forum.thread;
  * @author Gwindow
  */
 public class Answers {
+	
+	/** The answer. */
 	private String answer;
+	
+	/** The percent. */
 	private Number percent;
+	
+	/** The ratio. */
 	private Number ratio;
 
 	/**

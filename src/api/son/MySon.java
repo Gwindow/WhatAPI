@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 /**
  * Convert JSON to a Java object.
  * 
+ * @author Gwindow
  */
 public class MySon {
 	// private static GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Integer.class, new StringConverter());
@@ -20,7 +21,10 @@ public class MySon {
 
 	// TODO is serializeNulls needed?
 	// private final static Gson gson = new GsonBuilder().serializeNulls().create();
+	/** The Constant gson. */
 	private final static Gson gson = new Gson();
+	
+	/** The reader. */
 	private static Reader reader;
 
 	/**

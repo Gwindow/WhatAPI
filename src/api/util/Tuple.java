@@ -13,7 +13,11 @@ package api.util;
  * @author Gwindow
  */
 public class Tuple<A,B> {
+	
+	/** The a. */
 	private A a;
+	
+	/** The b. */
 	private B b;
 	
 	/**

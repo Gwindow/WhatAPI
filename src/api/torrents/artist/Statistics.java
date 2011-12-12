@@ -10,10 +10,20 @@ package api.torrents.artist;
  * @author Gwindow
  */
 public class Statistics {
+	
+	/** The num groups. */
 	private Number numGroups;
+	
+	/** The num leechers. */
 	private Number numLeechers;
+	
+	/** The num seeders. */
 	private Number numSeeders;
+	
+	/** The num snatches. */
 	private Number numSnatches;
+	
+	/** The num torrents. */
 	private Number numTorrents;
 
 	/**

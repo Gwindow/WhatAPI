@@ -9,11 +9,23 @@ package api.user;
  * @author Tim
  */
 public class Stats {
+	
+	/** The downloaded. */
 	private Number downloaded;
+	
+	/** The joined date. */
 	private String joinedDate;
+	
+	/** The last access. */
 	private String lastAccess;
+	
+	/** The ratio. */
 	private Number ratio;
+	
+	/** The required ratio. */
 	private Number requiredRatio;
+	
+	/** The uploaded. */
 	private Number uploaded;
 
 	/**

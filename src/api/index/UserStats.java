@@ -11,10 +11,20 @@ import com.google.gson.annotations.SerializedName;
  * @author Gwindow
  */
 public class UserStats {
+	
+	/** The downloaded. */
 	private Number downloaded;
+	
+	/** The ratio. */
 	private Number ratio;
+	
+	/** The requiredratio. */
 	private Number requiredratio;
+	
+	/** The uploaded. */
 	private Number uploaded;
+	
+	/** The user class. */
 	@SerializedName("class")
 	private String userClass;
 

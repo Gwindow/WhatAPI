@@ -11,7 +11,11 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The announcements. */
 	private List<AnnouncementsList> announcements;
+	
+	/** The blog posts. */
 	private List<BlogPosts> blogPosts;
 
 	/**

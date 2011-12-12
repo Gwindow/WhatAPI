@@ -15,9 +15,17 @@ package api.util;
  */
 
 public class Quadruple<A, B, C, D> {
+	
+	/** The a. */
 	private A a;
+	
+	/** The b. */
 	private B b;
+	
+	/** The c. */
 	private C c;
+	
+	/** The d. */
 	private D d;
 
 	/**

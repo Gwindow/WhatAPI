@@ -12,9 +12,17 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class UserSearch {
+	
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
+	
+	/** The page. */
 	private transient static int page;
+	
+	/** The search term. */
 	private transient static String searchTerm;
 
 	/**

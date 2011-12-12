@@ -15,10 +15,19 @@ import api.util.Tuple;
  */
 public class Thread {
 	// TODO voting on polls
+	/** The response. */
 	private Response response;
+	
+	/** The status. */
 	private String status;
+	
+	/** The id. */
 	private transient static int id;
+	
+	/** The page. */
 	private transient static int page;
+	
+	/** The pp. */
 	private transient static int pp = 25;
 
 	/**
@@ -195,6 +204,8 @@ public class Thread {
 	/**
 	 * Post reply.
 	 * 
+	 * @param id
+	 *            the id
 	 * @param body
 	 *            the body
 	 */

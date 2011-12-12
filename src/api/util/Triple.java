@@ -15,8 +15,14 @@ package api.util;
  * @author Gwindow
  */
 public class Triple<A,B,C> {
+	
+	/** The a. */
 	private A a;
+	
+	/** The b. */
 	private B b;
+	
+	/** The c. */
 	private C c;
 	
 	/**

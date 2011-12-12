@@ -11,10 +11,20 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	
+	/** The current page. */
 	private Number currentPage;
+	
+	/** The forum name. */
 	private String forumName;
+	
+	/** The pages. */
 	private Number pages;
+	
+	/** The specific rules. */
 	private List<SpecificRules> specificRules;
+	
+	/** The threads. */
 	private List<Threads> threads;
 
 	/**

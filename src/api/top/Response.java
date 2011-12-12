@@ -12,9 +12,17 @@ import java.util.List;
  * 
  */
 public class Response {
+	
+	/** The caption. */
 	private String caption;
+	
+	/** The limit. */
 	private Number limit;
+	
+	/** The results. */
 	private List<Results> results;
+	
+	/** The tag. */
 	private String tag;
 
 	/**

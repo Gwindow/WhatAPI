@@ -1,6 +1,6 @@
 package api.cli;
 
-import api.forum.forumsections.ForumSections;
+import api.requests.Request;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -20,7 +20,7 @@ public class Tester {
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("http://127.0.0.1:8080/");
 		MySoup.login("login.php", "tester", "123456");
-		System.out.println(ForumSections.init());
+		System.out.println(Request.requestFromId(1));
 
 	}
 

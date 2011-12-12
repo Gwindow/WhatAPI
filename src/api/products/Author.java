@@ -6,7 +6,11 @@ package api.products;
  * @author Gwindow
  */
 public class Author {
+	
+	/** The account id. */
 	private String accountId;
+	
+	/** The name. */
 	private String name;
 
 	/**
