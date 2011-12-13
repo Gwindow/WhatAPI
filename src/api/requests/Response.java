@@ -13,105 +13,117 @@ public class Response {
 
 	/** The bitrate list. */
 	private String bitrateList;
-	
+
 	/** The can edit. */
 	private boolean canEdit;
-	
+
 	/** The can vote. */
 	private boolean canVote;
-	
+
 	/** The catalogue number. */
 	private String catalogueNumber;
-	
+
 	/** The category id. */
 	private Number categoryId;
-	
+
 	/** The category name. */
 	private String categoryName;
-	
+
 	/** The comment page. */
 	private Number commentPage;
-	
+
 	/** The comment pages. */
 	private Number commentPages;
-	
+
 	/** The comments. */
 	private List<Comments> comments;
-	
+
 	/** The description. */
 	private String description;
-	
+
 	/** The filler id. */
 	private Number fillerId;
-	
+
 	/** The filler name. */
 	private String fillerName;
-	
+
 	/** The format list. */
 	private String formatList;
-	
+
 	/** The image. */
 	private String image;
-	
+
 	/** The is filled. */
 	private boolean isFilled;
-	
+
 	/** The last vote. */
 	private String lastVote;
-	
+
 	/** The log cue. */
 	private String logCue;
-	
+
 	/** The media list. */
 	private String mediaList;
-	
+
 	/** The minimum vote. */
 	private Number minimumVote;
-	
+
 	/** The music info. */
 	private MusicInfo musicInfo;
-	
+
 	/** The release type. */
 	private Number releaseType;
-	
+
 	/** The request id. */
 	private Number requestId;
-	
+
 	/** The request tax. */
 	private Number requestTax;
-	
+
 	/** The requestor id. */
 	private Number requestorId;
-	
+
 	/** The requestor name. */
 	private String requestorName;
-	
+
 	/** The tags. */
 	private List<String> tags;
-	
+
 	/** The time added. */
 	private String timeAdded;
-	
+
 	/** The time filled. */
 	private String timeFilled;
-	
+
 	/** The title. */
 	private String title;
-	
+
 	/** The top contributors. */
 	private List<TopContributors> topContributors;
-	
+
 	/** The torrent id. */
 	private Number torrentId;
-	
+
 	/** The total bounty. */
 	private Number totalBounty;
-	
+
 	/** The vote count. */
 	private Number voteCount;
-	
+
 	/** The year. */
 	private Number year;
+
+	/** The release name. */
+	private String releaseName;
+
+	/**
+	 * Gets the release name.
+	 * 
+	 * @return the releaseName
+	 */
+	public String getReleaseName() {
+		return releaseName;
+	}
 
 	/**
 	 * Gets the bitrate list.
@@ -419,7 +431,9 @@ public class Response {
 		return this.year;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
