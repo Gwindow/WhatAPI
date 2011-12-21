@@ -5,7 +5,6 @@ import java.util.List;
 
 import api.son.MySon;
 import api.soup.MySoup;
-import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 /**
@@ -17,18 +16,20 @@ public class Thread {
 	// TODO voting on polls
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The id. */
 	private transient static int id;
-	
+
 	/** The page. */
 	private transient static int page;
-	
+
 	/** The pp. */
 	private transient static int pp = 25;
+
+	private transient static boolean overridePostsPerPage = false;
 
 	/**
 	 * Sets the posts per page, default number is 25.
@@ -60,7 +61,13 @@ public class Thread {
 	 */
 	public static Thread threadFromIdAndPage(int id, int page) {
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
+		String url;
+		if (!overridePostsPerPage) {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&auth=" + authkey;
+		} else {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
+		}
+
 		Thread thread = (Thread) MySon.toObject(url, Thread.class);
 		Thread.id = id;
 		Thread.page = page;
@@ -79,8 +86,13 @@ public class Thread {
 	 */
 	public static Thread threadFromIdAndPostId(int id, int postId) {
 		String authkey = MySoup.getAuthKey();
-		String url =
-				"ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid" + postId + "&pp=" + pp + "&auth=" + authkey;
+		String url;
+		if (!overridePostsPerPage) {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid" + postId + "&auth=" + authkey;
+		} else {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid" + postId + "&pp=" + pp + "&auth=" + authkey;
+		}
+
 		Thread thread = (Thread) MySon.toObject(url, Thread.class);
 		Thread.id = id;
 		Thread.page = thread.getResponse().getCurrentPage().intValue();
@@ -96,7 +108,12 @@ public class Thread {
 	 */
 	public static Thread threadFromFirstPage(int id) {
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&pp=" + pp + "&auth=" + authkey;
+		String url;
+		if (!overridePostsPerPage) {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&auth=" + authkey;
+		} else {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&pp=" + pp + "&auth=" + authkey;
+		}
 		Thread thread = (Thread) MySon.toObject(url, Thread.class);
 		Thread.id = id;
 		Thread.page = 1;
@@ -113,11 +130,23 @@ public class Thread {
 	 */
 	public static Thread threadFromLastPage(int id) {
 		String authkey = MySoup.getAuthKey();
+		String url;
 		// get the number of pages
-		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&pp=" + pp + "&auth=" + authkey;
+		if (!overridePostsPerPage) {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&auth=" + authkey;
+		} else {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&pp=" + pp + "&auth=" + authkey;
+		}
 		Thread thread = (Thread) MySon.toObject(url, Thread.class);
 		// create thread from last page
-		url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + thread.getLastPage() + "&auth=" + authkey;
+		if (!overridePostsPerPage) {
+
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + thread.getLastPage() + "&auth=" + authkey;
+		} else {
+			url =
+					"ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + thread.getLastPage() + "&pp=" + pp
+							+ "&auth=" + authkey;
+		}
 		thread = (Thread) MySon.toObject(url, Thread.class);
 		Thread.id = id;
 		Thread.page = thread.getLastPage();
@@ -132,7 +161,12 @@ public class Thread {
 	public static Thread threadFromNextPage() {
 		page += 1;
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
+		String url;
+		if (!overridePostsPerPage) {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&auth=" + authkey;
+		} else {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
+		}
 		Thread thread = (Thread) MySon.toObject(url, Thread.class);
 		return thread;
 	}
@@ -145,7 +179,12 @@ public class Thread {
 	public static Thread threadFromPreviousPage() {
 		page -= 1;
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
+		String url;
+		if (!overridePostsPerPage) {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&auth=" + authkey;
+		} else {
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
+		}
 		Thread thread = (Thread) MySon.toObject(url, Thread.class);
 		return thread;
 	}
@@ -299,6 +338,23 @@ public class Thread {
 	 */
 	public static int getPage() {
 		return page;
+	}
+
+	/**
+	 * @return the overridePostsPerPage
+	 */
+	public static boolean isOverridePostsPerPage() {
+		return overridePostsPerPage;
+	}
+
+	/**
+	 * This must be set to true for custom posts per page
+	 * 
+	 * @param overridePostsPerPage
+	 * 
+	 */
+	public static void setOverridePostsPerPage(boolean overridePostsPerPage) {
+		Thread.overridePostsPerPage = overridePostsPerPage;
 	}
 
 }
