@@ -18,7 +18,7 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		MySoup.setSite("http://127.0.0.1:8080/");
+		MySoup.setSite("http://67.183.192.159/");
 		MySoup.login("login.php", "tester", "123456");
 		System.out.println(Request.requestFromId(1));
 
