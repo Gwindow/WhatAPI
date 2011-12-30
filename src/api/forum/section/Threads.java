@@ -1,5 +1,6 @@
 package api.forum.section;
 
+import api.soup.MySoup;
 
 /**
  * The Class Threads.
@@ -7,43 +8,43 @@ package api.forum.section;
  * @author Gwindow
  */
 public class Threads {
-	
+
 	/** The author id. */
 	private Number authorId;
-	
+
 	/** The author name. */
 	private String authorName;
-	
+
 	/** The last author id. */
 	private Number lastAuthorId;
-	
+
 	/** The last author name. */
 	private String lastAuthorName;
-	
+
 	/** The last id. */
 	private Number lastID;
-	
+
 	/** The last read page. */
 	private Number lastReadPage;
-	
+
 	/** The last read post id. */
 	private Number lastReadPostId;
-	
+
 	/** The last time. */
 	private String lastTime;
-	
+
 	/** The locked. */
 	private boolean locked;
-	
+
 	/** The post count. */
 	private Number postCount;
-	
+
 	/** The sticky. */
 	private boolean sticky;
-	
+
 	/** The title. */
 	private String title;
-	
+
 	/** The topic id. */
 	private Number topicId;
 
@@ -195,9 +196,39 @@ public class Threads {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Subscribe to thread.
 	 */
+	public void subscribe() {
+		try {
+			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + getTopicId().intValue() + "&auth="
+					+ MySoup.getAuthKey());
+			System.out.println("Subscribed");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * unsubscribe to thread.
+	 */
+	public void unsubscribe() {
+		try {
+			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + getTopicId().intValue() + "&auth="
+					+ MySoup.getAuthKey());
+			System.out.println("Unsubscribed");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/* (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Threads [getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName() + ", getLastAuthorId="

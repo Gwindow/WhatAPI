@@ -1,6 +1,6 @@
 package api.cli;
 
-import api.requests.Request;
+import api.forum.section.Section;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -18,10 +18,18 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		MySoup.setSite("http://67.183.192.159/");
-		MySoup.login("login.php", "tester", "123456");
-		System.out.println(Request.requestFromId(1));
+		MySoup.setSite("http://what.cd/");
+		// api.forum.thread.Thread t = api.forum.thread.Thread.threadFromFirstPage(147222);
+		// System.out.println(t.getResponse().getThreadTitle());
+		// t.unsubscribe();
+		Section s = Section.sectionFromFirstPage(17);
+		for (int i = 0; i < s.getResponse().getThreads().size(); i++) {
+			if (!s.getResponse().getThreads().get(i).isRead()) {
+				System.out.println(s.getResponse().getThreads().get(i).getTitle());
+				s.getResponse().getThreads().get(i).unsubscribe();
 
+			}
+		}
 	}
 
 	/**

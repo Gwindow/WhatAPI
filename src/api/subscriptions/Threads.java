@@ -1,7 +1,6 @@
-
-
-
 package api.subscriptions;
+
+import api.soup.MySoup;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,29 +10,29 @@ import com.google.gson.annotations.SerializedName;
  * @author Gwindow
  */
 public class Threads {
-	
+
 	/** The forum id. */
 	private Number forumId;
-	
+
 	/** The forum name. */
 	private String forumName;
-	
+
 	/** The last post id. */
 	private Number lastPostId;
-	
+
 	/** The locked. */
 	private boolean locked;
 	// so java doesn't get confused
 	/** The is new. */
 	@SerializedName("new")
 	private boolean isNew;
-	
+
 	/** The post id. */
 	private Number postId;
-	
+
 	/** The thread id. */
 	private Number threadId;
-	
+
 	/** The thread title. */
 	private String threadTitle;
 
@@ -129,9 +128,38 @@ public class Threads {
 		return url;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Subscribe to thread.
 	 */
+	public void subscribe() {
+		try {
+			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + getThreadId().intValue() + "&auth="
+					+ MySoup.getAuthKey());
+			System.out.println("Subscribed");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * unsubscribe to thread.
+	 */
+	public void unsubscribe() {
+		try {
+			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + getThreadId().intValue() + "&auth="
+					+ MySoup.getAuthKey());
+			System.out.println("Unsubscribed");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/* (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Threads [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()

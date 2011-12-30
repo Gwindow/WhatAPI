@@ -13,16 +13,16 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class Section {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The id. */
 	private transient static int id;
-	
+
 	/** The page. */
 	private transient static int page;
 
@@ -193,11 +193,56 @@ public class Section {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
+	/**
+	 * Subscribe to all unread threads.
 	 */
+	public void subscribeToAllUnreadThreads() {
+		for (int i = 0; i < response.getThreads().size(); i++) {
+			if (!response.getThreads().get(i).isRead()) {
+				response.getThreads().get(i).subscribe();
+			}
+		}
+	}
+
+	/**
+	 * Gets the number of unread threads.
+	 * 
+	 * @return the number of unread threads
+	 */
+	public int getNumberOfUnreadThreads() {
+		int counter = 0;
+		for (int i = 0; i < response.getThreads().size(); i++) {
+			if (!response.getThreads().get(i).isRead()) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+
+	/**
+	 * Catch up.
+	 */
+	public void catchUp() {
+		try {
+			MySoup.pressLink("forums.php?action=catchup&forumid=" + id + "&auth=" + MySoup.getAuthKey());
+			System.out.println("Caught up");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Subscribe to all unread threads and catch up.
+	 */
+	public void subscribeToAllUnreadThreadsAndCatchUp() {
+		subscribeToAllUnreadThreads();
+		catchUp();
+	}
+
+	/* (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Section [id = " + id + ", page = " + page + ", hasNextPage=" + hasNextPage() + ", getResponse=" + getResponse()

@@ -420,8 +420,7 @@ public class MySoup {
 		response = null;
 		try {
 			response = httpClient.execute(httpget);
-			response.getEntity().getContent();
-
+			response.getEntity().consumeContent();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

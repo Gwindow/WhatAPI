@@ -23,7 +23,7 @@ public class MySon {
 	// private final static Gson gson = new GsonBuilder().serializeNulls().create();
 	/** The Constant gson. */
 	private final static Gson gson = new Gson();
-	
+
 	/** The reader. */
 	private static Reader reader;
 
@@ -46,30 +46,6 @@ public class MySon {
 			System.err.println("Couldn't create json object " + t.toString());
 			return null;
 		}
-	}
-
-	/**
-	 * Prints the stream.
-	 * 
-	 * @param reader
-	 *            the reader
-	 */
-	@SuppressWarnings("unused")
-	private void printStream(Reader reader) {
-		char[] arr = new char[8 * 1024]; // 8K at a time
-		StringBuffer buf = new StringBuffer();
-		int numChars;
-
-		try {
-			while ((numChars = reader.read(arr, 0, arr.length)) > 0) {
-				buf.append(arr, 0, numChars);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println(buf.toString());
 	}
 
 	/**
@@ -106,5 +82,29 @@ public class MySon {
 	public static Object toObjectFromString(String json, Type t) {
 		Object o = gson.fromJson(json, t);
 		return o;
+	}
+
+	/**
+	 * Prints the stream.
+	 * 
+	 * @param reader
+	 *            the reader
+	 */
+	@SuppressWarnings("unused")
+	private void printStream(Reader reader) {
+		char[] arr = new char[8 * 1024]; // 8K at a time
+		StringBuffer buf = new StringBuffer();
+		int numChars;
+
+		try {
+			while ((numChars = reader.read(arr, 0, arr.length)) > 0) {
+				buf.append(arr, 0, numChars);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(buf.toString());
 	}
 }
