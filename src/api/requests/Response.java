@@ -139,7 +139,7 @@ public class Response {
 	 * 
 	 * @return the can edit
 	 */
-	public boolean getCanEdit() {
+	public boolean canEdit() {
 		return this.canEdit;
 	}
 
@@ -148,7 +148,7 @@ public class Response {
 	 * 
 	 * @return the can vote
 	 */
-	public boolean getCanVote() {
+	public boolean canVote() {
 		return this.canVote;
 	}
 
@@ -256,7 +256,7 @@ public class Response {
 	 * 
 	 * @return the checks if is filled
 	 */
-	public boolean getIsFilled() {
+	public boolean isFilled() {
 		return this.isFilled;
 	}
 
@@ -431,19 +431,17 @@ public class Response {
 		return this.year;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "Response [getBitrateList=" + getBitrateList() + ", getCanEdit=" + getCanEdit() + ", getCanVote=" + getCanVote()
+		return "Response [getBitrateList=" + getBitrateList() + ", getCanEdit=" + canEdit() + ", getCanVote=" + canVote()
 				+ ", getCatalogueNumber=" + getCatalogueNumber() + ", getCategoryId=" + getCategoryId() + ", getCategoryName="
 				+ getCategoryName() + ", getCommentPage=" + getCommentPage() + ", getCommentPages=" + getCommentPages()
 				+ ", getComments=" + getComments() + ", getDescription=" + getDescription() + ", getFillerId=" + getFillerId()
 				+ ", getFillerName=" + getFillerName() + ", getFormatList=" + getFormatList() + ", getImage=" + getImage()
-				+ ", getIsFilled=" + getIsFilled() + ", getLastVote=" + getLastVote() + ", getLogCue=" + getLogCue()
+				+ ", getIsFilled=" + isFilled() + ", getLastVote=" + getLastVote() + ", getLogCue=" + getLogCue()
 				+ ", getMediaList=" + getMediaList() + ", getMinimumVote=" + getMinimumVote() + ", getMusicInfo="
 				+ getMusicInfo() + ", getReleaseType=" + getReleaseType() + ", getRequestId=" + getRequestId()
 				+ ", getRequestTax=" + getRequestTax() + ", getRequestorId=" + getRequestorId() + ", getRequestorName="
