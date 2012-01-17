@@ -1,5 +1,7 @@
 package api.cli;
 
+import org.jsoup.Jsoup;
+
 import api.forum.section.Section;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
@@ -18,17 +20,14 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		MySoup.setSite("http://what.cd/");
-		// api.forum.thread.Thread t = api.forum.thread.Thread.threadFromFirstPage(147222);
-		// System.out.println(t.getResponse().getThreadTitle());
-		// t.unsubscribe();
-		Section s = Section.sectionFromFirstPage(17);
+		MySoup.setSite("http://67.183.192.159/");
+		MySoup.login("login.php", "gazelle", "123456");
+		Section s = Section.sectionFromFirstPage(2);
 		for (int i = 0; i < s.getResponse().getThreads().size(); i++) {
-			if (!s.getResponse().getThreads().get(i).isRead()) {
-				System.out.println(s.getResponse().getThreads().get(i).getTitle());
-				s.getResponse().getThreads().get(i).unsubscribe();
-
-			}
+			api.forum.thread.Thread t =
+					api.forum.thread.Thread.threadFromFirstPage(s.getResponse().getThreads().get(i).getTopicId().intValue());
+			System.out.println(s.getResponse().getThreads().get(i).getTitle());
+			System.out.println(Jsoup.parse(s.getResponse().getThreads().get(i).getTitle()).text());
 		}
 	}
 

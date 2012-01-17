@@ -9,6 +9,7 @@ import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * Convert JSON to a Java object.
@@ -20,9 +21,8 @@ public class MySon {
 	// private static Gson gson = builder.create();
 
 	// TODO is serializeNulls needed?
-	// private final static Gson gson = new GsonBuilder().serializeNulls().create();
-	/** The Constant gson. */
-	private final static Gson gson = new Gson();
+	// TODO disable html escaping?
+	private final static Gson gson = new GsonBuilder().create();
 
 	/** The reader. */
 	private static Reader reader;
@@ -38,7 +38,7 @@ public class MySon {
 	 */
 	public static Object toObject(String url, Type t) {
 		try {
-			reader = new InputStreamReader(MySoup.scrape(url));
+			reader = new InputStreamReader(MySoup.scrape(url), "UTF-8");
 			Object o = gson.fromJson(reader, t);
 			return o;
 		} catch (Exception e) {

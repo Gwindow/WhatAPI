@@ -373,6 +373,7 @@ public class MySoup {
 			response = httpClient.execute(httpget);
 			entity = response.getEntity();
 			InputStream s = entity.getContent();
+			System.err.println("encoding " + entity.getContentEncoding());
 			return s;
 		} catch (Exception e) {
 			e.printStackTrace();
