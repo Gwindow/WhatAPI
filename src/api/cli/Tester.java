@@ -3,7 +3,6 @@ package api.cli;
 import org.jsoup.Jsoup;
 
 import api.forum.section.Section;
-import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 /**
@@ -20,8 +19,6 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		MySoup.setSite("http://67.183.192.159/");
-		MySoup.login("login.php", "gazelle", "123456");
 		Section s = Section.sectionFromFirstPage(2);
 		for (int i = 0; i < s.getResponse().getThreads().size(); i++) {
 			api.forum.thread.Thread t =
