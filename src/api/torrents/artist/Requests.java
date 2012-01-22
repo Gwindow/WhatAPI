@@ -1,6 +1,3 @@
-
-
-
 package api.torrents.artist;
 
 /**
@@ -9,27 +6,27 @@ package api.torrents.artist;
  * @author Gwindow
  */
 public class Requests {
-	
+
 	/** The bounty. */
 	private Number bounty;
-	
+
 	/** The category id. */
 	private Number categoryId;
-	
+
 	/** The request id. */
 	private Number requestId;
-	
+
 	/** The time added. */
 	private String timeAdded;
-	
+
 	/** The title. */
 	private String title;
-	
+
 	/** The votes. */
 	private Number votes;
-	
+
 	/** The year. */
-	private String year;
+	private Number year;
 
 	/**
 	 * Gets the bounty.
@@ -90,13 +87,15 @@ public class Requests {
 	 * 
 	 * @return the year
 	 */
-	public String getYear() {
+	public Number getYear() {
 		return this.year;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Requests [getBounty=" + getBounty() + ", getCategoryId=" + getCategoryId() + ", getRequestId=" + getRequestId()

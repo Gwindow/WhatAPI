@@ -8,34 +8,34 @@ import java.util.List;
  * @author Gwindow
  */
 public class TorrentGroup {
-	
+
 	/** The group catalogue number. */
 	private String groupCatalogueNumber;
-	
+
 	/** The group id. */
 	private Number groupId;
-	
+
 	/** The group name. */
 	private String groupName;
-	
+
 	/** The group record label. */
 	private String groupRecordLabel;
-	
+
 	/** The group vanity house. */
 	private boolean groupVanityHouse;
-	
+
 	/** The group year. */
-	private String groupYear;
-	
+	private Number groupYear;
+
 	/** The is bookmarked. */
 	private boolean isBookmarked;
-	
+
 	/** The release type. */
 	private Number releaseType;
-	
+
 	/** The tags. */
 	private List<String> tags;
-	
+
 	/** The torrent. */
 	private List<Torrent> torrent;
 
@@ -89,7 +89,7 @@ public class TorrentGroup {
 	 * 
 	 * @return the group year
 	 */
-	public String getGroupYear() {
+	public Number getGroupYear() {
 		return this.groupYear;
 	}
 
@@ -155,9 +155,11 @@ public class TorrentGroup {
 		return this.torrent;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Torrentgroup [getGroupCatalogueNumber=" + getGroupCatalogueNumber() + ", getGroupId=" + getGroupId()
