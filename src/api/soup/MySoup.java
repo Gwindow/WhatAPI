@@ -95,9 +95,19 @@ public class MySoup {
 	 * Set the url of the gazelle site. Nothing will work if this isn't called when first starting the program
 	 * 
 	 * @param s
-	 *            url of the site following this format, http://what.cd/ don't forget the slash at the end
+	 *            url of the site following this format, http://what.cd/
 	 */
 	public static void setSite(String s) {
+		if (!s.endsWith("/")) {
+			s = s + "/";
+		}
+		if (!s.startsWith("http://") || s.startsWith("https://")) {
+			if (SSL) {
+				s = "https://" + s;
+			} else {
+				s = "http://" + s;
+			}
+		}
 		SITE = s;
 	}
 
