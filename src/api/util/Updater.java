@@ -16,25 +16,25 @@ public class Updater {
 	public Updater(String updateSite) throws CouldNotLoadException {
 		UPDATE_SITE = updateSite;
 		try {
-			// TODO fix update url
 			doc = Jsoup.connect(UPDATE_SITE).get();
 		} catch (Exception e) {
 			throw new CouldNotLoadException("Could not load update site");
 		}
 	}
 
-	public Tuple<String, String> getMessage() {
+	public Triple<String, String, String> getMessage() {
 		if (doc != null) {
-			String title = doc.getElementsByTag("subject").text();
-			String body = doc.getElementsByTag("info").text();
-			return new Tuple<String, String>(title, body);
+			String title = doc.getElementsByTag("subject").text().trim();
+			String body = doc.getElementsByTag("info").text().trim();
+			String valediction = doc.getElementsByTag("valediction").text().trim();
+			return new Triple<String, String, String>(title, body, valediction);
 		}
 		return null;
 	}
 
 	public Double getVersion() {
 		if (doc != null) {
-			String version = doc.getElementsByTag("version").text();
+			String version = doc.getElementsByTag("version").text().trim();
 			return Double.parseDouble(version);
 		}
 		return null;
@@ -42,7 +42,7 @@ public class Updater {
 
 	public String getDownloadLink() {
 		if (doc != null) {
-			String download = doc.getElementsByTag("link").text();
+			String download = doc.getElementsByTag("link").text().trim();
 			return download;
 		}
 		return null;
