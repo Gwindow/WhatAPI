@@ -1,6 +1,3 @@
-
-
-
 package api.user;
 
 /**
@@ -9,22 +6,22 @@ package api.user;
  * @author Tim
  */
 public class Stats {
-	
+
 	/** The downloaded. */
 	private Number downloaded;
-	
+
 	/** The joined date. */
 	private String joinedDate;
-	
+
 	/** The last access. */
 	private String lastAccess;
-	
+
 	/** The ratio. */
 	private Number ratio;
-	
+
 	/** The required ratio. */
 	private Number requiredRatio;
-	
+
 	/** The uploaded. */
 	private Number uploaded;
 
@@ -88,10 +85,15 @@ public class Stats {
 	 * @return the buffer
 	 */
 	public double getBuffer() {
-		return getUploaded().doubleValue() - getDownloaded().doubleValue();
+		if (getUploaded() != null && getDownloaded() != null)
+			return getUploaded().doubleValue() - getDownloaded().doubleValue();
+		else
+			return 0;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

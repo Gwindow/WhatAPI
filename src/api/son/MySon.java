@@ -22,7 +22,7 @@ public class MySon {
 
 	// TODO is serializeNulls needed?
 	// TODO disable html escaping?
-	private final static Gson gson = new GsonBuilder().create();
+	private final static Gson gson = new GsonBuilder().serializeNulls().create();
 
 	/** The reader. */
 	private static Reader reader;
