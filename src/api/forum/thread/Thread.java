@@ -88,9 +88,9 @@ public class Thread {
 		String authkey = MySoup.getAuthKey();
 		String url;
 		if (!overridePostsPerPage) {
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid" + postId + "&auth=" + authkey;
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid=" + postId + "&auth=" + authkey;
 		} else {
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid" + postId + "&pp=" + pp + "&auth=" + authkey;
+			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid=" + postId + "&pp=" + pp + "&auth=" + authkey;
 		}
 
 		Thread thread = (Thread) MySon.toObject(url, Thread.class);
@@ -311,11 +311,9 @@ public class Thread {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Thread [id = " + id + ", page = " + page + "  hasNextPage=" + hasNextPage() + ", getUrl=" + getUrl()
