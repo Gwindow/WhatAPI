@@ -27,10 +27,10 @@ Subscriptions
 ajax.php?action=subscriptions&auth=<Authkey>
 
 Forums
-ajax.php?action=forum&type=main&authkey=<Authkey>
+ajax.php?action=forum&type=main&auth=<Authkey>
 ajax.php?action=forum&type=viewforum&forumid=<Forum Id>&auth=<Authkey>
-ajax.php?action=forum&type=viewthread&threadid=<Thread Id>&page=<Page>&authkey=<Authkey>
-ajax.php?action=forum&type=viewthread&threadid=<Thread Id>&postid=<Post Id>&authkey=<Authkey>
+ajax.php?action=forum&type=viewthread&threadid=<Thread Id>&page=<Page>&auth=<Authkey>
+ajax.php?action=forum&type=viewthread&threadid=<Thread Id>&postid=<Post Id>&auth=<Authkey>
 
 Artist
 ajax.php?action=artist&id=<Artist Id>&auth=<Authkey>
@@ -40,6 +40,10 @@ ajax.php?action=torrentgroup&id=<Torrent Group Id>&auth=<Authkey>
 
 Request
 ajax.php?action=request&id=<Request Id>&auth=<Authkey>
+
+Notifications
+ajax.php?action=notifications&page<Page>>&auth=<Authkey>
+
 
 Rippy
 ajax.php?action=rippy
