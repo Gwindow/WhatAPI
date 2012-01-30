@@ -42,7 +42,7 @@ Request
 ajax.php?action=request&id=<Request Id>&auth=<Authkey>
 
 Notifications
-ajax.php?action=notifications&page<Page>>&auth=<Authkey>
+ajax.php?action=notifications&page=<Page>&auth=<Authkey>
 
 
 Rippy

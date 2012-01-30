@@ -1,6 +1,3 @@
-
-
-
 package api.forum.thread;
 
 import java.util.List;
@@ -11,37 +8,37 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
-	
+
 	/** The current page. */
 	private Number currentPage;
-	
+
 	/** The forum id. */
 	private Number forumId;
-	
+
 	/** The forum name. */
 	private String forumName;
-	
+
 	/** The locked. */
 	private boolean locked;
-	
+
 	/** The pages. */
 	private Number pages;
-	
+
 	/** The poll. */
 	private Poll poll;
-	
+
 	/** The posts. */
 	private List<Posts> posts;
-	
+
 	/** The subscribed. */
 	private boolean subscribed;
-	
+
 	/** The thread id. */
 	private Number threadId;
-	
+
 	/** The thread title. */
 	private String threadTitle;
-	
+
 	/** The sticky. */
 	private boolean sticky;
 
@@ -144,9 +141,11 @@ public class Response {
 		return sticky;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Response [isSticky=" + isSticky() + ", isLocked=" + isLocked() + ", getCurrentPage=" + getCurrentPage()
