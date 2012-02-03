@@ -1,5 +1,6 @@
 package api.cli;
 
+import api.forum.section.Section;
 import api.util.CouldNotLoadException;
 
 /**
@@ -16,9 +17,9 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		api.forum.thread.Thread t = api.forum.thread.Thread.threadFromIdAndPostId(148487, 3782816);
-		for (int i = 0; i < t.getResponse().getPosts().size(); i++) {
-			System.out.println(t.getResponse().getPosts().get(i).getAuthor().getAuthorName());
+		Section s = Section.sectionFromFirstPage(7);
+		for (int i = 0; i < s.getResponse().getThreads().size(); i++) {
+			System.out.println(s.getResponse().getThreads().get(i).getTitle());
 		}
 	}
 

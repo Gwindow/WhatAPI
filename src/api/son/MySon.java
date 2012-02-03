@@ -1,7 +1,6 @@
 package api.son;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Type;
 
@@ -38,8 +37,9 @@ public class MySon {
 	 */
 	public static Object toObject(String url, Type t) {
 		try {
-			reader = new InputStreamReader(MySoup.scrape(url), "UTF-8");
-			Object o = gson.fromJson(reader, t);
+			String string = MySoup.scrape(url);
+			// reader = new InputStreamReader(MySoup.scrape(url), "UTF-8");
+			Object o = gson.fromJson(string, t);
 			return o;
 		} catch (Exception e) {
 			e.printStackTrace();

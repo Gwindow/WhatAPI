@@ -18,6 +18,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -25,6 +26,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -372,7 +374,7 @@ public class MySoup {
 	 *            the url
 	 * @return the input stream
 	 */
-	public static InputStream scrape(String url) {
+	public static String scrape(String url) {
 		url = SITE + url;
 		if (isSSLEnabled()) {
 			url = linkToSSL(url);
@@ -382,8 +384,10 @@ public class MySoup {
 		try {
 			response = httpClient.execute(httpget);
 			entity = response.getEntity();
-			InputStream s = entity.getContent();
-			System.err.println("encoding " + entity.getContentEncoding());
+			StringEntity a;
+			String s = EntityUtils.toString(entity, HTTP.USER_AGENT);
+			// InputStream s = entity.getContent();
+			// System.err.println("encoding " + entity.getContentEncoding());
 			return s;
 		} catch (Exception e) {
 			e.printStackTrace();
