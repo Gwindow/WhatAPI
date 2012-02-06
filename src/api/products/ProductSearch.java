@@ -1,5 +1,7 @@
 package api.products;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import api.son.MySon;
@@ -47,6 +49,9 @@ public class ProductSearch {
 	/** The Constant KEY. */
 	private static final String KEY = "AIzaSyDOPEJep1GSxaWylXm7Tvdytozve8odmuo";
 
+	/** The url. */
+	private static String url;
+
 	/**
 	 * Product search from upc.
 	 * 
@@ -55,10 +60,15 @@ public class ProductSearch {
 	 * @return the product search
 	 */
 	public static ProductSearch productSearchFromUPC(String upc) {
-		String url =
-				"https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&restrictBy=gtin=" + upc
-						+ "&alt=json";
-		ProductSearch ps = (ProductSearch) MySon.toObjectOther(url, ProductSearch.class);
+		try {
+			upc = URLEncoder.encode(upc, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		url =
+				("https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&restrictBy=gtin="
+						+ upc + "&alt=json");
+		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
 		return ps;
 	}
 
@@ -70,10 +80,14 @@ public class ProductSearch {
 	 * @return the product search
 	 */
 	public static ProductSearch productSearchFromTitle(String title) {
-		String url =
-				"https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&q=" + title
-						+ "&alt=json";
-		ProductSearch ps = (ProductSearch) MySon.toObjectOther(url, ProductSearch.class);
+		try {
+			title = URLEncoder.encode(title, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		url =
+				("https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&q=" + title + "&alt=json");
+		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
 		return ps;
 
 	}
@@ -296,6 +310,27 @@ public class ProductSearch {
 	 */
 	public void setTotalItems(Number totalItems) {
 		this.totalItems = totalItems;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ProductSearch [currentItemCount=" + currentItemCount + ", etag=" + etag + ", id=" + id + ", items=" + items
+				+ ", itemsPerPage=" + itemsPerPage + ", kind=" + kind + ", nextLink=" + nextLink + ", requestId=" + requestId
+				+ ", selfLink=" + selfLink + ", startIndex=" + startIndex + ", totalItems=" + totalItems + "]";
+	}
+
+	/**
+	 * Gets the url.
+	 * 
+	 * @return the url
+	 */
+	public static String getUrl() {
+		return url;
 	}
 
 }

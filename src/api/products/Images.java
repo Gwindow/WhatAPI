@@ -1,6 +1,3 @@
-
-
-
 package api.products;
 
 /**
@@ -9,7 +6,7 @@ package api.products;
  * @author Gwindow
  */
 public class Images {
-	
+
 	/** The link. */
 	private String link;
 
@@ -30,5 +27,15 @@ public class Images {
 	 */
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Images [link=" + link + "]";
 	}
 }

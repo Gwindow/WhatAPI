@@ -1,7 +1,7 @@
-
-
-
 package api.search.user;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import api.son.MySon;
 import api.soup.MySoup;
@@ -12,16 +12,16 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class UserSearch {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The page. */
 	private transient static int page;
-	
+
 	/** The search term. */
 	private transient static String searchTerm;
 
@@ -34,6 +34,11 @@ public class UserSearch {
 	 */
 	public static UserSearch userSearchFromSearchTerm(String searchTerm) {
 		if (searchTerm.trim().length() > 0) {
+			try {
+				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			UserSearch.searchTerm = searchTerm;
 			page = 1;
 			String authkey = MySoup.getAuthKey();
@@ -55,6 +60,11 @@ public class UserSearch {
 	 */
 	public static UserSearch userSearchFromSearchTermAndPage(String searchTerm, int page) {
 		if (searchTerm.trim().length() > 0) {
+			try {
+				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			UserSearch.searchTerm = searchTerm;
 			UserSearch.page = page;
 			String authkey = MySoup.getAuthKey();
@@ -161,7 +171,9 @@ public class UserSearch {
 		return searchTerm;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

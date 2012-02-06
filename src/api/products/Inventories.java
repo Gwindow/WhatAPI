@@ -1,6 +1,3 @@
-
-
-
 package api.products;
 
 /**
@@ -9,22 +6,22 @@ package api.products;
  * @author Gwindow
  */
 public class Inventories {
-	
+
 	/** The availability. */
 	private String availability;
-	
+
 	/** The channel. */
 	private String channel;
-	
+
 	/** The currency. */
 	private String currency;
-	
+
 	/** The price. */
 	private Number price;
-	
+
 	/** The shipping. */
 	private Number shipping;
-	
+
 	/** The tax. */
 	private Number tax;
 
@@ -140,5 +137,16 @@ public class Inventories {
 	 */
 	public void setTax(Number tax) {
 		this.tax = tax;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Inventories [availability=" + availability + ", channel=" + channel + ", currency=" + currency + ", price="
+				+ price + ", shipping=" + shipping + ", tax=" + tax + "]";
 	}
 }

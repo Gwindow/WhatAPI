@@ -1,6 +1,3 @@
-
-
-
 package api.products;
 
 import java.util.List;
@@ -11,49 +8,49 @@ import java.util.List;
  * @author Gwindow
  */
 public class Product {
-	
+
 	/** The author. */
 	private Author author;
-	
+
 	/** The brand. */
 	private String brand;
-	
+
 	/** The condition. */
 	private String condition;
-	
+
 	/** The country. */
 	private String country;
-	
+
 	/** The creation time. */
 	private String creationTime;
-	
+
 	/** The description. */
 	private String description;
-	
+
 	/** The google id. */
 	private String googleId;
-	
+
 	/** The gtin. */
 	private String gtin;
-	
+
 	/** The gtins. */
 	private List<String> gtins;
-	
+
 	/** The images. */
 	private List<Images> images;
-	
+
 	/** The inventories. */
 	private List<Inventories> inventories;
-	
+
 	/** The language. */
 	private String language;
-	
+
 	/** The link. */
 	private String link;
-	
+
 	/** The modification time. */
 	private String modificationTime;
-	
+
 	/** The title. */
 	private String title;
 
@@ -340,5 +337,18 @@ public class Product {
 	 */
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Product [author=" + author + ", brand=" + brand + ", condition=" + condition + ", country=" + country
+				+ ", creationTime=" + creationTime + ", description=" + description + ", googleId=" + googleId + ", gtin=" + gtin
+				+ ", gtins=" + gtins + ", images=" + images + ", inventories=" + inventories + ", language=" + language
+				+ ", link=" + link + ", modificationTime=" + modificationTime + ", title=" + title + "]";
 	}
 }

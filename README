@@ -16,12 +16,17 @@ ajax.php?action=inbox&auth=<Authkey>
 ajax.php?action=inbox&type=viewconv&id=<Message Id>&auth=<Authkey>
 
 Top 10
-ajax.php?action=top10&type=<Type>&limit=<Limit>&auth=<Authkey>;
+ajax.php?action=top10&type=<Type>&limit=<Limit>&auth=<Authkey>
 Type = torrents, tags, users.
 Limit = 10,25,100; if no limit is specified defaults to 25.
 
 User Search
 ajax.php?action=usersearch&search=<Search Term>&auth=<Authkey>
+
+Requests Search
+ajax.php?action=requests&search=<Search Term>&auth=<AuthKey>
+ajax.php?action=requests&search=<Search Term>&tag<Tag>&auth=<AuthKey>
+If no search term then latest requests will be listed.
 
 Subscriptions
 ajax.php?action=subscriptions&auth=<Authkey>

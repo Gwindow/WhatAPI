@@ -1,6 +1,3 @@
-
-
-
 package api.products;
 
 /**
@@ -9,16 +6,16 @@ package api.products;
  * @author Gwindow
  */
 public class Items {
-	
+
 	/** The id. */
 	private String id;
-	
+
 	/** The kind. */
 	private String kind;
-	
+
 	/** The product. */
 	private Product product;
-	
+
 	/** The self link. */
 	private String selfLink;
 
@@ -96,5 +93,15 @@ public class Items {
 	 */
 	public void setSelfLink(String selfLink) {
 		this.selfLink = selfLink;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Items [id=" + id + ", kind=" + kind + ", product=" + product + ", selfLink=" + selfLink + "]";
 	}
 }

@@ -1,6 +1,8 @@
 package api.cli;
 
-import api.forum.section.Section;
+import api.search.requests.CrossReference;
+import api.search.requests.RequestsSearch;
+import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 /**
@@ -17,9 +19,16 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		Section s = Section.sectionFromFirstPage(7);
-		for (int i = 0; i < s.getResponse().getThreads().size(); i++) {
-			System.out.println(s.getResponse().getThreads().get(i).getTitle());
+		MySoup.setSite("what.cd");
+		RequestsSearch rs = CrossReference.crossReferenceRequestsByUPC("4011222222428");
+		/*
+		 * ProductSearch ps = ProductSearch.productSearchFromTitle("under dog world strike"); for (int i = 0; i <
+		 * ps.getItems().size(); i++) { System.out.println(ps.getItems().get(i).getProduct().getTitle()); }
+		 * System.err.println(CrossReference.determineSearchString(ps.getItems()));
+		 */
+
+		for (int i = 0; i < rs.getResponse().getResults().size(); i++) {
+			System.out.println(rs.getResponse().getResults().get(i).getTitle());
 		}
 	}
 

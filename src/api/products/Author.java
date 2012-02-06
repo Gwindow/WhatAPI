@@ -6,10 +6,10 @@ package api.products;
  * @author Gwindow
  */
 public class Author {
-	
+
 	/** The account id. */
 	private String accountId;
-	
+
 	/** The name. */
 	private String name;
 
@@ -49,5 +49,15 @@ public class Author {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Author [accountId=" + accountId + ", name=" + name + "]";
 	}
 }
