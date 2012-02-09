@@ -26,7 +26,7 @@ public class RequestsSearch {
 	private transient static String searchTerm;
 
 	/** The tags. */
-	private transient static String[] tags;
+	private transient static String tags;
 
 	/**
 	 * Request search from search term.
@@ -66,7 +66,7 @@ public class RequestsSearch {
 	 *            the tags
 	 * @return the requests search
 	 */
-	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String[] tags) {
+	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String tags) {
 		return requestSearchFromSearchTermAndTags(searchTerm, tags, 1);
 	}
 
@@ -115,7 +115,8 @@ public class RequestsSearch {
 	}
 
 	/**
-	 * Request search from search term and tags.
+	 * Request search from search term and tags. Separate tags must be separated by commas, while whitespace should be
+	 * replaced by periods. For example, hip.hop,pop,indie
 	 * 
 	 * @param searchTerm
 	 *            the search term
@@ -125,7 +126,7 @@ public class RequestsSearch {
 	 *            the page
 	 * @return the requests search
 	 */
-	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String[] tags, int page) {
+	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String tags, int page) {
 		if (searchTerm.trim().length() > 0) {
 			try {
 				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
@@ -134,23 +135,10 @@ public class RequestsSearch {
 			}
 			RequestsSearch.searchTerm = searchTerm;
 			RequestsSearch.page = page;
-			RequestsSearch.tags = tags;
 			String authkey = MySoup.getAuthKey();
-			String seperatedTags = "";
-			for (int i = 0; i < tags.length; i++) {
-				if (i == 0)
-					seperatedTags += tags[0];
-				else
-					seperatedTags += "&" + tags[i];
-				try {
-					seperatedTags = URLEncoder.encode(seperatedTags, "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
-			}
-			String url =
-					"ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&tags=" + seperatedTags + "&auth="
-							+ authkey;
+			RequestsSearch.tags = tags;
+			tags = tags.replace(",", "&");
+			String url = "ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&tags=" + tags + "&auth=" + authkey;
 			RequestsSearch requestSearch = (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
 			return requestSearch;
 		} else
@@ -232,7 +220,7 @@ public class RequestsSearch {
 	 * 
 	 * @return the tags
 	 */
-	public static String[] getTags() {
+	public static String getTags() {
 		return tags;
 	}
 
