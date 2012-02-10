@@ -8,33 +8,33 @@ import java.util.List;
  * @author Gwindow
  */
 public class Torrents {
-	
+
 	/** The catalogue number. */
 	private String catalogueNumber;
-	
+
 	/** The id. */
 	private Number id;
-	
+
 	/** The name. */
 	private String name;
-	
+
 	/** The record label. */
 	private String recordLabel;
-	
+
 	/** The release type. */
 	private String releaseType;
-	
+
 	/** The tag list. */
 	private String tagList;
-	
+
 	/** The torrents. */
 	private List<Torrent> torrents;
-	
+
 	/** The vanity house. */
 	private boolean vanityHouse;
-	
+
 	/** The year. */
-	private String year;
+	private Number year;
 
 	/**
 	 * Gets the catalogue number.
@@ -113,13 +113,15 @@ public class Torrents {
 	 * 
 	 * @return the year
 	 */
-	public String getYear() {
+	public Number getYear() {
 		return this.year;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "BookmarksList [getCatalogueNumber=" + getCatalogueNumber() + ", getId=" + getId() + ", getName=" + getName()

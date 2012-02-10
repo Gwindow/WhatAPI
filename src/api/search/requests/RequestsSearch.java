@@ -137,7 +137,12 @@ public class RequestsSearch {
 			RequestsSearch.page = page;
 			String authkey = MySoup.getAuthKey();
 			RequestsSearch.tags = tags;
-			tags = tags.replace(",", "&");
+			try {
+				tags = tags.replace(",", "&");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String url = "ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&tags=" + tags + "&auth=" + authkey;
 			RequestsSearch requestSearch = (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
 			return requestSearch;

@@ -15,7 +15,7 @@ public class Results {
 	private Number totalLeechers;
 	private Number totalSeeders;
 	private Number totalSnatched;
-	private String vanityHouse;
+	private Boolean vanityHouse;
 
 	public boolean getBookmarked() {
 		return this.bookmarked;
@@ -65,7 +65,7 @@ public class Results {
 		return this.totalSnatched;
 	}
 
-	public String getVanityHouse() {
+	public Boolean getVanityHouse() {
 		return this.vanityHouse;
 	}
 

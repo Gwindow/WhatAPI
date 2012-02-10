@@ -18,7 +18,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -384,7 +383,7 @@ public class MySoup {
 		try {
 			response = httpClient.execute(httpget);
 			entity = response.getEntity();
-			StringEntity a;
+			// String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
 			String s = EntityUtils.toString(entity, HTTP.USER_AGENT);
 			// InputStream s = entity.getContent();
 			// System.err.println("encoding " + entity.getContentEncoding());

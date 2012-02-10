@@ -17,7 +17,7 @@ public class Torrents {
 	private String remasterCatalogueNumber;
 	private String remasterTitle;
 	private Number remasterYear;
-	private String remastered;
+	private boolean remastered;
 	private boolean scene;
 	private Number seeders;
 	private Number size;
@@ -90,7 +90,7 @@ public class Torrents {
 		return this.remasterYear;
 	}
 
-	public String getRemastered() {
+	public boolean getRemastered() {
 		return this.remastered;
 	}
 

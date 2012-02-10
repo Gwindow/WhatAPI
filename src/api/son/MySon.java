@@ -4,11 +4,17 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 
+import org.jsoup.Jsoup;
+
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 
 /**
  * Convert JSON to a Java object.
@@ -21,10 +27,11 @@ public class MySon {
 
 	// TODO is serializeNulls needed?
 	// TODO disable html escaping?
-	private final static Gson gson = new GsonBuilder().serializeNulls().create();
+	private final static Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new MyStringDeserializer())
+			.serializeNulls().create();
 
-	/** The reader. */
-	private static Reader reader;
+	// /** The reader. */
+	// private static Reader reader;
 
 	/**
 	 * To object.
@@ -106,5 +113,14 @@ public class MySon {
 		}
 
 		System.out.println(buf.toString());
+	}
+
+	private static class MyStringDeserializer implements JsonDeserializer<Object> {
+		@Override
+		public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+			String s = Jsoup.parse(json.getAsJsonPrimitive().getAsString()).text();
+			return s;
+
+		}
 	}
 }
