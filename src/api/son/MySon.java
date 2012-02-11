@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 
-import org.jsoup.Jsoup;
-
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
+import api.util.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -118,7 +117,7 @@ public class MySon {
 	private static class MyStringDeserializer implements JsonDeserializer<Object> {
 		@Override
 		public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-			String s = Jsoup.parse(json.getAsJsonPrimitive().getAsString()).text();
+			String s = StringUtils.unescapeHTML(json.getAsJsonPrimitive().getAsString());
 			return s;
 
 		}

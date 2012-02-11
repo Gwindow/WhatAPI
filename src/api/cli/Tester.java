@@ -1,6 +1,6 @@
 package api.cli;
 
-import api.search.requests.RequestsSearch;
+import api.search.torrents.TorrentSearch;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -19,10 +19,12 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("what.cd");
-		RequestsSearch rs = RequestsSearch.requestSearchFromSearchTerm("opera");
+
+		TorrentSearch rs = TorrentSearch.torrentSearchFromSearchTerm("chopin");
 		for (int i = 0; i < rs.getResponse().getResults().size(); i++) {
-			System.out.println(rs.getResponse().getResults().get(i).getTitle());
+			System.out.println(rs.getResponse().getResults().get(i).getGroupName());
 		}
+
 	}
 
 	/**
