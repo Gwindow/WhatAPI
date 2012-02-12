@@ -1,7 +1,7 @@
 package api.cli;
 
-import api.search.torrents.TorrentSearch;
 import api.soup.MySoup;
+import api.subscriptions.Subscriptions;
 import api.util.CouldNotLoadException;
 
 /**
@@ -19,10 +19,14 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("what.cd");
-
-		TorrentSearch rs = TorrentSearch.torrentSearchFromSearchTerm("chopin");
-		for (int i = 0; i < rs.getResponse().getResults().size(); i++) {
-			System.out.println(rs.getResponse().getResults().get(i).getGroupName());
+		/*
+		 * RequestsSearch rs = RequestsSearch.requestSearchFromSearchTerm("chopin"); for (int i = 0; i <
+		 * rs.getResponse().getResults().size(); i++) {
+		 * System.out.println(rs.getResponse().getResults().get(i).getTitle()); }
+		 */
+		Subscriptions s = Subscriptions.init();
+		for (int i = 0; i < s.getResponse().getThreads().size(); i++) {
+			System.out.println(s.getResponse().getThreads().get(i).getThreadTitle());
 		}
 
 	}

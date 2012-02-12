@@ -56,6 +56,7 @@ public class StringUtils {
 		htmlEntities.put("&copy;", "\u00a9");
 		htmlEntities.put("&reg;", "\u00ae");
 		htmlEntities.put("&euro;", "\u20a0");
+		htmlEntities.put("&#39;", "'");
 	}
 
 	public static final String unescapeHTML(String source) {
