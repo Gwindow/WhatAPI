@@ -9,15 +9,24 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Notifications {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The page. */
 	private static transient int page;
+
+	/**
+	 * Notifications from page 1
+	 * 
+	 * @return the notifications
+	 */
+	public static Notifications notifications() {
+		return notificationsFromPage(1);
+	}
 
 	/**
 	 * Notifications from page.
@@ -136,9 +145,11 @@ public class Notifications {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Notifications [getLastPage=" + getLastPage() + ", hasNextPage=" + hasNextPage() + ", hasPreviousPage="

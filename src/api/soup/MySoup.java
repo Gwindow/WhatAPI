@@ -506,7 +506,8 @@ public class MySoup {
 	 * @return the string
 	 */
 	public static String toPlainText(String s) {
-		return Jsoup.parse(s).text();
+		s = Jsoup.parse(s.replaceAll("(?i)<br[^>]*>", "\n")).text();
+		return s;
 	}
 
 	/**
