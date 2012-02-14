@@ -3,7 +3,7 @@ package api.cli;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import api.inbox.conversation.Conversation;
+import api.search.torrents.TorrentSearch;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -22,19 +22,11 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("what.cd");
-		/*
-		 * RequestsSearch rs = RequestsSearch.requestSearchFromSearchTerm("chopin"); for (int i = 0; i <
-		 * rs.getResponse().getResults().size(); i++) {
-		 * System.out.println(rs.getResponse().getResults().get(i).getTitle()); }
-		 */
-		// Subscriptions s = Subscriptions.init();
-		// for (int i = 0; i < s.getResponse().getThreads().size(); i++) {
-		// System.out.println(s.getResponse().getThreads().get(i).getThreadTitle());
+		TorrentSearch ts = TorrentSearch.torrentSearchFromSearchTerm("hello");
+		System.out.println(ts);
+		// for (int i = 0; i < ts.getResponse().getResults().size(); i++) {
+		// System.out.println(ts.getResponse().getResults().get(i).getGroupYear().toString());
 		// }
-		Conversation c = Conversation.conversationFromId(3202632);
-		System.err.println(split(c.getResponse().getMessages().get(0).getBody(), "alt=", "src"));
-		System.out.println((c.getResponse().getMessages().get(0).getBody()));
-
 	}
 
 	/**
