@@ -25,8 +25,14 @@ ajax.php?action=usersearch&search=<Search Term>&auth=<Authkey>
 
 Requests Search
 ajax.php?action=requests&search=<Search Term>&auth=<AuthKey>
-ajax.php?action=requests&search=<Search Term>&tag<Tag>&auth=<AuthKey>
+ajax.php?action=requests&search=<Search Term>&tag<Tags>&auth=<AuthKey>
 If no search term then latest requests will be listed.
+
+Torrent Search
+ajax.php?action=browse&searchstr=<Search Term>&auth=<AuthKey>
+ajax.php?action=browse&searchstr=<Search Term>&taglist=<Tags>&tags_type=1&auth=<AuthKey>
+
+Searches also take all the advanced search parameters but there are too many to include, check Gazelle.  
 
 Subscriptions
 ajax.php?action=subscriptions&auth=<Authkey>
