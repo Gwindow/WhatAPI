@@ -16,35 +16,40 @@ public class Updater {
 	public Updater(String updateSite) throws CouldNotLoadException {
 		UPDATE_SITE = updateSite;
 		try {
-			doc = Jsoup.connect(UPDATE_SITE).get();
+			doc = (Jsoup.connect(UPDATE_SITE).get());
 		} catch (Exception e) {
 			throw new CouldNotLoadException("Could not load update site");
 		}
 	}
 
 	public Triple<String, String, String> getMessage() {
-		if (doc != null) {
-			String title = doc.getElementsByTag("subject").text().trim();
-			String body = doc.getElementsByTag("info").text().trim();
-			String valediction = doc.getElementsByTag("valediction").text().trim();
+		if (getDoc() != null) {
+			String title = getDoc().getElementsByTag("subject").text().trim();
+			String body = getDoc().getElementsByTag("info").text().trim();
+			String valediction = getDoc().getElementsByTag("valediction").text().trim();
 			return new Triple<String, String, String>(title, body, valediction);
 		}
 		return null;
 	}
 
 	public Double getVersion() {
-		if (doc != null) {
-			String version = doc.getElementsByTag("version").text().trim();
+		if (getDoc() != null) {
+			String version = getDoc().getElementsByTag("version").text().trim();
 			return Double.parseDouble(version);
 		}
 		return null;
 	}
 
 	public String getDownloadLink() {
-		if (doc != null) {
-			String download = doc.getElementsByTag("link").text().trim();
+		if (getDoc() != null) {
+			String download = getDoc().getElementsByTag("update").text().trim();
 			return download;
 		}
 		return null;
 	}
+
+	public Document getDoc() {
+		return doc;
+	}
+
 }
