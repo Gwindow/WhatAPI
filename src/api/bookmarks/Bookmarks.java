@@ -20,10 +20,10 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class Bookmarks {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
 
@@ -34,7 +34,7 @@ public class Bookmarks {
 	 */
 	public static Bookmarks initTorrentBookmarks() {
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=bookmarks&type=torrents&auth=&auth=" + authkey;
+		String url = "ajax.php?action=bookmarks&type=torrents&auth=" + authkey;
 		Bookmarks bookmarks = (Bookmarks) MySon.toObject(url, Bookmarks.class);
 		return bookmarks;
 	}
@@ -46,7 +46,7 @@ public class Bookmarks {
 	 */
 	public static Bookmarks initArtistBookmarks() {
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=bookmarks&type=artists&auth=&auth=" + authkey;
+		String url = "ajax.php?action=bookmarks&type=artists&auth=" + authkey;
 		Bookmarks bookmarks = (Bookmarks) MySon.toObject(url, Bookmarks.class);
 		return bookmarks;
 	}
@@ -69,7 +69,7 @@ public class Bookmarks {
 	 * @return true, if successful
 	 */
 	public boolean hasArtistBookmarks() {
-		if (response.getArtists().isEmpty() || response.getArtists() == null) {
+		if (response.getArtists() == null || response.getArtists().isEmpty()) {
 			return false;
 		}
 		return true;

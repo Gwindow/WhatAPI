@@ -14,15 +14,18 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class PrivateMessage {
-	
+
 	/** The id. */
-	private int id;
-	
+	private int userId;
+
 	/** The subject. */
 	private String subject;
-	
+
 	/** The body. */
 	private String body;
+
+	/** The conv id. */
+	private int convId;
 
 	/**
 	 * A new message.
@@ -35,8 +38,26 @@ public class PrivateMessage {
 	 *            body of the message
 	 */
 	public PrivateMessage(int id, String subject, String body) {
-		this.id = id;
+		this.userId = id;
 		this.subject = subject;
+		this.body = body;
+	}
+
+	/**
+	 * A reply to a message.
+	 * 
+	 * @param id
+	 *            recipent's id
+	 * @param convId
+	 *            the conv id
+	 * @param subject
+	 *            subject line
+	 * @param body
+	 *            body of the message
+	 */
+	public PrivateMessage(int id, int convId, String body) {
+		this.userId = id;
+		this.convId = convId;
 		this.body = body;
 	}
 
@@ -47,7 +68,7 @@ public class PrivateMessage {
 	 *            recipent's id
 	 */
 	public PrivateMessage(int id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	/**
@@ -57,12 +78,34 @@ public class PrivateMessage {
 	public void sendMessage() {
 		if ((subject.length() > 0) && (body.length() > 0)) {
 			try {
-				String url = "inbox.php?action=compose&to=" + id;
+				String url = "inbox.php?action=compose&to=" + userId;
 				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 				list.add(new Tuple<String, String>("action", "takecompose"));
-				list.add(new Tuple<String, String>("toid", String.valueOf(id)));
+				list.add(new Tuple<String, String>("toid", String.valueOf(userId)));
 				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
 				list.add(new Tuple<String, String>("subject", subject));
+				list.add(new Tuple<String, String>("body", body));
+				MySoup.postMethod(url, list);
+				System.out.println("Message sent");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Send the message as a reply
+	 * 
+	 */
+	public void replyMessage() {
+		if ((body.length() > 0)) {
+			try {
+				String url = "inbox.php?action=viewconv&id=" + convId;
+				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+				list.add(new Tuple<String, String>("action", "takecompose"));
+				list.add(new Tuple<String, String>("toid", String.valueOf(userId)));
+				list.add(new Tuple<String, String>("convid", String.valueOf(convId)));
+				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
 				list.add(new Tuple<String, String>("body", body));
 				MySoup.postMethod(url, list);
 				System.out.println("Message sent");
@@ -78,7 +121,7 @@ public class PrivateMessage {
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return userId;
 	}
 
 	/**
