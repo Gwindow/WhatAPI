@@ -25,7 +25,7 @@ public class Updater {
 	public Triple<String, String, String> getMessage() {
 		if (getDoc() != null) {
 			String title = getDoc().getElementsByTag("subject").text().trim();
-			String body = getDoc().getElementsByTag("info").text().trim();
+			String body = getDoc().getElementsByTag("info").html();
 			String valediction = getDoc().getElementsByTag("valediction").text().trim();
 			return new Triple<String, String, String>(title, body, valediction);
 		}

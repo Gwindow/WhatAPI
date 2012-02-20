@@ -28,11 +28,11 @@ public class Bookmarks {
 	private String status;
 
 	/**
-	 * Inits the torrent bookmarks.
+	 * loads the torrent bookmarks.
 	 * 
 	 * @return the bookmarks
 	 */
-	public static Bookmarks initTorrentBookmarks() {
+	public static Bookmarks loadTorrentBookmarks() {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=bookmarks&type=torrents&auth=" + authkey;
 		Bookmarks bookmarks = (Bookmarks) MySon.toObject(url, Bookmarks.class);
@@ -57,9 +57,8 @@ public class Bookmarks {
 	 * @return true, if successful
 	 */
 	public boolean hasTorrentBookmarks() {
-		if (response.getTorrents().isEmpty() || response.getTorrents() == null) {
+		if ((response.getTorrents() == null) || response.getTorrents().isEmpty())
 			return false;
-		}
 		return true;
 	}
 
@@ -69,9 +68,8 @@ public class Bookmarks {
 	 * @return true, if successful
 	 */
 	public boolean hasArtistBookmarks() {
-		if (response.getArtists() == null || response.getArtists().isEmpty()) {
+		if ((response.getArtists() == null) || response.getArtists().isEmpty())
 			return false;
-		}
 		return true;
 	}
 
@@ -136,11 +134,9 @@ public class Bookmarks {
 
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Bookmarks [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

@@ -22,16 +22,8 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		// MySoup.setSite("what.cd");
-		// TorrentSearch ts = TorrentSearch.torrent SearchFromSearchTerm("hello");
-		// System.out.println(ts);
-		// for (int i = 0; i < ts.getResponse().getResults().size(); i++) {
-		// System.out.println(ts.getResponse().getResults().get(i).getGroupYear().toString());
-		// }
-
-		Updater updater = new Updater(UPDATE_SITE);
-		System.out.println(updater.getDownloadLink());
-		System.out.println(updater.getDoc());
+		Updater u = new Updater(UPDATE_SITE);
+		System.out.println(u.getMessage().getB());
 	}
 
 	/**
