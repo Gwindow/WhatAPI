@@ -1,4 +1,4 @@
-package api.search.requests;
+package api.search.crossreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 
 import api.products.Items;
 import api.products.ProductSearch;
+import api.search.requests.RequestsSearch;
 import api.search.torrents.TorrentSearch;
 import api.util.Tuple;
 
@@ -84,10 +85,11 @@ public class CrossReference {
 		for (int i = 0; i < words.size(); i++) {
 			String s = "";
 			for (int j = 0; j <= i; j++) {
-				if (j != 0)
+				if (j != 0) {
 					s += " " + words.get(j);
-				else
+				} else {
 					s += words.get(j);
+				}
 			}
 			combinations.add(s);
 		}

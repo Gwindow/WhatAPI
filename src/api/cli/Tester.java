@@ -1,10 +1,8 @@
 package api.cli;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import api.search.requests.RequestsSearch;
+import api.soup.MySoup;
 import api.util.CouldNotLoadException;
-import api.util.Updater;
 
 /**
  * The Class Tester.
@@ -22,8 +20,13 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		Updater u = new Updater(UPDATE_SITE);
-		System.out.println(u.getMessage().getB());
+		MySoup.setSite("what.cd");
+		MySoup.login("login.php", "Gwindow", "t2ustUdE");
+
+		RequestsSearch rs = RequestsSearch.requestSearchFromSearchTerm("chopin");
+		for (int i = 0; i < rs.getResponse().getResults().size(); i++) {
+			System.out.println(rs.getResponse().getResults().get(i));
+		}
 	}
 
 	/**
@@ -37,14 +40,6 @@ public class Tester {
 	public static void main(String[] args) throws CouldNotLoadException {
 		new Tester();
 
-	}
-
-	public String split(String string, String from, String to) {
-		Pattern pattern = Pattern.compile(".*" + from + "(.*)" + to + ".*");
-		Matcher matcher = pattern.matcher(string);
-		if (matcher.matches())
-			return matcher.group(1);
-		return null;
 	}
 
 }
