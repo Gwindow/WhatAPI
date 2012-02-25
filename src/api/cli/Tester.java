@@ -21,7 +21,7 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("what.cd");
-		MySoup.login("login.php", "", "");
+		MySoup.login("login.php", "Gwindow", "t2ustUdE");
 
 		RequestsSearch rs = RequestsSearch.requestSearchFromSearchTerm("chopin");
 		for (int i = 0; i < rs.getResponse().getResults().size(); i++) {

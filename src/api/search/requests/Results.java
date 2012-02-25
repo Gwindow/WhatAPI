@@ -1,9 +1,8 @@
 package api.search.requests;
 
-import java.util.List;
 
 public class Results {
-	private List<Artists> artists;
+	// private List<Artists> artists;
 	private String bitrateList;
 	private Number bounty;
 	private String catalogueNumber;
@@ -29,10 +28,9 @@ public class Results {
 	private Number voteCount;
 	private Number year;
 
-	public List<Artists> getArtists() {
-		return this.artists;
-	}
-
+	/*
+	 * public List<Artists> getArtists() { return this.artists; }
+	 */
 	public String getBitrateList() {
 		return this.bitrateList;
 	}
@@ -129,12 +127,14 @@ public class Results {
 		return this.year;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Results [getArtists=" + getArtists() + ", getBitrateList=" + getBitrateList() + ", getBounty=" + getBounty()
+		return "Results [getArtists=" + "" + ", getBitrateList=" + getBitrateList() + ", getBounty=" + getBounty()
 				+ ", getCatalogueNumber=" + getCatalogueNumber() + ", getCategoryId=" + getCategoryId() + ", getCategoryName="
 				+ getCategoryName() + ", getDescription=" + getDescription() + ", getFillerId=" + getFillerId()
 				+ ", getFillerName=" + getFillerName() + ", getFormatList=" + getFormatList() + ", getImage=" + getImage()
