@@ -6,37 +6,37 @@ package api.torrents.torrents;
  * @author Gwindow
  */
 public class Group {
-	
+
 	/** The catalogue number. */
 	private String catalogueNumber;
-	
+
 	/** The category id. */
 	private Number categoryId;
-	
+
 	/** The id. */
 	private Number id;
-	
+
 	/** The name. */
 	private String name;
-	
+
 	/** The record label. */
 	private String recordLabel;
-	
+
 	/** The release type. */
 	private Number releaseType;
-	
+
 	/** The time. */
 	private String time;
-	
+
 	/** The vanity house. */
 	private boolean vanityHouse;
-	
+
 	/** The wiki body. */
 	private String wikiBody;
-	
+
 	/** The wiki image. */
 	private String wikiImage;
-	
+
 	/** The year. */
 	private String year;
 
@@ -163,5 +163,18 @@ public class Group {
 	 */
 	public String getYear() {
 		return this.year;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Group [getCatalogueNumber()=" + getCatalogueNumber() + ", getCategoryId()=" + getCategoryId() + ", getId()="
+				+ getId() + ", getName()=" + getName() + ", getRecordLabel()=" + getRecordLabel() + ", getReleaseType()="
+				+ getReleaseType() + ", getTime()=" + getTime() + ", isVanityHouse()=" + isVanityHouse() + ", getWikiBody()="
+				+ getWikiBody() + ", getWikiImage()=" + getWikiImage() + ", getYear()=" + getYear() + "]";
 	}
 }

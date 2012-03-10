@@ -364,4 +364,23 @@ public class Torrent {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Torrent [getDescription()=" + getDescription() + ", getEncoding()=" + getEncoding() + ", getFileCount()="
+				+ getFileCount() + ", getFileList()=" + getFileList() + ", getFilePath()=" + getFilePath() + ", getFormat()="
+				+ getFormat() + ", isFreeTorrent()=" + isFreeTorrent() + ", hasCue()=" + hasCue() + ", hasLog()=" + hasLog()
+				+ ", getId()=" + getId() + ", getLeechers()=" + getLeechers() + ", getLogScore()=" + getLogScore()
+				+ ", getMedia()=" + getMedia() + ", getRemasterCatalogueNumber()=" + getRemasterCatalogueNumber()
+				+ ", getRemasterRecordLabel()=" + getRemasterRecordLabel() + ", getRemasterTitle()=" + getRemasterTitle()
+				+ ", getRemasterYear()=" + getRemasterYear() + ", getRemastered()=" + getRemastered() + ", isScene()="
+				+ isScene() + ", getSeeders()=" + getSeeders() + ", getSize()=" + getSize() + ", getSnatched()=" + getSnatched()
+				+ ", getTime()=" + getTime() + ", getUserId()=" + getUserId() + ", getUsername()=" + getUsername()
+				+ ", getDownloadLink()=" + getDownloadLink() + ", getMediaFormatEncoding()=" + getMediaFormatEncoding() + "]";
+	}
+
 }

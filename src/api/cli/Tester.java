@@ -1,6 +1,5 @@
 package api.cli;
 
-import api.search.requests.RequestsSearch;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -22,11 +21,6 @@ public class Tester {
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("what.cd");
 		MySoup.login("login.php", "", "");
-
-		RequestsSearch rs = RequestsSearch.requestSearchFromSearchTerm("chopin");
-		for (int i = 0; i < rs.getResponse().getResults().size(); i++) {
-			System.out.println(rs.getResponse().getResults().get(i));
-		}
 	}
 
 	/**

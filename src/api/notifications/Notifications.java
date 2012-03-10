@@ -119,7 +119,7 @@ public class Notifications {
 	 */
 	public void clearNotifications() {
 		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=notifications&auth=" + authkey + "$clear=1";
+		String url = "torrents.php?action=notify_clear&auth=" + authkey;
 		MySoup.pressLink(url);
 		response.clear();
 		System.out.println("Notifications cleared");
