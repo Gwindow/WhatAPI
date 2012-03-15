@@ -6,40 +6,40 @@ package api.inbox.inbox;
  * @author Gwindow
  */
 public class Messages {
-	
+
 	/** The conv id. */
 	private Number convId;
-	
+
 	/** The date. */
 	private String date;
-	
+
 	/** The donor. */
 	private boolean donor;
-	
+
 	/** The enabled. */
 	private boolean enabled;
-	
+
 	/** The forwarded id. */
 	private Number forwardedId;
-	
+
 	/** The forwarded name. */
 	private String forwardedName;
-	
+
 	/** The sender id. */
 	private Number senderId;
-	
+
 	/** The sticky. */
 	private boolean sticky;
-	
+
 	/** The subject. */
 	private String subject;
-	
+
 	/** The unread. */
 	private boolean unread;
-	
+
 	/** The username. */
 	private String username;
-	
+
 	/** The warned. */
 	private boolean warned;
 
@@ -139,6 +139,8 @@ public class Messages {
 	 * @return the username
 	 */
 	public String getUsername() {
+		if (username == null | username.isEmpty())
+			username = "System";
 		return username;
 	}
 

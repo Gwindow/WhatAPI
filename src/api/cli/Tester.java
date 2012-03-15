@@ -1,5 +1,6 @@
 package api.cli;
 
+import api.inbox.inbox.Inbox;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -20,7 +21,10 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("what.cd");
-		MySoup.login("login.php", "", "");
+		Inbox inbox = Inbox.init();
+		for (int i = 0; i < inbox.getResponse().getMessages().size(); i++) {
+			System.out.println(inbox.getResponse().getMessages().get(i));
+		}
 	}
 
 	/**

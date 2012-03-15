@@ -1,6 +1,3 @@
-
-
-
 package api.inbox.inbox;
 
 import api.son.MySon;
@@ -12,15 +9,24 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Inbox {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The page. */
 	private static int page;
+
+	/**
+	 * Loads the first page of the inbox
+	 * 
+	 * @return
+	 */
+	public static Inbox init() {
+		return inboxFromPage(1);
+	}
 
 	/**
 	 * Inbox from page.
@@ -44,10 +50,7 @@ public class Inbox {
 	 */
 	public static Inbox inboxFromNextPage() {
 		page += 1;
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=inbox&page=" + page + "&auth=" + authkey;
-		Inbox inbox = (Inbox) MySon.toObject(url, Inbox.class);
-		return inbox;
+		return inboxFromPage(page);
 	}
 
 	/**
@@ -57,10 +60,7 @@ public class Inbox {
 	 */
 	public static Inbox inboxFromPreviousPage() {
 		page -= 1;
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=inbox&page=" + page + "&auth=" + authkey;
-		Inbox inbox = (Inbox) MySon.toObject(url, Inbox.class);
-		return inbox;
+		return inboxFromPage(page);
 	}
 
 	/**
@@ -137,9 +137,11 @@ public class Inbox {
 		return page;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Inbox [getResponse()=" + getResponse() + ", getStatus()=" + getStatus() + ", getLastPage()=" + getLastPage()
