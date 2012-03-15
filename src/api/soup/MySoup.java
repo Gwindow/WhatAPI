@@ -44,9 +44,6 @@ public class MySoup {
 	/** The http client. */
 	private static DefaultHttpClient httpClient = getHttpClient();
 
-	/** The SSL. */
-	private static boolean SSL;
-
 	/** The authey. */
 	private static String authey;
 
@@ -77,8 +74,8 @@ public class MySoup {
 	/** The forum sections loaded. */
 	private static boolean forumSectionsLoaded = false;
 
-	/** The i. */
-	private static Index i;
+	/** The index. */
+	private static Index index;
 
 	/** The httpget. */
 	private static HttpGet httpget;
@@ -92,6 +89,11 @@ public class MySoup {
 	/** The httpost. */
 	private static HttpPost httpost;
 
+	private static boolean isSSLEnabled = true;
+
+	private static String headerName = "name";
+	private static String headerValue = "value";
+
 	/**
 	 * Set the url of the gazelle site. Nothing will work if this isn't called when first starting the program
 	 * 
@@ -102,10 +104,12 @@ public class MySoup {
 		if (!s.endsWith("/")) {
 			s = s + "/";
 		}
-		if (!s.startsWith("http://") || s.startsWith("https://")) {
-			if (SSL) {
+		if (isSSLEnabled) {
+			if (!s.startsWith("https://")) {
 				s = "https://" + s;
-			} else {
+			}
+		} else {
+			if (!s.startsWith("http://")) {
 				s = "http://" + s;
 			}
 		}
@@ -131,9 +135,20 @@ public class MySoup {
 		DefaultHttpClient client = new DefaultHttpClient();
 		ClientConnectionManager mgr = client.getConnectionManager();
 		HttpParams params = client.getParams();
-
 		client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
+		// HttpProtocolParams.setUserAgent(client.getParams(), "WhatAPI");
 		return client;
+	}
+
+	private static HttpGet getHttpGet(String url) {
+		HttpGet hg = new HttpGet(url);
+		return hg;
+
+	}
+
+	private static void setHeader(String name, String value) {
+		headerName = name;
+		headerValue = value;
 	}
 
 	/**
@@ -159,10 +174,10 @@ public class MySoup {
 	}
 
 	/**
-	 * Enable ssl.
+	 * Enable/Disable ssl.
 	 */
-	public static void enableSSL() {
-		SSL = true;
+	public static void setSSLEnabled(boolean b) {
+		isSSLEnabled = b;
 	}
 
 	/**
@@ -171,7 +186,7 @@ public class MySoup {
 	 * @return true, if is sSL enabled
 	 */
 	public static boolean isSSLEnabled() {
-		return SSL;
+		return isSSLEnabled;
 	}
 
 	/**
@@ -223,18 +238,6 @@ public class MySoup {
 	}
 
 	/**
-	 * Link to ssl.
-	 * 
-	 * @param link
-	 *            the link
-	 * @return the string
-	 */
-	private static String linkToSSL(String link) {
-		link = link.replace("http://", "https://ssl.");
-		return link;
-	}
-
-	/**
 	 * Gets the update link.
 	 * 
 	 * @param page
@@ -275,15 +278,10 @@ public class MySoup {
 	 *             the could not load exception
 	 */
 	public static void login(String url, String username, String password) throws CouldNotLoadException {
-		String index = "index.php";
 		url = SITE + url;
-		if (isSSLEnabled()) {
-			url = linkToSSL(url);
-			index = linkToSSL(index);
-		}
 		try {
 
-			httpget = new HttpGet(url);
+			httpget = getHttpGet(url);
 			response = httpClient.execute(httpget);
 			entity = response.getEntity();
 
@@ -313,13 +311,13 @@ public class MySoup {
 	 * Load index.
 	 */
 	public static void loadIndex() {
-		i = Index.init();
-		MySoup.username = i.getResponse().getUsername();
-		MySoup.userId = i.getResponse().getId().intValue();
-		MySoup.authey = i.getResponse().getAuthkey();
-		MySoup.passkey = i.getResponse().getPasskey();
-		if (!i.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
-				&& !i.getResponse().getUserstats().getUserClass().equalsIgnoreCase("User")) {
+		index = Index.init();
+		MySoup.username = index.getResponse().getUsername();
+		MySoup.userId = index.getResponse().getId().intValue();
+		MySoup.authey = index.getResponse().getAuthkey();
+		MySoup.passkey = index.getResponse().getPasskey();
+		if (!index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
+				&& !index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("User")) {
 			MySoup.canNotifications = true;
 		}
 	}
@@ -330,7 +328,7 @@ public class MySoup {
 	 * @return the index
 	 */
 	public static Index getIndex() {
-		return i;
+		return index;
 	}
 
 	/**
@@ -345,11 +343,8 @@ public class MySoup {
 	 */
 	public static void postMethod(String url, List<Tuple<String, String>> list) throws Exception {
 		url = SITE + url;
-		if (isSSLEnabled()) {
-			url = linkToSSL(url);
-		}
 		try {
-			httpget = new HttpGet(url);
+			httpget = getHttpGet(url);
 
 			httpost = new HttpPost(url);
 
@@ -375,10 +370,7 @@ public class MySoup {
 	 */
 	public static String scrape(String url) {
 		url = SITE + url;
-		if (isSSLEnabled()) {
-			url = linkToSSL(url);
-		}
-		httpget = new HttpGet(url);
+		httpget = getHttpGet(url);
 		response = null;
 		try {
 			response = httpClient.execute(httpget);
@@ -427,10 +419,7 @@ public class MySoup {
 	 */
 	public static void pressLink(String url) {
 		url = SITE + url;
-		if (isSSLEnabled()) {
-			url = linkToSSL(url);
-		}
-		httpget = new HttpGet(url);
+		httpget = getHttpGet(url);
 		response = null;
 		try {
 			response = httpClient.execute(httpget);
@@ -450,7 +439,7 @@ public class MySoup {
 	 *             the could not load exception
 	 */
 	public static Document scrapeOther(String url) throws CouldNotLoadException {
-		httpget = new HttpGet(url);
+		httpget = getHttpGet(url);
 		response = null;
 		Document doc = null;
 		try {

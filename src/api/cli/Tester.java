@@ -1,6 +1,5 @@
 package api.cli;
 
-import api.inbox.inbox.Inbox;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -20,11 +19,8 @@ public class Tester {
 	 *             the could not load exception
 	 */
 	public Tester() throws CouldNotLoadException {
-		MySoup.setSite("what.cd");
-		Inbox inbox = Inbox.init();
-		for (int i = 0; i < inbox.getResponse().getMessages().size(); i++) {
-			System.out.println(inbox.getResponse().getMessages().get(i));
-		}
+		MySoup.setSite("ssl.what.cd");
+		System.out.println(MySoup.getIndex());
 	}
 
 	/**
