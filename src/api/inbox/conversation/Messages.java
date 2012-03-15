@@ -1,6 +1,3 @@
-
-
-
 package api.inbox.conversation;
 
 import org.jsoup.Jsoup;
@@ -11,19 +8,19 @@ import org.jsoup.Jsoup;
  * @author Gwindow
  */
 public class Messages {
-	
+
 	/** The body. */
 	private String body;
-	
+
 	/** The message id. */
 	private Number messageId;
-	
+
 	/** The sender id. */
 	private Number senderId;
-	
+
 	/** The sender name. */
 	private String senderName;
-	
+
 	/** The sent date. */
 	private String sentDate;
 
@@ -60,7 +57,9 @@ public class Messages {
 	 * @return the sender name
 	 */
 	public String getSenderName() {
-		return this.senderName;
+		if (senderName == null | senderName.isEmpty())
+			senderName = "System";
+		return senderName;
 	}
 
 	/**
@@ -82,9 +81,11 @@ public class Messages {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Messages [getBody()=" + getBody() + ", getMessageId()=" + getMessageId() + ", getSenderId()=" + getSenderId()

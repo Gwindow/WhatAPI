@@ -1,6 +1,3 @@
-
-
-
 package api.inbox.conversation;
 
 import api.son.MySon;
@@ -12,10 +9,10 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Conversation {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
 
@@ -28,7 +25,7 @@ public class Conversation {
 	 */
 	public static Conversation conversationFromId(int id) {
 		String authkey = MySoup.getAuthKey();
-		String url = "/ajax.php?action=inbox&type=viewconv&id=" + id + "&auth=" + authkey;
+		String url = "ajax.php?action=inbox&type=viewconv&id=" + id + "&auth=" + authkey;
 		Conversation conversation = (Conversation) MySon.toObject(url, Conversation.class);
 		return conversation;
 	}
@@ -53,9 +50,11 @@ public class Conversation {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Conversation [getResponse()=" + getResponse() + ", getStatus()=" + getStatus() + "]";
