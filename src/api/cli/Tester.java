@@ -20,7 +20,6 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("ssl.what.cd");
-		System.out.println(MySoup.getIndex());
 	}
 
 	/**

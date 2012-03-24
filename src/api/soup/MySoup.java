@@ -377,6 +377,7 @@ public class MySoup {
 			entity = response.getEntity();
 			// String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
 			String s = EntityUtils.toString(entity, HTTP.USER_AGENT);
+			// EntityUtils.consume(entity);
 			// InputStream s = entity.getContent();
 			// System.err.println("encoding " + entity.getContentEncoding());
 			return s;
