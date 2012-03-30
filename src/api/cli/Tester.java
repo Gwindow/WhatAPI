@@ -1,6 +1,7 @@
 package api.cli;
 
 import api.soup.MySoup;
+import api.top.Top;
 import api.util.CouldNotLoadException;
 
 /**
@@ -20,6 +21,13 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException {
 		MySoup.setSite("ssl.what.cd");
+		Top top = Top.initTopTags(250);
+		for (int i = 0; i < top.getResponse().size(); i++) {
+			for (int j = 0; j < top.getResponse().get(0).getResults().size(); j++) {
+				String tag = (top.getResponse().get(0).getResults().get(j).getName());
+				System.out.println("tags[\"" + tag + "\"] = true;");
+			}
+		}
 	}
 
 	/**

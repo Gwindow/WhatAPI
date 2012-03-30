@@ -69,6 +69,12 @@ public class Results {
 	/** The year. */
 	private Number year;
 
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
 	/**
 	 * Gets the artist.
 	 * 
@@ -250,11 +256,9 @@ public class Results {
 		return link;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Results [getArtist()=" + getArtist() + ", getData()=" + getData() + ", getEncoding()=" + getEncoding()

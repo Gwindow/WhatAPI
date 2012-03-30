@@ -10,6 +10,7 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
+	private List<Results> results;
 
 	/** The artist. */
 	private List<Artist> artist;
