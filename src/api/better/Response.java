@@ -10,8 +10,6 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
-	private List<Results> results;
-
 	/** The artist. */
 	private List<Artist> artist;
 
@@ -84,9 +82,11 @@ public class Response {
 		return this.torrentId;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Response [getArtist=" + getArtist() + ", getDownloadUrl=" + getDownloadUrl() + ", getGroupId=" + getGroupId()

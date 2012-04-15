@@ -28,6 +28,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.safety.Whitelist;
 
 import api.forum.forumsections.ForumSections;
 import api.index.Index;
@@ -498,6 +499,10 @@ public class MySoup {
 	public static String toPlainText(String s) {
 		s = Jsoup.parse(s.replaceAll("(?i)<br[^>]*>", "\n")).text();
 		return s;
+	}
+
+	public static String clean(String s) {
+		return Jsoup.clean(s, Whitelist.relaxed());
 	}
 
 	/**

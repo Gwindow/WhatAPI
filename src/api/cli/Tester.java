@@ -1,7 +1,8 @@
 package api.cli;
 
+import java.io.IOException;
+
 import api.soup.MySoup;
-import api.top.Top;
 import api.util.CouldNotLoadException;
 
 /**
@@ -18,16 +19,10 @@ public class Tester {
 	 * 
 	 * @throws CouldNotLoadException
 	 *             the could not load exception
+	 * @throws IOException
 	 */
-	public Tester() throws CouldNotLoadException {
+	public Tester() throws CouldNotLoadException, IOException {
 		MySoup.setSite("ssl.what.cd");
-		Top top = Top.initTopTags(250);
-		for (int i = 0; i < top.getResponse().size(); i++) {
-			for (int j = 0; j < top.getResponse().get(0).getResults().size(); j++) {
-				String tag = (top.getResponse().get(0).getResults().get(j).getName());
-				System.out.println("tags[\"" + tag + "\"] = true;");
-			}
-		}
 	}
 
 	/**
@@ -37,8 +32,9 @@ public class Tester {
 	 *            the arguments
 	 * @throws CouldNotLoadException
 	 *             the could not load exception
+	 * @throws IOException
 	 */
-	public static void main(String[] args) throws CouldNotLoadException {
+	public static void main(String[] args) throws CouldNotLoadException, IOException {
 		new Tester();
 
 	}

@@ -58,7 +58,7 @@ public class CrossReference {
 		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
 	}
 
-	private static String determineSearchString(List<Items> items) {
+	public static String determineSearchString(List<Items> items) {
 		StringTokenizer tokenizer;
 		ArrayList<String> words = new ArrayList<String>();
 		ArrayList<String> combinations = new ArrayList<String>();

@@ -25,7 +25,7 @@ ajax.php?action=usersearch&search=<Search Term>&auth=<Authkey>
 
 Requests Search
 ajax.php?action=requests&search=<Search Term>&auth=<AuthKey>
-ajax.php?action=requests&search=<Search Term>&tag<Tags>&auth=<AuthKey>
+ajax.php?action=requests&search=<Search Term>&tag=<Tags>&auth=<AuthKey>
 If no search term then latest requests will be listed.
 
 Torrent Search

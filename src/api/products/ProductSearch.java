@@ -47,7 +47,7 @@ public class ProductSearch {
 	private Number totalItems;
 
 	/** The Constant KEY. */
-	private static final String KEY = "AIzaSyDOPEJep1GSxaWylXm7Tvdytozve8odmuo";
+	private static String KEY = "AIzaSyDOPEJep1GSxaWylXm7Tvdytozve8odmuo";
 
 	/** The url. */
 	private static String url;
@@ -90,6 +90,10 @@ public class ProductSearch {
 		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
 		return ps;
 
+	}
+
+	public static void overrideAPIKey(String key) {
+		KEY = key;
 	}
 
 	/**
