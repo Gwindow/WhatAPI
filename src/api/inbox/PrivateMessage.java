@@ -1,9 +1,11 @@
-package api.user;
+package api.inbox;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import api.search.user.UserSearch;
 import api.soup.MySoup;
+import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 /**
@@ -41,6 +43,28 @@ public class PrivateMessage {
 		this.userId = id;
 		this.subject = subject;
 		this.body = body;
+	}
+
+	/**
+	 * A new message to a user.
+	 * 
+	 * @param id
+	 *            recipent's username
+	 * @param subject
+	 *            subject line
+	 * @param body
+	 *            body of the message
+	 * @throws CouldNotLoadException
+	 */
+	public PrivateMessage(String username, String subject, String body) throws CouldNotLoadException {
+		UserSearch us = UserSearch.userSearchFromSearchTerm(username);
+		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
+			this.userId = us.getResponse().getResults().get(0).getUserId().intValue();
+			this.subject = subject;
+			this.body = body;
+		} else {
+			throw new CouldNotLoadException("User not found");
+		}
 	}
 
 	/**
