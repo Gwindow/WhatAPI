@@ -79,7 +79,7 @@ public class MySoup {
 	private static Index index;
 
 	/** The httpget. */
-	private static HttpGet httpget;
+	private static HttpGet httpGet;
 
 	/** The response. */
 	private static HttpResponse response;
@@ -88,7 +88,7 @@ public class MySoup {
 	private static HttpEntity entity;
 
 	/** The httpost. */
-	private static HttpPost httpost;
+	private static HttpPost httpPost;
 
 	private static boolean isSSLEnabled = true;
 
@@ -282,18 +282,18 @@ public class MySoup {
 		url = SITE + url;
 		try {
 
-			httpget = getHttpGet(url);
-			response = httpClient.execute(httpget);
+			httpGet = getHttpGet(url);
+			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
 
-			httpost = new HttpPost(url);
+			httpPost = new HttpPost(url);
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			nvps.add(new BasicNameValuePair("username", username));
 			nvps.add(new BasicNameValuePair("password", password));
 
-			httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
-			response = httpClient.execute(httpost);
+			response = httpClient.execute(httpPost);
 			entity = response.getEntity();
 			if (entity != null) {
 				entity.consumeContent();
@@ -345,16 +345,14 @@ public class MySoup {
 	public static void postMethod(String url, List<Tuple<String, String>> list) throws Exception {
 		url = SITE + url;
 		try {
-			httpget = getHttpGet(url);
-
-			httpost = new HttpPost(url);
-
+			httpGet = getHttpGet(url);
+			httpPost = new HttpPost(url);
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			for (Tuple<String, String> t : list) {
 				nvps.add(new BasicNameValuePair(t.getA(), t.getB()));
 			}
-			httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-			response = httpClient.execute(httpost);
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+			response = httpClient.execute(httpPost);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not post data");
@@ -371,10 +369,10 @@ public class MySoup {
 	 */
 	public static String scrape(String url) {
 		url = SITE + url;
-		httpget = getHttpGet(url);
+		httpGet = getHttpGet(url);
 		response = null;
 		try {
-			response = httpClient.execute(httpget);
+			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
 			// String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
 			String s = EntityUtils.toString(entity, HTTP.USER_AGENT);
@@ -421,10 +419,10 @@ public class MySoup {
 	 */
 	public static void pressLink(String url) {
 		url = SITE + url;
-		httpget = getHttpGet(url);
+		httpGet = getHttpGet(url);
 		response = null;
 		try {
-			response = httpClient.execute(httpget);
+			response = httpClient.execute(httpGet);
 			response.getEntity().consumeContent();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -441,11 +439,11 @@ public class MySoup {
 	 *             the could not load exception
 	 */
 	public static Document scrapeOther(String url) throws CouldNotLoadException {
-		httpget = getHttpGet(url);
+		httpGet = getHttpGet(url);
 		response = null;
 		Document doc = null;
 		try {
-			response = httpClient.execute(httpget);
+			response = httpClient.execute(httpGet);
 			doc = Jsoup.parse(inputStreamToString(response.getEntity().getContent()));
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

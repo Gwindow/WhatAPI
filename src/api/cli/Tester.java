@@ -22,7 +22,7 @@ public class Tester {
 	 * @throws IOException
 	 */
 	public Tester() throws CouldNotLoadException, IOException {
-		MySoup.setSite("ssl.what.cd");
+		MySoup.setSite("what.cd");
 	}
 
 	/**
