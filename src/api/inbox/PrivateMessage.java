@@ -60,6 +60,7 @@ public class PrivateMessage {
 		UserSearch us = UserSearch.userSearchFromSearchTerm(username);
 		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
 			this.userId = us.getResponse().getResults().get(0).getUserId().intValue();
+			System.out.println(this.userId);
 			this.subject = subject;
 			this.body = body;
 		} else {
@@ -93,6 +94,22 @@ public class PrivateMessage {
 	 */
 	public PrivateMessage(int id) {
 		this.userId = id;
+	}
+
+	/**
+	 * Instantiates a new private message.
+	 * 
+	 * @param id
+	 *            recipent's id
+	 * @throws CouldNotLoadException
+	 */
+	public PrivateMessage(String username) throws CouldNotLoadException {
+		UserSearch us = UserSearch.userSearchFromSearchTerm(username);
+		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
+			this.userId = us.getResponse().getResults().get(0).getUserId().intValue();
+		} else {
+			throw new CouldNotLoadException("User not found");
+		}
 	}
 
 	/**

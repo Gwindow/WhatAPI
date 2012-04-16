@@ -1,5 +1,6 @@
 package api.user;
 
+import api.inbox.PrivateMessage;
 import api.son.MySon;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
@@ -10,13 +11,13 @@ import api.util.CouldNotLoadException;
  * @author Gwindow
  */
 public class User {
-	
+
 	/** The response. */
 	private Profile response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The id. */
 	private static transient int id;
 
@@ -104,9 +105,11 @@ public class User {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", response=" + response + ", status=" + status + "]";

@@ -26,19 +26,6 @@ public class Better {
 	private String status;
 
 	/**
-	 * The Enum BetterTypes.
-	 * 
-	 * //TODO description
-	 * 
-	 * @author Gwindow
-	 */
-	public enum BetterTypes {
-
-		/** The SINGLE. */
-		SINGLE;
-	}
-
-	/**
 	 * Inits Better.
 	 * 
 	 * @param types
@@ -110,9 +97,11 @@ public class Better {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Better [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

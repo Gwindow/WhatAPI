@@ -14,9 +14,9 @@ public class WhatCLI extends CLI {
 	 * Instantiates a new what cli.
 	 */
 	public WhatCLI() {
-		MySoup.setSite("http://127.0.0.1:8080/");
+		MySoup.setSite("ssl.what.cd");
 		try {
-			MySoup.login("login.php", "gazelle", "123456");
+			MySoup.login("", "", "");
 			System.out.println("logged in");
 			System.out.println(MySoup.getAuthKey());
 		} catch (CouldNotLoadException e) {
