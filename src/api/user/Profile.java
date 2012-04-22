@@ -1,6 +1,3 @@
-
-
-
 package api.user;
 
 /**
@@ -9,27 +6,30 @@ package api.user;
  * @author Tim
  */
 public class Profile {
-	
+
 	/** The avatar. */
 	private String avatar;
-	
+
 	/** The community. */
 	private Community community;
-	
+
 	/** The is friend. */
 	private boolean isFriend;
-	
+
 	/** The personal. */
 	private Personal personal;
-	
+
 	/** The ranks. */
 	private Ranks ranks;
-	
+
 	/** The stats. */
 	private Stats stats;
-	
+
 	/** The username. */
 	private String username;
+
+	/** The profile text. */
+	private String profileText;
 
 	/**
 	 * Gets the avatar.
@@ -94,12 +94,25 @@ public class Profile {
 		return this.username;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Gets the profile text.
+	 * 
+	 * @return the profile text
+	 */
+	public String getProfileText() {
+		return this.profileText;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Profile [avatar=" + avatar + ", community=" + community + ", isFriend=" + isFriend + ", personal=" + personal
-				+ ", ranks=" + ranks + ", stats=" + stats + ", username=" + username + "]";
+		return "Profile [getAvatar()=" + getAvatar() + ", getCommunity()=" + getCommunity() + ", IsFriend()=" + IsFriend()
+				+ ", getPersonal()=" + getPersonal() + ", getRanks()=" + getRanks() + ", getStats()=" + getStats()
+				+ ", getUsername()=" + getUsername() + ", getProfileText()=" + getProfileText() + "]";
 	}
+
 }

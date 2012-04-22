@@ -26,6 +26,8 @@ public class MySon {
 
 	// /** The reader. */
 	// private static Reader reader;
+	private static boolean isDebugEnabled = false;
+	private static String debugString;
 
 	/**
 	 * To object.
@@ -41,6 +43,9 @@ public class MySon {
 			String string = MySoup.scrape(url);
 			// reader = new InputStreamReader(MySoup.scrape(url), "UTF-8");
 			Object o = gson.fromJson(string, t);
+			if (isDebugEnabled) {
+				debugString = o.toString();
+			}
 			return o;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,6 +112,28 @@ public class MySon {
 		}
 
 		System.out.println(buf.toString());
+	}
+
+	/**
+	 * @return the isDebugEnabled
+	 */
+	public static boolean isDebugEnabled() {
+		return isDebugEnabled;
+	}
+
+	/**
+	 * @param isDebugEnabled
+	 *            the isDebugEnabled to set
+	 */
+	public static void setDebugEnabled(boolean isDebugEnabled) {
+		MySon.isDebugEnabled = isDebugEnabled;
+	}
+
+	/**
+	 * @return the debugString
+	 */
+	public static String getDebugString() {
+		return debugString;
 	}
 
 }
