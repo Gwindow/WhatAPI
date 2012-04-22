@@ -1,3 +1,4 @@
+
 package api.inbox;
 
 import java.util.ArrayList;
@@ -48,13 +49,14 @@ public class PrivateMessage {
 	/**
 	 * A new message to a user.
 	 * 
-	 * @param id
-	 *            recipent's username
+	 * @param username
+	 *            the username
 	 * @param subject
 	 *            subject line
 	 * @param body
 	 *            body of the message
 	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public PrivateMessage(String username, String subject, String body) throws CouldNotLoadException {
 		UserSearch us = UserSearch.userSearchFromSearchTerm(username.toLowerCase());
@@ -74,8 +76,6 @@ public class PrivateMessage {
 	 *            recipent's id
 	 * @param convId
 	 *            the conv id
-	 * @param subject
-	 *            subject line
 	 * @param body
 	 *            body of the message
 	 */
@@ -98,9 +98,10 @@ public class PrivateMessage {
 	/**
 	 * Instantiates a new private message.
 	 * 
-	 * @param id
-	 *            recipent's id
+	 * @param username
+	 *            the username
 	 * @throws CouldNotLoadException
+	 *             the could not load exception
 	 */
 	public PrivateMessage(String username) throws CouldNotLoadException {
 		UserSearch us = UserSearch.userSearchFromSearchTerm(username);
@@ -134,8 +135,7 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * Send the message as a reply
-	 * 
+	 * Send the message as a reply.
 	 */
 	public void replyMessage() {
 		if ((body.length() > 0)) {

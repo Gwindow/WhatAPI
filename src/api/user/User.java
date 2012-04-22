@@ -1,3 +1,4 @@
+
 package api.user;
 
 import api.inbox.PrivateMessage;
@@ -37,6 +38,15 @@ public class User {
 		return user;
 	}
 
+	/**
+	 * User from name.
+	 * 
+	 * @param username
+	 *            the username
+	 * @return the user
+	 * @throws CouldNotLoadException
+	 *             the could not load exception
+	 */
 	public static User userFromName(String username) throws CouldNotLoadException {
 		UserSearch us = UserSearch.userSearchFromSearchTerm(username.toLowerCase());
 		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {

@@ -1,3 +1,4 @@
+
 package api.son;
 
 import java.io.IOException;
@@ -21,12 +22,16 @@ public class MySon {
 
 	// TODO is serializeNulls needed?
 	// TODO disable html escaping?
+	/** The Constant gson. */
 	private final static Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new MyStringDeserializer())
 			.serializeNulls().create();
 
 	// /** The reader. */
 	// private static Reader reader;
+	/** The is debug enabled. */
 	private static boolean isDebugEnabled = false;
+	
+	/** The debug string. */
 	private static String debugString;
 
 	/**
@@ -121,6 +126,8 @@ public class MySon {
 	}
 
 	/**
+	 * Checks if is debug enabled.
+	 * 
 	 * @return the isDebugEnabled
 	 */
 	public static boolean isDebugEnabled() {
@@ -128,6 +135,8 @@ public class MySon {
 	}
 
 	/**
+	 * Sets the debug enabled.
+	 * 
 	 * @param isDebugEnabled
 	 *            the isDebugEnabled to set
 	 */
@@ -136,6 +145,8 @@ public class MySon {
 	}
 
 	/**
+	 * Gets the debug string.
+	 * 
 	 * @return the debugString
 	 */
 	public static String getDebugString() {

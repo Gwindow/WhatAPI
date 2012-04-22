@@ -1,3 +1,4 @@
+
 package api.better;
 
 import java.io.FileOutputStream;
@@ -44,6 +45,12 @@ public class Better {
 		return better;
 	}
 
+	/**
+	 * Download all.
+	 * 
+	 * @param downloadLocation
+	 *            the download location
+	 */
 	public void downloadAll(String downloadLocation) {
 		for (final Response r : response) {
 			String url = MySoup.getSite() + r.getDownloadUrl();

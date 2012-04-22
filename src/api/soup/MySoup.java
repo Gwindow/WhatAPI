@@ -1,3 +1,4 @@
+
 package api.soup;
 
 import java.io.BufferedReader;
@@ -90,9 +91,13 @@ public class MySoup {
 	/** The httpost. */
 	private static HttpPost httpPost;
 
+	/** The is ssl enabled. */
 	private static boolean isSSLEnabled = true;
 
+	/** The header name. */
 	private static String headerName = "name";
+	
+	/** The header value. */
 	private static String headerValue = "value";
 
 	/**
@@ -141,12 +146,27 @@ public class MySoup {
 		return client;
 	}
 
+	/**
+	 * Gets the http get.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the http get
+	 */
 	private static HttpGet getHttpGet(String url) {
 		HttpGet hg = new HttpGet(url);
 		return hg;
 
 	}
 
+	/**
+	 * Sets the header.
+	 * 
+	 * @param name
+	 *            the name
+	 * @param value
+	 *            the value
+	 */
 	private static void setHeader(String name, String value) {
 		headerName = name;
 		headerValue = value;
@@ -176,6 +196,9 @@ public class MySoup {
 
 	/**
 	 * Enable/Disable ssl.
+	 * 
+	 * @param b
+	 *            the new sSL enabled
 	 */
 	public static void setSSLEnabled(boolean b) {
 		isSSLEnabled = b;
@@ -499,6 +522,13 @@ public class MySoup {
 		return s;
 	}
 
+	/**
+	 * Clean.
+	 * 
+	 * @param s
+	 *            the s
+	 * @return the string
+	 */
 	public static String clean(String s) {
 		return Jsoup.clean(s, Whitelist.relaxed());
 	}

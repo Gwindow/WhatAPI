@@ -1,3 +1,4 @@
+
 package api.cli;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ import api.util.CouldNotLoadException;
 public class Tester {
 
 	// private final static String UPDATE_SITE = "https://raw.github.com/Gwindow/WhatAndroid/gh-pages/index.html";
+	/** The Constant UPDATE_SITE. */
 	private final static String UPDATE_SITE = "http://gwindow.github.com/WhatAndroid/index.html";
 
 	/**
@@ -21,6 +23,7 @@ public class Tester {
 	 * @throws CouldNotLoadException
 	 *             the could not load exception
 	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public Tester() throws CouldNotLoadException, IOException {
 		MySoup.setSite("ssl.what.cd");
@@ -34,6 +37,7 @@ public class Tester {
 	 * @throws CouldNotLoadException
 	 *             the could not load exception
 	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public static void main(String[] args) throws CouldNotLoadException, IOException {
 		new Tester();

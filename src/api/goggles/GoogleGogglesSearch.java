@@ -1,3 +1,4 @@
+
 package api.goggles;
 
 import java.io.BufferedReader;
@@ -16,30 +17,53 @@ import java.util.Random;
 /**
  * Searches google using an image. Based on the code written by Poloz Igor, http://prodroid.com.ua/?p=385
  * 
- * 
+ * @author Gwindow
  */
 public class GoogleGogglesSearch {
+	
+	/** The cssid post body. */
 	private static byte[] cssidPostBody = new byte[] { 0x22, 0x00, 0x62, 0x3C, 0x0A, 0x13, 0x22, 0x02, 0x65, 0x6E, (byte) 0xBA,
 			(byte) 0xD3, (byte) 0xF0, 0x3B, 0x0A, 0x08, 0x01, 0x10, 0x01, 0x28, 0x01, 0x30, 0x00, 0x38, 0x01, 0x12, 0x1D, 0x0A,
 			0x09, 0x69, 0x50, 0x68, 0x6F, 0x6E, 0x65, 0x20, 0x4F, 0x53, 0x12, 0x03, 0x34, 0x2E, 0x31, 0x1A, 0x00, 0x22, 0x09,
 			0x69, 0x50, 0x68, 0x6F, 0x6E, 0x65, 0x33, 0x47, 0x53, 0x1A, 0x02, 0x08, 0x02, 0x22, 0x02, 0x08, 0x01 };
 
 	// Bytes trailing the image byte array.
+	/** The trailing bytes. */
 	private static byte[] trailingBytes = new byte[] { 0x18, 0x4B, 0x20, 0x01, 0x30, 0x00, (byte) 0x92, (byte) 0xEC, (byte) 0xF4,
 			0x3B, 0x09, 0x18, 0x00, 0x38, (byte) 0xC6, (byte) 0x97, (byte) 0xDC, (byte) 0xDF, (byte) 0xF7, 0x25, 0x22, 0x00 };
 
+	/** The image. */
 	private File image;
 
+	/** The result. */
 	private String result;
 
+	/**
+	 * Instantiates a new google goggles search.
+	 * 
+	 * @param file
+	 *            the file
+	 */
 	public GoogleGogglesSearch(File file) {
 		image = file;
 	}
 
+	/**
+	 * Instantiates a new google goggles search.
+	 * 
+	 * @param filePath
+	 *            the file path
+	 */
 	public GoogleGogglesSearch(String filePath) {
 		image = new File(filePath);
 	}
 
+	/**
+	 * Search.
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
 	public void search() throws Exception {
 		int i = 0;
 
@@ -69,17 +93,36 @@ public class GoogleGogglesSearch {
 			throw new Exception("Three attempts were broken");
 	}
 
+	/**
+	 * Gets the result.
+	 * 
+	 * @return the result
+	 */
 	public String getResult() {
 		return result;
 	}
 
 	// Generates a cssid.
+	/**
+	 * Generate cssid.
+	 * 
+	 * @return the string
+	 */
 	private String generateCSSID() {
 		BigInteger bi = new BigInteger(64, new Random());
 		return bi.toString(16).toUpperCase();
 	}
 
 	// Validating cssid
+	/**
+	 * Validate cssid.
+	 * 
+	 * @param cssid
+	 *            the cssid
+	 * @return true, if successful
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private boolean ValidateCSSID(String cssid) throws IOException {
 		URL url = new URL("http://www.google.com/goggles/container_proto?cssid=" + cssid);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -104,6 +147,16 @@ public class GoogleGogglesSearch {
 		return true; // let's imagine that is valid
 	}
 
+	/**
+	 * Send photo.
+	 * 
+	 * @param cssid
+	 *            the cssid
+	 * @param file
+	 *            the file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private void sendPhoto(String cssid, File file) throws IOException {
 		URL url = new URL("http://www.google.com/goggles/container_proto?cssid=" + cssid);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -160,6 +213,13 @@ public class GoogleGogglesSearch {
 	}
 
 	// Encodes an int32 into varint32.
+	/**
+	 * To varint32.
+	 * 
+	 * @param value
+	 *            the value
+	 * @return the byte[]
+	 */
 	private byte[] toVarint32(int value) {
 		int index = 0;
 		int tmp = value;
@@ -181,6 +241,17 @@ public class GoogleGogglesSearch {
 		return res;
 	}
 
+	/**
+	 * Gets the file bytes.
+	 * 
+	 * @param file
+	 *            the file
+	 * @return the file bytes
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private byte[] getFileBytes(File file) throws FileNotFoundException, IOException {
 		byte[] bytes = new byte[(int) file.length()];
 		DataInputStream dis = new DataInputStream(new FileInputStream(file));

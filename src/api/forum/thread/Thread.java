@@ -1,3 +1,4 @@
+
 package api.forum.thread;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class Thread {
 	/** The pp. */
 	private transient static int pp = 25;
 
+	/** The override posts per page. */
 	private transient static boolean overridePostsPerPage = false;
 
 	/**
@@ -341,6 +343,8 @@ public class Thread {
 	}
 
 	/**
+	 * Checks if is override posts per page.
+	 * 
 	 * @return the overridePostsPerPage
 	 */
 	public static boolean isOverridePostsPerPage() {
@@ -348,10 +352,10 @@ public class Thread {
 	}
 
 	/**
-	 * This must be set to true for custom posts per page
+	 * This must be set to true for custom posts per page.
 	 * 
 	 * @param overridePostsPerPage
-	 * 
+	 *            the new override posts per page
 	 */
 	public static void setOverridePostsPerPage(boolean overridePostsPerPage) {
 		Thread.overridePostsPerPage = overridePostsPerPage;

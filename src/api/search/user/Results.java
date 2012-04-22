@@ -1,3 +1,4 @@
+
 package api.search.user;
 
 import com.google.gson.annotations.SerializedName;

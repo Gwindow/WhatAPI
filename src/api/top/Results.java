@@ -1,3 +1,4 @@
+
 package api.top;
 
 import java.util.List;
@@ -69,8 +70,14 @@ public class Results {
 	/** The year. */
 	private Number year;
 
+	/** The name. */
 	private String name;
 
+	/**
+	 * Gets the name.
+	 * 
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -246,6 +253,11 @@ public class Results {
 		return this.year;
 	}
 
+	/**
+	 * Gets the download link.
+	 * 
+	 * @return the download link
+	 */
 	public String getDownloadLink() {
 		String link;
 		String authkey = MySoup.getAuthKey();

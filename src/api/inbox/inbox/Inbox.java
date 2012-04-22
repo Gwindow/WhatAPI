@@ -1,3 +1,4 @@
+
 package api.inbox.inbox;
 
 import api.son.MySon;
@@ -20,9 +21,9 @@ public class Inbox {
 	private static int page;
 
 	/**
-	 * Loads the first page of the inbox
+	 * Loads the first page of the inbox.
 	 * 
-	 * @return
+	 * @return the inbox
 	 */
 	public static Inbox init() {
 		return inboxFromPage(1);

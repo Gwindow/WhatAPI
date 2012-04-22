@@ -1,6 +1,7 @@
 
 
 
+
 package api.torrents.artist;
 
 /**

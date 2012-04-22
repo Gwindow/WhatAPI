@@ -1,3 +1,4 @@
+
 package api.notifications;
 
 import api.son.MySon;
@@ -20,7 +21,7 @@ public class Notifications {
 	private static transient int page;
 
 	/**
-	 * Notifications from page 1
+	 * Notifications from page 1.
 	 * 
 	 * @return the notifications
 	 */

@@ -1,3 +1,4 @@
+
 package api.products;
 
 import java.io.UnsupportedEncodingException;
@@ -92,6 +93,12 @@ public class ProductSearch {
 
 	}
 
+	/**
+	 * Override api key.
+	 * 
+	 * @param key
+	 *            the key
+	 */
 	public static void overrideAPIKey(String key) {
 		KEY = key;
 	}

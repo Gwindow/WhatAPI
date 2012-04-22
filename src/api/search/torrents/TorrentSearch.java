@@ -1,3 +1,4 @@
+
 package api.search.torrents;
 
 import java.io.UnsupportedEncodingException;
@@ -27,30 +28,75 @@ public class TorrentSearch {
 	/** The tags. */
 	private transient static String tags;
 
+	/**
+	 * Torrent search from search term.
+	 * 
+	 * @param searchTerm
+	 *            the search term
+	 * @return the torrent search
+	 */
 	public static TorrentSearch torrentSearchFromSearchTerm(String searchTerm) {
 		return torrentSearchFromSearchTerm(searchTerm, 1);
 	}
 
+	/**
+	 * Torrent search from search term next page.
+	 * 
+	 * @return the torrent search
+	 */
 	public static TorrentSearch torrentSearchFromSearchTermNextPage() {
 		return torrentSearchFromSearchTerm(searchTerm, page + 1);
 	}
 
+	/**
+	 * Torrent search from search term previous page.
+	 * 
+	 * @return the torrent search
+	 */
 	public static TorrentSearch torrentSearchFromSearchTermPreviousPage() {
 		return torrentSearchFromSearchTerm(searchTerm, page - 1);
 	}
 
+	/**
+	 * Torrent search from search term and tags.
+	 * 
+	 * @param searchTerm
+	 *            the search term
+	 * @param tags
+	 *            the tags
+	 * @return the torrent search
+	 */
 	public static TorrentSearch torrentSearchFromSearchTermAndTags(String searchTerm, String tags) {
 		return torrentSearchFromSearchTermAndTags(searchTerm, tags, 1);
 	}
 
+	/**
+	 * Torrent search from search term and tags next page.
+	 * 
+	 * @return the torrent search
+	 */
 	public static TorrentSearch torrentSearchFromSearchTermAndTagsNextPage() {
 		return torrentSearchFromSearchTermAndTags(searchTerm, tags, page + 1);
 	}
 
+	/**
+	 * Torrent search from search term and tags previous page.
+	 * 
+	 * @return the torrent search
+	 */
 	public static TorrentSearch torrentSearchFromSearchTermAndTagsPreviousPage() {
 		return torrentSearchFromSearchTermAndTags(searchTerm, tags, page - 1);
 	}
 
+	/**
+	 * Torrent search from search term.
+	 * 
+	 * @param searchTerm
+	 *            the search term
+	 * @param page
+	 *            the page
+	 * @return the torrent search
+	 */
 	public static TorrentSearch torrentSearchFromSearchTerm(String searchTerm, int page) {
 		if (searchTerm.trim().length() > 0) {
 			try {

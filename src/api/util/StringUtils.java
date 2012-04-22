@@ -5,11 +5,22 @@ package api.util;
 
 import java.util.HashMap;
 
+/**
+ * The Class StringUtils.
+ * 
+ * //TODO description
+ * 
+ * @author Gwindow
+ */
 public class StringUtils {
 
+	/**
+	 * Instantiates a new string utils.
+	 */
 	private StringUtils() {
 	}
 
+	/** The html entities. */
 	private static HashMap<String, String> htmlEntities;
 	static {
 		htmlEntities = new HashMap<String, String>();
@@ -62,6 +73,13 @@ public class StringUtils {
 		htmlEntities.put("&deg;", "°");
 	}
 
+	/**
+	 * Unescape html.
+	 * 
+	 * @param source
+	 *            the source
+	 * @return the string
+	 */
 	public static final String unescapeHTML(String source) {
 		int i, j;
 
