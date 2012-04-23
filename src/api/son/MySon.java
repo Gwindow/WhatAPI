@@ -49,8 +49,8 @@ public class MySon {
 			Object o = gson.fromJson(string, t);
 			if (isDebugEnabled) {
 				endTime = System.currentTimeMillis();
-				long totalTime = (endTime - startTime) / 1000;
-				debugString = "Load Time: " + totalTime + "\n" + o.toString();
+				float totalTime = (endTime - startTime) / 1000f;
+				debugString = "Load Time: " + String.valueOf(totalTime) + "\n\n" + o.toString();
 			}
 			return o;
 		} catch (Exception e) {

@@ -52,4 +52,15 @@ public class Updater {
 		return doc;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Updater [getMessage()=" + getMessage() + ", getVersion()=" + getVersion() + ", getDownloadLink()="
+				+ getDownloadLink() + ", getDoc()=" + getDoc() + "]";
+	}
+
 }
