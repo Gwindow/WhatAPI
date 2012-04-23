@@ -57,10 +57,9 @@ public class PrivateMessage {
 	 * @throws CouldNotLoadException
 	 */
 	public PrivateMessage(String username, String subject, String body) throws CouldNotLoadException {
-		UserSearch us = UserSearch.userSearchFromSearchTerm(username);
+		UserSearch us = UserSearch.userSearchFromSearchTerm(username.toLowerCase());
 		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
 			this.userId = us.getResponse().getResults().get(0).getUserId().intValue();
-			System.out.println(this.userId);
 			this.subject = subject;
 			this.body = body;
 		} else {

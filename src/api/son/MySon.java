@@ -39,12 +39,18 @@ public class MySon {
 	 * @return the object
 	 */
 	public static Object toObject(String url, Type t) {
+		long startTime = 0, endTime = 0;
+		if (isDebugEnabled) {
+			startTime = System.currentTimeMillis();
+		}
 		try {
 			String string = MySoup.scrape(url);
 			// reader = new InputStreamReader(MySoup.scrape(url), "UTF-8");
 			Object o = gson.fromJson(string, t);
 			if (isDebugEnabled) {
-				debugString = o.toString();
+				endTime = System.currentTimeMillis();
+				long totalTime = (endTime - startTime) / 1000;
+				debugString = "Load Time: " + totalTime + "\n" + o.toString();
 			}
 			return o;
 		} catch (Exception e) {

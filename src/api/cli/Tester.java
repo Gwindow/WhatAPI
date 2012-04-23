@@ -23,6 +23,7 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException, IOException {
 		MySoup.setSite("ssl.what.cd");
+
 	}
 
 	/**

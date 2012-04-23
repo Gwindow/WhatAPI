@@ -6,42 +6,54 @@ package api.user;
  * @author Gwindow
  */
 public class Community {
-	
+
 	/** The collages contrib. */
 	private Number collagesContrib;
-	
+
 	/** The collages started. */
 	private Number collagesStarted;
-	
+
 	/** The groups. */
 	private Number groups;
-	
+
 	/** The invited. */
 	private Number invited;
-	
+
 	/** The leeching. */
 	private Number leeching;
-	
+
 	/** The posts. */
 	private Number posts;
-	
+
 	/** The requests filled. */
 	private Number requestsFilled;
-	
+
 	/** The requests voted. */
 	private Number requestsVoted;
-	
+
 	/** The seeding. */
 	private Number seeding;
-	
+
 	/** The snatched. */
 	private Number snatched;
-	
+
 	/** The torrent comments. */
 	private Number torrentComments;
-	
+
 	/** The uploaded. */
 	private Number uploaded;
+
+	/** The perfect flacs. */
+	private Number perfectFlacs;
+
+	/**
+	 * Gets the perfect flacs.
+	 * 
+	 * @return the perfect flacs
+	 */
+	public Number getPerfectFlacs() {
+		return this.perfectFlacs;
+	}
 
 	/**
 	 * Gets the collages contrib.
@@ -151,16 +163,19 @@ public class Community {
 		return this.uploaded;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Community [getCollagesContrib=" + getCollagesContrib() + ", getCollagesStarted=" + getCollagesStarted()
-				+ ", getGroups=" + getGroups() + ", getInvited=" + getInvited() + ", getLeeching=" + getLeeching()
-				+ ", getPosts=" + getPosts() + ", getRequestsFilled=" + getRequestsFilled() + ", getRequestsVoted="
-				+ getRequestsVoted() + ", getSeeding=" + getSeeding() + ", getSnatched=" + getSnatched()
-				+ ", getTorrentComments=" + getTorrentComments() + ", getUploaded=" + getUploaded() + "]";
+		return "Community [getPerfectFlacs()=" + getPerfectFlacs() + ", getCollagesContrib()=" + getCollagesContrib()
+				+ ", getCollagesStarted()=" + getCollagesStarted() + ", getGroups()=" + getGroups() + ", getInvited()="
+				+ getInvited() + ", getLeeching()=" + getLeeching() + ", getPosts()=" + getPosts() + ", getRequestsFilled()="
+				+ getRequestsFilled() + ", getRequestsVoted()=" + getRequestsVoted() + ", getSeeding()=" + getSeeding()
+				+ ", getSnatched()=" + getSnatched() + ", getTorrentComments()=" + getTorrentComments() + ", getUploaded()="
+				+ getUploaded() + "]";
 	}
 
 }

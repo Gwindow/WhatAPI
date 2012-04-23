@@ -57,6 +57,9 @@ public class StringUtils {
 		htmlEntities.put("&reg;", "\u00ae");
 		htmlEntities.put("&euro;", "\u20a0");
 		htmlEntities.put("&#39;", "'");
+		htmlEntities.put("&macr;", "¯");
+		htmlEntities.put("\\\\", "\\");
+		htmlEntities.put("&deg;", "°");
 	}
 
 	public static final String unescapeHTML(String source) {

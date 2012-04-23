@@ -1,6 +1,7 @@
 package api.user;
 
 import api.inbox.PrivateMessage;
+import api.search.user.UserSearch;
 import api.son.MySon;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
@@ -34,6 +35,15 @@ public class User {
 		User user = (User) MySon.toObject(url, User.class);
 		User.id = id;
 		return user;
+	}
+
+	public static User userFromName(String username) throws CouldNotLoadException {
+		UserSearch us = UserSearch.userSearchFromSearchTerm(username.toLowerCase());
+		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
+			return userFromId(us.getResponse().getResults().get(0).getUserId().intValue());
+		} else {
+			throw new CouldNotLoadException("User not found");
+		}
 	}
 
 	/**
@@ -98,6 +108,7 @@ public class User {
 	 * Gets the status.
 	 * 
 	 * @return the status
+	 * 
 	 */
 	public boolean getStatus() {
 		if (status.equalsIgnoreCase("success"))
