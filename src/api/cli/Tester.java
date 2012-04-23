@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
-import api.util.Updater;
 
 /**
  * The Class Tester.
@@ -25,8 +24,6 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException, IOException {
 		MySoup.setSite("ssl.what.cd");
-		Updater u = new Updater(UPDATE_SITE);
-		System.out.println(u);
 	}
 
 	/**
