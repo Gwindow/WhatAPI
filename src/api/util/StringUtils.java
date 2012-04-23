@@ -71,6 +71,8 @@ public class StringUtils {
 		htmlEntities.put("&macr;", "¯");
 		htmlEntities.put("\\\\", "\\");
 		htmlEntities.put("&deg;", "°");
+		htmlEntities.put("&deg;", "°");
+		htmlEntities.put("&trade;", "™");
 	}
 
 	/**
