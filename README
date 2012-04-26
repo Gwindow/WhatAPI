@@ -1,9 +1,27 @@
-Under heavy development, take what you see with a grain of salt, if you have any questions message Gwindow or join #what.cd-code in irc.what-network.net 
+WhatAPI
+=======
 
-P.S. If you use this for anything malicious there will be life altering consequences. 
+This is a Java API for What.CD that provides a wrapper around the AJAX API of Gazelle. 
+If you have any questions on the java or ajax api please contact Gwindow in #what.cd-code.
+
+Example
+-------
+    //set the site and login
+    MySoup.setSite("ssl.what.cd");
+    MySoup.login("login.php", username, password);
+    //create an object
+    User user = User.userFromId(id);
+    //you now have an object to work with, awesome right?
+    System.out.println(user); //this will print all the values that the object contains
+    //Most classes also have extra methods to do special stuff, like sending messages or downloading files
+    user.sendMessage(subject, body);
+And that is a basic example of how you can use the api. Please don't make more than 1 request to the site per second and don't do anything malicious or 
+there will be consequences.  
 
 Java documentation: http://gwindow.github.com/WhatAPI/
 
+List of JSON pages present on What.CD and Gazelle 
+==================================================
 
 Index, basic info such as passkey, authkey, and U/D/R
 ajax.php?action=index
