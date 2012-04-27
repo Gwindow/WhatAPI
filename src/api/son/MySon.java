@@ -1,4 +1,3 @@
-
 package api.son;
 
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class MySon {
 	// private static Reader reader;
 	/** The is debug enabled. */
 	private static boolean isDebugEnabled = false;
-	
+
 	/** The debug string. */
 	private static String debugString;
 
@@ -77,7 +76,7 @@ public class MySon {
 	public static Object toObjectOther(String url, Type t) {
 		String json = null;
 		try {
-			json = MySoup.scrapeOther(url).text();
+			json = MySoup.scrapeOther(url);
 			Object o = gson.fromJson(json, t);
 			return o;
 		} catch (CouldNotLoadException e) {

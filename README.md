@@ -1,8 +1,11 @@
 WhatAPI
 =======
 
-This is a Java API for What.CD that provides a wrapper around the AJAX API of Gazelle. 
+This is a Java API for What.CD that provides a wrapper around the AJAX API of Gazelle. Please don't make more than 1 request to the site per second and don't do anything malicious or there will be consequences.  
+
 If you have any questions on the java or ajax api please contact Gwindow in #what.cd-code.
+
+
 
 Example
 -------
@@ -15,8 +18,7 @@ Example
     System.out.println(user); //this will print all the values that the object contains
     //Most classes also have extra methods to do special stuff, like sending messages or downloading files
     user.sendMessage(subject, body);
-And that is a basic example of how you can use the api. Please don't make more than 1 request to the site per second and don't do anything malicious or 
-there will be consequences.  
+And that is a basic example of how you can use the api.
 
 Java documentation: http://gwindow.github.com/WhatAPI/
 
@@ -75,7 +77,6 @@ ajax.php?action=request&id=<Request Id>&auth=<Authkey>
 
 Notifications
 ajax.php?action=notifications&page=<Page>&auth=<Authkey>
-
 
 Rippy
 ajax.php?action=rippy

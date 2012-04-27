@@ -1,4 +1,3 @@
-
 package api.soup;
 
 import java.io.BufferedReader;
@@ -12,7 +11,6 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -28,7 +26,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 
 import api.forum.forumsections.ForumSections;
@@ -96,7 +93,7 @@ public class MySoup {
 
 	/** The header name. */
 	private static String headerName = "name";
-	
+
 	/** The header value. */
 	private static String headerValue = "value";
 
@@ -259,23 +256,6 @@ public class MySoup {
 			return true;
 		else
 			return false;
-	}
-
-	/**
-	 * Gets the update link.
-	 * 
-	 * @param page
-	 *            the page
-	 * @return the update link
-	 */
-	public static String getUpdateLink(String page) {
-		Document doc = null;
-		try {
-			doc = scrapeOther(page);
-		} catch (CouldNotLoadException e) {
-			e.printStackTrace();
-		}
-		return doc.getElementsByTag("b").text();
 	}
 
 	/**
@@ -452,30 +432,18 @@ public class MySoup {
 		}
 	}
 
-	/**
-	 * Scrape other.
-	 * 
-	 * @param url
-	 *            the url
-	 * @return the document
-	 * @throws CouldNotLoadException
-	 *             the could not load exception
-	 */
-	public static Document scrapeOther(String url) throws CouldNotLoadException {
+	public static String scrapeOther(String url) throws CouldNotLoadException {
 		httpGet = getHttpGet(url);
 		response = null;
-		Document doc = null;
 		try {
 			response = httpClient.execute(httpGet);
-			doc = Jsoup.parse(inputStreamToString(response.getEntity().getContent()));
-		} catch (ClientProtocolException e) {
+			entity = response.getEntity();
+			String s = EntityUtils.toString(entity);
+			return s;
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new CouldNotLoadException("Could not load non what.cd page");
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could not load non what.cd page");
+			throw new CouldNotLoadException("Could not load page");
 		}
-		return doc;
 	}
 
 	/**

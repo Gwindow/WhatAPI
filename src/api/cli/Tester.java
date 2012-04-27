@@ -1,10 +1,10 @@
-
 package api.cli;
 
 import java.io.IOException;
 
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
+import api.whatstatus.WhatStatus;
 
 /**
  * The Class Tester.
@@ -13,9 +13,8 @@ import api.util.CouldNotLoadException;
  */
 public class Tester {
 
-	// private final static String UPDATE_SITE = "https://raw.github.com/Gwindow/WhatAndroid/gh-pages/index.html";
 	/** The Constant UPDATE_SITE. */
-	private final static String UPDATE_SITE = "http://gwindow.github.com/WhatAndroid/index.html";
+	private static final String UPDATE_SITE = "http://gwindow.github.com/WhatAndroid/index.html";
 
 	/**
 	 * Instantiates a new tester.
@@ -27,6 +26,7 @@ public class Tester {
 	 */
 	public Tester() throws CouldNotLoadException, IOException {
 		MySoup.setSite("ssl.what.cd");
+		System.out.println(WhatStatus.init());
 	}
 
 	/**
