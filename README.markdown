@@ -24,11 +24,12 @@ Java documentation: http://gwindow.github.com/WhatAPI/
 List of JSON pages present on What.CD and Gazelle 
 ==================================================
 
-Index, basic info such as passkey, authkey, and U/D/R
-ajax.php?action=index
+**Index, basic info such as passkey, authkey, and U/D/R**
+* ajax.php?action=index
+* This is the most important page since it provides the authkey which is required to access anything else*
 
-User Profile
-ajax.php?action=user&id=<User ID>&auth=<Authkey>
+**User Profile**
+* ajax.php?action=user&id=<User ID>&auth=<Authkey>
 
 Inbox and Conversation
 ajax.php?action=inbox&auth=<Authkey>
