@@ -25,7 +25,7 @@ Java documentation: http://gwindow.github.com/WhatAPI/
 List of JSON pages present on What.CD and Gazelle 
 ==================================================
 
-Index, basic info such as passkey, authkey, and U/D/R
+## Index, basic info such as passkey, authkey, and U/D/R
 ajax.php?action=index
 
 User Profile
