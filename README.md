@@ -25,6 +25,7 @@ List of JSON pages present on What.CD and Gazelle
 
 ### Index
 ajax.php?action=index
+
 The most important page, provides basic info such as passkey, authkey, and U/D/R
 
 ### User Profile
