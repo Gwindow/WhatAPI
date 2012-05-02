@@ -1,7 +1,7 @@
 WhatAPI
 =======
 
-This is a Java API for What.CD that provides a wrapper around the AJAX API of Gazelle. Please don't make more than 1 request to the site per second and don't do anything malicious or there will be consequences.  
+This is a Java API for What.CD that provides a wrapper around the AJAX API of Gazelle. The [What.CD Android App](http://github.com/Gwindow/WhatAndroid) heavily utilizes this API. Please don't make more than 1 request to the site per second and don't do anything malicious or there will be consequences.  
 
 If you have any questions contact Gwindow in #what.cd-code or through Github. 
 
