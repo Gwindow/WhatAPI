@@ -12,7 +12,7 @@ import api.util.CouldNotLoadException;
  */
 public class Tester {
 
-	private static final String SITE = "67.183.192.159";
+	private static final String SITE = "";
 	private static final boolean SSL = false;
 
 	private static final String USERNAME = "gazelle";
