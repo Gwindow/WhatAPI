@@ -100,23 +100,28 @@ public class MySoup {
 	/**
 	 * Set the url of the gazelle site. Nothing will work if this isn't called when first starting the program
 	 * 
-	 * @param s
+	 * @param url
 	 *            url of the site following this format, http://what.cd/
 	 */
-	public static void setSite(String s) {
-		if (!s.endsWith("/")) {
-			s = s + "/";
+	public static void setSite(String url) {
+		if (!url.endsWith("/")) {
+			url = url + "/";
 		}
 		if (isSSLEnabled) {
-			if (!s.startsWith("https://")) {
-				s = "https://" + s;
+			if (!url.startsWith("https://")) {
+				url = "https://" + url;
 			}
 		} else {
-			if (!s.startsWith("http://")) {
-				s = "http://" + s;
+			if (!url.startsWith("http://")) {
+				url = "http://" + url;
 			}
 		}
-		SITE = s;
+		SITE = url;
+	}
+
+	public static void setSite(String url, boolean ssl) {
+		isSSLEnabled = ssl;
+		setSite(url);
 	}
 
 	/**
@@ -197,7 +202,7 @@ public class MySoup {
 	 * @param b
 	 *            the new sSL enabled
 	 */
-	public static void setSSLEnabled(boolean b) {
+	public static void setSSL(boolean b) {
 		isSSLEnabled = b;
 	}
 

@@ -1,7 +1,3 @@
-
-
-
-
 package api.index;
 
 /**
@@ -10,19 +6,22 @@ package api.index;
  * @author Gwindow
  */
 public class Response {
-	
+
 	/** The authkey. */
 	private String authkey;
-	
+
 	/** The id. */
 	private Number id;
-	
+
 	/** The passkey. */
 	private String passkey;
-	
+
 	/** The username. */
 	private String username;
-	
+
+	/** The notifications. */
+	private Notifications notifications;
+
 	/** The userstats. */
 	private UserStats userstats;
 
@@ -63,6 +62,15 @@ public class Response {
 	}
 
 	/**
+	 * Gets the notifications.
+	 * 
+	 * @return the notifications
+	 */
+	public Notifications getNotifications() {
+		return this.notifications;
+	}
+
+	/**
 	 * Gets the userstats.
 	 * 
 	 * @return the userstats
@@ -71,12 +79,16 @@ public class Response {
 		return this.userstats;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Response [getAuthkey=" + getAuthkey() + ", getId=" + getId() + ", getPasskey=" + getPasskey() + ", getUsername="
-				+ getUsername() + ", getUserstats=" + getUserstats() + "]";
+		return "Response [getAuthkey()=" + getAuthkey() + ", getId()=" + getId() + ", getPasskey()=" + getPasskey()
+				+ ", getUsername()=" + getUsername() + ", getNotifications()=" + getNotifications() + ", getUserstats()="
+				+ getUserstats() + "]";
 	}
+
 }

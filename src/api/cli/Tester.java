@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
-import api.whatstatus.WhatStatus;
 
 /**
  * The Class Tester.
@@ -13,8 +12,11 @@ import api.whatstatus.WhatStatus;
  */
 public class Tester {
 
-	/** The Constant UPDATE_SITE. */
-	private static final String UPDATE_SITE = "http://gwindow.github.com/WhatAndroid/index.html";
+	private static final String SITE = "67.183.192.159";
+	private static final boolean SSL = false;
+
+	private static final String USERNAME = "gazelle";
+	private static final String PASSWORD = "123456";
 
 	/**
 	 * Instantiates a new tester.
@@ -25,8 +27,10 @@ public class Tester {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public Tester() throws CouldNotLoadException, IOException {
-		MySoup.setSite("ssl.what.cd");
-		System.out.println(WhatStatus.init());
+		MySoup.setSite(SITE, SSL);
+		MySoup.login("login.php", USERNAME, PASSWORD);
+
+		System.out.println(MySoup.getIndex());
 	}
 
 	/**

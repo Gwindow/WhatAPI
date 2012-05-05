@@ -1,4 +1,3 @@
-
 package api.util;
 
 import org.jsoup.Jsoup;
@@ -10,10 +9,10 @@ import org.jsoup.nodes.Document;
  * @author Gwindow
  */
 public class Updater {
-	
+
 	/** The doc. */
 	private Document doc = null;
-	
+
 	/** The UPDAT e_ site. */
 	private static String UPDATE_SITE;
 
@@ -92,7 +91,7 @@ public class Updater {
 	@Override
 	public String toString() {
 		return "Updater [getMessage()=" + getMessage() + ", getVersion()=" + getVersion() + ", getDownloadLink()="
-				+ getDownloadLink() + ", getDoc()=" + getDoc() + "]";
+				+ getDownloadLink();
 	}
 
 }
