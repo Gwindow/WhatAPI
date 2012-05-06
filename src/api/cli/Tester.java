@@ -2,6 +2,7 @@ package api.cli;
 
 import java.io.IOException;
 
+import api.forum.thread.Thread;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
@@ -30,7 +31,10 @@ public class Tester {
 		MySoup.setSite(SITE, SSL);
 		MySoup.login("login.php", USERNAME, PASSWORD);
 
-		System.out.println(MySoup.getIndex());
+		for (int i = 0; i < 50; i++) {
+			Thread.postReply(68, "test");
+		}
+
 	}
 
 	/**

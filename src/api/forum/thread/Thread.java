@@ -1,4 +1,3 @@
-
 package api.forum.thread;
 
 import java.util.ArrayList;
