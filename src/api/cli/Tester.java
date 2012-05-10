@@ -31,9 +31,6 @@ public class Tester {
 		MySoup.setSite(SITE, SSL);
 		MySoup.login("login.php", USERNAME, PASSWORD);
 
-		for (int i = 0; i < 50; i++) {
-			Thread.postReply(68, "test");
-		}
 
 	}
 
