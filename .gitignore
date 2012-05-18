@@ -6,3 +6,4 @@ out/
 WhatAndroid.iml
 *.log
 res/.DS_Store
+src/api/cli/Tester.java
