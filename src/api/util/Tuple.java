@@ -1,7 +1,3 @@
-
-
-
-
 package api.util;
 
 /**
@@ -13,14 +9,14 @@ package api.util;
  *            the generic type
  * @author Gwindow
  */
-public class Tuple<A,B> {
-	
+public class Tuple<A, B> {
+
 	/** The a. */
 	private A a;
-	
+
 	/** The b. */
 	private B b;
-	
+
 	/**
 	 * Instantiates a new tuple.
 	 * 
@@ -29,11 +25,11 @@ public class Tuple<A,B> {
 	 * @param b
 	 *            the b
 	 */
-	public Tuple(A a,B b) {
+	public Tuple(A a, B b) {
 		this.a = a;
 		this.b = b;
 	}
-	
+
 	/**
 	 * Gets the a.
 	 * 
@@ -42,7 +38,7 @@ public class Tuple<A,B> {
 	public A getA() {
 		return a;
 	}
-	
+
 	/**
 	 * Gets the b.
 	 * 
@@ -51,32 +47,68 @@ public class Tuple<A,B> {
 	public B getB() {
 		return b;
 	}
-	
-	/**
-	 * Sets the a.
+
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param a
-	 *            the new a
+	 * @see java.lang.Object#toString()
 	 */
-	public void setA(A a) {
-		this.a = a;
+	@Override
+	public String toString() {
+		return a + "," + b;
 	}
-	
+
 	/**
-	 * Sets the b.
-	 * 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((a == null) ? 0 : a.hashCode());
+		result = prime * result + ((b == null) ? 0 : b.hashCode());
+		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tuple<A, B> other = (Tuple<A, B>) obj;
+		if (a == null) {
+			if (other.a != null)
+				return false;
+		} else if (!a.equals(other.a))
+			return false;
+		if (b == null) {
+			if (other.b != null)
+				return false;
+		} else if (!b.equals(other.b))
+			return false;
+		return true;
+	}
+
+	/**
 	 * @param b
-	 *            the new b
+	 *            the b to set
 	 */
 	public void setB(B b) {
 		this.b = b;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+
+	/**
+	 * @param a
+	 *            the a to set
 	 */
-	public String toString() {
-		return a + "," + b;
+	public void setA(A a) {
+		this.a = a;
 	}
 
 }

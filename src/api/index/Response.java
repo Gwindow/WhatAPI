@@ -66,6 +66,7 @@ public class Response {
 	 * 
 	 * @return the notifications
 	 */
+
 	public Notifications getNotifications() {
 		return this.notifications;
 	}
@@ -75,6 +76,7 @@ public class Response {
 	 * 
 	 * @return the userstats
 	 */
+
 	public UserStats getUserstats() {
 		return this.userstats;
 	}

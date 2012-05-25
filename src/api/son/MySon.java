@@ -33,6 +33,8 @@ public class MySon {
 	/** The debug string. */
 	private static String debugString;
 
+	private static String path = "";
+
 	/**
 	 * To object.
 	 * 
@@ -48,7 +50,7 @@ public class MySon {
 			startTime = System.currentTimeMillis();
 		}
 		try {
-			String string = MySoup.scrape(url);
+			String string = MySoup.scrape(path + url);
 			// reader = new InputStreamReader(MySoup.scrape(url), "UTF-8");
 			Object o = gson.fromJson(string, t);
 			if (isDebugEnabled) {
@@ -150,6 +152,20 @@ public class MySon {
 	 */
 	public static String getDebugString() {
 		return debugString;
+	}
+
+	/**
+	 * @return the path
+	 */
+	public static String getPath() {
+		return path;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public static void setPath(String path) {
+		MySon.path = path;
 	}
 
 }
