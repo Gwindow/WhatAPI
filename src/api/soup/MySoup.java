@@ -378,7 +378,6 @@ public class MySoup {
 	 */
 	public static String scrape(String url) {
 		url = SITE + url;
-		System.out.println(url);
 		httpGet = getHttpGet(url);
 		response = null;
 		try {
