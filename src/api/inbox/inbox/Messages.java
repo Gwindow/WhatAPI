@@ -1,4 +1,3 @@
-
 package api.inbox.inbox;
 
 /**
@@ -140,7 +139,7 @@ public class Messages {
 	 * @return the username
 	 */
 	public String getUsername() {
-		if (username == null | username.isEmpty())
+		if (username == null | username.length() == 0)
 			username = "System";
 		return username;
 	}

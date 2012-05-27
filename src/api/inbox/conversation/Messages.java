@@ -1,4 +1,3 @@
-
 package api.inbox.conversation;
 
 import org.jsoup.Jsoup;
@@ -58,7 +57,7 @@ public class Messages {
 	 * @return the sender name
 	 */
 	public String getSenderName() {
-		if (senderName == null | senderName.isEmpty())
+		if (senderName == null || senderName.length() == 0)
 			senderName = "System";
 		return senderName;
 	}
