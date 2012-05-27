@@ -1,4 +1,3 @@
-
 package api.inbox;
 
 import java.util.ArrayList;
@@ -72,15 +71,15 @@ public class PrivateMessage {
 	/**
 	 * A reply to a message.
 	 * 
-	 * @param id
-	 *            recipent's id
+	 * @param userId
+	 *            the user id
 	 * @param convId
 	 *            the conv id
 	 * @param body
 	 *            body of the message
 	 */
-	public PrivateMessage(int id, int convId, String body) {
-		this.userId = id;
+	public PrivateMessage(int userId, int convId, String body) {
+		this.userId = userId;
 		this.convId = convId;
 		this.body = body;
 	}
