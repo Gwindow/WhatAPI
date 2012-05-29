@@ -1,4 +1,3 @@
-
 package api.search.torrents;
 
 import java.util.List;
@@ -11,45 +10,48 @@ import java.util.List;
  * @author Gwindow
  */
 public class Results {
-	
+
 	/** The bookmarked. */
 	private boolean bookmarked;
-	
+
 	/** The group id. */
 	private Number groupId;
-	
+
 	/** The group name. */
 	private String groupName;
-	
+
 	/** The group time. */
 	private Number groupTime;
-	
+
 	/** The group year. */
 	private Number groupYear;
-	
+
 	/** The max size. */
 	private Number maxSize;
-	
+
 	/** The release type. */
 	private String releaseType;
-	
+
 	/** The tags. */
 	private List<String> tags;
-	
+
 	/** The torrents. */
 	private List<Torrents> torrents;
-	
+
 	/** The total leechers. */
 	private Number totalLeechers;
-	
+
 	/** The total seeders. */
 	private Number totalSeeders;
-	
+
 	/** The total snatched. */
 	private Number totalSnatched;
-	
+
 	/** The vanity house. */
 	private Boolean vanityHouse;
+
+	/** The artist. */
+	private String artist;
 
 	/**
 	 * Gets the bookmarked.
@@ -168,10 +170,17 @@ public class Results {
 		return this.vanityHouse;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Gets the artist.
 	 * 
-	 * @see java.lang.Object#toString()
+	 * @return the artist
+	 */
+	public String getArtist() {
+		return this.artist;
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
@@ -180,6 +189,7 @@ public class Results {
 				+ ", getMaxSize()=" + getMaxSize() + ", getReleaseType()=" + getReleaseType() + ", getTags()=" + getTags()
 				+ ", getTorrents()=" + getTorrents() + ", getTotalLeechers()=" + getTotalLeechers() + ", getTotalSeeders()="
 				+ getTotalSeeders() + ", getTotalSnatched()=" + getTotalSnatched() + ", getVanityHouse()=" + getVanityHouse()
-				+ "]";
+				+ ", getArtist()=" + getArtist() + "]";
 	}
+
 }
