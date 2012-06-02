@@ -1,10 +1,13 @@
-
+/*
+ * 
+ */
 package api.torrents.torrents;
 
 /**
  * The Class Group.
  * 
  * @author Gwindow
+ * @since Jun 2, 2012 12:17:19 AM
  */
 public class Group {
 
@@ -14,8 +17,14 @@ public class Group {
 	/** The category id. */
 	private Number categoryId;
 
+	/** The category name. */
+	private String categoryName;
+
 	/** The id. */
 	private Number id;
+
+	/** The music info. */
+	private MusicInfo musicInfo;
 
 	/** The name. */
 	private String name;
@@ -39,7 +48,7 @@ public class Group {
 	private String wikiImage;
 
 	/** The year. */
-	private String year;
+	private Number year;
 
 	/**
 	 * Gets the catalogue number.
@@ -60,12 +69,30 @@ public class Group {
 	}
 
 	/**
+	 * Gets the category name.
+	 * 
+	 * @return the category name
+	 */
+	public String getCategoryName() {
+		return this.categoryName;
+	}
+
+	/**
 	 * Gets the id.
 	 * 
 	 * @return the id
 	 */
 	public Number getId() {
 		return this.id;
+	}
+
+	/**
+	 * Gets the music info.
+	 * 
+	 * @return the music info
+	 */
+	public MusicInfo getMusicInfo() {
+		return this.musicInfo;
 	}
 
 	/**
@@ -162,19 +189,22 @@ public class Group {
 	 * 
 	 * @return the year
 	 */
-	public String getYear() {
+	public Number getYear() {
 		return this.year;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
+	public String getOriginal() {
+		return this.getYear() + " - Original Release" + " / " + this.getRecordLabel() + " / " + this.getCatalogueNumber();
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return "Group [getCatalogueNumber()=" + getCatalogueNumber() + ", getCategoryId()=" + getCategoryId() + ", getId()="
-				+ getId() + ", getName()=" + getName() + ", getRecordLabel()=" + getRecordLabel() + ", getReleaseType()="
+		return "Group [getCatalogueNumber()=" + getCatalogueNumber() + ", getCategoryId()=" + getCategoryId()
+				+ ", getCategoryName()=" + getCategoryName() + ", getId()=" + getId() + ", getMusicInfo()=" + getMusicInfo()
+				+ ", getName()=" + getName() + ", getRecordLabel()=" + getRecordLabel() + ", getReleaseType()="
 				+ getReleaseType() + ", getTime()=" + getTime() + ", isVanityHouse()=" + isVanityHouse() + ", getWikiBody()="
 				+ getWikiBody() + ", getWikiImage()=" + getWikiImage() + ", getYear()=" + getYear() + "]";
 	}

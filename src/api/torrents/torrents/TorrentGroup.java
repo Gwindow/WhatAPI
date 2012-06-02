@@ -1,7 +1,6 @@
-
-
-
-
+/*
+ * 
+ */
 package api.torrents.torrents;
 
 import java.io.FileOutputStream;
@@ -24,13 +23,13 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class TorrentGroup {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The id. */
 	private static transient int id;
 
@@ -85,15 +84,18 @@ public class TorrentGroup {
 	 * 
 	 * @return the status
 	 */
-	/*public void addBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() == false)
-	 * { MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
-	 * System.out.println("Bookmarked"); } else { System.err.println("Already bookmarked"); } } *//**
-	 * Removes the
-	 * bookmark.
+	/*
+	 * public void addBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
+	 * false) { MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
+	 * System.out.println("Bookmarked"); } else { System.err.println("Already bookmarked"); } }
+	 *//**
+	 * Removes the bookmark.
 	 */
-	/*public void removeBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
+	/*
+	 * public void removeBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
 	 * true) { MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
-	 * System.out.println("Removed bookmark"); } else { System.err.println("Already isn't bookmarked"); } } */
+	 * System.out.println("Removed bookmark"); } else { System.err.println("Already isn't bookmarked"); } }
+	 */
 	/**
 	 * Get the status of the request.
 	 * 
@@ -112,7 +114,7 @@ public class TorrentGroup {
 	 */
 	public List<Tuple<String, String>> getDownloadLinksList() {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
-		for (Torrent t : response.getTorrents()) {
+		for (Torrents t : response.getTorrents()) {
 			String name = t.getFilePath();
 			if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
 				name =
@@ -133,7 +135,7 @@ public class TorrentGroup {
 	 */
 	public List<Tuple<String, String>> getDownloadLinksListFor(String[] formatList) {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
-		for (Torrent t : response.getTorrents()) {
+		for (Torrents t : response.getTorrents()) {
 			for (int i = 0; i < formatList.length; i++) {
 				if (formatList[i].equalsIgnoreCase(t.getFormat())) {
 					String name = t.getFilePath();
@@ -159,7 +161,7 @@ public class TorrentGroup {
 	 */
 	public List<Tuple<String, String>> getDownloadLinksListExcept(String[] formatList) {
 		List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
-		for (Torrent t : response.getTorrents()) {
+		for (Torrents t : response.getTorrents()) {
 			for (int i = 0; i < formatList.length; i++) {
 				if (!formatList[i].equalsIgnoreCase(t.getFormat())) {
 					String name = t.getFilePath();
@@ -252,9 +254,14 @@ public class TorrentGroup {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return "Torrents [id =" + id + ", response=" + response + ", status=" + status + "]";

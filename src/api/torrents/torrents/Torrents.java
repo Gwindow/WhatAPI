@@ -1,4 +1,6 @@
-
+/*
+ * 
+ */
 package api.torrents.torrents;
 
 import java.io.FileOutputStream;
@@ -10,11 +12,12 @@ import java.nio.channels.ReadableByteChannel;
 import api.soup.MySoup;
 
 /**
- * The Class Torrent.
+ * The Class Torrents.
  * 
  * @author Gwindow
+ * @since Jun 2, 2012 12:08:53 AM
  */
-public class Torrent {
+public class Torrents {
 
 	/** The description. */
 	private String description;
@@ -146,9 +149,9 @@ public class Torrent {
 	}
 
 	/**
-	 * Checks if is free torrent.
+	 * Gets the free torrent.
 	 * 
-	 * @return true, if is free torrent
+	 * @return the free torrent
 	 */
 	public boolean isFreeTorrent() {
 		return this.freeTorrent;
@@ -245,11 +248,11 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the remastered.
+	 * Checks if is remastered.
 	 * 
-	 * @return the remastered
+	 * @return true, if is remastered
 	 */
-	public boolean getRemastered() {
+	public boolean isRemastered() {
 		return this.remastered;
 	}
 
@@ -341,6 +344,16 @@ public class Torrent {
 	}
 
 	/**
+	 * Gets the remaster.
+	 * 
+	 * @return the remaster
+	 */
+	public String getRemaster() {
+		return this.getRemasterYear() + " - " + this.getRemasterRecordLabel() + " / " + this.getRemasterTitle() + " / "
+				+ this.getRemasterCatalogueNumber();
+	}
+
+	/**
 	 * Download file.
 	 * 
 	 * @param url
@@ -365,23 +378,19 @@ public class Torrent {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return "Torrent [getDescription()=" + getDescription() + ", getEncoding()=" + getEncoding() + ", getFileCount()="
+		return "Torrents [getDescription()=" + getDescription() + ", getEncoding()=" + getEncoding() + ", getFileCount()="
 				+ getFileCount() + ", getFileList()=" + getFileList() + ", getFilePath()=" + getFilePath() + ", getFormat()="
-				+ getFormat() + ", isFreeTorrent()=" + isFreeTorrent() + ", hasCue()=" + hasCue() + ", hasLog()=" + hasLog()
+				+ getFormat() + ", getFreeTorrent()=" + isFreeTorrent() + ", hasCue()=" + hasCue() + ", hasLog()=" + hasLog()
 				+ ", getId()=" + getId() + ", getLeechers()=" + getLeechers() + ", getLogScore()=" + getLogScore()
 				+ ", getMedia()=" + getMedia() + ", getRemasterCatalogueNumber()=" + getRemasterCatalogueNumber()
 				+ ", getRemasterRecordLabel()=" + getRemasterRecordLabel() + ", getRemasterTitle()=" + getRemasterTitle()
-				+ ", getRemasterYear()=" + getRemasterYear() + ", getRemastered()=" + getRemastered() + ", isScene()="
-				+ isScene() + ", getSeeders()=" + getSeeders() + ", getSize()=" + getSize() + ", getSnatched()=" + getSnatched()
-				+ ", getTime()=" + getTime() + ", getUserId()=" + getUserId() + ", getUsername()=" + getUsername()
-				+ ", getDownloadLink()=" + getDownloadLink() + ", getMediaFormatEncoding()=" + getMediaFormatEncoding() + "]";
+				+ ", getRemasterYear()=" + getRemasterYear() + ", isRemastered()=" + isRemastered() + ", isScene()=" + isScene()
+				+ ", getSeeders()=" + getSeeders() + ", getSize()=" + getSize() + ", getSnatched()=" + getSnatched()
+				+ ", getTime()=" + getTime() + ", getUserId()=" + getUserId() + ", getUsername()=" + getUsername() + "]";
 	}
-
 }
