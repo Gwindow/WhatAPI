@@ -241,16 +241,14 @@ public class TorrentGroup {
 	 * @return the last fm url
 	 */
 	public String getLastFMUrl() {
+		String s;
 		try {
-			String s =
-					"http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8")
-							+ "&type=album";
-			return s;
+			s = "http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8") + "&type=album";
 		} catch (UnsupportedEncodingException e) {
-			System.err.println("Could not encode url");
+			s = "http://www.last.fm/";
 			e.printStackTrace();
-			return null;
 		}
+		return s;
 
 	}
 

@@ -73,6 +73,7 @@ public class StringUtils {
 		htmlEntities.put("&deg;", "°");
 		htmlEntities.put("&deg;", "°");
 		htmlEntities.put("&trade;", "™");
+		htmlEntities.put("&helip;", "...");
 	}
 
 	/**

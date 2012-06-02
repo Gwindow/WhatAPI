@@ -1,4 +1,3 @@
-
 package api.torrents.artist;
 
 import java.io.FileOutputStream;
@@ -21,13 +20,13 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class Artist {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
-	
+
 	/** The id. */
 	private static transient int id;
 
@@ -117,11 +116,13 @@ public class Artist {
 	}
 
 	// TODO fix
-	/* public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
+	/*
+	 * public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
 	 * ArrayList<Tuple<String, String>>(); for (TorrentGroup tg : response.getTorrentgroup()) { for (Torrent t :
 	 * tg.getTorrents()) { String name = t.getFilePath(); if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath() ==
 	 * null) { name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")"; }
-	 * list.add(new Tuple<String, String>(t.getDownloadLink(), name)); } } return list; } */
+	 * list.add(new Tuple<String, String>(t.getDownloadLink(), name)); } } return list; }
+	 */
 	/**
 	 * Gets the download links list for.
 	 * 
@@ -230,20 +231,20 @@ public class Artist {
 	 * @return the last fm url
 	 */
 	public String getLastFMUrl() {
+		String s;
 		try {
-			String s = "http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getName(), "UTF-8") + "&type=artist";
-			return s;
+			s = "http://www.last.fm/search?q=" + URLEncoder.encode(getResponse().getName(), "UTF-8") + "&type=artist";
 		} catch (UnsupportedEncodingException e) {
-			System.err.println("Could not encode url");
-			e.printStackTrace();
-			return null;
+			s = "http://www.last.fm/";
 		}
-
+		return s;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Artist [getResponse()=" + getResponse() + ", getSpotifyUrl()=" + getSpotifyUrl() + ", getLastFMUrl()="
