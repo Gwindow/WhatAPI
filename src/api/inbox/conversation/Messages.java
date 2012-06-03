@@ -62,6 +62,10 @@ public class Messages {
 		return senderName;
 	}
 
+	public boolean isSystem() {
+		return getSenderName().equals("System");
+	}
+
 	/**
 	 * Gets the sent date.
 	 * 

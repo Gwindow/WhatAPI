@@ -144,6 +144,10 @@ public class Messages {
 		return username;
 	}
 
+	public boolean isSystem() {
+		return getUsername().equals("System");
+	}
+
 	/**
 	 * Checks if is warned.
 	 * 
