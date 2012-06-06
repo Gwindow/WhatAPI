@@ -1,4 +1,3 @@
-
 package api.bookmarks;
 
 /**
@@ -29,11 +28,11 @@ public class Bookmarks {
 	private String status;
 
 	/**
-	 * loads the torrent bookmarks.
+	 * Inits the torrent bookmarks.
 	 * 
 	 * @return the bookmarks
 	 */
-	public static Bookmarks loadTorrentBookmarks() {
+	public static Bookmarks initTorrentBookmarks() {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=bookmarks&type=torrents&auth=" + authkey;
 		Bookmarks bookmarks = (Bookmarks) MySon.toObject(url, Bookmarks.class);
@@ -135,9 +134,11 @@ public class Bookmarks {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Bookmarks [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

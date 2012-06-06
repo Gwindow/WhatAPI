@@ -1,7 +1,3 @@
-
-
-
-
 package api.bookmarks;
 
 import java.io.FileOutputStream;
@@ -18,70 +14,70 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Torrent {
-	
+
 	/** The encoding. */
 	private String encoding;
-	
+
 	/** The file count. */
 	private Number fileCount;
-	
+
 	/** The format. */
 	private String format;
-	
+
 	/** The free torrent. */
 	private boolean freeTorrent;
-	
+
 	/** The group id. */
 	private Number groupId;
-	
+
 	/** The has cue. */
 	private boolean hasCue;
-	
+
 	/** The has file. */
 	private Number hasFile;
-	
+
 	/** The has log. */
 	private boolean hasLog;
-	
+
 	/** The id. */
 	private Number id;
-	
+
 	/** The leechers. */
 	private Number leechers;
-	
+
 	/** The log score. */
 	private Number logScore;
-	
+
 	/** The media. */
 	private String media;
-	
+
 	/** The remaster catalogue number. */
 	private String remasterCatalogueNumber;
-	
+
 	/** The remaster record label. */
 	private String remasterRecordLabel;
-	
+
 	/** The remaster title. */
 	private String remasterTitle;
-	
+
 	/** The remaster year. */
 	private String remasterYear;
-	
+
 	/** The remastered. */
 	private boolean remastered;
-	
+
 	/** The scene. */
 	private boolean scene;
-	
+
 	/** The seeders. */
 	private Number seeders;
-	
+
 	/** The size. */
 	private Number size;
-	
+
 	/** The snatched. */
 	private Number snatched;
-	
+
 	/** The time. */
 	private String time;
 
@@ -328,7 +324,9 @@ public class Torrent {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

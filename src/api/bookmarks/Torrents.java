@@ -1,4 +1,3 @@
-
 package api.bookmarks;
 
 import java.util.List;
@@ -36,6 +35,8 @@ public class Torrents {
 
 	/** The year. */
 	private Number year;
+
+	private String image;
 
 	/**
 	 * Gets the catalogue number.
@@ -118,16 +119,15 @@ public class Torrents {
 		return this.year;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	public String getImage() {
+		return this.image;
+	}
+
 	@Override
 	public String toString() {
-		return "BookmarksList [getCatalogueNumber=" + getCatalogueNumber() + ", getId=" + getId() + ", getName=" + getName()
-				+ ", getRecordLabel=" + getRecordLabel() + ", getReleaseType=" + getReleaseType() + ", getTagList="
-				+ getTagList() + ", getTorrents=" + getTorrents() + ", isVanityHouse=" + isVanityHouse() + ", getYear="
-				+ getYear() + "]";
+		return "Torrents [getCatalogueNumber()=" + getCatalogueNumber() + ", getId()=" + getId() + ", getName()=" + getName()
+				+ ", getRecordLabel()=" + getRecordLabel() + ", getReleaseType()=" + getReleaseType() + ", getTagList()="
+				+ getTagList() + ", getTorrents()=" + getTorrents() + ", isVanityHouse()=" + isVanityHouse() + ", getYear()="
+				+ getYear() + ", getImage()=" + getImage() + "]";
 	}
 }
