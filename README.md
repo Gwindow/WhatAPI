@@ -62,7 +62,9 @@ ajax.php?action=browse&searchstr=<_Search Term_>&taglist=<_Tags_>&tags_type=1&au
 Searches also take all the advanced search parameters but there are too many to include, check Gazelle.  
 
 ### Bookmarks
-ajax.php?action=bookmarks&auth=<_AuthKey_>
+ajax.php?action=bookmarks&type=<_Type_>&auth=<_AuthKey_>
+
+Type = torrents, artists
 
 ### Subscriptions
 ajax.php?action=subscriptions&auth=<_Authkey_>
