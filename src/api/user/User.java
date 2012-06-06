@@ -1,4 +1,3 @@
-
 package api.user;
 
 import api.inbox.PrivateMessage;
@@ -69,7 +68,13 @@ public class User {
 		}
 	}
 
-	// TODO test sending messages
+	// TODO complete
+	/*
+	 * public void removeFromFriends() { if (getProfile().IsFriend()) {
+	 * MySoup.pressLink("friends.php?action=remove&friendid=" + id + "&auth=" + MySoup.getAuthKey());
+	 * System.out.println("Removed from friends"); } else { System.out.println("Already isn't a friend"); } }
+	 */
+
 	/**
 	 * Send message to the user.
 	 * 

@@ -13,21 +13,28 @@ public class Updater {
 	/** The doc. */
 	private Document doc = null;
 
-	/** The UPDAT e_ site. */
-	private static String UPDATE_SITE;
+	/** The update site. */
+	private String updateSite;
 
 	/**
 	 * Instantiates a new updater.
 	 * 
 	 * @param updateSite
 	 *            the update site
+	 */
+	public Updater(String updateSite) {
+		this.updateSite = updateSite;
+	}
+
+	/**
+	 * Check for updates.
+	 * 
 	 * @throws CouldNotLoadException
 	 *             the could not load exception
 	 */
-	public Updater(String updateSite) throws CouldNotLoadException {
-		UPDATE_SITE = updateSite;
+	public void checkForUpdates() throws CouldNotLoadException {
 		try {
-			doc = (Jsoup.connect(UPDATE_SITE).get());
+			doc = (Jsoup.connect(updateSite).get());
 		} catch (Exception e) {
 			throw new CouldNotLoadException("Could not load update site");
 		}
@@ -87,6 +94,11 @@ public class Updater {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.lang.Object#toString()
+	 */
+	/**
+	 * To string.
+	 * 
+	 * @return the string
 	 */
 	@Override
 	public String toString() {
