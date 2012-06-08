@@ -1,7 +1,3 @@
-
-
-
-
 package api.index;
 
 import com.google.gson.annotations.SerializedName;
@@ -12,19 +8,19 @@ import com.google.gson.annotations.SerializedName;
  * @author Gwindow
  */
 public class UserStats {
-	
+
 	/** The downloaded. */
 	private Number downloaded;
-	
+
 	/** The ratio. */
 	private Number ratio;
-	
+
 	/** The requiredratio. */
 	private Number requiredratio;
-	
+
 	/** The uploaded. */
 	private Number uploaded;
-	
+
 	/** The user class. */
 	@SerializedName("class")
 	private String userClass;
@@ -52,7 +48,7 @@ public class UserStats {
 	 * 
 	 * @return the requiredratio
 	 */
-	public Number getRequiredratio() {
+	public Number getRequiredRatio() {
 		return this.requiredratio;
 	}
 
@@ -86,13 +82,15 @@ public class UserStats {
 		return buffer;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "UserStats [getDownloaded=" + getDownloaded() + ", getRatio=" + getRatio() + ", getRequiredratio="
-				+ getRequiredratio() + ", getUploaded=" + getUploaded() + ", getUserClass=" + getUserClass() + ", getBuffer="
+				+ getRequiredRatio() + ", getUploaded=" + getUploaded() + ", getUserClass=" + getUserClass() + ", getBuffer="
 				+ getBuffer() + "]";
 	}
 

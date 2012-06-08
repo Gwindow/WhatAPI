@@ -1,4 +1,3 @@
-
 package api.forum.section;
 
 import api.soup.MySoup;
@@ -48,6 +47,8 @@ public class Threads {
 
 	/** The topic id. */
 	private Number topicId;
+
+	private boolean read;
 
 	/**
 	 * Gets the author id.
@@ -192,9 +193,7 @@ public class Threads {
 	 * @return true, if is read
 	 */
 	public boolean isRead() {
-		if (getLastReadPage().intValue() > 0)
-			return true;
-		return false;
+		return this.read;
 	}
 
 	/**
@@ -227,9 +226,11 @@ public class Threads {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Threads [getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName() + ", getLastAuthorId="
