@@ -1,4 +1,3 @@
-
 package api.torrents.artist;
 
 import java.io.FileOutputStream;
@@ -274,8 +273,19 @@ public class Torrent {
 	 * @return the media, format, and encoding
 	 */
 	public String getMediaFormatEncoding() {
-		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding();
+		String log = hasLog ? " - " + logScore.toString() : "";
+		String cue = hasCue ? " - " + "Cue" : "";
+		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding() + log + cue;
 
+	}
+
+	/**
+	 * Gets the remaster.
+	 * 
+	 * @return the remaster
+	 */
+	public String getRemaster() {
+		return this.getRemasterYear() + " - " + this.getRemasterRecordLabel() + " / " + this.getRemasterTitle();
 	}
 
 	/**

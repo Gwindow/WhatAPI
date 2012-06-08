@@ -1,7 +1,3 @@
-
-
-
-
 package api.notifications;
 
 import java.util.List;
@@ -12,16 +8,16 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
-	
+
 	/** The current pages. */
 	private Number currentPages;
-	
+
 	/** The num new. */
 	private Number numNew;
-	
+
 	/** The pages. */
 	private Number pages;
-	
+
 	/** The results. */
 	private List<Results> results;
 
@@ -68,10 +64,14 @@ public class Response {
 		currentPages = 0;
 		numNew = 0;
 		pages = 0;
-		results.clear();
+		if (results != null && !results.isEmpty()) {
+			results.clear();
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

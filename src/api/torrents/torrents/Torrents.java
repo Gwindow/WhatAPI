@@ -339,7 +339,9 @@ public class Torrents {
 	 * @return the media, format, and encoding
 	 */
 	public String getMediaFormatEncoding() {
-		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding();
+		String log = hasLog ? " - " + logScore.toString() : "";
+		String cue = hasCue ? " - " + "Cue" : "";
+		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding() + log + cue;
 
 	}
 

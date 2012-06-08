@@ -1,4 +1,3 @@
-
 package api.notifications;
 
 import java.io.FileOutputStream;
@@ -310,18 +309,19 @@ public class Results {
 	 * @return the media, format, and encoding
 	 */
 	public String getMediaFormatEncoding() {
-		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding();
+		String log = hasLog ? " - " + logScore.toString() : "";
+		String cue = hasCue ? " - " + "Cue" : "";
+		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding() + log + cue;
 
 	}
 
 	/**
-	 * Get a concise representation of the torrent year, media, format and encoding. For example "[2004] CD - AAC - 320"
+	 * Gets the remaster.
 	 * 
-	 * @return the media, format, and encoding
+	 * @return the remaster
 	 */
-	public String getYearMediaFormatEncoding() {
-		return "[" + this.getGroupYear() + "] " + this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding();
-
+	public String getRemaster() {
+		return this.getRemasterYear() + " - " + this.getRemasterTitle();
 	}
 
 	/**
@@ -376,6 +376,6 @@ public class Results {
 				+ isScene() + ", getSeeders=" + getSeeders() + ", getSize=" + getSize() + ", getSnatched=" + getSnatched()
 				+ ", getTorrentId=" + getTorrentId() + ", getTorrentTags=" + getTorrentTags() + ", isUnread=" + isUnread()
 				+ ", getMediaFormatEncoding=" + getMediaFormatEncoding() + ", getYearMediaFormatEncoding="
-				+ getYearMediaFormatEncoding() + ", getDownloadLink=" + getDownloadLink() + "]";
+				+ getMediaFormatEncoding() + ", getDownloadLink=" + getDownloadLink() + "]";
 	}
 }

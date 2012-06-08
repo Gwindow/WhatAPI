@@ -361,7 +361,9 @@ public class MySoup {
 			}
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 			response = httpClient.execute(httpPost);
-			EntityUtils.consume(response.getEntity());
+			// TODO investigate
+			// EntityUtils.consume(response.getEntity());
+			// response.getEntity().consumeContent();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not post data");
