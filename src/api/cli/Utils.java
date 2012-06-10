@@ -1,5 +1,6 @@
 package api.cli;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,13 +60,13 @@ public class Utils {
 		System.out.println("\t \t" + object);
 	}
 
-	// from http://stackoverflow.com/questions/3758606/how-to-convert-byte-size-into-human-readable-format-in-java
 	public static String toHumanReadableSize(long bytes) {
+		DecimalFormat df = new DecimalFormat("#.00");
 		double result = bytes / Math.pow(1024, 3);
 		String s = "GB";
 		if (result > 100.0) {
 			s = "TB";
 		}
-		return result + " " + s;
+		return df.format(result) + " " + s;
 	}
 }
