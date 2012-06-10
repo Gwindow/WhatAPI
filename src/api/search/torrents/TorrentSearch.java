@@ -1,4 +1,3 @@
-
 package api.search.torrents;
 
 import java.io.UnsupportedEncodingException;
@@ -107,7 +106,7 @@ public class TorrentSearch {
 			TorrentSearch.searchTerm = searchTerm;
 			TorrentSearch.page = page;
 			String authkey = MySoup.getAuthKey();
-			String url = "ajax.php?action=browse&searchstr=" + searchTerm + "&auth=" + authkey;
+			String url = "ajax.php?action=browse&searchstr=" + searchTerm + "&page=" + page + "&auth=" + authkey;
 
 			TorrentSearch torrentSearch = (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
 			return torrentSearch;
@@ -139,7 +138,8 @@ public class TorrentSearch {
 			String authkey = MySoup.getAuthKey();
 			TorrentSearch.tags = tags;
 			tags = tags.replace(",", "&");
-			String url = "ajax.php?action=browse&searchstr=" + searchTerm + "&taglist=" + tags + "&auth=" + authkey;
+			String url =
+					"ajax.php?action=browse&searchstr=" + searchTerm + "&taglist=" + tags + "&page=" + page + "&auth=" + authkey;
 
 			TorrentSearch torrentSearch = (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
 			return torrentSearch;
@@ -226,9 +226,11 @@ public class TorrentSearch {
 		return tags;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "TorrentSearch [hasNextPage()=" + hasNextPage() + ", hasPreviousPage()=" + hasPreviousPage() + ", getResponse()="
