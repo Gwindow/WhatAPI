@@ -1,4 +1,3 @@
-
 package api.subscriptions;
 
 import java.util.ArrayList;
@@ -14,10 +13,10 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Subscriptions {
-	
+
 	/** The response. */
 	private Response response;
-	
+
 	/** The status. */
 	private String status;
 
@@ -78,6 +77,15 @@ public class Subscriptions {
 		ArrayList<String> sortedKeys = new ArrayList<String>(map.keySet());
 		Collections.sort(sortedKeys);
 		return map;
+	}
+
+	public static void catchUp() {
+		try {
+			MySoup.pressLink("userhistory.php?action=catchup&auth=" + MySoup.getAuthKey());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*

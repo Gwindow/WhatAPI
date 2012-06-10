@@ -1,5 +1,6 @@
-
 package api.search.torrents;
+
+import java.util.List;
 
 /**
  * The Class Torrents.
@@ -9,78 +10,84 @@ package api.search.torrents;
  * @author Gwindow
  */
 public class Torrents {
-	
+
 	/** The can use token. */
 	private boolean canUseToken;
-	
+
 	/** The edition id. */
 	private Number editionId;
-	
+
 	/** The encoding. */
 	private String encoding;
-	
+
 	/** The file count. */
 	private Number fileCount;
-	
+
 	/** The format. */
 	private String format;
-	
+
 	/** The has cue. */
 	private boolean hasCue;
-	
+
 	/** The has log. */
 	private boolean hasLog;
-	
+
 	/** The is freeleech. */
 	private boolean isFreeleech;
-	
+
 	/** The is neutral leech. */
 	private boolean isNeutralLeech;
-	
+
 	/** The is personal freeleech. */
 	private boolean isPersonalFreeleech;
-	
+
 	/** The leechers. */
 	private Number leechers;
-	
+
 	/** The log score. */
 	private Number logScore;
-	
+
 	/** The media. */
 	private String media;
-	
+
 	/** The remaster catalogue number. */
 	private String remasterCatalogueNumber;
-	
+
 	/** The remaster title. */
 	private String remasterTitle;
-	
+
 	/** The remaster year. */
 	private Number remasterYear;
-	
+
 	/** The remastered. */
 	private boolean remastered;
-	
+
 	/** The scene. */
 	private boolean scene;
-	
+
 	/** The seeders. */
 	private Number seeders;
-	
+
 	/** The size. */
 	private Number size;
-	
+
 	/** The snatches. */
 	private Number snatches;
-	
+
 	/** The time. */
 	private String time;
-	
+
 	/** The torrent id. */
 	private Number torrentId;
-	
+
 	/** The vanity house. */
 	private boolean vanityHouse;
+
+	private List<Artists> artists;
+
+	public List<Artists> getArtists() {
+		return this.artists;
+	}
 
 	/**
 	 * Gets the can use token.
@@ -298,22 +305,18 @@ public class Torrents {
 		return this.vanityHouse;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Torrents [getCanUseToken()=" + getCanUseToken() + ", getEditionId()=" + getEditionId() + ", getEncoding()="
-				+ getEncoding() + ", getFileCount()=" + getFileCount() + ", getFormat()=" + getFormat() + ", getHasCue()="
-				+ getHasCue() + ", getHasLog()=" + getHasLog() + ", getIsFreeleech()=" + getIsFreeleech()
-				+ ", getIsNeutralLeech()=" + getIsNeutralLeech() + ", getIsPersonalFreeleech()=" + getIsPersonalFreeleech()
-				+ ", getLeechers()=" + getLeechers() + ", getLogScore()=" + getLogScore() + ", getMedia()=" + getMedia()
-				+ ", getRemasterCatalogueNumber()=" + getRemasterCatalogueNumber() + ", getRemasterTitle()=" + getRemasterTitle()
-				+ ", getRemasterYear()=" + getRemasterYear() + ", getRemastered()=" + getRemastered() + ", getScene()="
-				+ getScene() + ", getSeeders()=" + getSeeders() + ", getSize()=" + getSize() + ", getSnatches()=" + getSnatches()
-				+ ", getTime()=" + getTime() + ", getTorrentId()=" + getTorrentId() + ", getVanityHouse()=" + getVanityHouse()
-				+ "]";
+		return "Torrents [getArtists()=" + getArtists() + ", getCanUseToken()=" + getCanUseToken() + ", getEditionId()="
+				+ getEditionId() + ", getEncoding()=" + getEncoding() + ", getFileCount()=" + getFileCount() + ", getFormat()="
+				+ getFormat() + ", getHasCue()=" + getHasCue() + ", getHasLog()=" + getHasLog() + ", getIsFreeleech()="
+				+ getIsFreeleech() + ", getIsNeutralLeech()=" + getIsNeutralLeech() + ", getIsPersonalFreeleech()="
+				+ getIsPersonalFreeleech() + ", getLeechers()=" + getLeechers() + ", getLogScore()=" + getLogScore()
+				+ ", getMedia()=" + getMedia() + ", getRemasterCatalogueNumber()=" + getRemasterCatalogueNumber()
+				+ ", getRemasterTitle()=" + getRemasterTitle() + ", getRemasterYear()=" + getRemasterYear()
+				+ ", getRemastered()=" + getRemastered() + ", getScene()=" + getScene() + ", getSeeders()=" + getSeeders()
+				+ ", getSize()=" + getSize() + ", getSnatches()=" + getSnatches() + ", getTime()=" + getTime()
+				+ ", getTorrentId()=" + getTorrentId() + ", getVanityHouse()=" + getVanityHouse() + "]";
 	}
+
 }
