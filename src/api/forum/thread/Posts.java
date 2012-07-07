@@ -1,10 +1,7 @@
-
-
-
-
 package api.forum.thread;
 
 import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /**
  * The Class Posts.
@@ -12,27 +9,36 @@ import org.jsoup.Jsoup;
  * @author Gwindow
  */
 public class Posts {
-	
+
 	/** The added time. */
 	private String addedTime;
-	
+
 	/** The author. */
 	private Author author;
-	
+
 	/** The body. */
 	private String body;
-	
+
 	/** The edited time. */
 	private String editedTime;
-	
+
 	/** The edited user id. */
 	private Number editedUserId;
-	
+
 	/** The edited username. */
 	private String editedUsername;
-	
+
 	/** The post id. */
 	private Number postId;
+
+	private String bbBody;
+
+	/**
+	 * @return the bbBody
+	 */
+	public String getBBBody() {
+		return bbBody;
+	}
 
 	/**
 	 * Gets the added time.
@@ -103,17 +109,15 @@ public class Posts {
 	 * @return the quotable body
 	 */
 	public String getQuotableBody() {
-		return "[quote=" + author.getAuthorName() + "]" + Jsoup.parse(body).text() + "[/quote]";
+		return "[quote=" + author.getAuthorName() + "]" + Jsoup.clean(getBBBody(), Whitelist.basic()) + "[/quote]";
 
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Posts [getAddedTime=" + getAddedTime() + ", getAuthor=" + getAuthor() + ", getBody=" + getBody()
-				+ ", getEditedTime=" + getEditedTime() + ", getEditedUserId=" + getEditedUserId() + ", getEditedUsername="
-				+ getEditedUsername() + ", getPostId=" + getPostId() + "]";
+		return "Posts [getBBBody()=" + getBBBody() + ", getAddedTime()=" + getAddedTime() + ", getAuthor()=" + getAuthor()
+				+ ", getBody()=" + getBody() + ", getEditedTime()=" + getEditedTime() + ", getEditedUserId()="
+				+ getEditedUserId() + ", getEditedUsername()=" + getEditedUsername() + ", getPostId()=" + getPostId()
+				+ ", getQuotableBody()=" + getQuotableBody() + "]";
 	}
 }

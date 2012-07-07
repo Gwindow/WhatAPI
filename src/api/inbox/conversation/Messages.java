@@ -1,6 +1,7 @@
 package api.inbox.conversation;
 
 import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /**
  * The Class Messages.
@@ -23,6 +24,15 @@ public class Messages {
 
 	/** The sent date. */
 	private String sentDate;
+
+	private String bbBody;
+
+	/**
+	 * @return the bbBody
+	 */
+	public String getBBBody() {
+		return bbBody;
+	}
 
 	/**
 	 * Gets the body.
@@ -81,19 +91,15 @@ public class Messages {
 	 * @return the quotable body
 	 */
 	public String getQuotableBody() {
-		return "[quote=" + senderName + "]" + Jsoup.parse(body).text() + "[/quote]";
+		return "[quote=" + senderName + "]" + Jsoup.clean(getBBBody(), Whitelist.basic()) + "[/quote]";
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Messages [getBody()=" + getBody() + ", getMessageId()=" + getMessageId() + ", getSenderId()=" + getSenderId()
-				+ ", getSenderName()=" + getSenderName() + ", getSentDate()=" + getSentDate() + "]";
+		return "Messages [getBBBody()=" + getBBBody() + ", getBody()=" + getBody() + ", getMessageId()=" + getMessageId()
+				+ ", getSenderId()=" + getSenderId() + ", getSenderName()=" + getSenderName() + ", isSystem()=" + isSystem()
+				+ ", getSentDate()=" + getSentDate() + ", getQuotableBody()=" + getQuotableBody() + "]";
 	}
 
 }

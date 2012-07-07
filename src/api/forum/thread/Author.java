@@ -1,4 +1,3 @@
-
 package api.forum.thread;
 
 /**
@@ -7,22 +6,25 @@ package api.forum.thread;
  * @author Gwindow
  */
 public class Author {
-	
+
 	/** The artist. */
 	private boolean artist;
-	
+
 	/** The author id. */
 	private Number authorId;
-	
+
 	/** The author name. */
 	private String authorName;
-	
+
+	// TODO remove
+	private String permissionId;
+
 	/** The avatar. */
 	private String avatar;
-	
+
 	/** The donor. */
 	private boolean donor;
-	
+
 	/** The enabled. */
 	private boolean enabled;
 	// TODO paranoi crashes for some reason
@@ -112,13 +114,29 @@ public class Author {
 		return warned;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Author [isArtist=" + isArtist() + ", getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName()
 				+ ", getAvatar=" + getAvatar() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled() + ", getParanoia="
 				+ /* getParanoia() + */", getUserTitle=" + getUserTitle() + ", isWarned=" + isWarned() + "]";
+	}
+
+	/**
+	 * @return the permissionId
+	 */
+	public String getPermissionId() {
+		return permissionId;
+	}
+
+	/**
+	 * @param permissionId the permissionId to set
+	 */
+	public void setPermissionId(String permissionId) {
+		this.permissionId = permissionId;
 	}
 }

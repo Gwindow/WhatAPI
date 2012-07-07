@@ -108,4 +108,5 @@ public class StringUtils {
 		} while (continueLoop);
 		return source;
 	}
+
 }
