@@ -1,8 +1,5 @@
 package api.forum.thread;
 
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
-
 /**
  * The Class Posts.
  * 
@@ -37,7 +34,7 @@ public class Posts {
 	 * @return the bbBody
 	 */
 	public String getBBBody() {
-		return bbBody;
+		return bbBody.replace("\r", "");
 	}
 
 	/**
@@ -109,8 +106,7 @@ public class Posts {
 	 * @return the quotable body
 	 */
 	public String getQuotableBody() {
-		return "[quote=" + author.getAuthorName() + "]" + Jsoup.clean(getBBBody(), Whitelist.basic()) + "[/quote]";
-
+		return "[quote=" + author.getAuthorName() + "]" + getBBBody() + "[/quote]";
 	}
 
 	@Override

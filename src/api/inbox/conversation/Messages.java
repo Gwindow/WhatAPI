@@ -1,7 +1,5 @@
 package api.inbox.conversation;
 
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 
 /**
  * The Class Messages.
@@ -31,7 +29,7 @@ public class Messages {
 	 * @return the bbBody
 	 */
 	public String getBBBody() {
-		return bbBody;
+		return bbBody.replace("\r", "");
 	}
 
 	/**
@@ -91,7 +89,7 @@ public class Messages {
 	 * @return the quotable body
 	 */
 	public String getQuotableBody() {
-		return "[quote=" + senderName + "]" + Jsoup.clean(getBBBody(), Whitelist.basic()) + "[/quote]";
+		return "[quote=" + senderName + "]" + getBBBody() + "[/quote]";
 
 	}
 
