@@ -1,6 +1,4 @@
-
 package api.search.requests;
-
 
 /**
  * The Class Results.
@@ -13,73 +11,73 @@ public class Results {
 	// private List<Artists> artists;
 	/** The bitrate list. */
 	private String bitrateList;
-	
+
 	/** The bounty. */
 	private Number bounty;
-	
+
 	/** The catalogue number. */
 	private String catalogueNumber;
-	
+
 	/** The category id. */
 	private Number categoryId;
-	
+
 	/** The category name. */
 	private String categoryName;
-	
+
 	/** The description. */
 	private String description;
-	
+
 	/** The filler id. */
 	private Number fillerId;
-	
+
 	/** The filler name. */
 	private String fillerName;
-	
+
 	/** The format list. */
 	private String formatList;
-	
+
 	/** The image. */
 	private String image;
-	
+
 	/** The is filled. */
 	private boolean isFilled;
-	
+
 	/** The last vote. */
 	private String lastVote;
-	
+
 	/** The log cue. */
 	private String logCue;
-	
+
 	/** The media list. */
 	private String mediaList;
-	
+
 	/** The release type. */
 	private String releaseType;
-	
+
 	/** The request id. */
 	private Number requestId;
-	
+
 	/** The requestor id. */
 	private Number requestorId;
-	
+
 	/** The requestor name. */
 	private String requestorName;
-	
+
 	/** The time added. */
 	private String timeAdded;
-	
+
 	/** The time filled. */
 	private String timeFilled;
-	
+
 	/** The title. */
 	private String title;
-	
+
 	/** The torrent id. */
 	private Number torrentId;
-	
+
 	/** The vote count. */
 	private Number voteCount;
-	
+
 	/** The year. */
 	private Number year;
 

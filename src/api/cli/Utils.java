@@ -64,7 +64,7 @@ public class Utils {
 		DecimalFormat df = new DecimalFormat("#.00");
 		double result = bytes / Math.pow(1024, 3);
 		String s = "GB";
-		if (result > 1000.0) {
+		if (result > 10000.0) {
 			s = "TB";
 		}
 		return df.format(result) + " " + s;

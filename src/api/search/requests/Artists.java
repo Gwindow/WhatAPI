@@ -1,4 +1,3 @@
-
 package api.search.requests;
 
 /**
@@ -11,17 +10,17 @@ package api.search.requests;
 public class Artists {
 
 	/** The id. */
-	private String id;
+	private Number id;
 
 	/** The name. */
-	private String name;
+	private Number name;
 
 	/**
 	 * Gets the id.
 	 * 
 	 * @return the id
 	 */
-	public String getId() {
+	public Number getId() {
 		return this.id;
 	}
 
@@ -30,13 +29,15 @@ public class Artists {
 	 * 
 	 * @return the name
 	 */
-	public String getName() {
+	public Number getName() {
 		return this.name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString() */
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Artists [getId=" + getId() + ", getName=" + getName() + "]";
