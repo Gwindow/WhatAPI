@@ -97,12 +97,13 @@ public class TorrentSearch {
 	 * @return the torrent search
 	 */
 	public static TorrentSearch torrentSearchFromSearchTerm(String searchTerm, int page) {
-		if (searchTerm.trim().length() > 0) {
+		if (searchTerm != null) {
 			try {
 				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
+			System.err.println(searchTerm);
 			TorrentSearch.searchTerm = searchTerm;
 			TorrentSearch.page = page;
 			String authkey = MySoup.getAuthKey();
@@ -127,7 +128,7 @@ public class TorrentSearch {
 	 * @return the torrent search
 	 */
 	public static TorrentSearch torrentSearchFromSearchTermAndTags(String searchTerm, String tags, int page) {
-		if (searchTerm.trim().length() > 0) {
+		if (searchTerm != null) {
 			try {
 				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
 			} catch (UnsupportedEncodingException e) {

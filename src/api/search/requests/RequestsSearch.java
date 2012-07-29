@@ -1,4 +1,3 @@
-
 package api.search.requests;
 
 import java.io.UnsupportedEncodingException;
@@ -99,7 +98,7 @@ public class RequestsSearch {
 	 * @return the requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTerm(String searchTerm, int page) {
-		if (searchTerm.trim().length() > 0) {
+		if (searchTerm != null) {
 			try {
 				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
@@ -128,7 +127,7 @@ public class RequestsSearch {
 	 * @return the requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String tags, int page) {
-		if (searchTerm.trim().length() > 0) {
+		if (searchTerm != null) {
 			try {
 				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
