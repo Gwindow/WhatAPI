@@ -23,6 +23,15 @@ public class Comments {
 		return this.body;
 	}
 
+	/**
+	 * Gets the quotable body.
+	 * 
+	 * @return the quotable body
+	 */
+	public String getQuotableBody() {
+		return "[quote=" + userinfo.getAuthorName() + "]" + getBbBody() + "[/quote]";
+	}
+
 	public String getEditedTime() {
 		return this.editedTime;
 	}
