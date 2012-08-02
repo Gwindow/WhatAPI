@@ -241,15 +241,7 @@ public class Thread {
 		return url;
 	}
 
-	/**
-	 * Post reply.
-	 * 
-	 * @param id
-	 *            the id
-	 * @param body
-	 *            the body
-	 */
-	public static void postReply(int id, String body) {
+	public static void postReply(int id, String body, boolean subscribe) {
 		if (body.length() > 0) {
 			try {
 				String url = "forums.php?action=new&forumid=" + id;
@@ -258,6 +250,9 @@ public class Thread {
 				list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
 				list.add(new Tuple<String, String>("thread", String.valueOf(id)));
 				list.add(new Tuple<String, String>("body", body));
+				if (subscribe) {
+					list.add(new Tuple<String, String>("subscribe", "checked"));
+				}
 				MySoup.postMethod(url, list);
 				System.out.println("Reply posted");
 			} catch (Exception e) {

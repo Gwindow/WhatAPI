@@ -29,15 +29,15 @@ ajax.php?action=index
 The most important page, provides basic info such as passkey, authkey, and U/D/R
 
 ### User Profile
-ajax.php?action=user&id=<_User ID_>
+ajax.php?action=user&id=<_User ID_>&auth=<_Authkey_>
 
 Inbox and Conversation
-ajax.php?action=inbox
+ajax.php?action=inbox&auth=<_Authkey_>
 
-ajax.php?action=inbox&type=viewconv&id=<_Message Id_>
+ajax.php?action=inbox&type=viewconv&id=<_Message Id_>&auth=<_Authkey_>
 
 ### Top 10
-ajax.php?action=top10&type=<_Type_>&limit=<_Limit_>
+ajax.php?action=top10&type=<_Type_>&limit=<_Limit_>&auth=<_Authkey_>
 
 Type = torrents, tags, users.
 
@@ -45,50 +45,50 @@ Limit = 10,25,100; if no limit is specified defaults to 25.
 
 ### User Search
 
-ajax.php?action=usersearch&search=<_Search Term_>
+ajax.php?action=usersearch&search=<_Search Term_>&auth=<_Authkey_>
 
 ### Requests Search
-ajax.php?action=requests&search=<_Search Term_>
+ajax.php?action=requests&search=<_Search Term_>&auth=<_AuthKey_>
 
-ajax.php?action=requests&search=<_Search Term_>&tag=<_Tags_>
+ajax.php?action=requests&search=<_Search Term_>&tag=<_Tags_>&auth=<_AuthKey_>
 
 If no search term then latest requests will be listed.
 
 ### Torrent Search
-ajax.php?action=browse&searchstr=<_Search Term_>
+ajax.php?action=browse&searchstr=<_Search Term_>&auth=<_AuthKey_>
 
-ajax.php?action=browse&searchstr=<_Search Term_>&taglist=<_Tags_>&tags_type=1
+ajax.php?action=browse&searchstr=<_Search Term_>&taglist=<_Tags_>&tags_type=1&auth=<_AuthKey_>
 
 Searches also take all the advanced search parameters but there are too many to include, check Gazelle.  
 
 ### Bookmarks
-ajax.php?action=bookmarks&type=<_Type_>
+ajax.php?action=bookmarks&type=<_Type_>&auth=<_AuthKey_>
 
 Type = torrents, artists
 
 ### Subscriptions
-ajax.php?action=subscriptions
+ajax.php?action=subscriptions&auth=<_Authkey_>
 
 ### Forums
-ajax.php?action=forum&type=main
+ajax.php?action=forum&type=main&auth=<_Authkey_>
 
-ajax.php?action=forum&type=viewforum&forumid=<_Forum Id_>
+ajax.php?action=forum&type=viewforum&forumid=<_Forum Id_>&auth=<_Authkey_>
 
-ajax.php?action=forum&type=viewthread&threadid=<_Thread Id_>&page=<_Page_>
+ajax.php?action=forum&type=viewthread&threadid=<_Thread Id_>&page=<_Page_>&auth=<_Authkey_>
 
-ajax.php?action=forum&type=viewthread&threadid=<_Thread Id_>&postid=<_Post Id_>
+ajax.php?action=forum&type=viewthread&threadid=<_Thread Id_>&postid=<_Post Id_>&auth=<_Authkey_>
 
 ### Artist
-ajax.php?action=artist&id=<_Artist Id_>
+ajax.php?action=artist&id=<_Artist Id_>&auth=<_Authkey_>
 
 ### Torrent Group
-ajax.php?action=torrentgroup&id=<_Torrent Group Id_>
+ajax.php?action=torrentgroup&id=<_Torrent Group Id_>&auth=<_Authkey_>
 
 ### Request
-ajax.php?action=request&id=<_Request Id_>
+ajax.php?action=request&id=<_Request Id_>&auth=<_Authkey_>
 
 ### Notifications
-ajax.php?action=notifications&page=<_Page_>
+ajax.php?action=notifications&page=<_Page_>&auth=<_Authkey_>
 
 ### Rippy
 ajax.php?action=rippy&format=json
