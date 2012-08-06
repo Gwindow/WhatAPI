@@ -64,6 +64,27 @@ public class MySon {
 		}
 	}
 
+	public static Object toObjectFromString(String string, Type t) {
+		long startTime = 0, endTime = 0;
+		if (isDebugEnabled) {
+			startTime = System.currentTimeMillis();
+		}
+		try {
+			// reader = new InputStreamReader(MySoup.scrape(url), "UTF-8");
+			Object o = gson.fromJson(string, t);
+			if (isDebugEnabled) {
+				endTime = System.currentTimeMillis();
+				float totalTime = (endTime - startTime) / 1000f;
+				debugString = "Load Time: " + String.valueOf(totalTime) + "\n\n" + o.toString();
+			}
+			return o;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Couldn't create json object " + t.toString());
+			return null;
+		}
+	}
+
 	/**
 	 * Create a java object from a json page.
 	 * 
@@ -86,18 +107,8 @@ public class MySon {
 		}
 	}
 
-	/**
-	 * Create a java object from a json string.
-	 * 
-	 * @param json
-	 *            json string
-	 * @param t
-	 *            type of object to create
-	 * @return object of type t
-	 */
-	public static Object toObjectFromString(String json, Type t) {
-		Object o = gson.fromJson(json, t);
-		return o;
+	public static String toJson(Object o, Type t) {
+		return gson.toJson(o, t);
 	}
 
 	/**
