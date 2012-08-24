@@ -5,6 +5,8 @@ This is a Java API for What.CD that provides a wrapper around the AJAX API of Ga
 
 If you have any questions contact Gwindow in #what.cd-code or through Github. 
 
+Licensed under the 2-Clause BSD License, see LICENSE for full terms.
+
 Example
 -------
     //set the site and login
@@ -92,3 +94,4 @@ ajax.php?action=notifications&page=<_Page_>
 
 ### Rippy
 ajax.php?action=rippy&format=json
+
