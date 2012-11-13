@@ -145,7 +145,6 @@ public class Group {
 			return "Unknown";
 		else
 			return "API Error";
-
 	}
 
 	/**

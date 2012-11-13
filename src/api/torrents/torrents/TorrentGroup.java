@@ -84,18 +84,33 @@ public class TorrentGroup {
 	 * 
 	 * @return the status
 	 */
-	/*
-	 * public void addBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
-	 * false) { MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
-	 * System.out.println("Bookmarked"); } else { System.err.println("Already bookmarked"); } }
-	 *//**
+	public void addBookmark() {
+        String authKey = MySoup.getAuthKey();
+        //Need to add check for this
+        //if (response.getGroup().isBookmarked() == false) {
+        if (true){
+            MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
+	        System.out.println("Bookmarked");
+        }
+        else {
+            System.err.println("Already bookmarked");
+        }
+    }
+	 /**
 	 * Removes the bookmark.
 	 */
-	/*
-	 * public void removeBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
-	 * true) { MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
-	 * System.out.println("Removed bookmark"); } else { System.err.println("Already isn't bookmarked"); } }
-	 */
+	public void removeBookmark() {
+        String authKey = MySoup.getAuthKey();
+        //if (response.getGroup().isBookmarked() == true) {
+        if (true){
+            MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
+	        System.out.println("Removed bookmark");
+        }
+        else {
+            System.err.println("Already isn't bookmarked");
+        }
+    }
+
 	/**
 	 * Get the status of the request.
 	 * 

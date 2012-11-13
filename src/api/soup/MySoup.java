@@ -19,6 +19,7 @@ import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
@@ -143,6 +144,7 @@ public class MySoup {
 		DefaultHttpClient client = new DefaultHttpClient();
 		ClientConnectionManager mgr = client.getConnectionManager();
 		HttpParams params = client.getParams();
+        //TODO: replace ThreadSafeClientConnManager with PoolingClientConnectionManager to fix deprecation
 		client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
 		// HttpProtocolParams.setUserAgent(client.getParams(), "WhatAPI");
 		return client;
@@ -158,7 +160,6 @@ public class MySoup {
 	private static HttpGet getHttpGet(String url) {
 		HttpGet hg = new HttpGet(url);
 		return hg;
-
 	}
 
 	/**
@@ -299,11 +300,13 @@ public class MySoup {
 			nvps.add(new BasicNameValuePair("username", username));
 			nvps.add(new BasicNameValuePair("password", password));
 
+            //TODO: Fix deprecation
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
 			response = httpClient.execute(httpPost);
 			entity = response.getEntity();
 			if (entity != null) {
+                //TODO: Fix deprecation
 				entity.consumeContent();
 			}
 			cookies = httpClient.getCookieStore().getCookies();
@@ -359,6 +362,7 @@ public class MySoup {
 			for (Tuple<String, String> t : list) {
 				nvps.add(new BasicNameValuePair(t.getA(), t.getB()));
 			}
+            //TODO: Fix deprecation
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 			response = httpClient.execute(httpPost);
 			// TODO investigate
@@ -386,7 +390,8 @@ public class MySoup {
 			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
 			// String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
-			String s = EntityUtils.toString(entity, HTTP.USER_AGENT);
+            //Using HTTP.USER_AGENT crashes, UnupportedCharsetException
+			String s = EntityUtils.toString(entity, HTTP.UTF_8);
 			// EntityUtils.consume(entity);
 			// InputStream s = entity.getContent();
 			// System.err.println("encoding " + entity.getContentEncoding());
@@ -434,6 +439,7 @@ public class MySoup {
 		response = null;
 		try {
 			response = httpClient.execute(httpGet);
+            //TODO: Fix deprecation
 			response.getEntity().consumeContent();
 		} catch (Exception e) {
 			e.printStackTrace();
