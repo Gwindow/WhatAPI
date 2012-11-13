@@ -2,10 +2,6 @@
 Just a file to track my notes related to working on the WhatAPI since there isn't much of a point
 in opening issues on the main repo that only I really need to keep track of hah.
 
-### api.torrents.torrents.TorrentGroup
-Need a way to tell if this is bookmarked. It sounded like it was going to be added to the API
-response? If so, fantastic.
-
 ### Deprecation work
 Within MySoup some deprecated functions/classes are used, namely HTTP.UTF-8 and ThreadSafeClientConnManager
 I'll be replacing these with the appropriate functionality (when i found out what that is..)
@@ -18,18 +14,18 @@ so I will DO
 ### Shortening of some simple Boolean returning functions (getStatus and such)
 In many places a function like so exists:
 ```Java
-    public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
-	}
+public boolean getStatus() {
+    return status.equalsIgnoreCase("success");
+    if (status.equalsIgnoreCase("success"))
+        return true;
+    return false;
+}
 ```
 Where I have now changed them too
 ```Java
-    public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
-	}
+public boolean getStatus() {
+    return status.equalsIgnoreCase("success");
+}
 ```
 In other areas where and if else statement was being used to simply decide whether to return true or false
 I've changed the return statement to just return the result of evaluating the if condition, as is done here.
@@ -49,11 +45,11 @@ if (blah)
 In many areas a function exists like so:
 ```Java
 //Within class Thread
-    public static Thread threadFromIdandPage
+public static Thread threadFromIdandPage
 ```
 I have shortened the function names to
 ```Java
-    public static Thread fromIdandPage
+public static Thread fromIdandPage
 ```
 
 I've left the various crossReferenceByX, requestSearchFromX, torrentSearchFromX, userSearchFromX the same.
@@ -76,17 +72,17 @@ I've removed the try catch, let's see what happens. I should ask Gwindow to conf
 
 In function in notifications.Results:
 ```Java
-    public void downloadFile(String url, String path) throws IOException {
-		// todo fix this
-		String name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
-		URL u;
-		u = new URL(getDownloadLink());
-		ReadableByteChannel rbc = Channels.newChannel(u.openStream());
-		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
-		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
-		System.out.println("Downloaded " + name + " to " + path);
+public void downloadFile(String url, String path) throws IOException {
+    // todo fix this
+    String name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
+    URL u;
+    u = new URL(getDownloadLink());
+    ReadableByteChannel rbc = Channels.newChannel(u.openStream());
+    FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
+    fos.getChannel().transferFrom(rbc, 0, 1 << 24);
+    System.out.println("Downloaded " + name + " to " + path);
 
-	}
+}
 ```
 What's broken? Some testing would probably reveal it, but if I'll ask first to save some trouble haha.
 
