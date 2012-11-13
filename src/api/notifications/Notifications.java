@@ -50,11 +50,10 @@ public class Notifications {
 	 * @return the notifications
 	 */
 	public static Notifications notificationsFromNextPage() {
-		page += 1;
+		++page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + authkey;
-		Notifications n = (Notifications) MySon.toObject(url, Notifications.class);
-		return n;
+		return (Notifications) MySon.toObject(url, Notifications.class);
 	}
 
 	/**
@@ -63,11 +62,10 @@ public class Notifications {
 	 * @return the notifications
 	 */
 	public static Notifications notificationsFromPreviousPage() {
-		page -= 1;
+		--page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + authkey;
-		Notifications n = (Notifications) MySon.toObject(url, Notifications.class);
-		return n;
+		return (Notifications) MySon.toObject(url, Notifications.class);
 	}
 
 	/**
@@ -76,11 +74,15 @@ public class Notifications {
 	 * @return the last page
 	 */
 	public int getLastPage() {
+        //What throws?
+        return response.getPages().intValue();
+        /*
 		try {
 			return response.getPages().intValue();
 		} catch (Exception e) {
 			return 0;
 		}
+		*/
 	}
 
 	/**
@@ -89,6 +91,9 @@ public class Notifications {
 	 * @return true, if successful
 	 */
 	public boolean hasNextPage() {
+        //What throws?
+        return ((response.getPages().intValue() - response.getCurrentPages().intValue()) > 0);
+        /*
 		try {
 			if ((response.getPages().intValue() - response.getCurrentPages().intValue()) > 0)
 				return true;
@@ -97,6 +102,7 @@ public class Notifications {
 		} catch (Exception e) {
 			return false;
 		}
+		*/
 	}
 
 	/**
@@ -105,6 +111,9 @@ public class Notifications {
 	 * @return true, if successful
 	 */
 	public boolean hasPreviousPage() {
+        //What throws?
+        return ((response.getCurrentPages().intValue() != 1) || (response.getCurrentPages().intValue() == 0));
+        /*
 		try {
 			if (((response.getCurrentPages().intValue()) != 1) || ((response.getCurrentPages().intValue()) == 0))
 				return true;
@@ -113,6 +122,7 @@ public class Notifications {
 		} catch (Exception e) {
 			return false;
 		}
+		*/
 	}
 
 	/**
@@ -141,9 +151,7 @@ public class Notifications {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/*

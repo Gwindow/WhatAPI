@@ -36,7 +36,7 @@ public class Section {
 	 *            the page
 	 * @return the section
 	 */
-	public static Section sectionFromIdAndPage(int id, int page) {
+	public static Section fromIdAndPage(int id, int page) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + page + "&auth=" + authkey;
 		Section section = (Section) MySon.toObject(url, Section.class);
@@ -50,7 +50,7 @@ public class Section {
 	 * 
 	 * @return the section
 	 */
-	public static Section sectionFromNextPage() {
+	public static Section fromNextPage() {
 		page += 1;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + page + "&auth=" + authkey;
@@ -63,7 +63,7 @@ public class Section {
 	 * 
 	 * @return the section
 	 */
-	public static Section sectionFromPreviousPage() {
+	public static Section fromPreviousPage() {
 		page -= 1;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + page + "&auth=" + authkey;
@@ -78,7 +78,7 @@ public class Section {
 	 *            the id
 	 * @return the section
 	 */
-	public static Section sectionFromFirstPage(int id) {
+	public static Section fromFirstPage(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + 1 + "&auth=" + authkey;
 		Section section = (Section) MySon.toObject(url, Section.class);
@@ -143,9 +143,7 @@ public class Section {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/**

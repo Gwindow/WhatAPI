@@ -13,12 +13,12 @@ import java.util.List;
  * @since Jun 2, 2012 12:17:19 AM
  */
 public class Producer{
-   	
-	   /** The id. */
-	   private Number id;
-   	
-	   /** The name. */
-	   private String name;
+
+   /** The id. */
+   private Number id;
+
+   /** The name. */
+   private String name;
 
  	/**
 		 * Gets the id.

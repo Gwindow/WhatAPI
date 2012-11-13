@@ -158,8 +158,7 @@ public class MySoup {
 	 * @return the http get
 	 */
 	private static HttpGet getHttpGet(String url) {
-		HttpGet hg = new HttpGet(url);
-		return hg;
+		return new HttpGet(url);
 	}
 
 	/**
@@ -181,7 +180,7 @@ public class MySoup {
 	 * @return the forum sections
 	 */
 	public static ForumSections loadForumSections() {
-		if (forumSectionsLoaded == false) {
+		if (!forumSectionsLoaded) {
 			forumSections = ForumSections.init();
 			forumSectionsLoaded = true;
 		}
@@ -258,10 +257,7 @@ public class MySoup {
 	 * @return true, if is logged in
 	 */
 	public static boolean isLoggedIn() {
-		if ((cookies != null) && !cookies.isEmpty())
-			return true;
-		else
-			return false;
+        return (cookies != null && !cookies.isEmpty());
 	}
 
 	/**
@@ -290,7 +286,6 @@ public class MySoup {
 	public static void login(String url, String username, String password) throws CouldNotLoadException {
 		url = SITE + url;
 		try {
-
 			httpGet = getHttpGet(url);
 			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
@@ -310,9 +305,7 @@ public class MySoup {
 				entity.consumeContent();
 			}
 			cookies = httpClient.getCookieStore().getCookies();
-
 			loadIndex();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not login");
@@ -366,6 +359,7 @@ public class MySoup {
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 			response = httpClient.execute(httpPost);
 			// TODO investigate
+            //Investigate what issue?
 			// EntityUtils.consume(response.getEntity());
 			// response.getEntity().consumeContent();
 		} catch (UnsupportedEncodingException e) {
@@ -413,7 +407,6 @@ public class MySoup {
 	private static String inputStreamToString(InputStream is) {
 		String line = "";
 		StringBuilder total = new StringBuilder();
-
 		BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 
 		// Read response until the end
@@ -452,8 +445,7 @@ public class MySoup {
 		try {
 			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
-			String s = EntityUtils.toString(entity);
-			return s;
+			return EntityUtils.toString(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not load page");

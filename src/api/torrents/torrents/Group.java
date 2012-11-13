@@ -50,6 +50,9 @@ public class Group {
 	/** The year. */
 	private Number year;
 
+    /** If the TorrentGroup is bookmarked */
+    private boolean isBookmarked;
+
 	/**
 	 * Gets the catalogue number.
 	 * 
@@ -195,6 +198,15 @@ public class Group {
 	public String getOriginal() {
 		return this.getYear() + " - Original Release" + " / " + this.getRecordLabel() + " / " + this.getCatalogueNumber();
 	}
+
+    /**
+     * Check if the group is bookmarked
+     *
+     * @return True if torrent is bookmarked
+     */
+    public boolean isBookmarked(){
+        return this.isBookmarked;
+    }
 
 	/**
 	 * {@inheritDoc}

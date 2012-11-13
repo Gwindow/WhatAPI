@@ -60,7 +60,7 @@ public class ProductSearch {
 	 *            the upc
 	 * @return the product search
 	 */
-	public static ProductSearch productSearchFromUPC(String upc) {
+	public static ProductSearch fromUPC(String upc) {
 		try {
 			upc = URLEncoder.encode(upc, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -80,7 +80,7 @@ public class ProductSearch {
 	 *            the title
 	 * @return the product search
 	 */
-	public static ProductSearch productSearchFromTitle(String title) {
+	public static ProductSearch fromTitle(String title) {
 		try {
 			title = URLEncoder.encode(title, "UTF-8");
 		} catch (UnsupportedEncodingException e) {

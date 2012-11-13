@@ -24,8 +24,6 @@ public class MyStringDeserializer implements JsonDeserializer<Object> {
 	 */
 	@Override
 	public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		String s = StringUtils.unescapeHTML(json.getAsJsonPrimitive().getAsString());
-		return s;
-
+		return StringUtils.unescapeHTML(json.getAsJsonPrimitive().getAsString());
 	}
 }

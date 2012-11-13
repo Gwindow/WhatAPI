@@ -42,9 +42,7 @@ public class Index {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/* (non-Javadoc)

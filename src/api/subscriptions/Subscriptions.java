@@ -28,8 +28,7 @@ public class Subscriptions {
 	public static Subscriptions init() {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=subscriptions&auth=" + authkey;
-		Subscriptions subscriptions = (Subscriptions) MySon.toObject(url, Subscriptions.class);
-		return subscriptions;
+		return (Subscriptions) MySon.toObject(url, Subscriptions.class);
 	}
 
 	/**
@@ -47,9 +46,7 @@ public class Subscriptions {
 	 * @return true, if successful
 	 */
 	public boolean hasUnreadThreads() {
-		if (response.getThreads().isEmpty() || (response.getThreads() == null))
-			return false;
-		return true;
+        return !(response.getThreads().isEmpty() || (response.getThreads() == null));
 	}
 
 	/**
@@ -58,9 +55,7 @@ public class Subscriptions {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	// TODO needs to be tested

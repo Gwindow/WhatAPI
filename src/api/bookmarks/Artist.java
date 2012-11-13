@@ -36,7 +36,7 @@ public class Artist {
 		return this.artistName;
 	}
 
-	/**
+    /**
 	 * Removes the bookmark.
 	 */
 	public void removeBookmark() {

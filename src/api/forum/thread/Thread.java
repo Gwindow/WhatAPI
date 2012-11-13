@@ -60,7 +60,7 @@ public class Thread {
 	 *            the page
 	 * @return the thread
 	 */
-	public static Thread threadFromIdAndPage(int id, int page) {
+	public static Thread fromIdAndPage(int id, int page) {
 		String authkey = MySoup.getAuthKey();
 		String url;
 		if (!overridePostsPerPage) {
@@ -85,7 +85,7 @@ public class Thread {
 	 *            the post id
 	 * @return the thread
 	 */
-	public static Thread threadFromIdAndPostId(int id, int postId) {
+	public static Thread fromIdAndPostId(int id, int postId) {
 		String authkey = MySoup.getAuthKey();
 		String url;
 		if (!overridePostsPerPage) {
@@ -107,7 +107,7 @@ public class Thread {
 	 *            the id
 	 * @return the thread
 	 */
-	public static Thread threadFromFirstPage(int id) {
+	public static Thread fromFirstPage(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url;
 		if (!overridePostsPerPage) {
@@ -129,7 +129,7 @@ public class Thread {
 	 *            the id
 	 * @return the thread
 	 */
-	public static Thread threadFromLastPage(int id) {
+	public static Thread fromLastPage(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url;
 		// get the number of pages
@@ -159,7 +159,7 @@ public class Thread {
 	 * 
 	 * @return the thread
 	 */
-	public static Thread threadFromNextPage() {
+	public static Thread fromNextPage() {
 		page += 1;
 		String authkey = MySoup.getAuthKey();
 		String url;
@@ -177,7 +177,7 @@ public class Thread {
 	 * 
 	 * @return the thread
 	 */
-	public static Thread threadFromPreviousPage() {
+	public static Thread fromPreviousPage() {
 		page -= 1;
 		String authkey = MySoup.getAuthKey();
 		String url;
@@ -302,9 +302,7 @@ public class Thread {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/*

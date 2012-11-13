@@ -37,7 +37,7 @@ public class Artist {
 	 *            the id
 	 * @return the artist
 	 */
-	public static Artist artistFromId(int id) {
+	public static Artist fromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=artist&id=" + id + "&auth=" + authkey;
 		Artist artist = (Artist) MySon.toObject(url, Artist.class);
@@ -68,7 +68,7 @@ public class Artist {
 	 */
 	public void addBookmark() {
 		String authKey = MySoup.getAuthKey();
-		if (response.isBookmarked() == false) {
+		if (!response.isBookmarked()) {
 			MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
 			System.out.println("Bookmarked");
 		} else {
@@ -81,7 +81,7 @@ public class Artist {
 	 */
 	public void removeBookmark() {
 		String authKey = MySoup.getAuthKey();
-		if (response.isBookmarked() == true) {
+		if (response.isBookmarked()) {
 			MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
 			System.out.println("Removed bookmark");
 		} else {
@@ -94,7 +94,7 @@ public class Artist {
 	 */
 	public void enableNotifications() {
 		String authkey = MySoup.getAuthKey();
-		if (response.hasNotificationsEnabled() == false) {
+		if (!response.hasNotificationsEnabled()) {
 			MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
 			System.out.println("Notifications enabled");
 		} else {
@@ -107,7 +107,7 @@ public class Artist {
 	 */
 	public void disbaleNotifications() {
 		String authkey = MySoup.getAuthKey();
-		if (response.hasNotificationsEnabled() == true) {
+		if (response.hasNotificationsEnabled()) {
 			MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
 			System.out.println("Notifications disabled");
 		} else {
@@ -115,7 +115,7 @@ public class Artist {
 		}
 	}
 
-	// TODO fix
+	// TODO fix: What's wrong?
 	/*
 	 * public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
 	 * ArrayList<Tuple<String, String>>(); for (TorrentGroup tg : response.getTorrentgroup()) { for (Torrent t :
@@ -215,14 +215,12 @@ public class Artist {
 	 */
 	public String getSpotifyUrl() {
 		try {
-			String s = "spotify:artist" + URLEncoder.encode(getResponse().getName(), "UTF-8");
-			return s;
+			return "spotify:artist" + URLEncoder.encode(getResponse().getName(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("Could not encode url");
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 	/**
@@ -259,9 +257,6 @@ public class Artist {
 	 * @return true if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
-
 }

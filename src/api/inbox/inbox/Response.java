@@ -1,7 +1,3 @@
-
-
-
-
 package api.inbox.inbox;
 
 import java.util.List;
@@ -30,7 +26,7 @@ public class Response {
 	public int getUnread() {
 		int counter = 0;
 		for (Messages m : messages) {
-			if (m.isUnread() == true) {
+			if (m.isUnread()) {
 				counter++;
 			}
 		}

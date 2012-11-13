@@ -135,7 +135,6 @@ public class TorrentGroup {
 			return "Unknown";
 		else
 			return "API Error";
-
 	}
 
 	/**

@@ -86,9 +86,7 @@ public class TorrentGroup {
 	 */
 	public void addBookmark() {
         String authKey = MySoup.getAuthKey();
-        //Need to add check for this
-        //if (response.getGroup().isBookmarked() == false) {
-        if (true){
+        if (!response.getGroup().isBookmarked()) {
             MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
 	        System.out.println("Bookmarked");
         }
@@ -101,8 +99,7 @@ public class TorrentGroup {
 	 */
 	public void removeBookmark() {
         String authKey = MySoup.getAuthKey();
-        //if (response.getGroup().isBookmarked() == true) {
-        if (true){
+        if (response.getGroup().isBookmarked()) {
             MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
 	        System.out.println("Removed bookmark");
         }
@@ -117,9 +114,7 @@ public class TorrentGroup {
 	 * @return true if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/**
@@ -164,7 +159,6 @@ public class TorrentGroup {
 			}
 		}
 		return list;
-
 	}
 
 	/**
@@ -190,7 +184,6 @@ public class TorrentGroup {
 			}
 		}
 		return list;
-
 	}
 
 	/**
@@ -240,14 +233,12 @@ public class TorrentGroup {
 	 */
 	public String getSpotifyUrl() {
 		try {
-			String s = "spotify:" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8");
-			return s;
+			return "spotify:" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("Could not encode url");
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 	/**
@@ -264,7 +255,6 @@ public class TorrentGroup {
 			e.printStackTrace();
 		}
 		return s;
-
 	}
 
 	/*

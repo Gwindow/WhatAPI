@@ -115,9 +115,8 @@ public class Threads {
 	 * @return the url
 	 */
 	public String getUrl() {
-		String url = "forums.php?action=viewthread&threadid=" + threadId;
-		return url;
-	}
+		return "forums.php?action=viewthread&threadid=" + threadId;
+    }
 
 	/**
 	 * Gets the last read url.
@@ -125,8 +124,7 @@ public class Threads {
 	 * @return the last read url
 	 */
 	public String getLastReadUrl() {
-		String url = "forums.php?action=viewthread&threadid=" + threadId + "&postid=" + lastPostId;
-		return url;
+		return "forums.php?action=viewthread&threadid=" + threadId + "&postid=" + lastPostId;
 	}
 
 	/**
@@ -140,7 +138,6 @@ public class Threads {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -155,7 +152,6 @@ public class Threads {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	/* (non-Javadoc)

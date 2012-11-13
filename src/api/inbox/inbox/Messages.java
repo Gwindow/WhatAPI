@@ -139,7 +139,7 @@ public class Messages {
 	 * @return the username
 	 */
 	public String getUsername() {
-		if (username == null | username.length() == 0)
+		if (username == null || username.length() == 0)
 			username = "System";
 		return username;
 	}

@@ -259,13 +259,11 @@ public class Results {
 	 * @return the download link
 	 */
 	public String getDownloadLink() {
-		String link;
 		String authkey = MySoup.getAuthKey();
 		String passkey = MySoup.getPassKey();
-		link =
-				MySoup.getSite() + "torrents.php?action=download&id=" + torrentId + "5&authkey=" + authkey + "&torrent_pass="
-						+ passkey;
-		return link;
+		return MySoup.getSite() + "torrents.php?action=download&id=" + torrentId
+                + "&authkey=" + authkey
+                + "&torrent_pass=" + passkey;
 	}
 
 	/* (non-Javadoc)

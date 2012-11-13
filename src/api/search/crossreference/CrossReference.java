@@ -31,7 +31,7 @@ public class CrossReference {
 	 * @return the requests search
 	 */
 	public static RequestsSearch crossReferenceRequestsBySearchTerm(String searchTerm) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(searchTerm);
+		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
 		determinedSearchTerm = determineSearchString(ps.getItems());
 		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
 		return r;
@@ -45,7 +45,7 @@ public class CrossReference {
 	 * @return the requests search
 	 */
 	public static RequestsSearch crossReferenceRequestsByUPC(String upc) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(upc);
+		ProductSearch ps = ProductSearch.fromTitle(upc);
 		determinedSearchTerm = determineSearchString(ps.getItems());
 		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
 		return r;
@@ -59,7 +59,7 @@ public class CrossReference {
 	 * @return the torrent search
 	 */
 	public static TorrentSearch crossReferenceTorrentsBySearchTerm(String searchTerm) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(searchTerm);
+		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
 		determinedSearchTerm = determineSearchString(ps.getItems());
 		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
 		return t;
@@ -73,7 +73,7 @@ public class CrossReference {
 	 * @return the torrent search
 	 */
 	public static TorrentSearch crossReferenceTorrentsByUPC(String upc) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(upc);
+		ProductSearch ps = ProductSearch.fromTitle(upc);
 		determinedSearchTerm = determineSearchString(ps.getItems());
 		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
 		return t;
@@ -87,7 +87,7 @@ public class CrossReference {
 	 * @return the tuple
 	 */
 	public static Tuple<TorrentSearch, RequestsSearch> crossReferenceTorrentsAndRequestsByUPC(String upc) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(upc);
+		ProductSearch ps = ProductSearch.fromTitle(upc);
 		determinedSearchTerm = determineSearchString(ps.getItems());
 		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
 		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
@@ -102,7 +102,7 @@ public class CrossReference {
 	 * @return the tuple
 	 */
 	public static Tuple<TorrentSearch, RequestsSearch> crossReferenceTorrentsAndRequestsBySearchTerm(String searchTerm) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(searchTerm);
+		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
 		determinedSearchTerm = determineSearchString(ps.getItems());
 		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
 		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);

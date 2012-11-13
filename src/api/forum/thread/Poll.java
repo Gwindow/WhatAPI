@@ -40,10 +40,7 @@ public class Poll {
 	 * @return true if featured
 	 */
 	public boolean isFeatured() {
-		if (featured.equalsIgnoreCase("0000-00-00 00:00:00"))
-			return false;
-		else
-			return true;
+        return featured.equalsIgnoreCase("0000-00-00 00:00:00");
 	}
 
 	/**

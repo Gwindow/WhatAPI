@@ -333,9 +333,9 @@ public class Results {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
 		String passKey = MySoup.getPassKey();
-		String downloadLink =
-				site + "torrents.php?action=download&id=" + torrentId + "&authkey=" + authKey + "&torrent_pass=" + passKey;
-		return downloadLink;
+		return site + "torrents.php?action=download&id="
+                + torrentId + "&authkey=" + authKey
+                + "&torrent_pass=" + passKey;
 	}
 
 	/**
@@ -350,6 +350,7 @@ public class Results {
 	 */
 	public void downloadFile(String url, String path) throws IOException {
 		// todo fix this
+        //What's broken?
 		String name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
 		URL u;
 		u = new URL(getDownloadLink());

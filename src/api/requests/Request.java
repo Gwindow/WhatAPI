@@ -26,7 +26,7 @@ public class Request {
 	 *            the id
 	 * @return the request
 	 */
-	public static Request requestFromId(int id) {
+	public static Request fromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=request&id=" + id + "&auth=" + authkey;
 		Request request = (Request) MySon.toObject(url, Request.class);
@@ -48,9 +48,7 @@ public class Request {
 	 * @return true if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/* (non-Javadoc)

@@ -78,8 +78,7 @@ public class UserStats {
 	public Number getBuffer() {
 		double up = uploaded.doubleValue();
 		double down = downloaded.doubleValue();
-		double buffer = up - down;
-		return buffer;
+		return (up - down);
 	}
 
 	/*

@@ -26,7 +26,7 @@ public class Inbox {
 	 * @return the inbox
 	 */
 	public static Inbox init() {
-		return inboxFromPage(1);
+		return fromPage(1);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Inbox {
 	 *            the page
 	 * @return the inbox
 	 */
-	public static Inbox inboxFromPage(int page) {
+	public static Inbox fromPage(int page) {
 		String authkey = MySoup.getAuthKey();
 		Inbox.page = page;
 		String url = "ajax.php?action=inbox&page=" + page + "&auth=" + authkey;
@@ -49,9 +49,9 @@ public class Inbox {
 	 * 
 	 * @return the inbox
 	 */
-	public static Inbox inboxFromNextPage() {
-		page += 1;
-		return inboxFromPage(page);
+	public static Inbox fromNextPage() {
+		++page;
+		return fromPage(page);
 	}
 
 	/**
@@ -59,9 +59,9 @@ public class Inbox {
 	 * 
 	 * @return the inbox
 	 */
-	public static Inbox inboxFromPreviousPage() {
-		page -= 1;
-		return inboxFromPage(page);
+	public static Inbox fromPreviousPage() {
+		--page;
+		return fromPage(page);
 	}
 
 	/**
@@ -79,9 +79,7 @@ public class Inbox {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/**
@@ -90,11 +88,15 @@ public class Inbox {
 	 * @return the last page
 	 */
 	public int getLastPage() {
+        //What throws?
+        return response.getPages().intValue();
+        /*
 		try {
 			return response.getPages().intValue();
 		} catch (Exception e) {
 			return 1;
 		}
+		*/
 	}
 
 	/**
@@ -103,14 +105,16 @@ public class Inbox {
 	 * @return true, if successful
 	 */
 	public boolean hasNextPage() {
+        //What throws?
+        return ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0);
+        /*
 		try {
-			if ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0)
-				return true;
-			else
-				return false;
+			return ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0);
 		} catch (Exception e) {
+            System.out.println("Inbox.hasNextPage exception: " + e.g);
 			return false;
 		}
+		*/
 	}
 
 	/**
@@ -119,14 +123,15 @@ public class Inbox {
 	 * @return true, if successful
 	 */
 	public boolean hasPreviousPage() {
+        //What throws?
+        return ((response.getCurrentPage().intValue() != 1) || (response.getCurrentPage().intValue() == 0));
+        /*
 		try {
-			if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
-				return true;
-			else
-				return false;
+			return ((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0);
 		} catch (Exception e) {
 			return false;
 		}
+		*/
 	}
 
 	/**
