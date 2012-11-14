@@ -31,12 +31,11 @@ public static String scrape(String url) {
         return null;
         }
 ```
-It only seems to throw UnsupportedCharsetException when running on desktop, but accepts UTF-8 on desktop and Android,
-so I've changed it to that.
+It only seems to throw UnsupportedCharsetException when running on desktop, but accepts UTF-8 on desktop and Android, so I've changed it to that.
 
 I've also left the various HTTP.UTF-8 in as I couldn't seem to turn up any information on what they should be changed too.
 
-HttpEntity.consumeContent is also still being used as it's replacement method, EntityUtils.consume doesn't exist on Android
+HttpEntity.consumeContent is also still being used as it's replacement method, EntityUtils.consume doesn't exist on Android. We could tag the http libraries as exports to access the new features. Are there negative effects to this? 
 
 ### Code comments
 It seems like the comments are auto-generated perhaps? I'd like to add some more descriptive comments,
