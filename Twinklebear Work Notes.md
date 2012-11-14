@@ -12,30 +12,30 @@ works when running standalone, but on Android it crashes.
 in MySoup.java
 ```Java
 public static String scrape(String url) {
-        url = SITE + url;
-        httpGet = getHttpGet(url);
-        response = null;
-        try {
-            response = httpClient.execute(httpGet);
-            entity = response.getEntity();
-            // String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
-            //Using HTTP.USER_AGENT crashes, UnupportedCharsetException on desktop (not in app for some reason)
-            String s = EntityUtils.toString(entity, HTTP.UTF_8);
-            // EntityUtils.consume(entity);
-            // InputStream s = entity.getContent();
-            // System.err.println("encoding " + entity.getContentEncoding());
-            return s;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    url = SITE + url;
+    httpGet = getHttpGet(url);
+    response = null;
+    try {
+        response = httpClient.execute(httpGet);
+        entity = response.getEntity();
+        // String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
+        //Using HTTP.USER_AGENT crashes, UnupportedCharsetException on desktop (not in app for some reason)
+        String s = EntityUtils.toString(entity, HTTP.UTF_8);
+        // EntityUtils.consume(entity);
+        // InputStream s = entity.getContent();
+        // System.err.println("encoding " + entity.getContentEncoding());
+        return s;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
 }
 ```
 It only seems to throw UnsupportedCharsetException when running on desktop, but accepts UTF-8 on desktop and Android, so I've changed it to that.
 
 I've also left the various HTTP.UTF-8 in as I couldn't seem to turn up any information on what they should be changed too.
 
-HttpEntity.consumeContent is also still being used as it's replacement method, EntityUtils.consume doesn't exist on Android. We could tag the http libraries as exports to access the new features. Are there negative effects to this? 
+HttpEntity.consumeContent is also still being used as it's replacement method, EntityUtils.consume doesn't exist on Android.
 
 ### Code comments
 It seems like the comments are auto-generated perhaps? I'd like to add some more descriptive comments,
