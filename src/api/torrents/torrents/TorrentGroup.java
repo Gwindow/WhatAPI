@@ -127,9 +127,8 @@ public class TorrentGroup {
 		for (Torrents t : response.getTorrents()) {
 			String name = t.getFilePath();
 			if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
-				name =
-						response.getGroup().getName() + " - " + response.getGroup().getYear() + " (" + t.getMediaFormatEncoding()
-								+ ")";
+				name = response.getGroup().getName() + " - " + response.getGroup().getYear()
+                        + " (" + t.getMediaFormatEncoding() + ")";
 			}
 			list.add(new Tuple<String, String>(t.getDownloadLink(), name));
 		}

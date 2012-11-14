@@ -6,6 +6,38 @@ in opening issues on the main repo that only I really need to keep track of hah.
 Within MySoup some deprecated functions/classes are used, namely HTTP.UTF-8 and ThreadSafeClientConnManager
 I'll be replacing these with the appropriate functionality (when i found out what that is..)
 
+Update: ThreadSafeClientConnManager has to stay for now, using the recommended alternative, PoolingClientConnectionManager
+works when running standalone, but on Android it crashes.
+
+in MySoup.java
+```Java
+public static String scrape(String url) {
+        url = SITE + url;
+        httpGet = getHttpGet(url);
+        response = null;
+        try {
+            response = httpClient.execute(httpGet);
+            entity = response.getEntity();
+            // String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
+            //Using HTTP.USER_AGENT crashes, UnupportedCharsetException on desktop (not in app for some reason)
+            String s = EntityUtils.toString(entity, HTTP.UTF_8);
+            // EntityUtils.consume(entity);
+            // InputStream s = entity.getContent();
+            // System.err.println("encoding " + entity.getContentEncoding());
+            return s;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        }
+```
+It only seems to throw UnsupportedCharsetException when running on desktop, but accepts UTF-8 on desktop and Android,
+so I've changed it to that.
+
+I've also left the various HTTP.UTF-8 in as I couldn't seem to turn up any information on what they should be changed too.
+
+HttpEntity.consumeContent is also still being used as it's replacement method, EntityUtils.consume doesn't exist on Android
+
 ### Code comments
 It seems like the comments are auto-generated perhaps? I'd like to add some more descriptive comments,
 if only to just force myself to read through the all the code. Seems like there's a lot of TODO: description,
@@ -81,7 +113,6 @@ public void downloadFile(String url, String path) throws IOException {
     FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
     fos.getChannel().transferFrom(rbc, 0, 1 << 24);
     System.out.println("Downloaded " + name + " to " + path);
-
 }
 ```
 What's broken? Some testing would probably reveal it, but if I'll ask first to save some trouble haha.

@@ -144,7 +144,7 @@ public class MySoup {
 		DefaultHttpClient client = new DefaultHttpClient();
 		ClientConnectionManager mgr = client.getConnectionManager();
 		HttpParams params = client.getParams();
-        //TODO: replace ThreadSafeClientConnManager with PoolingClientConnectionManager to fix deprecation
+        //Yes it's deprecated, no we can't change it. Using PoolingClientConnectionManager crashes on Android
 		client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
 		// HttpProtocolParams.setUserAgent(client.getParams(), "WhatAPI");
 		return client;
@@ -295,15 +295,12 @@ public class MySoup {
 			nvps.add(new BasicNameValuePair("username", username));
 			nvps.add(new BasicNameValuePair("password", password));
 
-            //TODO: Fix deprecation
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
 			response = httpClient.execute(httpPost);
 			entity = response.getEntity();
-			if (entity != null) {
-                //TODO: Fix deprecation
-				entity.consumeContent();
-			}
+			if (entity != null)
+                entity.consumeContent();
 			cookies = httpClient.getCookieStore().getCookies();
 			loadIndex();
 		} catch (Exception e) {
@@ -355,7 +352,6 @@ public class MySoup {
 			for (Tuple<String, String> t : list) {
 				nvps.add(new BasicNameValuePair(t.getA(), t.getB()));
 			}
-            //TODO: Fix deprecation
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 			response = httpClient.execute(httpPost);
 			// TODO investigate
@@ -366,7 +362,6 @@ public class MySoup {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not post data");
 		}
-
 	}
 
 	/**
@@ -384,7 +379,7 @@ public class MySoup {
 			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
 			// String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
-            //Using HTTP.USER_AGENT crashes, UnupportedCharsetException
+            //Using HTTP.USER_AGENT crashes, UnupportedCharsetException on desktop (not in app for some reason)
 			String s = EntityUtils.toString(entity, HTTP.UTF_8);
 			// EntityUtils.consume(entity);
 			// InputStream s = entity.getContent();
@@ -394,7 +389,6 @@ public class MySoup {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	/**
@@ -432,7 +426,6 @@ public class MySoup {
 		response = null;
 		try {
 			response = httpClient.execute(httpGet);
-            //TODO: Fix deprecation
 			response.getEntity().consumeContent();
 		} catch (Exception e) {
 			e.printStackTrace();
