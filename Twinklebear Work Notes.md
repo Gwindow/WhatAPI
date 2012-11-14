@@ -29,7 +29,7 @@ public static String scrape(String url) {
             e.printStackTrace();
         }
         return null;
-        }
+}
 ```
 It only seems to throw UnsupportedCharsetException when running on desktop, but accepts UTF-8 on desktop and Android, so I've changed it to that.
 
