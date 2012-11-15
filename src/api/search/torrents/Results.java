@@ -21,7 +21,7 @@ public class Results {
 	private String groupName;
 
 	/** The group time. */
-	private Number groupTime;
+	private String groupTime;
 
 	/** The group year. */
 	private Number groupYear;
@@ -85,7 +85,7 @@ public class Results {
 	 * 
 	 * @return the group time
 	 */
-	public Number getGroupTime() {
+	public String getGroupTime() {
 		return this.groupTime;
 	}
 

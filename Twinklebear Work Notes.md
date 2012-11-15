@@ -97,6 +97,26 @@ the local variable n isn't needed, so I've reduced the statement too
 return (Notifications) MySon.toObject(url, Notifications.class);
 ```
 
+### Bugs
+Torrent Search returning null
+I seem to be getting a null torrentSearch in the Async task in TorrentSearchActivity, looking into why. Have
+tracked the issue down through my WhatAPI Test program. When trying to parse the search result to object from json
+we get Expecting number, got: STRING. Now to find out which one is wrong. Found the issue:
+in the search response results, the value of groupTime is supposed to be a number, but I seem to be getting a string back
+the API says it should return a number on the wiki page and the app running on my phone doesn't seem to crash either.
+
+The scraped JSON response showing the issue:
+```json
+Scraped: {"status":"success","response":{"currentPage":1,"pages":31,"results":[
+{"groupId":72058492,"groupName":"All Punk Rods: A Gearhead Magazine Compilation",
+"artist":"Various Artists","tags":["garage","punk","surf"],"bookmarked":false,
+"vanityHouse":false,"groupYear":1998,"releaseType":"Compilation",
+"groupTime":"1352875841","maxSize":248945626,
+```
+Where you can see groupTime is a String now. But it should be a number. Why has this changed? Why doesn't the released
+app crash with what I can only assume is the same response? A note for this also exists in the Android app repo as that's
+where I encountered the issue.
+
 ### Questions:
 Within inbox.inbox.Inbox.hasNextPage and inbox.inbox.Inbox.hasPreviousPage there is nothing that can throw an exception, so why is it in try/catch?
 I've removed the try catch, let's see what happens. I should ask Gwindow to confirm this removal is ok.
