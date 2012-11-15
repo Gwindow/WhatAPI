@@ -11,6 +11,8 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CircularRedirectException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -427,15 +429,39 @@ public class MySoup {
 		url = SITE + url;
 		httpGet = getHttpGet(url);
 		response = null;
+        boolean success = false;
 		try {
 			response = httpClient.execute(httpGet);
-			response.getEntity().consumeContent();
-		} catch (Exception e) {
-			e.printStackTrace();
-            return false;
+            success = (response.getStatusLine().getStatusCode() == 200);
 		}
-        System.out.println("pressLink status code: " + response.getStatusLine().getStatusCode());
-        return (response.getStatusLine().getStatusCode() == 200);
+        catch (ClientProtocolException e){
+            //Exception specific to receiving the circular redirect when changing notifications
+            if (e.getCause() instanceof CircularRedirectException){
+                //Double check we we're changing notifications
+                if (url.contains("notify"))
+                    success = true;
+                else
+                    e.printStackTrace();
+            }
+            else
+                e.printStackTrace();
+        }
+        catch (Exception e) {
+			e.printStackTrace();
+            System.out.println("pressLink error: " + e.getMessage());
+            success = false;
+		}
+        finally {
+            //Clean up
+            try {
+                if (response != null && response.getEntity() != null)
+                    response.getEntity().consumeContent();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return success;
 	}
 
 	public static String scrapeOther(String url) throws CouldNotLoadException {

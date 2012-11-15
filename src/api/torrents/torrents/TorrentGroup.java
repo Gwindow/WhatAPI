@@ -87,8 +87,8 @@ public class TorrentGroup {
 	public boolean addBookmark() {
         String authKey = MySoup.getAuthKey();
         if (!response.getGroup().isBookmarked()){
-            boolean changed = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
-            if (changed){
+            boolean success = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
+            if (success){
                 response.getGroup().setBookmarked(true);
                 return true;
             }
@@ -103,8 +103,8 @@ public class TorrentGroup {
 	public boolean removeBookmark() {
         String authKey = MySoup.getAuthKey();
         if (response.getGroup().isBookmarked()){
-            boolean changed = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
-            if (changed){
+            boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
+            if (success){
                 response.getGroup().setBookmarked(false);
                 return true;
             }

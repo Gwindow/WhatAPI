@@ -66,53 +66,74 @@ public class Artist {
 	/**
 	 * Adds the bookmark.
 	 */
-	public void addBookmark() {
+	public boolean addBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (!response.isBookmarked()) {
-			MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
-			System.out.println("Bookmarked");
-		} else {
-			System.err.println("Already bookmarked");
+			boolean success = MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
+            if (success){
+                response.setBookmarked(true);
+                return true;
+            }
+            return false;
 		}
+        //If it's already bookmarked, just say it went ok
+        return true;
 	}
 
 	/**
 	 * Removes the bookmark.
 	 */
-	public void removeBookmark() {
+	public boolean removeBookmark() {
 		String authKey = MySoup.getAuthKey();
 		if (response.isBookmarked()) {
-			MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
-			System.out.println("Removed bookmark");
-		} else {
-			System.err.println("Already isn't bookmarked");
+			boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
+            if (success){
+                response.setBookmarked(false);
+                return true;
+            }
+            else
+                return false;
 		}
+        //If it's already not bookmarked, say it went ok
+        return true;
 	}
 
 	/**
 	 * Enable notifications.
 	 */
-	public void enableNotifications() {
+	public boolean enableNotifications() {
 		String authkey = MySoup.getAuthKey();
 		if (!response.hasNotificationsEnabled()) {
-			MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
-			System.out.println("Notifications enabled");
-		} else {
-			System.err.println("Notifications already enabled");
+			boolean success = MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
+			if (success){
+                response.setNotificationsEnabled(true);
+                System.out.println("Notifications enabled");
+                return true;
+            }
+            else
+                return false;
 		}
+        //If already enabled, just say it went ok
+        return true;
 	}
 
 	/**
-	 * Disbale notifications.
+	 * Disabale notifications.
 	 */
-	public void disbaleNotifications() {
+	public boolean disableNotifications() {
 		String authkey = MySoup.getAuthKey();
 		if (response.hasNotificationsEnabled()) {
-			MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
-			System.out.println("Notifications disabled");
-		} else {
-			System.err.println("Notifications already disabled");
+			boolean success = MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
+            if (success){
+                response.setNotificationsEnabled(false);
+                System.out.println("Notifications disabled");
+                return true;
+            }
+            else
+                return false;
 		}
+        //If already disabled just say it went ok
+        return true;
 	}
 
 	// TODO fix: What's wrong?

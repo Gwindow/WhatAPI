@@ -117,6 +117,17 @@ Where you can see groupTime is a String now. But it should be a number. Why has 
 app crash with what I can only assume is the same response? A note for this also exists in the Android app repo as that's
 where I encountered the issue.
 
+### Enable Notification toggling for Artists
+- Trying to do this results in an error in the API as a result of how the site handles notification toggleing via a circular redirect.
+This is currently interpreted as an error but in fact it means the notification status change was successful. I'm undecided quite what to do now.
+Should I catch CircularRedirectException, check if the url has "notify" in it and if so, say it went ok?
+- I've restructured the pressLink function to allow for enabling/disabling notifications. To do this I've added a catch block to
+check for the specific error thrown by receiving the circular redirect resulting from setting notifications and in for additional checking
+it confirms that "notify" is in the url to make sure this error is actually the expected behavior and we still print the error if it
+turns out this is actually an error, not the notify behavior.
+- In addition I've modified the function to perform clean up the HttpEntity in a finally block, with some null checking for safety, this way
+we still clean up if needed even when hitting an exception.
+
 ### Questions:
 Within inbox.inbox.Inbox.hasNextPage and inbox.inbox.Inbox.hasPreviousPage there is nothing that can throw an exception, so why is it in try/catch?
 I've removed the try catch, let's see what happens. I should ask Gwindow to confirm this removal is ok.

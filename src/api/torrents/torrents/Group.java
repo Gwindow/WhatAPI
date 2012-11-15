@@ -212,7 +212,7 @@ public class Group {
      * Set the is bookmarked property. We only do this since if add/removeBookmark
      * succeeded we know what we changed the property too and want to update the
      * Group without having to reload the entire thing. Don't change this if you
-     * don't think the API request went ok. (ie. add/remove returned false)
+     * don't think the API request went ok! (ie. add/remove returned false)
      *
      * @param val
      *      The val to set isBookmarked too
