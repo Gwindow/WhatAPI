@@ -419,8 +419,11 @@ public class MySoup {
 	 * 
 	 * @param url
 	 *            the url
+     *
+     * @return
+     *      true if response ok, false if failed
 	 */
-	public static void pressLink(String url) {
+	public static boolean pressLink(String url) {
 		url = SITE + url;
 		httpGet = getHttpGet(url);
 		response = null;
@@ -429,7 +432,10 @@ public class MySoup {
 			response.getEntity().consumeContent();
 		} catch (Exception e) {
 			e.printStackTrace();
+            return false;
 		}
+        System.out.println("pressLink status code: " + response.getStatusLine().getStatusCode());
+        return (response.getStatusLine().getStatusCode() == 200);
 	}
 
 	public static String scrapeOther(String url) throws CouldNotLoadException {

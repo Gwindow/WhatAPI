@@ -84,28 +84,35 @@ public class TorrentGroup {
 	 * 
 	 * @return the status
 	 */
-	public void addBookmark() {
+	public boolean addBookmark() {
         String authKey = MySoup.getAuthKey();
-        if (!response.getGroup().isBookmarked()) {
-            MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
-	        System.out.println("Bookmarked");
+        if (!response.getGroup().isBookmarked()){
+            boolean changed = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
+            if (changed){
+                response.getGroup().setBookmarked(true);
+                return true;
+            }
+            return false;
         }
-        else {
-            System.err.println("Already bookmarked");
-        }
+        //If it's already bookmarked, just say we succeeded
+        return true;
     }
 	 /**
 	 * Removes the bookmark.
 	 */
-	public void removeBookmark() {
+	public boolean removeBookmark() {
         String authKey = MySoup.getAuthKey();
-        if (response.getGroup().isBookmarked()) {
-            MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
-	        System.out.println("Removed bookmark");
+        if (response.getGroup().isBookmarked()){
+            boolean changed = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
+            if (changed){
+                response.getGroup().setBookmarked(false);
+                return true;
+            }
+            else
+                return false;
         }
-        else {
-            System.err.println("Already isn't bookmarked");
-        }
+        //If it's already not bookmarked, just say we succeeded
+        return true;
     }
 
 	/**
