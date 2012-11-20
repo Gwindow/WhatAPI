@@ -98,7 +98,7 @@ return (Notifications) MySon.toObject(url, Notifications.class);
 ```
 
 ### Bugs
-Torrent Search returning null
+#### Torrent Search returning null
 I seem to be getting a null torrentSearch in the Async task in TorrentSearchActivity, looking into why. Have
 tracked the issue down through my WhatAPI Test program. When trying to parse the search result to object from json
 we get Expecting number, got: STRING. Now to find out which one is wrong. Found the issue:
@@ -116,6 +116,10 @@ Scraped: {"status":"success","response":{"currentPage":1,"pages":31,"results":[
 Where you can see groupTime is a String now. But it should be a number. Why has this changed? Why doesn't the released
 app crash with what I can only assume is the same response? A note for this also exists in the Android app repo as that's
 where I encountered the issue.
+
+#### Intermittent null artist name and/or image file
+This is a tricky one on the server side where sometimes we'll be given a null for artist name or image file or both
+for now I'll band-aid it by converting nulls to "failed to load" strings in the deserializer.
 
 ### Enable Notification toggling for Artists
 Trying to do this results in an error in the API as a result of how the site handles notification toggleing via a circular redirect.
@@ -158,3 +162,55 @@ In torrents.artist.Artist.getDownloadLinksList() it's commented out and says TOD
 In user.User the function removeFromFriends is commented out and tagged TODO complete. What is left to be finished?
 
 In whatstatus.WhatStatus the function getTweets is commented out. What should be done with this function?
+
+## Resolved Bugs
+#### Japanese/Non-English characters
+##### Resolved:
+This issue was resolved by adding the apache commons lang3 library to the WhatAPI and using
+StringEscapeUtils.unescapeHtml4 in MyStringDeserializer in the API. This bug resolution note will also
+be added to the api.
+
+Seems to not display them correctly instead showing gibberish symbols. Perhaps we aren't drawing
+the text with the right encoding? Or reading it with the wrong encoding? This happens on my phone too
+so I'm sure I didn't break anything with this issue.
+
+I made some requests to artists with Japanese characters and have found the issue. The response we receive
+contains bad characters for the artist name and album names. Basically anywhere that the Kanji characters appear,
+I think it's safe to assume this issue would also come up for other special characters but will have to find
+an artist with the characters to test on. For now see response for artist id 781409 name 神聖かまってちゃん
+
+where I've edited it to show the relevant areas.
+```json
+{"status":"success","response":{"id":781409,"name":null,"notificationsEnabled":false,
+"hasBookmarked":false,"image":null
+```
+
+it does also have an image, so why do we get null here? Note the name being null.
+For the torrent groups: album titles should be 8月32日へ for first album and つまんね for second. Instead we get
+
+```json
+First:
+"torrentgroup":[{"groupId":72287531,"groupName":"8&#26376;32&#26085;&#12408;","groupYear":2011,
+
+Second:
+{"groupId":72289938,"groupName":"&#12388;&#12414;&#12435;&#12397;","groupYear":2010,
+```
+
+Where now we get garbage for the group names. I tested this in my browser so I think this is a serverside issue?
+I'll have to ask Gwindow.
+
+The plot thickens: When I google
+```txt
+8&#26376;32&#26085;&#12408;
+```
+it brings up results for 8月32日へ. This is clearly an encoding issue, but what is the encoding being used?
+It also seems if I type it in the text here github interprets it correctly.
+
+Have found the cause. The encoding that is being sent in the API response for these characters is HTML Entity (decimal)
+but the encoding Java expects is Unicode. We should get something like
+```Java
+"\u795E"
+```
+From the API response to receive a unicode character. That or we'll need to do some sort of conversion. I think a tweak
+in the API response is probably best though, as this may be an issue for other people using the API too. Although they should
+probably be notified of the change if it does change.

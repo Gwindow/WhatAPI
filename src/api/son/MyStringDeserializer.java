@@ -9,6 +9,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * The Class MyStringDeserializer.
@@ -24,6 +25,6 @@ public class MyStringDeserializer implements JsonDeserializer<Object> {
 	 */
 	@Override
 	public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		return StringUtils.unescapeHTML(json.getAsJsonPrimitive().getAsString());
+		return StringEscapeUtils.unescapeHtml4(json.getAsJsonPrimitive().getAsString());
 	}
 }

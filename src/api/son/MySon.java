@@ -1,14 +1,13 @@
 package api.son;
 
+import api.soup.MySoup;
+import api.util.CouldNotLoadException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
-
-import api.soup.MySoup;
-import api.util.CouldNotLoadException;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 /**
  * Convert JSON to a Java object.
