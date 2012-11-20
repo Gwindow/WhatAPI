@@ -170,6 +170,7 @@ This issue was resolved by adding the apache commons lang3 library to the WhatAP
 StringEscapeUtils.unescapeHtml4 in MyStringDeserializer in the API. This bug resolution note will also
 be added to the api.
 
+#### Issue:
 Seems to not display them correctly instead showing gibberish symbols. Perhaps we aren't drawing
 the text with the right encoding? Or reading it with the wrong encoding? This happens on my phone too
 so I'm sure I didn't break anything with this issue.
