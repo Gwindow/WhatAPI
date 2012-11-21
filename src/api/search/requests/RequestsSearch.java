@@ -144,9 +144,9 @@ public class RequestsSearch {
 				e.printStackTrace();
 			}
 			String url = "ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&tags=" + tags + "&auth=" + authkey;
-			RequestsSearch requestSearch = (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
-			return requestSearch;
-		} else
+			return (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
+		}
+        else
 			return null;
 	}
 

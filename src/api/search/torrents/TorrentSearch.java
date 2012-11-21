@@ -109,8 +109,7 @@ public class TorrentSearch {
 			String authkey = MySoup.getAuthKey();
 			String url = "ajax.php?action=browse&searchstr=" + searchTerm + "&page=" + page + "&auth=" + authkey;
 
-			TorrentSearch torrentSearch = (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
-			return torrentSearch;
+			return (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
 		} else
 			return null;
 	}
@@ -141,10 +140,9 @@ public class TorrentSearch {
 			tags = tags.replace(",", "&");
 			String url =
 					"ajax.php?action=browse&searchstr=" + searchTerm + "&taglist=" + tags + "&page=" + page + "&auth=" + authkey;
-
-			TorrentSearch torrentSearch = (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
-			return torrentSearch;
-		} else
+			return (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
+		}
+        else
 			return null;
 	}
 
@@ -155,10 +153,7 @@ public class TorrentSearch {
 	 */
 	public boolean hasNextPage() {
 		try {
-			if (((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0))
-				return true;
-			else
-				return false;
+			return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
 		} catch (Exception e) {
 			return false;
 		}
@@ -171,10 +166,7 @@ public class TorrentSearch {
 	 */
 	public boolean hasPreviousPage() {
 		try {
-			if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
-				return true;
-			else
-				return false;
+			return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
 		} catch (Exception e) {
 			return false;
 		}
@@ -204,9 +196,7 @@ public class TorrentSearch {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/**
