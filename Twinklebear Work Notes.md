@@ -1,8 +1,8 @@
-## Twinklebear Work Notes
+# Twinklebear Work Notes
 Just a file to track my notes related to working on the WhatAPI since there isn't much of a point
 in opening issues on the main repo that only I really need to keep track of hah.
 
-### Deprecation work
+## Deprecation work
 Within MySoup some deprecated functions/classes are used, namely HTTP.UTF-8 and ThreadSafeClientConnManager
 I'll be replacing these with the appropriate functionality (when i found out what that is..)
 
@@ -37,12 +37,12 @@ I've also left the various HTTP.UTF-8 in as I couldn't seem to turn up any infor
 
 HttpEntity.consumeContent is also still being used as it's replacement method, EntityUtils.consume doesn't exist on Android.
 
-### Code comments
+## Code comments
 It seems like the comments are auto-generated perhaps? I'd like to add some more descriptive comments,
 if only to just force myself to read through the all the code. Seems like there's a lot of TODO: description,
 so I will DO
 
-### Shortening of some simple Boolean returning functions (getStatus and such)
+## Shortening of some simple Boolean returning functions (getStatus and such)
 In many places a function like so exists:
 ```Java
 public boolean getStatus() {
@@ -72,7 +72,7 @@ if (blah == true)
 if (blah)
 ```
 
-### Function name shortening
+## Function name shortening
 In many areas a function exists like so:
 ```Java
 //Within class Thread
@@ -86,7 +86,7 @@ public static Thread fromIdandPage
 I've left the various crossReferenceByX, requestSearchFromX, torrentSearchFromX, userSearchFromX the same.
 Although maybe they should be shortened.
 
-### Removal of redundant local variables
+## Removal of redundant local variables
 In some areas a value is returned like so:
 ```Java
 Notifications n = (Notifications) MySon.toObject(url, Notifications.class);
@@ -97,7 +97,7 @@ the local variable n isn't needed, so I've reduced the statement too
 return (Notifications) MySon.toObject(url, Notifications.class);
 ```
 
-### Bugs
+## Bugs
 #### Torrent Search returning null
 I seem to be getting a null torrentSearch in the Async task in TorrentSearchActivity, looking into why. Have
 tracked the issue down through my WhatAPI Test program. When trying to parse the search result to object from json
@@ -134,7 +134,7 @@ turns out this is actually an error, not the notify behavior.
 In addition I've modified the function to perform clean up the HttpEntity in a finally block, with some null checking for safety, this way
 we still clean up if needed even when hitting an exception.
 
-### Feature Additions
+## Feature Additions
 #### Adding ability to view Better.php for transcoding torrents
 Unfortunately the way this is implemented at the moment is pretty hideous. Separate class exists
 for viewing Transcoded better, BetterTranscode and it uses TranscodingResponse as its Response field.
@@ -151,7 +151,7 @@ In addition when trying to view better API response for: Snatch, Uploading, Tags
 Various Artists and 1982 Cleanup I either got status: failure or no response at all. I should ask Gwindow if it
 would be possible to have these responses added.
 
-### Questions:
+## Questions:
 What should be done about html characters? Namely things such as <b>, <br /> and so on.
 
 Within inbox.inbox.Inbox.hasNextPage and inbox.inbox.Inbox.hasPreviousPage there is nothing that can throw an exception, so why is it in try/catch?
