@@ -121,7 +121,7 @@ where I encountered the issue.
 This is a tricky one on the server side where sometimes we'll be given a null for artist name or image file or both
 for now I'll band-aid it by converting nulls to "failed to load" strings in the deserializer.
 
-### Enable Notification toggling for Artists
+#### Enable Notification toggling for Artists
 Trying to do this results in an error in the API as a result of how the site handles notification toggleing via a circular redirect.
 This is currently interpreted as an error but in fact it means the notification status change was successful. I'm undecided quite what to do now.
 Should I catch CircularRedirectException, check if the url has "notify" in it and if so, say it went ok?
@@ -150,6 +150,16 @@ style by how gson functions. Maybe we can do better though.
 In addition when trying to view better API response for: Snatch, Uploading, Tags, Folder names, File names,
 Various Artists and 1982 Cleanup I either got status: failure or no response at all. I should ask Gwindow if it
 would be possible to have these responses added.
+
+#### Improving the public side of the library
+It seems like a lot of the classes are defined the way they are because it's how Gson requires them to be in order for it
+to properly deserialize the API Json response. As such we're using the highest-level of the response so to speak
+as our main class for requesting/interacting with the site API, and using getters to get the subclasses returned by the
+response (Response and status and so on). I'm curious if it would be possible to create a better wrapper class of
+sorts to clean up how we interact with these Gson-styled classes from the public side of the library.
+
+Just a thought. As it is now, I'm still trying to get familiar with the code-base so after I know more perhaps I can
+come up with something more concrete and test it out.
 
 ## Questions:
 What should be done about html characters? Namely things such as <b>, <br /> and so on.
