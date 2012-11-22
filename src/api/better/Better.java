@@ -12,41 +12,88 @@ import api.son.MySon;
 import api.soup.MySoup;
 
 /**
- * The Class Better.
- * 
- * //TODO description
+ * The Class Better
+ * For getting the information from better.php
+ * through the API. Currently this class can only
+ * handle the response returned for Single seeded FLAC
  * 
  * @author Gwindow
  */
 public class Better {
-
-	/** The response. */
+    /**
+     * The API response, a list of all the torrents
+     * that can be improved
+     */
 	private List<Response> response;
 
-	/** The status. */
+	/** The API response status */
 	private String status;
 
-	/**
-	 * Inits Better.
-	 * 
-	 * @param types
-	 *            the types
-	 * @return the better
-	 */
-	public static Better init(final BetterTypes types) {
+    /**
+     * Init BetterSingle: Get the list of single seeded FLAC torrents
+     * from better.php
+     *
+     * @param betterType
+     *      The type of better response to get. Currently only supports SINGLE
+     *      for Transcoding use BetterTranscode
+     *
+     * @return an instance of Better containing the result of the request
+     */
+	public static Better init(final BetterType betterType) {
 		String authkey = MySoup.getAuthKey();
-		String type = null;
-		switch (types) {
-		case SINGLE:
-			type = "single";
-		}
-		String url = "ajax.php?action=better&method=" + type + "&auth=" + authkey;
-		Better better = (Better) MySon.toObject(url, Better.class);
-		return better;
+        //Only compatible with SINGLE atm
+		//String type = resolveBetterType(betterType);
+		String url = "ajax.php?action=better&method=" + "single" + "&auth=" + authkey;
+		return (Better) MySon.toObject(url, Better.class);
 	}
 
+    /**
+     * Resolve the BetterType enum to the corresponding
+     * method=? string for the API request
+     * because we're required to have a default, even though no other values are
+     * possible, the default returns SINGLE
+     *
+     * @param type
+     *      The BetterType enum corresponding to the type we want
+     * @return the string corresponding to the desired better method, along with
+     *      any extra fields if needed
+     */
+    /*
+    protected static String resolveBetterType(final BetterType type){
+        switch (type){
+            case TRANSCODEV0:
+                return "transcode&type=0";
+            case TRANSCODEV2:
+                return "transcode&type=1";
+            case TRANSCODE320:
+                return "transcode&type=2";
+            case TRANSCODEALL:
+                return "transcode&type=3";
+            case SNATCH:
+                return "snatch";
+            case UPLOAD:
+                return "upload";
+            case TAGS:
+                return "tags&filter=all";
+            case FOLDERNAMES:
+                return "folders";
+            case FILENAMES:
+                return "files";
+            case SINGLE:
+                return "single";
+            case VARIOUSARTISTS:
+                return "va";
+            case CLEANUP:
+                return "cleanup";
+            default:
+                return "single";
+        }
+    }
+    */
+
 	/**
-	 * Download all.
+	 * Download all torrents that could be improved listed in
+     * the Better response
 	 * 
 	 * @param downloadLocation
 	 *            the download location
@@ -64,14 +111,14 @@ public class Better {
 	}
 
 	/**
-	 * Download torrent.
+	 * Download a torrent
 	 * 
 	 * @param url
-	 *            the url
+	 *            the url to download from
 	 * @param path
-	 *            the path
+	 *            the path to save to
 	 * @param name
-	 *            the name
+	 *            the name of the file to save to
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
@@ -84,8 +131,8 @@ public class Better {
 		System.out.println("Downloaded " + name + " to " + path);
 	}
 
-	/**
-	 * Gets the response.
+    /**
+	 * Gets the API response
 	 * 
 	 * @return the response
 	 */
@@ -94,21 +141,14 @@ public class Better {
 	}
 
 	/**
-	 * Gets the status.
+	 * Gets the status, True if success, False otherwise
 	 * 
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+		return status.equalsIgnoreCase("success");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Better [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

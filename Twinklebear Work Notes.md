@@ -134,6 +134,23 @@ turns out this is actually an error, not the notify behavior.
 In addition I've modified the function to perform clean up the HttpEntity in a finally block, with some null checking for safety, this way
 we still clean up if needed even when hitting an exception.
 
+### Feature Additions
+#### Adding ability to view Better.php for transcoding torrents
+Unfortunately the way this is implemented at the moment is pretty hideous. Separate class exists
+for viewing Transcoded better, BetterTranscode and it uses TranscodingResponse as its Response field.
+This is mainly due to how Google gson handles serialization and the differences in the API response.
+
+For single seeded flac response we get an array of Artists (the class) containing some information.
+For transcoding we're given a single artist name as a string. Google gson doesn't like this heh.
+
+So for the time being it's pretty nasty. I've got to look more into how gson handles inheritance and such and
+maybe I can clean up this, along with the rest of the API. But it seems like we're kind of shoved into this
+style by how gson functions. Maybe we can do better though.
+
+In addition when trying to view better API response for: Snatch, Uploading, Tags, Folder names, File names,
+Various Artists and 1982 Cleanup I either got status: failure or no response at all. I should ask Gwindow if it
+would be possible to have these responses added.
+
 ### Questions:
 What should be done about html characters? Namely things such as <b>, <br /> and so on.
 
