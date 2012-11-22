@@ -7,7 +7,7 @@ Within MySoup some deprecated functions/classes are used, namely HTTP.UTF-8 and 
 I'll be replacing these with the appropriate functionality (when i found out what that is..)
 
 Update: ThreadSafeClientConnManager has to stay for now, using the recommended alternative, PoolingClientConnectionManager
-works when running standalone, but on Android it crashes.
+works when running standalone, but on Android it crashes with a missing class def error.
 
 in MySoup.java
 ```Java
@@ -135,6 +135,8 @@ In addition I've modified the function to perform clean up the HttpEntity in a f
 we still clean up if needed even when hitting an exception.
 
 ### Questions:
+What should be done about html characters? Namely things such as <b>, <br /> and so on.
+
 Within inbox.inbox.Inbox.hasNextPage and inbox.inbox.Inbox.hasPreviousPage there is nothing that can throw an exception, so why is it in try/catch?
 I've removed the try catch, let's see what happens. I should ask Gwindow to confirm this removal is ok.
 
