@@ -178,6 +178,8 @@ What should be done about html characters? Namely things such as <b>, <br /> and
 For bookmarks.Torrent the field freeTorrent I can only assume relates to the freeleech status of the torrent. Is this correct?
 For bookmarks.Torrent there is a field "hasFile" What does this mean?
 
+For comments.Userinfo what is the field userTitle for?
+
 There seem to be multiple definitions of download file/download torrent found throughout the API. Can we not consolidate these?
 They seem rather generic, taking only a url and a file path.
 
