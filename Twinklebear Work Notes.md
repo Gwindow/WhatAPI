@@ -161,8 +161,25 @@ sorts to clean up how we interact with these Gson-styled classes from the public
 Just a thought. As it is now, I'm still trying to get familiar with the code-base so after I know more perhaps I can
 come up with something more concrete and test it out.
 
+#### Enable/Disable Notifications from a Bookmarked Artist response
+Note that this will require two additional site interactions. The bookmarked artist response gives us the name and ID
+from this we must get the artist, then do pressLink on enable/disable notifications.
+
+#### View Request/Collage bookmarks
+Is the site API set up to handle this request? I'll have to see. If it is I'll toss in the feature, if not I'll discuss
+it with Gwindow. Is viewing collages supported in the API library at the moment? Or on the site?
+
+Related: Why do I not get the artist name when looking at a torrentgroup bookmark? It seems like a reasonable thing to
+expect to be returned in the API response, but it isn't there.
+
 ## Questions:
 What should be done about html characters? Namely things such as <b>, <br /> and so on.
+
+For bookmarks.Torrent the field freeTorrent I can only assume relates to the freeleech status of the torrent. Is this correct?
+For bookmarks.Torrent there is a field "hasFile" What does this mean?
+
+There seem to be multiple definitions of download file/download torrent found throughout the API. Can we not consolidate these?
+They seem rather generic, taking only a url and a file path.
 
 Within inbox.inbox.Inbox.hasNextPage and inbox.inbox.Inbox.hasPreviousPage there is nothing that can throw an exception, so why is it in try/catch?
 I've removed the try catch, let's see what happens. I should ask Gwindow to confirm this removal is ok.

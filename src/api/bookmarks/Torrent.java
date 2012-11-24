@@ -9,46 +9,45 @@ import java.nio.channels.ReadableByteChannel;
 import api.soup.MySoup;
 
 /**
- * The Class Torrent.
+ * The Class Torrent
+ * Contains information about a specific torrent
  * 
  * @author Gwindow
  */
 public class Torrent {
-
-	/** The encoding. */
+	/** The file encoding. */
 	private String encoding;
 
-	/** The file count. */
+	/** The number of files */
 	private Number fileCount;
 
-	/** The format. */
+	/** The file format */
 	private String format;
 
-	/** The free torrent. */
+	/** If the torrent is freeleech */
 	private boolean freeTorrent;
 
-	/** The group id. */
+	/** The torrent group id */
 	private Number groupId;
 
-	/** The has cue. */
+	/** If the torrent has a cue file */
 	private boolean hasCue;
 
-	/** The has file. */
+	/** The has file.
+     * TODO: What does this mean?
+     */
 	private Number hasFile;
 
-	/** The has log. */
+	/** If the torrent has a log file */
 	private boolean hasLog;
 
-	/** The id. */
+    /** The log score. */
+    private Number logScore;
+
+	/** The torrent id */
 	private Number id;
 
-	/** The leechers. */
-	private Number leechers;
-
-	/** The log score. */
-	private Number logScore;
-
-	/** The media. */
+	/** The media the files were ripped from. */
 	private String media;
 
 	/** The remaster catalogue number. */
@@ -63,26 +62,29 @@ public class Torrent {
 	/** The remaster year. */
 	private String remasterYear;
 
-	/** The remastered. */
+	/** If the torrent is a remaster */
 	private boolean remastered;
 
-	/** The scene. */
+	/** If the torrent is a scene release */
 	private boolean scene;
 
-	/** The seeders. */
+    /** The number of leechers. */
+    private Number leechers;
+
+	/** The number of seeders. */
 	private Number seeders;
 
-	/** The size. */
+    /** The number of snatches */
+    private Number snatched;
+
+	/** The size of the torrent */
 	private Number size;
 
-	/** The snatched. */
-	private Number snatched;
-
-	/** The time. */
+	/** The torrent upload date */
 	private String time;
 
 	/**
-	 * Gets the encoding.
+	 * Get the file encoding.
 	 * 
 	 * @return torrent encoding
 	 */
@@ -91,16 +93,16 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the file count.
+	 * Get the file count.
 	 * 
 	 * @return number of files in torrent
 	 */
 	public Number getFileCount() {
-		return (this.fileCount);
+		return this.fileCount;
 	}
 
 	/**
-	 * Gets the format.
+	 * Get the file format.
 	 * 
 	 * @return format of torrent
 	 */
@@ -109,30 +111,30 @@ public class Torrent {
 	}
 
 	/**
-	 * Returns true if torrent is freeleech.
+	 * Check if the torrent is free leech
 	 * 
-	 * @return is free leech
+	 * @return True if the torrent is freeleech
 	 */
 	public boolean isFreeTorrent() {
-		return freeTorrent;
+		return this.freeTorrent;
 	}
 
 	/**
-	 * Gets the group id.
+	 * Get the torrent group id.
 	 * 
 	 * @return torrent group id
 	 */
 	public Number getGroupId() {
-		return (this.groupId);
+		return this.groupId;
 	}
 
 	/**
-	 * Returns true if the torrent has a cue.
+	 * Check if the torrent has a cue file
 	 * 
-	 * @return has cue
+	 * @return True if the torrent has a cue file
 	 */
 	public boolean hasCue() {
-		return hasCue;
+		return this.hasCue;
 	}
 
 	/**
@@ -141,38 +143,29 @@ public class Torrent {
 	 * @return the number
 	 */
 	public Number hasFile() {
-		return hasFile;
+		return this.hasFile;
 	}
 
 	/**
-	 * Returns true if torrent has a log.
+	 * Check if the torrent has a log file
 	 * 
-	 * @return has log
+	 * @return True if the torrent has a log file
 	 */
 	public boolean hasLog() {
-		return hasLog;
+		return this.hasLog;
 	}
 
 	/**
-	 * Gets the id.
+	 * Get the torrent id
 	 * 
-	 * @return the id
+	 * @return the torrent id
 	 */
 	public Number getId() {
-		return (this.id);
+		return this.id;
 	}
 
 	/**
-	 * Gets the leechers.
-	 * 
-	 * @return number of leechers
-	 */
-	public Number getLeechers() {
-		return (this.leechers);
-	}
-
-	/**
-	 * Gets the log score.
+	 * Get the log score.
 	 * 
 	 * @return the log score
 	 */
@@ -181,7 +174,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the media.
+	 * Get the media type the torrent was ripped from
 	 * 
 	 * @return media of torrent
 	 */
@@ -190,7 +183,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the remaster catalogue number.
+	 * Get the remaster catalogue number.
 	 * 
 	 * @return catalogue number of remastered torrent
 	 */
@@ -199,7 +192,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the remaster record label.
+	 * Get the remaster record label.
 	 * 
 	 * @return the remastered record label
 	 */
@@ -208,7 +201,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the remaster title.
+	 * Get the remaster title.
 	 * 
 	 * @return the title of remaster
 	 */
@@ -217,7 +210,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the remaster year.
+	 * Get the remaster year.
 	 * 
 	 * @return the year of remaster
 	 */
@@ -226,34 +219,52 @@ public class Torrent {
 	}
 
 	/**
-	 * Checks if is remastered.
+	 * Check if the torrent is remastered.
 	 * 
-	 * @return true if remastered
+	 * @return True if the torrent is remastered
 	 */
 	public boolean isRemastered() {
 		return this.remastered;
 	}
 
 	/**
-	 * Return true if torrent is a scene release.
+	 * Check if the torrent is a scene release
 	 * 
-	 * @return is scene release
+	 * @return True if the torrent is a scene release
 	 */
 	public boolean isScene() {
-		return scene;
+		return this.scene;
 	}
 
+    /**
+     * Get the number of leechers
+     *
+     * @return number of leechers
+     */
+    public Number getLeechers() {
+        return this.leechers;
+    }
+
 	/**
-	 * Gets the seeders.
+	 * Get the number of seeders
 	 * 
 	 * @return number of seeders
 	 */
 	public Number getSeeders() {
-		return (this.seeders);
+		return this.seeders;
 	}
 
+    /**
+     * Get the number of snatches
+     *
+     * @return number of snatches
+     */
+    public Number getSnatched() {
+        return this.snatched;
+    }
+
 	/**
-	 * Gets the size.
+	 * Get the size of the torrent
 	 * 
 	 * @return size of torrent
 	 */
@@ -262,16 +273,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Gets the snatched.
-	 * 
-	 * @return the snatched
-	 */
-	public Number getSnatched() {
-		return this.snatched;
-	}
-
-	/**
-	 * Gets the time.
+	 * Get the time the torrent was uploaded
 	 * 
 	 * @return time of upload
 	 */
@@ -290,7 +292,7 @@ public class Torrent {
 	}
 
 	/**
-	 * Get the download link of the torrent.
+	 * Get the download link for the torrent.
 	 * 
 	 * @return download link
 	 */
@@ -298,8 +300,7 @@ public class Torrent {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
 		String passKey = MySoup.getPassKey();
-		String downloadLink = site + "torrents.php?action=download&id=" + id + "&authkey=" + authKey + "&torrent_pass=" + passKey;
-		return downloadLink;
+		return site + "torrents.php?action=download&id=" + id + "&authkey=" + authKey + "&torrent_pass=" + passKey;
 	}
 
 	/**
@@ -324,11 +325,6 @@ public class Torrent {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Torrent [getEncoding=" + getEncoding() + ", getFileCount=" + getFileCount() + ", getFormat=" + getFormat()
