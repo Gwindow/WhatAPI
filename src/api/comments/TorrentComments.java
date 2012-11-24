@@ -75,7 +75,7 @@ public class TorrentComments {
      * @return True if the request was successful
      */
 	public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
+        return this.status.equalsIgnoreCase("success");
 	}
 
 	@Override

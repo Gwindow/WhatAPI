@@ -145,7 +145,7 @@ public class Better {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		return status.equalsIgnoreCase("success");
+		return this.status.equalsIgnoreCase("success");
 	}
 
 	@Override

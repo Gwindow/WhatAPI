@@ -161,6 +161,10 @@ sorts to clean up how we interact with these Gson-styled classes from the public
 Just a thought. As it is now, I'm still trying to get familiar with the code-base so after I know more perhaps I can
 come up with something more concrete and test it out.
 
+Perhaps a good option would be to ditch Gson and work with JSON directly? It'd be a bit of a pain,
+but we'd have far more freedom in how we design our classes instead of having to match the API response
+JSON formatting.
+
 #### Enable/Disable Notifications from a Bookmarked Artist response
 Note that this will require two additional site interactions. The bookmarked artist response gives us the name and ID
 from this we must get the artist, then do pressLink on enable/disable notifications.

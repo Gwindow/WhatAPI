@@ -82,7 +82,7 @@ public class Bookmarks {
 	 * @return true if success
 	 */
 	public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
+        return this.status.equalsIgnoreCase("success");
 	}
 
 	/**
