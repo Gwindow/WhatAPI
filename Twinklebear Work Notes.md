@@ -165,6 +165,11 @@ Perhaps a good option would be to ditch Gson and work with JSON directly? It'd b
 but we'd have far more freedom in how we design our classes instead of having to match the API response
 JSON formatting.
 
+I think Gson really has got to go. It seems that a lot of the poor design/layout of the library is a direct
+result of having to model our classes to exactly match the JSON response and since we have no control over the
+response we're forced to write individual classes in cases where re-use/inheritance would be a cleaner choice
+and so on. I'll make my case to Gwindow as to the reasons for ditching Gson to improve the API library.
+
 #### Enable/Disable Notifications from a Bookmarked Artist response
 Note that this will require two additional site interactions. The bookmarked artist response gives us the name and ID
 from this we must get the artist, then do pressLink on enable/disable notifications.
