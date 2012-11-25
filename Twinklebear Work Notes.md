@@ -182,7 +182,11 @@ Related: Why do I not get the artist name when looking at a torrentgroup bookmar
 expect to be returned in the API response, but it isn't there.
 
 ## Questions:
-What should be done about html characters? Namely things such as <b>, <br /> and so on.
+What should be done about html characters? Namely things such as
+```html
+<b>, <br />
+```
+and so on.
 
 For bookmarks.Torrent the field freeTorrent I can only assume relates to the freeleech status of the torrent. Is this correct?
 For bookmarks.Torrent there is a field "hasFile" What does this mean?
