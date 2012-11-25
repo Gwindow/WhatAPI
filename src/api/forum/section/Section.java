@@ -1,4 +1,3 @@
-
 package api.forum.section;
 
 import java.util.ArrayList;
@@ -10,30 +9,31 @@ import api.util.Tuple;
 
 /**
  * The Class Section.
+ * For getting and using the API for viewing a
+ * forum
  * 
  * @author Gwindow
  */
 public class Section {
-
-	/** The response. */
+	/** The API response data */
 	private Response response;
 
-	/** The status. */
+	/** The API response status */
 	private String status;
 
-	/** The id. */
+	/** The forum id */
 	private transient static int id;
 
-	/** The page. */
+	/** The forum page number */
 	private transient static int page;
 
 	/**
-	 * Section from id and page.
+	 * Get a Section from its forum id and page #
 	 * 
 	 * @param id
-	 *            the id
+	 *            the forum id
 	 * @param page
-	 *            the page
+	 *            the page number
 	 * @return the section
 	 */
 	public static Section fromIdAndPage(int id, int page) {
@@ -45,91 +45,85 @@ public class Section {
 		return section;
 	}
 
+    /**
+     * Get a section from it's id and the first page
+     *
+     * @param id
+     *            the forum id
+     * @return the section
+     */
+    public static Section fromFirstPage(int id) {
+        String authkey = MySoup.getAuthKey();
+        String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + 1 + "&auth=" + authkey;
+        Section section = (Section) MySon.toObject(url, Section.class);
+        Section.id = id;
+        Section.page = 1;
+        return section;
+    }
+
 	/**
+     * Get a section from the next page of the current section
 	 * Should only be called if hasNextPage() returned true.
 	 * 
 	 * @return the section
 	 */
 	public static Section fromNextPage() {
-		page += 1;
+		++page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + page + "&auth=" + authkey;
-		Section section = (Section) MySon.toObject(url, Section.class);
-		return section;
+		return (Section) MySon.toObject(url, Section.class);
 	}
 
 	/**
+     * Get a section from the previous page of the current section
 	 * Should only be called if hasPreviousPage() returned true.
 	 * 
 	 * @return the section
 	 */
 	public static Section fromPreviousPage() {
-		page -= 1;
+		--page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + page + "&auth=" + authkey;
-		Section section = (Section) MySon.toObject(url, Section.class);
-		return section;
+		return (Section) MySon.toObject(url, Section.class);
 	}
 
 	/**
-	 * Section from first page.
+	 * Get the last page number
 	 * 
-	 * @param id
-	 *            the id
-	 * @return the section
-	 */
-	public static Section fromFirstPage(int id) {
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=forum&type=viewforum&forumid=" + id + "&page=" + 1 + "&auth=" + authkey;
-		Section section = (Section) MySon.toObject(url, Section.class);
-		Section.id = id;
-		Section.page = 1;
-		return section;
-	}
-
-	/**
-	 * Gets the last page.
-	 * 
-	 * @return the last page
+	 * @return the last page number
 	 */
 	public int getLastPage() {
 		return response.getPages().intValue();
 	}
 
 	/**
-	 * Checks for next page.
+	 * Check if there is a next page available
 	 * 
-	 * @return true, if successful
+	 * @return True if a next page exists
 	 */
 	public boolean hasNextPage() {
 		try {
-			if ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0)
-				return true;
-			else
-				return false;
+            return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	/**
-	 * Checks for previous page.
+	 * Check if there is a previous page available
 	 * 
-	 * @return true, if successful
+	 * @return True if a previous page exists
 	 */
 	public boolean hasPreviousPage() {
 		try {
-			if (((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0))
-				return true;
-			else
-				return false;
+			return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response.
 	 * 
 	 * @return the response
 	 */
@@ -138,44 +132,45 @@ public class Section {
 	}
 
 	/**
-	 * Gets the status.
+	 * Gets the status of the API request
 	 * 
-	 * @return the status
+	 * @return True if success
 	 */
 	public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
+        return this.status.equalsIgnoreCase("success");
 	}
 
 	/**
-	 * Gets the id.
+	 * Get the forum id.
 	 * 
-	 * @return the id
+	 * @return the forum id
 	 */
 	public static int getId() {
 		return id;
 	}
 
 	/**
-	 * Gets the page.
+	 * Gets the current page number
 	 * 
-	 * @return the page
+	 * @return current page number
 	 */
 	public static int getPage() {
 		return page;
 	}
 
 	/**
-	 * Creates the new thread.
+	 * Create a new thread in some forum with a given title
+     * and post body text
 	 * 
 	 * @param id
-	 *            the id
+	 *            the forum id to post the thread in
 	 * @param title
-	 *            the title
+	 *            the title for the thread
 	 * @param body
-	 *            the body
+	 *            the body text of the post
 	 */
 	public static void createNewThread(int id, String title, String body) {
-		if ((title.length() > 0) && (body.length() > 0)) {
+		if (title.length() > 0 && body.length() > 0) {
 			try {
 				String url = "forums.php?action=new&forumid=" + id;
 				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
@@ -204,44 +199,39 @@ public class Section {
 	}
 
 	/**
-	 * Gets the number of unread threads.
+	 * Get the number of unread threads.
 	 * 
 	 * @return the number of unread threads
 	 */
 	public int getNumberOfUnreadThreads() {
 		int counter = 0;
-		for (int i = 0; i < response.getThreads().size(); i++) {
-			if (!response.getThreads().get(i).isRead()) {
-				counter++;
-			}
-		}
+        for (Threads thread : response.getThreads()){
+            if (thread.isRead())
+                ++counter;
+        }
 		return counter;
 	}
 
 	/**
-	 * Catch up.
+	 * Catch up with all subscribed posts
 	 */
 	public void catchUp() {
 		try {
 			MySoup.pressLink("forums.php?action=catchup&forumid=" + id + "&auth=" + MySoup.getAuthKey());
 			System.out.println("Caught up");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Subscribe to all unread threads and catch up.
+	 * Subscribe to all unread threads and catch up
 	 */
 	public void subscribeToAllUnreadThreadsAndCatchUp() {
 		subscribeToAllUnreadThreads();
 		catchUp();
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Section [id = " + id + ", page = " + page + ", hasNextPage=" + hasNextPage() + ", getResponse=" + getResponse()

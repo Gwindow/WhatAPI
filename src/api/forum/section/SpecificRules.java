@@ -1,43 +1,37 @@
-
-
-
-
 package api.forum.section;
 
 /**
  * The Class SpecificRules.
- * 
+ * Describes the thread containing the list
+ * of specific rules for the forum
+ *
  * @author Gwindow
  */
 public class SpecificRules {
-	
-	/** The thread id. */
+	/** The rules thread id. */
 	private Number threadId;
 	
-	/** The thread. */
+	/** The rules thread title. */
 	private String thread;
 
 	/**
-	 * Gets the thread id.
+	 * Get the rules thread id.
 	 * 
-	 * @return the thread id
+	 * @return the rules thread id
 	 */
 	public Number getThreadId() {
-		return threadId;
+		return this.threadId;
 	}
 
 	/**
-	 * Gets the thread.
+	 * Get the rules thread title
 	 * 
-	 * @return the thread
+	 * @return the rules thread title
 	 */
 	public String getThread() {
-		return thread;
+		return this.thread;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "SpecificRules [getThreadId=" + getThreadId() + ", getThread=" + getThread() + "]";

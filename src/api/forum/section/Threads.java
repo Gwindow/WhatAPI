@@ -4,24 +4,24 @@ import api.soup.MySoup;
 
 /**
  * The Class Threads.
+ * Describes a single forum thread
  * 
  * @author Gwindow
  */
 public class Threads {
-
 	/** The author id. */
 	private Number authorId;
 
 	/** The author name. */
 	private String authorName;
 
-	/** The last author id. */
+	/** The last post author id. */
 	private Number lastAuthorId;
 
-	/** The last author name. */
+	/** The last post author name. */
 	private String lastAuthorName;
 
-	/** The last id. */
+	/** The last post id. */
 	private Number lastID;
 
 	/** The last read page. */
@@ -30,174 +30,173 @@ public class Threads {
 	/** The last read post id. */
 	private Number lastReadPostId;
 
-	/** The last time. */
+	/** The last post time. */
 	private String lastTime;
 
-	/** The locked. */
-	private boolean locked;
-
-	/** The post count. */
+	/** The thread post count */
 	private Number postCount;
 
-	/** The sticky. */
-	private boolean sticky;
-
-	/** The title. */
+	/** The thread title. */
 	private String title;
 
 	/** The topic id. */
 	private Number topicId;
 
+    /** If the thread is locked */
+    private boolean locked;
+
+    /** If the thread is stickied */
+    private boolean sticky;
+
+    /** If the thread has been read */
 	private boolean read;
 
 	/**
-	 * Gets the author id.
+	 * Get the author id.
 	 * 
-	 * @return the authorId
+	 * @return the author id
 	 */
 	public Number getAuthorId() {
-		return authorId;
+		return this.authorId;
 	}
 
 	/**
-	 * Gets the author name.
+	 * Get the author name.
 	 * 
-	 * @return the authorName
+	 * @return the author name
 	 */
 	public String getAuthorName() {
-		return authorName;
+		return this.authorName;
 	}
 
 	/**
-	 * Gets the last author id.
+	 * Get the last post author id.
 	 * 
-	 * @return the lastAuthorId
+	 * @return the last post author id
 	 */
 	public Number getLastAuthorId() {
-		return lastAuthorId;
+		return this.lastAuthorId;
 	}
 
 	/**
-	 * Gets the last author name.
+	 * Get the last post author name.
 	 * 
-	 * @return the lastAuthorName
+	 * @return the last post author name
 	 */
 	public String getLastAuthorName() {
-		return lastAuthorName;
+		return this.lastAuthorName;
 	}
 
 	/**
-	 * Gets the last id.
+	 * Get the last post id
 	 * 
-	 * @return the lastID
+	 * @return the last post id
 	 */
 	public Number getLastID() {
-		return lastID;
+		return this.lastID;
 	}
 
 	/**
-	 * Gets the last read page.
+	 * Get the last read page.
 	 * 
-	 * @return the lastReadPage
+	 * @return the last read page number
 	 */
 	public Number getLastReadPage() {
-		return lastReadPage;
+		return this.lastReadPage;
 	}
 
 	/**
-	 * Gets the last read post id.
+	 * Get the last read post id.
 	 * 
-	 * @return the lastReadPostId
+	 * @return the last read post id
 	 */
 	public Number getLastReadPostId() {
-		return lastReadPostId;
+		return this.lastReadPostId;
 	}
 
 	/**
-	 * Gets the last time.
+	 * Get the last post time
 	 * 
-	 * @return the lastTime
+	 * @return the post time
 	 */
 	public String getLastTime() {
-		return lastTime;
+		return this.lastTime;
 	}
 
 	/**
-	 * Checks if is locked.
+	 * Get the post count.
 	 * 
-	 * @return the locked
-	 */
-	public boolean isLocked() {
-		return locked;
-	}
-
-	/**
-	 * Gets the post count.
-	 * 
-	 * @return the postCount
+	 * @return the post count
 	 */
 	public Number getPostCount() {
-		return postCount;
+		return this.postCount;
 	}
 
 	/**
-	 * Checks if is sticky.
+	 * Get the thread title
 	 * 
-	 * @return the sticky
-	 */
-	public boolean isSticky() {
-		return sticky;
-	}
-
-	/**
-	 * Gets the title.
-	 * 
-	 * @return the title
+	 * @return the thread title
 	 */
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	/**
-	 * Gets the topic id.
+	 * Get the topic id.
 	 * 
 	 * @return the topicId
 	 */
 	public Number getTopicId() {
-		return topicId;
+		return this.topicId;
 	}
 
+    /**
+     * Check if the thread is locked
+     *
+     * @return True if the thread is locked
+     */
+    public boolean isLocked() {
+        return this.locked;
+    }
+
+    /**
+     * Checks if is sticky.
+     *
+     * @return the sticky
+     */
+    public boolean isSticky() {
+        return sticky;
+    }
+
+    /**
+     * Checks if is read.
+     *
+     * @return true, if is read
+     */
+    public boolean isRead() {
+        return this.read;
+    }
+
 	/**
-	 * Gets the url.
+	 * Get the url to view the thread
 	 * 
-	 * @return the url
+	 * @return the thread url
 	 */
 	public String getUrl() {
-		String url = "forums.php?action=viewthread&threadid=" + topicId;
-		return url;
+		return "forums.php?action=viewthread&threadid=" + topicId;
 	}
 
 	/**
-	 * Gets the last read url.
+	 * Gets the url to jump to the last read post
 	 * 
 	 * @return the last read url
 	 */
 	public String getLastReadUrl() {
-		String url = "forums.php?action=viewthread&threadid=" + topicId + "&page=" + lastReadPage;
-		return url;
+		return "forums.php?action=viewthread&threadid=" + topicId + "&page=" + lastReadPage;
 	}
 
 	/**
-	 * Checks if is read.
-	 * 
-	 * @return true, if is read
-	 */
-	public boolean isRead() {
-		return this.read;
-	}
-
-	/**
-	 * Subscribe to thread.
+	 * Subscribe to the thread.
 	 */
 	public void subscribe() {
 		try {
@@ -205,14 +204,12 @@ public class Threads {
 					+ MySoup.getAuthKey());
 			System.out.println("Subscribed");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
-	 * unsubscribe to thread.
+	 * Unsubscribe to the thread.
 	 */
 	public void unsubscribe() {
 		try {
@@ -220,17 +217,11 @@ public class Threads {
 					+ MySoup.getAuthKey());
 			System.out.println("Unsubscribed");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Threads [getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName() + ", getLastAuthorId="
