@@ -4,28 +4,29 @@ import java.util.List;
 
 /**
  * The Class Response.
+ * Stores data returned by the API related to
+ * viewing a user's inbox
  * 
  * @author Gwindow
  */
 public class Response {
-	
-	/** The current page. */
+	/** The current page being viewed */
 	private Number currentPage;
 	
-	/** The messages. */
-	private List<Messages> messages;
+	/** The messages in the inbox */
+	private List<Message> messages;
 	
-	/** The pages. */
+	/** The number of pages in the inbox */
 	private Number pages;
 
 	/**
-	 * Gets the unread.
+	 * Get the number of unread messages
 	 * 
-	 * @return the unread
+	 * @return number of unread messages
 	 */
 	public int getUnread() {
 		int counter = 0;
-		for (Messages m : messages) {
+		for (Message m : messages) {
 			if (m.isUnread()) {
 				counter++;
 			}
@@ -34,35 +35,32 @@ public class Response {
 	}
 
 	/**
-	 * Gets the current page.
+	 * Get the current page number being viewed
 	 * 
-	 * @return the current page
+	 * @return the current page number
 	 */
 	public Number getCurrentPage() {
-		return this.currentPage;
+		return currentPage;
 	}
 
 	/**
-	 * Gets the messages.
+	 * Get the messages in the inbox
 	 * 
 	 * @return the messages
 	 */
-	public List<Messages> getMessages() {
-		return this.messages;
+	public List<Message> getMessages() {
+		return messages;
 	}
 
 	/**
-	 * Gets the pages.
+	 * Get the total number of pages in the inbox
 	 * 
-	 * @return the pages
+	 * @return the total number of pages
 	 */
 	public Number getPages() {
-		return this.pages;
+		return pages;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [getUnread=" + getUnread() + ", getCurrentPage=" + getCurrentPage() + ", getMessages=" + getMessages()
