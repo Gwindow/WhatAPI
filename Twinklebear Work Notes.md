@@ -177,6 +177,8 @@ Instead of requiring the user to do a seperate check of hasNextPage/hasPreviousP
 just do the check ourselves in the fromNextPage/fromPreviousPage function and if there is no next/previous page, just
 do nothing.
 
+All the unnecessary "this" I added in the getters should be removed, if only for consistency heh.
+
 #### Enable/Disable Notifications from a Bookmarked Artist response
 Note that this will require two additional site interactions. The bookmarked artist response gives us the name and ID
 from this we must get the artist, then do pressLink on enable/disable notifications.
