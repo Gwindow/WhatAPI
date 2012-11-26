@@ -19,7 +19,7 @@ public class Userinfo {
     /** URL to the poster's avatar */
 	private String avatar;
 
-    /** TODO What is userTitle? */
+    /** The extra text some users get as additional user title */
     private String userTitle;
 
     /** If the poster is a donor */

@@ -9,8 +9,7 @@ import api.util.Tuple;
 
 /**
  * The Class Section.
- * For getting and using the API for viewing a
- * forum
+ * For getting and using the API for viewing a forum
  * 
  * @author Gwindow
  */

@@ -170,6 +170,13 @@ result of having to model our classes to exactly match the JSON response and sin
 response we're forced to write individual classes in cases where re-use/inheritance would be a cleaner choice
 and so on. I'll make my case to Gwindow as to the reasons for ditching Gson to improve the API library.
 
+In forum.section.Section the id and page fields are static. Why? We limit ourselves to only being able to have
+one possible forum Section being viewed at once. Same for the static fields in forum.thread.Thread.
+
+Instead of requiring the user to do a seperate check of hasNextPage/hasPreviousPage before trying to navigate, we should
+just do the check ourselves in the fromNextPage/fromPreviousPage function and if there is no next/previous page, just
+do nothing.
+
 #### Enable/Disable Notifications from a Bookmarked Artist response
 Note that this will require two additional site interactions. The bookmarked artist response gives us the name and ID
 from this we must get the artist, then do pressLink on enable/disable notifications.
@@ -180,6 +187,9 @@ it with Gwindow. Is viewing collages supported in the API library at the moment?
 
 Related: Why do I not get the artist name when looking at a torrentgroup bookmark? It seems like a reasonable thing to
 expect to be returned in the API response, but it isn't there.
+
+#### Voting on Polls in the Forums
+It looks like we need to send some sort of post request, but what information do we need to send and to where?
 
 ## Questions:
 What should be done about html characters? Namely things such as
@@ -192,6 +202,10 @@ For bookmarks.Torrent the field freeTorrent I can only assume relates to the fre
 For bookmarks.Torrent there is a field "hasFile" What does this mean?
 
 For comments.Userinfo what is the field userTitle for?
+
+in forum.thread.Author a field permissionId was marked TODO: remove. I removed it. What was it? It doesn't seem to be in the API response.
+
+in forum.thread.Poll what are maxVotes and featured?
 
 There seem to be multiple definitions of download file/download torrent found throughout the API. Can we not consolidate these?
 They seem rather generic, taking only a url and a file path.

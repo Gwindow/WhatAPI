@@ -1,105 +1,99 @@
-
-
-
-
 package api.forum.thread;
 
 import java.util.List;
 
 /**
  * The Class Poll.
+ * Stores information returned from the API about a
+ * thread's Poll
  * 
  * @author Gwindow
  */
 public class Poll {
+    /** The question. */
+    private String question;
+
+	/** The possible answers */
+	private List<Answer> answers;
 	
-	/** The answers. */
-	private List<Answers> answers;
-	
-	/** The closed. */
-	private boolean closed;
-	
-	/** The featured. */
+    /** The featured. TODO: What is this? */
 	private String featured;
 	
-	/** The max votes. */
+	/** The max votes. TODO: What is this? */
 	private Number maxVotes;
-	
-	/** The question. */
-	private String question;
-	
+
 	/** The total votes. */
 	private Number totalVotes;
+
+    /** If the poll is closed */
+    private boolean closed;
 	
-	/** The voted. */
+	/** If we've voted on the poll */
 	private boolean voted;
 
+    /**
+     * Get the question.
+     *
+     * @return the question
+     */
+    public String getQuestion() {
+        return this.question;
+    }
+
+    /**
+     * Get the possible answers
+     *
+     * @return the answers
+     */
+    public List<Answer> getAnswers() {
+        return this.answers;
+    }
+
 	/**
-	 * Checks if is featured.
+	 * Check if the poll is featured
 	 * 
-	 * @return true if featured
+	 * @return True if featured
 	 */
 	public boolean isFeatured() {
-        return featured.equalsIgnoreCase("0000-00-00 00:00:00");
+        return this.featured.equalsIgnoreCase("0000-00-00 00:00:00");
 	}
 
 	/**
-	 * Gets the answers.
+	 * Get the max votes
 	 * 
-	 * @return the answers
-	 */
-	public List<Answers> getAnswers() {
-		return answers;
-	}
-
-	/**
-	 * Checks if is closed.
-	 * 
-	 * @return the closed
-	 */
-	public boolean isClosed() {
-		return closed;
-	}
-
-	/**
-	 * Gets the max votes.
-	 * 
-	 * @return the maxVotes
+	 * @return the max votes
 	 */
 	public Number getMaxVotes() {
-		return maxVotes;
+		return this.maxVotes;
 	}
 
 	/**
-	 * Gets the question.
+	 * Get the total votes
 	 * 
-	 * @return the question
-	 */
-	public String getQuestion() {
-		return question;
-	}
-
-	/**
-	 * Gets the total votes.
-	 * 
-	 * @return the totalVotes
+	 * @return the total votes
 	 */
 	public Number getTotalVotes() {
-		return totalVotes;
+		return this.totalVotes;
 	}
+
+    /**
+     * Check if the poll is closed
+     *
+     * @return True if the poll is closed
+     */
+    public boolean isClosed() {
+        return this.closed;
+    }
 
 	/**
-	 * Checks for voted.
+	 * Check if we've voted on the poll
 	 * 
-	 * @return the voted
+	 * @return True if we've voted
 	 */
 	public boolean hasVoted() {
-		return voted;
+		return this.voted;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Poll [getAnswers=" + getAnswers() + ", isClosed=" + isClosed() + ", isFeatured=" + isFeatured()
