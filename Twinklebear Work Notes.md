@@ -121,6 +121,7 @@ where I encountered the issue.
 This is a tricky one on the server side where sometimes we'll be given a null for artist name or image file or both
 for now I'll band-aid it by converting nulls to "failed to load" strings in the deserializer.
 
+## Feature Additions
 #### Enable Notification toggling for Artists
 Trying to do this results in an error in the API as a result of how the site handles notification toggleing via a circular redirect.
 This is currently interpreted as an error but in fact it means the notification status change was successful. I'm undecided quite what to do now.
@@ -134,7 +135,6 @@ turns out this is actually an error, not the notify behavior.
 In addition I've modified the function to perform clean up the HttpEntity in a finally block, with some null checking for safety, this way
 we still clean up if needed even when hitting an exception.
 
-## Feature Additions
 #### Adding ability to view Better.php for transcoding torrents
 Unfortunately the way this is implemented at the moment is pretty hideous. Separate class exists
 for viewing Transcoded better, BetterTranscode and it uses TranscodingResponse as its Response field.
