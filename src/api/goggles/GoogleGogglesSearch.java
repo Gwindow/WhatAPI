@@ -1,14 +1,6 @@
-
 package api.goggles;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,15 +12,13 @@ import java.util.Random;
  * @author Gwindow
  */
 public class GoogleGogglesSearch {
-	
 	/** The cssid post body. */
 	private static byte[] cssidPostBody = new byte[] { 0x22, 0x00, 0x62, 0x3C, 0x0A, 0x13, 0x22, 0x02, 0x65, 0x6E, (byte) 0xBA,
 			(byte) 0xD3, (byte) 0xF0, 0x3B, 0x0A, 0x08, 0x01, 0x10, 0x01, 0x28, 0x01, 0x30, 0x00, 0x38, 0x01, 0x12, 0x1D, 0x0A,
 			0x09, 0x69, 0x50, 0x68, 0x6F, 0x6E, 0x65, 0x20, 0x4F, 0x53, 0x12, 0x03, 0x34, 0x2E, 0x31, 0x1A, 0x00, 0x22, 0x09,
 			0x69, 0x50, 0x68, 0x6F, 0x6E, 0x65, 0x33, 0x47, 0x53, 0x1A, 0x02, 0x08, 0x02, 0x22, 0x02, 0x08, 0x01 };
 
-	// Bytes trailing the image byte array.
-	/** The trailing bytes. */
+	/** The bytes trailing the image byte array. */
 	private static byte[] trailingBytes = new byte[] { 0x18, 0x4B, 0x20, 0x01, 0x30, 0x00, (byte) 0x92, (byte) 0xEC, (byte) 0xF4,
 			0x3B, 0x09, 0x18, 0x00, 0x38, (byte) 0xC6, (byte) 0x97, (byte) 0xDC, (byte) 0xDF, (byte) 0xF7, 0x25, 0x22, 0x00 };
 
@@ -59,26 +49,20 @@ public class GoogleGogglesSearch {
 	}
 
 	/**
-	 * Search.
+	 * Search google goggles with the image
 	 * 
 	 * @throws Exception
 	 *             the exception
 	 */
 	public void search() throws Exception {
 		int i = 0;
-
 		boolean cssidIsValid = false;
-
 		String cssid = "";
 
 		while (i < 3) {
-
 			cssid = generateCSSID();
-
 			System.out.println(cssid);
-
 			cssidIsValid = ValidateCSSID(cssid);
-
 			if (cssidIsValid) {
 				break;
 			} else {
@@ -86,7 +70,6 @@ public class GoogleGogglesSearch {
 			}
 			i++;
 		}
-
 		if (cssidIsValid) {
 			sendPhoto(cssid, image);
 		} else
@@ -94,7 +77,7 @@ public class GoogleGogglesSearch {
 	}
 
 	/**
-	 * Gets the result.
+	 * Get the result of the search
 	 * 
 	 * @return the result
 	 */
@@ -102,18 +85,16 @@ public class GoogleGogglesSearch {
 		return result;
 	}
 
-	// Generates a cssid.
 	/**
 	 * Generate cssid.
 	 * 
-	 * @return the string
-	 */
+	 * @return the cssid as a string
+     */
 	private String generateCSSID() {
 		BigInteger bi = new BigInteger(64, new Random());
 		return bi.toString(16).toUpperCase();
 	}
 
-	// Validating cssid
 	/**
 	 * Validate cssid.
 	 * 
@@ -141,14 +122,12 @@ public class GoogleGogglesSearch {
 			response += line;
 			System.out.println(line);
 		}
-
-		// here should parce response and check is cssid is valid
-
-		return true; // let's imagine that is valid
+        //If we get HTTP 200 ok, we're ok, otherwise not ok
+        return (conn.getResponseCode() == 200);
 	}
 
 	/**
-	 * Send photo.
+	 * Send an image file
 	 * 
 	 * @param cssid
 	 *            the cssid
@@ -212,9 +191,8 @@ public class GoogleGogglesSearch {
 		}
 	}
 
-	// Encodes an int32 into varint32.
 	/**
-	 * To varint32.
+	 * Encode an int32 to varint32.
 	 * 
 	 * @param value
 	 *            the value
@@ -242,7 +220,7 @@ public class GoogleGogglesSearch {
 	}
 
 	/**
-	 * Gets the file bytes.
+	 * Get the file's bytes.
 	 * 
 	 * @param file
 	 *            the file
@@ -262,5 +240,4 @@ public class GoogleGogglesSearch {
 		}
 		return bytes;
 	}
-
 }
