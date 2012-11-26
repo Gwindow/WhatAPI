@@ -1,34 +1,34 @@
-
 package api.index;
 
 import api.son.MySon;
 
 /**
  * The Class Index.
+ * For getting and working with the API related
+ * to viewing the index for a user. Contains information such
+ * as notifications, user stats, messages, etc.
  * 
  * @author Gwindow
  */
 public class Index {
-	
-	/** The response. */
+	/** The API response. */
 	private Response response;
 	
-	/** The status. */
+	/** The response status */
 	private String status;
 
 	/**
-	 * Inits the index.
+	 * Get the Index data from the site
 	 * 
-	 * @return the index
+	 * @return the Index
 	 */
 	public static Index init() {
 		String url = "ajax.php?action=index";
-		Index index = (Index) MySon.toObject(url, Index.class);
-		return index;
+		return (Index) MySon.toObject(url, Index.class);
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response data
 	 * 
 	 * @return the response
 	 */
@@ -39,15 +39,12 @@ public class Index {
 	/**
 	 * Get the status of the request.
 	 * 
-	 * @return the status
+	 * @return True if success
 	 */
 	public boolean getStatus() {
         return status.equalsIgnoreCase("success");
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Index [response=" + response + ", status=" + status + ", getResponse=" + getResponse() + ", getStatus="

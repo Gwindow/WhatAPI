@@ -4,88 +4,82 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * The Class UserStats.
+ * Stores information about a user's statistics
+ * ratio, up/down, etc.
  * 
  * @author Gwindow
  */
 public class UserStats {
+    /** The number of bytes uploaded */
+    private Number uploaded;
 
-	/** The downloaded. */
+	/** The amount of bytes downloaded. */
 	private Number downloaded;
 
-	/** The ratio. */
+	/** The ratio of up / down */
 	private Number ratio;
 
-	/** The requiredratio. */
+	/** The required ratio. */
 	private Number requiredratio;
 
-	/** The uploaded. */
-	private Number uploaded;
-
-	/** The user class. */
+	/** The user's class. */
 	@SerializedName("class")
 	private String userClass;
 
+    /**
+     * Get the number of bytes uploaded.
+     *
+     * @return number of bytes uploaded
+     */
+    public Number getUploaded() {
+        return uploaded;
+    }
+
 	/**
-	 * Gets the downloaded.
+	 * Get the number of bytes downloaded
 	 * 
-	 * @return the downloaded
+	 * @return number of bytes downloaded
 	 */
 	public Number getDownloaded() {
-		return this.downloaded;
+		return downloaded;
 	}
 
 	/**
-	 * Gets the ratio.
+	 * Get the user's ratio of up / down.
 	 * 
 	 * @return the ratio
 	 */
 	public Number getRatio() {
-		return this.ratio;
+		return ratio;
 	}
 
 	/**
-	 * Gets the requiredratio.
+	 * Get the required ratio
 	 * 
-	 * @return the requiredratio
+	 * @return the required ratio
 	 */
 	public Number getRequiredRatio() {
-		return this.requiredratio;
+		return requiredratio;
 	}
 
 	/**
-	 * Gets the uploaded.
+	 * Get the user's class
 	 * 
-	 * @return the uploaded
-	 */
-	public Number getUploaded() {
-		return this.uploaded;
-	}
-
-	/**
-	 * Gets the user class.
-	 * 
-	 * @return the user class
+	 * @return the user's class
 	 */
 	public String getUserClass() {
-		return this.userClass;
+		return userClass;
 	}
 
 	/**
-	 * Gets the buffer.
+	 * Get the buffer the user has, up - down
 	 * 
-	 * @return the buffer
+	 * @return size of buffer in bytes
 	 */
 	public Number getBuffer() {
-		double up = uploaded.doubleValue();
-		double down = downloaded.doubleValue();
-		return (up - down);
+		return (uploaded.doubleValue() - downloaded.doubleValue());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "UserStats [getDownloaded=" + getDownloaded() + ", getRatio=" + getRatio() + ", getRequiredratio="
