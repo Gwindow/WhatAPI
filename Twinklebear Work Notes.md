@@ -204,6 +204,9 @@ For bookmarks.Torrent there is a field "hasFile" What does this mean?
 For comments.Userinfo what is the field userTitle for?
 
 in forum.thread.Author a field permissionId was marked TODO: remove. I removed it. What was it? It doesn't seem to be in the API response.
+in forum.thread.Author the field paranoia is commented out as causing a crash. Do we even care about this field? It seems kind of
+irrelevant to viewing a forum post. It'd be nice to know the paranoia level when viewing a user page though, i'll see if that field is there
+when I get to the user package.
 
 in forum.thread.Poll what are maxVotes and featured?
 
