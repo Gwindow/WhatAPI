@@ -4,61 +4,62 @@ import java.util.List;
 
 /**
  * The Class Response.
+ * Stores the data returned to us by the API about the
+ * user's notifications
  * 
  * @author Gwindow
  */
 public class Response {
-
-	/** The current pages. */
+	/** The current page being viewed */
 	private Number currentPages;
 
-	/** The num new. */
+    /** The number of pages of notifications */
+    private Number pages;
+
+	/** The number of new notifications */
 	private Number numNew;
 
-	/** The pages. */
-	private Number pages;
-
-	/** The results. */
-	private List<Results> results;
+	/** The torrents we're being notified about. */
+	private List<Torrent> results;
 
 	/**
-	 * Gets the current pages.
+	 * Get the current page number being viewed
 	 * 
-	 * @return the current pages
+	 * @return the current page number
 	 */
 	public Number getCurrentPages() {
-		return this.currentPages;
+		return currentPages;
 	}
 
+    /**
+     * Get the total number of pages of notifications
+     *
+     * @return the number of pages of notifications
+     */
+    public Number getPages() {
+        return pages;
+    }
+
 	/**
-	 * Gets the num new.
+	 * Get the number of new notifications
 	 * 
-	 * @return the num new
+	 * @return number of new notifications
 	 */
 	public Number getNumNew() {
-		return this.numNew;
+		return numNew;
 	}
 
 	/**
-	 * Gets the pages.
+	 * Get the list of torrents we're being notified about
 	 * 
-	 * @return the pages
+	 * @return the torrents
 	 */
-	public Number getPages() {
-		return this.pages;
+	public List<Torrent> getResults() {
+		return results;
 	}
 
 	/**
-	 * Gets the results.
-	 * 
-	 * @return the results
-	 */
-	public List<Results> getResults() {
-		return this.results;
-	}
-
-	/**
-	 * Clear.
+	 * Clear the notifications
 	 */
 	public void clear() {
 		currentPages = 0;
@@ -69,11 +70,6 @@ public class Response {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [getCurrentPages=" + getCurrentPages() + ", getNumNew=" + getNumNew() + ", getPages=" + getPages()

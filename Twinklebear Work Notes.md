@@ -217,6 +217,11 @@ in forum.thread.Poll what are maxVotes and featured?
 in inbox.inbox.Message, what are the fields forwardedId and forwardedName for? Can you forward messages on what? If so, is that the user
 information about the person who forwarded the message?
 
+in notifications.Results what is the field groupCategoryId? what is logInDb?
+
+in notifications.Results the function downloadFile is tagged as needing fixing. Can I just replace it with another implementation?
+there seem to be quite a few copies of the download torrent function around, perhaps they should be rolled into a utility or base class.
+
 There seem to be multiple definitions of download file/download torrent found throughout the API. Can we not consolidate these?
 They seem rather generic, taking only a url and a file path.
 

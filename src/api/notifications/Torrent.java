@@ -9,55 +9,46 @@ import java.nio.channels.ReadableByteChannel;
 import api.soup.MySoup;
 
 /**
- * The Class Results.
+ * The Class Torrent.
+ * Describes a torrent we're being notified about
  * 
  * @author Gwindow
  */
-public class Results {
-
-	/** The encoding. */
+public class Torrent {
+	/** The encoding (Lossless/320/V0/etc) */
 	private String encoding;
 
-	/** The file count. */
+	/** The number of files in the torrent. */
 	private Number fileCount;
 
-	/** The format. */
+	/** The file format of the torrent (FLAC/MP3/etc) */
 	private String format;
 
-	/** The free torrent. */
-	private Boolean freeTorrent;
-
-	/** The group category id. */
+	/** The group category id. TODO: What is this? */
 	private Number groupCategoryId;
 
-	/** The group id. */
+	/** The torrent group id */
 	private Number groupId;
 
-	/** The group name. */
+    /** The torrent id. */
+    private Number torrentId;
+
+	/** The torrent group name */
 	private String groupName;
 
-	/** The group year. */
+	/** The release year */
 	private Number groupYear;
 
-	/** The has cue. */
-	private Boolean hasCue;
-
-	/** The has log. */
-	private Boolean hasLog;
-
-	/** The leechers. */
-	private Number leechers;
-
-	/** The log in db. */
+	/** The log in db. TODO What is this? */
 	private String logInDb;
 
 	/** The log score. */
 	private Number logScore;
 
-	/** The media. */
+	/** The media the torrent was ripped from */
 	private String media;
 
-	/** The notification time. */
+	/** The time we were notified of the torrent */
 	private String notificationTime;
 
 	/** The remaster title. */
@@ -66,29 +57,38 @@ public class Results {
 	/** The remaster year. */
 	private Number remasterYear;
 
-	/** The scene. */
-	private Boolean scene;
+    /** The torrent tags. */
+    private String torrentTags;
 
-	/** The seeders. */
+    /** The size of the torrent */
+    private Number size;
+
+	/** The number of seeders */
 	private Number seeders;
 
-	/** The size. */
-	private Number size;
+    /** The number of leechers */
+    private Number leechers;
 
-	/** The snatched. */
+	/** The number of snatches */
 	private Number snatched;
 
-	/** The torrent id. */
-	private Number torrentId;
+    /** If the torrent is freeleech */
+    private Boolean freeTorrent;
 
-	/** The torrent tags. */
-	private String torrentTags;
+    /** If the torrent is a scene release */
+    private Boolean scene;
 
-	/** The unread. */
+    /** If the torrent has a cue file */
+    private Boolean hasCue;
+
+    /** If the torrent has a log file */
+    private Boolean hasLog;
+
+	/** If the notification is unread */
 	private Boolean unread;
 
 	/**
-	 * Gets the encoding.
+	 * Get the encoding.
 	 * 
 	 * @return the encoding
 	 */
@@ -97,7 +97,7 @@ public class Results {
 	}
 
 	/**
-	 * Gets the file count.
+	 * Get the number of files.
 	 * 
 	 * @return the file count
 	 */
@@ -106,7 +106,7 @@ public class Results {
 	}
 
 	/**
-	 * Gets the format.
+	 * Get the format.
 	 * 
 	 * @return the format
 	 */
@@ -115,16 +115,7 @@ public class Results {
 	}
 
 	/**
-	 * Checks if is free torrent.
-	 * 
-	 * @return the boolean
-	 */
-	public Boolean isFreeTorrent() {
-		return freeTorrent;
-	}
-
-	/**
-	 * Gets the group category id.
+	 * Get the group category id.
 	 * 
 	 * @return the group category id
 	 */
@@ -133,7 +124,7 @@ public class Results {
 	}
 
 	/**
-	 * Gets the group id.
+	 * Get the group id.
 	 * 
 	 * @return the group id
 	 */
@@ -141,8 +132,17 @@ public class Results {
 		return groupId;
 	}
 
+    /**
+     * Get the torrent id.
+     *
+     * @return the torrent id
+     */
+    public Number getTorrentId() {
+        return torrentId;
+    }
+
 	/**
-	 * Gets the group name.
+	 * Get the group name.
 	 * 
 	 * @return the group name
 	 */
@@ -151,7 +151,7 @@ public class Results {
 	}
 
 	/**
-	 * Gets the group year.
+	 * Get the group year.
 	 * 
 	 * @return the group year
 	 */
@@ -160,34 +160,7 @@ public class Results {
 	}
 
 	/**
-	 * Checks for cue.
-	 * 
-	 * @return the checks for cue
-	 */
-	public Boolean hasCue() {
-		return hasCue;
-	}
-
-	/**
-	 * Checks for log.
-	 * 
-	 * @return the checks for log
-	 */
-	public Boolean hasLog() {
-		return hasLog;
-	}
-
-	/**
-	 * Gets the leechers.
-	 * 
-	 * @return the leechers
-	 */
-	public Number getLeechers() {
-		return leechers;
-	}
-
-	/**
-	 * Gets the log in db.
+	 * Get the log in db.
 	 * 
 	 * @return the log in db
 	 */
@@ -196,7 +169,7 @@ public class Results {
 	}
 
 	/**
-	 * Gets the log score.
+	 * Get the log score.
 	 * 
 	 * @return the log score
 	 */
@@ -205,16 +178,16 @@ public class Results {
 	}
 
 	/**
-	 * Gets the media.
+	 * Get the media type the torrent was ripped from
 	 * 
-	 * @return the media
+	 * @return the media type
 	 */
 	public String getMedia() {
 		return media;
 	}
 
 	/**
-	 * Gets the notification time.
+	 * Get the time we were notified of the torrent
 	 * 
 	 * @return the notification time
 	 */
@@ -223,7 +196,7 @@ public class Results {
 	}
 
 	/**
-	 * Gets the remaster title.
+	 * Get the remaster title.
 	 * 
 	 * @return the remaster title
 	 */
@@ -240,64 +213,91 @@ public class Results {
 		return remasterYear;
 	}
 
-	/**
-	 * Checks if is scene.
-	 * 
-	 * @return the boolean
-	 */
-	public Boolean isScene() {
-		return scene;
-	}
+    /**
+     * Get the torrent tags.
+     *
+     * @return the torrent tags
+     */
+    public String getTorrentTags() {
+        return torrentTags;
+    }
+
+    /**
+     * Get the size of the torrent
+     *
+     * @return the size of the torrent
+     */
+    public Number getSize() {
+        return size;
+    }
+
+    /**
+     * Get the number of seeders
+     *
+     * @return number of seeders
+     */
+    public Number getSeeders() {
+        return seeders;
+    }
+
+    /**
+     * Get the number of leechers
+     *
+     * @return number of leechers
+     */
+    public Number getLeechers() {
+        return leechers;
+    }
 
 	/**
-	 * Gets the seeders.
+	 * Get the number of snatches
 	 * 
-	 * @return the seeders
-	 */
-	public Number getSeeders() {
-		return seeders;
-	}
-
-	/**
-	 * Gets the size.
-	 * 
-	 * @return the size
-	 */
-	public Number getSize() {
-		return size;
-	}
-
-	/**
-	 * Gets the snatched.
-	 * 
-	 * @return the snatched
+	 * @return number of snatches
 	 */
 	public Number getSnatched() {
 		return snatched;
 	}
 
-	/**
-	 * Gets the torrent id.
-	 * 
-	 * @return the torrent id
-	 */
-	public Number getTorrentId() {
-		return torrentId;
-	}
+    /**
+     * Check if the torrent is freeleech
+     *
+     * @return True if it's freeleech
+     */
+    public Boolean isFreeTorrent() {
+        return freeTorrent;
+    }
+
+    /**
+     * Check if the torrent is a scene release
+     *
+     * @return True if it's a scene release
+     */
+    public Boolean isScene() {
+        return scene;
+    }
+
+    /**
+     * Check if the torrent has a cue file
+     *
+     * @return True if it has a cue file
+     */
+    public Boolean hasCue() {
+        return hasCue;
+    }
+
+    /**
+     * Check if the torrent has a log file
+     *
+     * @return True if it has a log file
+     */
+    public Boolean hasLog() {
+        return hasLog;
+    }
 
 	/**
-	 * Gets the torrent tags.
+	 * Check if the notification is unread
 	 * 
-	 * @return the torrent tags
-	 */
-	public String getTorrentTags() {
-		return torrentTags;
-	}
-
-	/**
-	 * Checks if is unread.
-	 * 
-	 * @return the boolean
+	 * @return True if it's unread
 	 */
 	public Boolean isUnread() {
 		return unread;
@@ -311,21 +311,22 @@ public class Results {
 	public String getMediaFormatEncoding() {
 		String log = hasLog ? " - " + logScore.toString() : "";
 		String cue = hasCue ? " - " + "Cue" : "";
-		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding() + log + cue;
+		return (getMedia() + " - " + getFormat() + " - " + getEncoding() + log + cue);
 
 	}
 
 	/**
-	 * Gets the remaster.
-	 * 
+	 * Get a concise representation of the information about the torrent remastering
+	 * ex. 2005 - Remaster Title
+     *
 	 * @return the remaster
 	 */
 	public String getRemaster() {
-		return this.getRemasterYear() + " - " + this.getRemasterTitle();
+		return (getRemasterYear() + " - " + getRemasterTitle());
 	}
 
 	/**
-	 * Gets the download link.
+	 * Get the download link for the torrent
 	 * 
 	 * @return the download link
 	 */
@@ -333,20 +334,19 @@ public class Results {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
 		String passKey = MySoup.getPassKey();
-		return site + "torrents.php?action=download&id="
-                + torrentId + "&authkey=" + authKey
-                + "&torrent_pass=" + passKey;
+		return site + "torrents.php?action=download&id=" + torrentId + "&authkey=" + authKey
+            + "&torrent_pass=" + passKey;
 	}
 
 	/**
-	 * Download file.
+	 * Download the torrent file
 	 * 
 	 * @param url
-	 *            the url
+	 *      the torrent download url TODO Why not used?
 	 * @param path
-	 *            the path
+	 *      the path to save too
 	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 *      Signals that an I/O exception has occurred.
 	 */
 	public void downloadFile(String url, String path) throws IOException {
 		// todo fix this
@@ -358,17 +358,11 @@ public class Results {
 		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
 		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
 		System.out.println("Downloaded " + name + " to " + path);
-
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Results [getEncoding=" + getEncoding() + ", getFileCount=" + getFileCount() + ", getFormat=" + getFormat()
+		return "Torrent [getEncoding=" + getEncoding() + ", getFileCount=" + getFileCount() + ", getFormat=" + getFormat()
 				+ ", isFreeTorrent=" + isFreeTorrent() + ", getGroupCategoryId=" + getGroupCategoryId() + ", getGroupId="
 				+ getGroupId() + ", getGroupName=" + getGroupName() + ", getGroupYear=" + getGroupYear() + ", hasCue=" + hasCue()
 				+ ", hasLog=" + hasLog() + ", getLeechers=" + getLeechers() + ", getLogInDb=" + getLogInDb() + ", getLogScore="
