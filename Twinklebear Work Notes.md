@@ -199,6 +199,8 @@ What should be done about html characters? Namely things such as
 <b>, <br />
 ```
 and so on.
+I've decided to leave these in since we can make use of them to format the text being displayed in the
+Android text view or in any other thing that's using the library.
 
 For bookmarks.Torrent the field freeTorrent I can only assume relates to the freeleech status of the torrent. Is this correct?
 For bookmarks.Torrent there is a field "hasFile" What does this mean?
