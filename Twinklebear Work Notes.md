@@ -210,6 +210,9 @@ It looks like we need to send some sort of post request, but what information do
 The code for handling Users and Tags isn't written. For Favorites it appears that the API response is yet to be
 written as I get status: failure when trying what a guess at the url is
 
+#### Removing Friends
+The function is commented out in user.User and marked as todo complete, I'll do it.
+
 ## Questions:
 What should be done about html characters? Namely things such as
 ```html

@@ -1,4 +1,3 @@
-
 package api.user;
 
 /**
@@ -104,11 +103,6 @@ public class Profile {
 		return this.profileText;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Profile [getAvatar()=" + getAvatar() + ", getCommunity()=" + getCommunity() + ", IsFriend()=" + IsFriend()
