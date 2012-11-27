@@ -98,7 +98,7 @@ return (Notifications) MySon.toObject(url, Notifications.class);
 ```
 
 ## Bugs
-#### Wrong data for some fields in the Request
+#### Wrong data for some fields in the Request Search
 it seems that the fields for the Requests returned in the Request search have some mixed up fields. Specifically release type:
 
 For a request search with search tag Midori, viewing the request for Midori Takada - Through the Looking Glass [1983]
