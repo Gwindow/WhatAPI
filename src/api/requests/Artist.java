@@ -1,21 +1,20 @@
-
 package api.requests;
 
 /**
- * The Class With.
- * An artist who was performed with on some media recording
- * 
+ * The Class Artist.
+ * Stores information about an artist
+ *
  * @author Gwindow
  */
-public class With {
-	/** The artist id. */
+public class Artist {
+	/** The artist id */
 	private Number id;
 	
-	/** The artist name. */
+	/** The artist name */
 	private String name;
 
 	/**
-	 * Get the artist id.
+	 * Get the artist id
 	 * 
 	 * @return the id
 	 */
@@ -34,6 +33,6 @@ public class With {
 
 	@Override
 	public String toString() {
-		return "With [getId=" + getId() + ", getName=" + getName() + "]";
+		return "Artist [getId=" + getId() + ", getName=" + getName() + "]";
 	}
 }

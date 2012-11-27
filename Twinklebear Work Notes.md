@@ -230,6 +230,15 @@ They seem rather generic, taking only a url and a file path.
 Within inbox.inbox.Inbox.hasNextPage and inbox.inbox.Inbox.hasPreviousPage there is nothing that can throw an exception, so why is it in try/catch?
 I've removed the try catch, let's see what happens. I should ask Gwindow to confirm this removal is ok.
 
+in requests.Response what are the fields catalogueNumber, logCue, bitRateList?
+I thought bit rate list would be a list of acceptable bitrates, but inspecting the response it appears to be a number. What is its meaning?
+Same question for releaseType
+
+In requests.Conductor is the field id corresponding to the conductor's artist id?
+
+In requests package, Conductor, Artist, RemixedBy, DJ and With are identical. Why not have them inherit from a
+base class defining their shared properties, or simply make them all the same class?
+
 In function in notifications.Results:
 ```Java
 public void downloadFile(String url, String path) throws IOException {

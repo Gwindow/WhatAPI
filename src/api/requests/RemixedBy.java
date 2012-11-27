@@ -1,42 +1,36 @@
-
 package api.requests;
 
 /**
  * The Class RemixedBy.
- * 
- * //TODO description
+ * Stores information about an artist who remixed some media
  * 
  * @author Gwindow
  */
 public class RemixedBy {
-	
-	/** The id. */
+	/** The artist id. */
 	private Number id;
 	
-	/** The name. */
+	/** The artist name. */
 	private String name;
 
 	/**
-	 * Gets the id.
+	 * Get the artist id
 	 * 
 	 * @return the id
 	 */
 	public Number getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
-	 * Gets the name.
+	 * Get the artist name
 	 * 
 	 * @return the name
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "RemixedBy [getId=" + getId() + ", getName=" + getName() + "]";

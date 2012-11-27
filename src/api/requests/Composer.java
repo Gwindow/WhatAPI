@@ -2,13 +2,13 @@
 package api.requests;
 
 /**
- * The Class Conductors.
+ * The Class Composer.
  * 
  * //TODO description
  * 
  * @author Gwindow
  */
-public class Conductors {
+public class Composer {
 	
 	/** The id. */
 	private Number id;
@@ -39,6 +39,6 @@ public class Conductors {
 	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "Conductors [getId=" + getId() + ", getName=" + getName() + "]";
+		return "Composer [getId=" + getId() + ", getName=" + getName() + "]";
 	}
 }
