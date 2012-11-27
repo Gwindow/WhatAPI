@@ -267,6 +267,23 @@ what is personal freeleech? Is that if you use a token on the torrent, it tags a
 
 in search.torrents.Artist what is the field aliasId?
 
+in soup.MySoup what are the fields headerName, headerValue?
+in soup.MySoup why do we have the function
+```Java
+private static HttpGet getHttpGet(String url) {
+	return new HttpGet(url);
+}
+```
+in soup.MySoup why do we need
+```Java
+public static ForumSections getForumSections() {
+	return forumSections;
+}
+```
+when loadForumSections does the same thing but makes sure the sections are loaded first? And if they are loaded, just returns them
+
+do we use soup.MySoup.inputStreamToString or soup.MySoup.toPlainText? IDE seems to say no. Do we need them? Should we be using them?
+
 in general: what is catalogueNumber/remasterCatalogueNumber?
 
 In function in notifications.Results:

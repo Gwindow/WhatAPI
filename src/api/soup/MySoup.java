@@ -1,13 +1,9 @@
 package api.soup;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
+import api.forum.forumsections.ForumSections;
+import api.index.Index;
+import api.util.CouldNotLoadException;
+import api.util.Tuple;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -21,7 +17,6 @@ import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
@@ -31,10 +26,9 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-import api.forum.forumsections.ForumSections;
-import api.index.Index;
-import api.util.CouldNotLoadException;
-import api.util.Tuple;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class MySoup.
@@ -42,7 +36,6 @@ import api.util.Tuple;
  * @author Gwindow
  */
 public class MySoup {
-
 	/** The http client. */
 	private static DefaultHttpClient httpClient = getHttpClient();
 
@@ -67,13 +60,13 @@ public class MySoup {
 	/** The SITE. */
 	private static String SITE;
 
-	/** The can notifications. */
+	/** If the user is able to use notifications. */
 	private static boolean canNotifications = true;
 
 	/** The forum sections. */
 	private static ForumSections forumSections;
 
-	/** The forum sections loaded. */
+	/** If the forum sections have been loaded. */
 	private static boolean forumSectionsLoaded = false;
 
 	/** The index. */
@@ -91,7 +84,7 @@ public class MySoup {
 	/** The httpost. */
 	private static HttpPost httpPost;
 
-	/** The is ssl enabled. */
+	/** If ssl is enabled. */
 	private static boolean isSSLEnabled = true;
 
 	/** The header name. */
@@ -138,7 +131,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the http client.
+	 * Get the http client.
 	 * 
 	 * @return the http client
 	 */
@@ -153,10 +146,11 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the http get.
+	 * Get the HttpGet for a url
+     * TODO is this function necessary? It's equivalent to new HttpGet(url)
 	 * 
 	 * @param url
-	 *            the url
+	 *      the url to get for
 	 * @return the http get
 	 */
 	private static HttpGet getHttpGet(String url) {
@@ -165,11 +159,12 @@ public class MySoup {
 
 	/**
 	 * Sets the header.
+     * TODO what is header for?
 	 * 
 	 * @param name
-	 *            the name
+	 *      the name
 	 * @param value
-	 *            the value
+     *      the value
 	 */
 	private static void setHeader(String name, String value) {
 		headerName = name;
@@ -190,7 +185,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the forum sections.
+	 * Get the forum sections.
 	 * 
 	 * @return the forum sections
 	 */
@@ -202,23 +197,23 @@ public class MySoup {
 	 * Enable/Disable ssl.
 	 * 
 	 * @param b
-	 *            the new sSL enabled
+	 *      the new SSL enabled
 	 */
 	public static void setSSL(boolean b) {
 		isSSLEnabled = b;
 	}
 
 	/**
-	 * Checks if is sSL enabled.
+	 * Check if is SSL enabled.
 	 * 
-	 * @return true, if is sSL enabled
+	 * @return True if SSL is enabled
 	 */
 	public static boolean isSSLEnabled() {
 		return isSSLEnabled;
 	}
 
 	/**
-	 * Gets the auth key.
+	 * Get the auth key.
 	 * 
 	 * @return the auth key
 	 */
@@ -236,7 +231,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the session id.
+	 * Get the session id.
 	 * 
 	 * @return the session id
 	 */
@@ -245,7 +240,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the cookies.
+	 * Get the cookies.
 	 * 
 	 * @return the cookies
 	 */
@@ -254,19 +249,19 @@ public class MySoup {
 	}
 
 	/**
-	 * Checks if is logged in.
+	 * Check if we're logged in
 	 * 
-	 * @return true, if is logged in
+	 * @return True if we're logged in
 	 */
 	public static boolean isLoggedIn() {
         return (cookies != null && !cookies.isEmpty());
 	}
 
 	/**
-	 * To quotable string.
+	 * Convert some html string to quotable text
 	 * 
 	 * @param html
-	 *            the html
+	 *      the html string to parse
 	 * @return the string
 	 */
 	public static String toQuotableString(String html) {
@@ -274,16 +269,17 @@ public class MySoup {
 	}
 
 	/**
-	 * Login.
+	 * Login to a site
 	 * 
 	 * @param url
-	 *            the url
+	 *      the url extension to submit the login information to, ie. login.php
+     *      the site url will be pre-pended to the url
 	 * @param username
-	 *            the username
+     *      the username to login with
 	 * @param password
-	 *            the password
+	 *      the password to login with
 	 * @throws CouldNotLoadException
-	 *             the could not load exception
+     *      thrown if we fail to login
 	 */
 	public static void login(String url, String username, String password) throws CouldNotLoadException {
 		url = SITE + url;
@@ -312,7 +308,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Load index.
+	 * Load the user information index
 	 */
 	public static void loadIndex() {
 		index = Index.init();
@@ -327,7 +323,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the index.
+	 * Get the user index
 	 * 
 	 * @return the index
 	 */
@@ -336,14 +332,15 @@ public class MySoup {
 	}
 
 	/**
-	 * Post method.
+	 * Perform an HttpPost method to some what.cd url with some list parameters
 	 * 
 	 * @param url
-	 *            the url
+	 *      the url to submit to, of the form blah.php? and the site url will be
+     *      pre-prended to it
 	 * @param list
-	 *            the list
+	 *      the list of parameters
 	 * @throws Exception
-	 *             the exception
+	 *      if we fail to execute the post method
 	 */
 	public static void postMethod(String url, List<Tuple<String, String>> list) throws Exception {
 		url = SITE + url;
@@ -367,11 +364,12 @@ public class MySoup {
 	}
 
 	/**
-	 * Scrape.
+	 * Perform an HttpGet on some site url to get some data from it
 	 * 
 	 * @param url
-	 *            the url
-	 * @return the input stream
+	 *      the url to scrape, of the form blah.php? and the site url will
+     *      be pre-prended to it
+	 * @return the string of data received in response
 	 */
 	public static String scrape(String url) {
 		url = SITE + url;
@@ -383,10 +381,11 @@ public class MySoup {
 			// String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
             //Using HTTP.USER_AGENT crashes, UnupportedCharsetException on desktop (not in app for some reason)
 			String s = EntityUtils.toString(entity, HTTP.UTF_8);
+            entity.consumeContent();
+            return s;
 			// EntityUtils.consume(entity);
 			// InputStream s = entity.getContent();
 			// System.err.println("encoding " + entity.getContentEncoding());
-			return s;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -394,10 +393,10 @@ public class MySoup {
 	}
 
 	/**
-	 * Input stream to string.
+	 * Read an input stream into a string
 	 * 
 	 * @param is
-	 *            the is
+	 *      the input stream
 	 * @return the string
 	 */
 	private static String inputStreamToString(InputStream is) {
@@ -417,11 +416,10 @@ public class MySoup {
 	}
 
 	/**
-	 * Press link.
+	 * Simulate a simple link press on the site, that returns no JSON data.
 	 * 
 	 * @param url
-	 *            the url
-     *
+	 *      the url to click
      * @return
      *      true if response ok, false if failed
 	 */
@@ -464,13 +462,24 @@ public class MySoup {
         return success;
 	}
 
+    /**
+     * Perform an HttpGet on some non-site url and get the string data returned b it
+     *
+     * @param url
+     *      the url to get data from
+     * @return the response data as a string
+     * @throws CouldNotLoadException
+     *      if we fail to load the page
+     */
 	public static String scrapeOther(String url) throws CouldNotLoadException {
 		httpGet = getHttpGet(url);
 		response = null;
 		try {
 			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
-			return EntityUtils.toString(entity);
+			String s = EntityUtils.toString(entity);
+            entity.consumeContent();
+            return s;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not load page");
@@ -478,7 +487,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the user id.
+	 * Get the user id.
 	 * 
 	 * @return the user id
 	 */
@@ -487,7 +496,7 @@ public class MySoup {
 	}
 
 	/**
-	 * Gets the username.
+	 * Get the username.
 	 * 
 	 * @return the username
 	 */
@@ -496,10 +505,10 @@ public class MySoup {
 	}
 
 	/**
-	 * Sets the session id.
+	 * Set the session id.
 	 * 
 	 * @param sessionId
-	 *            the new session id
+     *      the new session id
 	 */
 	public static void setSessionId(String sessionId) {
 		Cookie cookie = new BasicClientCookie("", sessionId);
@@ -510,11 +519,11 @@ public class MySoup {
 	}
 
 	/**
-	 * To plain text.
+	 * Convert a string to plain text
 	 * 
 	 * @param s
-	 *            the s
-	 * @return the string
+	 *      the string to convert
+	 * @return the converted string
 	 */
 	public static String toPlainText(String s) {
 		s = Jsoup.parse(s.replaceAll("(?i)<br[^>]*>", "\n")).text();
@@ -522,20 +531,20 @@ public class MySoup {
 	}
 
 	/**
-	 * Clean.
+	 * Clean some string of unsafe html characters
 	 * 
 	 * @param s
-	 *            the s
-	 * @return the string
+	 *      the string to clean
+	 * @return the cleaned string
 	 */
 	public static String clean(String s) {
 		return Jsoup.clean(s, Whitelist.relaxed());
 	}
 
 	/**
-	 * Can notifications.
+	 * Check if the user can read torrent notifications
 	 * 
-	 * @return true, if successful
+	 * @return True if the user can read torrent notifications
 	 */
 	public static boolean canNotifications() {
 		return canNotifications;
