@@ -222,6 +222,8 @@ in notifications.Results what is the field groupCategoryId? what is logInDb?
 in notifications.Results the function downloadFile is tagged as needing fixing. Can I just replace it with another implementation?
 there seem to be quite a few copies of the download torrent function around, perhaps they should be rolled into a utility or base class.
 
+What is the products package used for? Is it the barcode/upc searching? I'll ask and work on it later.
+
 There seem to be multiple definitions of download file/download torrent found throughout the API. Can we not consolidate these?
 They seem rather generic, taking only a url and a file path.
 
