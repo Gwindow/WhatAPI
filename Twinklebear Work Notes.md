@@ -239,6 +239,9 @@ In requests.Conductor is the field id corresponding to the conductor's artist id
 In requests package, Conductor, Artist, RemixedBy, DJ and With are identical. Why not have them inherit from a
 base class defining their shared properties, or simply make them all the same class?
 
+in search.crossreference.CrossReference perhaps the determineSearchString is the function we can improve
+to improve our search results when searching via UPC/barcode scans?
+
 In function in notifications.Results:
 ```Java
 public void downloadFile(String url, String path) throws IOException {
