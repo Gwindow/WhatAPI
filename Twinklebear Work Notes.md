@@ -98,6 +98,19 @@ return (Notifications) MySon.toObject(url, Notifications.class);
 ```
 
 ## Bugs
+#### Wrong data for some fields in the Request
+it seems that the fields for the Requests returned in the Request search have some mixed up fields. Specifically release type:
+
+For a request search with search tag Midori, viewing the request for Midori Takada - Through the Looking Glass [1983]
+```Json
+"releaseType":"RCA"
+```
+however, RCA is the record label. The desired release type as shown on the request page is "Album"
+
+When viewing the request page itself, I'm given "0". Is this some enum corresponding to the types? If so
+what number means what? I should write up some more documentation on the wiki, especially if those other folks
+want to make an iOS app using the API.
+
 #### Torrent Search returning null
 I seem to be getting a null torrentSearch in the Async task in TorrentSearchActivity, looking into why. Have
 tracked the issue down through my WhatAPI Test program. When trying to parse the search result to object from json
@@ -193,18 +206,9 @@ expect to be returned in the API response, but it isn't there.
 #### Voting on Polls in the Forums
 It looks like we need to send some sort of post request, but what information do we need to send and to where?
 
-#### Wrong data for some fields in the Request
-it seems that the fields for the Requests returned in the Request search have some mixed up fields. Specifically release type:
-
-For a request search with search tag Midori, viewing the request for Midori Takada - Through the Looking Glass [1983]
-```Json
-"releaseType":"RCA"
-```
-however, RCA is the record label. The desired release type as shown on the request page is "Album"
-
-When viewing the request page itself, I'm given "0". Is this some enum corresponding to the types? If so
-what number means what? I should write up some more documentation on the wiki, especially if those other folks
-want to make an iOS app using the API.
+#### Viewing Top Users, Tags and Favorites
+The code for handling Users and Tags isn't written. For Favorites it appears that the API response is yet to be
+written as I get status: failure when trying what a guess at the url is
 
 ## Questions:
 What should be done about html characters? Namely things such as

@@ -63,6 +63,15 @@ public class Artist {
 		return this.response;
 	}
 
+    /**
+     * Get the status of the request.
+     *
+     * @return true if success
+     */
+    public boolean getStatus() {
+        return status.equalsIgnoreCase("success");
+    }
+
 	/**
 	 * Adds the bookmark.
 	 */
@@ -259,25 +268,9 @@ public class Artist {
 		return s;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
+    @Override
 	public String toString() {
 		return "Artist [getResponse()=" + getResponse() + ", getSpotifyUrl()=" + getSpotifyUrl() + ", getLastFMUrl()="
 				+ getLastFMUrl() + ", getStatus()=" + getStatus() + "]";
-	}
-
-	/* public boolean getStatus() { if (status.equalsIgnoreCase("success")) return true; return false; } */
-
-	/**
-	 * Get the status of the request.
-	 * 
-	 * @return true if success
-	 */
-	public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
 	}
 }

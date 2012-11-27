@@ -1,4 +1,3 @@
-
 package api.torrents.artist;
 
 import java.util.List;

@@ -1,4 +1,3 @@
-
 package api.top;
 
 import java.util.List;
@@ -266,9 +265,6 @@ public class Results {
                 + "&torrent_pass=" + passkey;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Results [getArtist()=" + getArtist() + ", getData()=" + getData() + ", getEncoding()=" + getEncoding()
