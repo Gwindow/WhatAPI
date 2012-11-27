@@ -267,6 +267,8 @@ what is personal freeleech? Is that if you use a token on the torrent, it tags a
 
 in search.torrents.Artist what is the field aliasId?
 
+in general: what is catalogueNumber/remasterCatalogueNumber?
+
 in soup.MySoup what are the fields headerName, headerValue?
 in soup.MySoup why do we have the function
 ```Java
@@ -284,7 +286,8 @@ when loadForumSections does the same thing but makes sure the sections are loade
 
 do we use soup.MySoup.inputStreamToString or soup.MySoup.toPlainText? IDE seems to say no. Do we need them? Should we be using them?
 
-in general: what is catalogueNumber/remasterCatalogueNumber?
+in subscriptions.Subscriptions what is sortThreadsBySection supposed to do? So I can test it and make sure it does what's expected. I'm
+guessing it orders the subscriptions by forum section to match the ordering on the site's forum section view?
 
 In function in notifications.Results:
 ```Java

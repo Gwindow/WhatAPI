@@ -1,36 +1,29 @@
-
-
-
-
 package api.subscriptions;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * Stores the data returned by the API for viewing the
+ * user's forum thread subscriptions
  * 
  * @author Gwindow
  */
 public class Response {
-	
-	/** The threads. */
-	private List<Threads> threads;
+	/** The subscribed threads. */
+	private List<Thread> threads;
 
 	/**
-	 * Gets the threads.
+	 * Get the threads
 	 * 
 	 * @return the threads
 	 */
-	public List<Threads> getThreads() {
-		return this.threads;
+	public List<Thread> getThreads() {
+		return threads;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [getThreads=" + getThreads() + "]";
 	}
-
 }

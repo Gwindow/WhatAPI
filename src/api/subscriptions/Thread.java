@@ -1,4 +1,3 @@
-
 package api.subscriptions;
 
 import api.soup.MySoup;
@@ -6,29 +5,29 @@ import api.soup.MySoup;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * The Class Threads.
+ * The Class Thread.
+ * Describes a subscribed forum thread
  * 
  * @author Gwindow
  */
-public class Threads {
-
+public class Thread {
 	/** The forum id. */
 	private Number forumId;
 
 	/** The forum name. */
 	private String forumName;
 
-	/** The last post id. */
+	/** The last viewed post id. */
 	private Number lastPostId;
 
-	/** The locked. */
+	/** If the thread is locked */
 	private boolean locked;
-	// so java doesn't get confused
-	/** The is new. */
+
+	/** If there's been a new post. */
 	@SerializedName("new")
 	private boolean isNew;
 
-	/** The post id. */
+	/** The new post id. */
 	private Number postId;
 
 	/** The thread id. */
@@ -38,7 +37,7 @@ public class Threads {
 	private String threadTitle;
 
 	/**
-	 * Gets the forum id.
+	 * Get the forum id.
 	 * 
 	 * @return the forum id
 	 */
@@ -47,7 +46,7 @@ public class Threads {
 	}
 
 	/**
-	 * Gets the forum name.
+	 * Get the forum name.
 	 * 
 	 * @return the forum name
 	 */
@@ -56,34 +55,34 @@ public class Threads {
 	}
 
 	/**
-	 * Gets the last post id.
+	 * Get the last viewed post id.
 	 * 
-	 * @return the last post id
+	 * @return the new post id
 	 */
 	public Number getLastPostId() {
 		return lastPostId;
 	}
 
 	/**
-	 * Checks if is locked.
+	 * Check if the thread is locked
 	 * 
-	 * @return true, if is locked
+	 * @return True if locked
 	 */
 	public boolean isLocked() {
 		return locked;
 	}
 
 	/**
-	 * Checks if is new.
+	 * Check if the thread has new posts
 	 * 
-	 * @return true, if is new
+	 * @return True if it has new posts
 	 */
 	public boolean isNew() {
 		return isNew;
 	}
 
 	/**
-	 * Gets the post id.
+	 * Get the new post id.
 	 * 
 	 * @return the post id
 	 */
@@ -92,7 +91,7 @@ public class Threads {
 	}
 
 	/**
-	 * Gets the thread id.
+	 * Get the thread id.
 	 * 
 	 * @return the thread id
 	 */
@@ -101,7 +100,7 @@ public class Threads {
 	}
 
 	/**
-	 * Gets the thread title.
+	 * Get the thread title.
 	 * 
 	 * @return the thread title
 	 */
@@ -110,25 +109,25 @@ public class Threads {
 	}
 
 	/**
-	 * Gets the url.
+	 * Get the thread url
 	 * 
-	 * @return the url
+	 * @return the thread url
 	 */
 	public String getUrl() {
 		return "forums.php?action=viewthread&threadid=" + threadId;
     }
 
 	/**
-	 * Gets the last read url.
+	 * Gets the last read post url
 	 * 
-	 * @return the last read url
+	 * @return the last read post url
 	 */
 	public String getLastReadUrl() {
 		return "forums.php?action=viewthread&threadid=" + threadId + "&postid=" + lastPostId;
 	}
 
 	/**
-	 * Subscribe to thread.
+	 * Subscribe to the thread
 	 */
 	public void subscribe() {
 		try {
@@ -141,7 +140,7 @@ public class Threads {
 	}
 
 	/**
-	 * unsubscribe to thread.
+	 * Unsubscribe from the thread
 	 */
 	public void unsubscribe() {
 		try {
@@ -149,17 +148,13 @@ public class Threads {
 					+ MySoup.getAuthKey());
 			System.out.println("Unsubscribed");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return "Threads [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()
+		return "Thread [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()
 				+ ", isLocked=" + isLocked() + ", isNew=" + isNew() + ", getPostId=" + getPostId() + ", getThreadId="
 				+ getThreadId() + ", getThreadTitle=" + getThreadTitle() + ", getUrl=" + getUrl() + ", getLastReadUrl="
 				+ getLastReadUrl() + "]";

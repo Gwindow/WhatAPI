@@ -1,27 +1,28 @@
 package api.subscriptions;
 
+import api.son.MySon;
+import api.soup.MySoup;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import api.son.MySon;
-import api.soup.MySoup;
-
 /**
  * The Class Subscriptions.
+ * For getting and interacting with the site API related to viewing
+ * forum thread subscriptions
  * 
  * @author Gwindow
  */
 public class Subscriptions {
-
-	/** The response. */
+	/** The API response. */
 	private Response response;
 
-	/** The status. */
+	/** The response status. */
 	private String status;
 
 	/**
-	 * Inits the.
+	 * Get the list subscripts that have new posts
 	 * 
 	 * @return the subscriptions
 	 */
@@ -32,41 +33,41 @@ public class Subscriptions {
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response
 	 * 
 	 * @return the response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
 
 	/**
-	 * Checks for unread threads.
+	 * Check if there are any unread posts in the subscribed threads
 	 * 
-	 * @return true, if successful
+	 * @return True if unread posts exist
 	 */
 	public boolean hasUnreadThreads() {
-        return !(response.getThreads().isEmpty() || (response.getThreads() == null));
+        return !(response.getThreads().isEmpty() || response.getThreads() == null);
 	}
 
 	/**
-	 * Gets the status.
+	 * Get the status of the API response
 	 * 
-	 * @return the status
+	 * @return True if success
 	 */
 	public boolean getStatus() {
         return status.equalsIgnoreCase("success");
 	}
 
-	// TODO needs to be tested
 	/**
 	 * Dont call me just yet!.
+     * TODO: Finish this function
 	 * 
 	 * @return the hash map
 	 */
-	public HashMap<String, Threads> sortThreadsBySection() {
-		HashMap<String, Threads> map = new HashMap<String, Threads>();
-		for (Threads t : response.getThreads()) {
+	public HashMap<String, Thread> sortThreadsBySection() {
+		HashMap<String, Thread> map = new HashMap<String, Thread>();
+		for (Thread t : response.getThreads()) {
 			map.put(t.getForumName(), t);
 		}
 		ArrayList<String> sortedKeys = new ArrayList<String>(map.keySet());
@@ -74,20 +75,17 @@ public class Subscriptions {
 		return map;
 	}
 
+    /**
+     * Catch up with all subscribed topics
+     */
 	public static void catchUp() {
 		try {
 			MySoup.pressLink("userhistory.php?action=catchup&auth=" + MySoup.getAuthKey());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Subscriptions [getResponse()=" + getResponse() + ", hasUnreadThreads()=" + hasUnreadThreads() + ", getStatus()="
