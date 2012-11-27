@@ -89,11 +89,6 @@ public class Updater {
 		return doc;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	/**
 	 * To string.
 	 * 

@@ -1,7 +1,3 @@
-
-
-
-
 package api.whatstatus;
 
 /**
@@ -26,10 +22,10 @@ public class Status {
 	 * @return the irc
 	 */
 	public int getIrc() {
-		if ((irc.equalsIgnoreCase("up"))) {
+		if (irc.equalsIgnoreCase("up")) {
 			System.out.println("IRC Up");
 			return 0;
-		} else if ((irc.equalsIgnoreCase("down"))) {
+		} else if (irc.equalsIgnoreCase("down")) {
 			System.out.println("IRC Down");
 			return 1;
 		} else {
@@ -44,10 +40,10 @@ public class Status {
 	 * @return the site
 	 */
 	public int getSite() {
-		if ((site.equalsIgnoreCase("up"))) {
+		if (site.equalsIgnoreCase("up")) {
 			System.out.println("Site Up");
 			return 0;
-		} else if ((site.equalsIgnoreCase("down"))) {
+		} else if (site.equalsIgnoreCase("down")) {
 			System.out.println("Site Down");
 			return 1;
 		} else {
@@ -62,10 +58,10 @@ public class Status {
 	 * @return the tracker
 	 */
 	public int getTracker() {
-		if ((tracker.equalsIgnoreCase("up"))) {
+		if (tracker.equalsIgnoreCase("up")) {
 			System.out.println("Tracker Up");
 			return 0;
-		} else if ((tracker.equalsIgnoreCase("down"))) {
+		} else if (tracker.equalsIgnoreCase("down")) {
 			System.out.println("Tracker Down");
 			return 1;
 		} else {
@@ -74,11 +70,6 @@ public class Status {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Status [getIrc()=" + getIrc() + ", getSite()=" + getSite() + ", getTracker()=" + getTracker() + "]";

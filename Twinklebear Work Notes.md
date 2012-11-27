@@ -296,6 +296,12 @@ do we use soup.MySoup.inputStreamToString or soup.MySoup.toPlainText? IDE seems 
 in subscriptions.Subscriptions what is sortThreadsBySection supposed to do? So I can test it and make sure it does what's expected. I'm
 guessing it orders the subscriptions by forum section to match the ordering on the site's forum section view?
 
+In util.Updater, is this finished? Is there an update site setup? Shouldn't it be part of the Android app code, instead of here
+In util, do we need Quadruple, Quintuple, Septuple, Sextuple, StringUtils or Triple?
+
+Some classes have static init functions that simply peform the job of a constructor. I think in some areas we could
+replace the init with a constructor.
+
 In function in notifications.Results:
 ```Java
 public void downloadFile(String url, String path) throws IOException {

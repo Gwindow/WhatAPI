@@ -1,7 +1,3 @@
-
-
-
-
 package api.util;
 
 /**
@@ -25,9 +21,6 @@ public class CouldNotLoadException extends Exception {
 		this.error = error;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Throwable#getMessage()
-	 */
 	@Override
 	public String getMessage() {
 		return error;

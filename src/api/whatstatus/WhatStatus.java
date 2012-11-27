@@ -1,4 +1,3 @@
-
 package api.whatstatus;
 
 import api.son.MySon;
@@ -44,9 +43,6 @@ public class WhatStatus {
 	 * status.get(i).getCreatedAt().toString())); } return tweetList; } catch (TwitterException e) {
 	 * e.printStackTrace(); } return null; } */
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "WhatStatus [getStatus()=" + getStatus() + "]";
