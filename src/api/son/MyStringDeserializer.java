@@ -1,4 +1,3 @@
-
 package api.son;
 
 import java.lang.reflect.Type;
@@ -13,14 +12,16 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * The Class MyStringDeserializer.
- * 
- * //TODO description
- * 
+ * A custom string deserializer where we add in unescaping of
+ * HTML to the deserialization process
+ *
  * @author Gwindow
  */
 public class MyStringDeserializer implements JsonDeserializer<Object> {
 	
-	/* (non-Javadoc)
+	/**
+     * We get the json as a string, unescape any html characters and return it back
+     *
 	 * @see com.google.gson.JsonDeserializer#deserialize(com.google.gson.JsonElement, java.lang.reflect.Type, com.google.gson.JsonDeserializationContext)
 	 */
 	@Override
