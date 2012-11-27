@@ -332,7 +332,7 @@ public class Torrent {
 				+ hasFile() + ", hasLog=" + hasLog() + ", getId=" + getId() + ", getLeechers=" + getLeechers() + ", getLogScore="
 				+ getLogScore() + ", getMedia=" + getMedia() + ", getRemasterCatalogueNumber=" + getRemasterCatalogueNumber()
 				+ ", getRemasterRecordLabel=" + getRemasterRecordLabel() + ", getRemasterTitle=" + getRemasterTitle()
-				+ ", getRemasterYear=" + getRemasterYear() + ", getRemastered=" + isRemastered() + ", isScene=" + isScene()
+				+ ", getRemasterYear=" + getRemasterYear() + ", isRemastered=" + isRemastered() + ", isScene=" + isScene()
 				+ ", getSeeders=" + getSeeders() + ", getSize=" + getSize() + ", getSnatched=" + getSnatched() + ", getTime="
 				+ getTime() + ", getMediaFormatEncoding=" + getMediaFormatEncoding() + ", getDownloadLink=" + getDownloadLink()
 				+ "]";

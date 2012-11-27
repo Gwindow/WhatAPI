@@ -261,6 +261,14 @@ The various search classes could do with a bit of a re-working, I'll look into t
 Why is the artist list returned to us in the Request search a 2d array, when it's just an array of artists? I'll have to ask Gwindow about this. Maybe
 we can change it to a 1d array, 2d is an odd choice.
 
+in search.torrents.Torrent what is the field editionId?
+
+what is personal freeleech? Is that if you use a token on the torrent, it tags as personal freeleech til you download it?
+
+in search.torrents.Artist what is the field aliasId?
+
+in general: what is catalogueNumber/remasterCatalogueNumber?
+
 In function in notifications.Results:
 ```Java
 public void downloadFile(String url, String path) throws IOException {

@@ -40,7 +40,7 @@ public class RequestsSearch {
 	}
 
 	/**
-	 * Get the next page of the existing Request search
+	 * Get the next page of the existing Request search from term
 	 * 
 	 * @return the next page of the Requests search
 	 */
@@ -49,7 +49,7 @@ public class RequestsSearch {
 	}
 
 	/**
-	 * Get the previous page of the existing Request search
+	 * Get the previous page of the existing Request search from term
 	 * 
 	 * @return the previous page of the Requests search
 	 */
@@ -71,7 +71,7 @@ public class RequestsSearch {
 	}
 
 	/**
-	 * Get the next page of the existing Request search and tags
+	 * Get the next page of the existing Request search from term and tags
 	 * 
 	 * @return the next page of the Requests search
 	 */
@@ -80,7 +80,7 @@ public class RequestsSearch {
 	}
 
 	/**
-	 * Get the previous page of the existing Request search and tags
+	 * Get the previous page of the existing Request search from term and tags
 	 * 
 	 * @return the previous page of the Requests search
 	 */
@@ -108,7 +108,8 @@ public class RequestsSearch {
 			RequestsSearch.searchTerm = searchTerm;
 			RequestsSearch.page = page;
 			String authkey = MySoup.getAuthKey();
-			String url = "ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
+			String url = "ajax.php?action=requests&page=" + page
+                    + "&search=" + searchTerm + "&auth=" + authkey;
 			return (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
 		}
         else
@@ -143,7 +144,8 @@ public class RequestsSearch {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			String url = "ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&tags=" + tags + "&auth=" + authkey;
+			String url = "ajax.php?action=requests&page=" + page
+                    + "&search=" + searchTerm + "&tags=" + tags + "&auth=" + authkey;
 			return (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
 		}
         else
