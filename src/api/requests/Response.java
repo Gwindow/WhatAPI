@@ -45,7 +45,7 @@ public class Response {
 	/** The filler's user name. */
 	private String fillerName;
 
-	/** The list of acceptable formats */
+	/** The acceptable media format list (Lossless/MP3/etc) */
 	private String formatList;
 
 	/** The url for the image for the request */
@@ -60,7 +60,7 @@ public class Response {
 	/** The log cue. */
 	private String logCue;
 
-	/** The list of acceptable media types */
+	/** The list of acceptable media formats */
 	private String mediaList;
 
 	/** The minimum bounty required to vote, in bytes */
@@ -99,7 +99,7 @@ public class Response {
 	/** The top contributors to the bounty */
 	private List<TopContributor> topContributors;
 
-	/** The torrent id if filled */
+	/** The torrent id of the torrent that filled the request. */
 	private Number torrentId;
 
 	/** The total bounty, in bytes */

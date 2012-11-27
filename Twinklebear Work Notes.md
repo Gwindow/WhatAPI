@@ -193,6 +193,19 @@ expect to be returned in the API response, but it isn't there.
 #### Voting on Polls in the Forums
 It looks like we need to send some sort of post request, but what information do we need to send and to where?
 
+#### Wrong data for some fields in the Request
+it seems that the fields for the Requests returned in the Request search have some mixed up fields. Specifically release type:
+
+For a request search with search tag Midori, viewing the request for Midori Takada - Through the Looking Glass [1983]
+```Json
+"releaseType":"RCA"
+```
+however, RCA is the record label. The desired release type as shown on the request page is "Album"
+
+When viewing the request page itself, I'm given "0". Is this some enum corresponding to the types? If so
+what number means what? I should write up some more documentation on the wiki, especially if those other folks
+want to make an iOS app using the API.
+
 ## Questions:
 What should be done about html characters? Namely things such as
 ```html
@@ -231,6 +244,7 @@ Within inbox.inbox.Inbox.hasNextPage and inbox.inbox.Inbox.hasPreviousPage there
 I've removed the try catch, let's see what happens. I should ask Gwindow to confirm this removal is ok.
 
 in requests.Response what are the fields catalogueNumber, logCue, bitRateList?
+also in search.requests.Request, what is logCue.
 I thought bit rate list would be a list of acceptable bitrates, but inspecting the response it appears to be a number. What is its meaning?
 Same question for releaseType
 
@@ -241,6 +255,11 @@ base class defining their shared properties, or simply make them all the same cl
 
 in search.crossreference.CrossReference perhaps the determineSearchString is the function we can improve
 to improve our search results when searching via UPC/barcode scans?
+
+The various search classes could do with a bit of a re-working, I'll look into this after I've finished my documentation + minor refactoring sweep
+
+Why is the artist list returned to us in the Request search a 2d array, when it's just an array of artists? I'll have to ask Gwindow about this. Maybe
+we can change it to a 1d array, 2d is an odd choice.
 
 In function in notifications.Results:
 ```Java

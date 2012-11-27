@@ -8,94 +8,95 @@ import api.soup.MySoup;
 
 /**
  * The Class RequestsSearch.
+ * For performing and interacting with the results of a Request search
  * 
  * @author Gwindow
  */
 public class RequestsSearch {
-
-	/** The response. */
+	/** The API response. */
 	private Response response;
 
-	/** The status. */
+	/** The response status. */
 	private String status;
 
-	/** The page. */
+	/** The current page being viewed */
 	private transient static int page;
 
 	/** The search term. */
 	private transient static String searchTerm;
 
-	/** The tags. */
+	/** The search tags */
 	private transient static String tags;
 
 	/**
-	 * Request search from search term.
+	 * Perform a Request search from a search term.
 	 * 
 	 * @param searchTerm
-	 *            the search term
-	 * @return the requests search
+	 *      the search term
+	 * @return the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTerm(String searchTerm) {
 		return requestSearchFromSearchTerm(searchTerm, 1);
 	}
 
 	/**
-	 * Request search from search term next page.
+	 * Get the next page of the existing Request search
 	 * 
-	 * @return the requests search
+	 * @return the next page of the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTermNextPage() {
 		return requestSearchFromSearchTerm(searchTerm, page + 1);
 	}
 
 	/**
-	 * Request search from search term previous page.
+	 * Get the previous page of the existing Request search
 	 * 
-	 * @return the requests search
+	 * @return the previous page of the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTermPreviousPage() {
 		return requestSearchFromSearchTerm(searchTerm, page - 1);
 	}
 
 	/**
-	 * Request search from search term and page.
+	 * Perform a Request search from a search term and tags
 	 * 
 	 * @param searchTerm
-	 *            the search term
+	 *      the search term
 	 * @param tags
-	 *            the tags
-	 * @return the requests search
+	 *      the search tags
+	 * @return the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String tags) {
 		return requestSearchFromSearchTermAndTags(searchTerm, tags, 1);
 	}
 
 	/**
-	 * Request search from search term and tags next page.
+	 * Get the next page of the existing Request search and tags
 	 * 
-	 * @return the requests search
+	 * @return the next page of the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTermAndTagsNextPage() {
 		return requestSearchFromSearchTermAndTags(searchTerm, tags, page + 1);
 	}
 
 	/**
-	 * Request search from search term and tags previous page.
+	 * Get the previous page of the existing Request search and tags
 	 * 
-	 * @return the requests search
+	 * @return the previous page of the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTermAndTagsPreviousPage() {
 		return requestSearchFromSearchTermAndTags(searchTerm, tags, page - 1);
 	}
 
 	/**
-	 * Request search from search term.
+	 * Perform a Request search with some search term and return the desired page
+     * of results
 	 * 
 	 * @param searchTerm
-	 *            the search term
+	 *      the search term
 	 * @param page
-	 *            the page
-	 * @return the requests search
+	 *      the page of results to return
+	 * @return the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTerm(String searchTerm, int page) {
 		if (searchTerm != null) {
@@ -108,23 +109,23 @@ public class RequestsSearch {
 			RequestsSearch.page = page;
 			String authkey = MySoup.getAuthKey();
 			String url = "ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
-			RequestsSearch requestSearch = (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
-			return requestSearch;
-		} else
+			return (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
+		}
+        else
 			return null;
 	}
 
 	/**
-	 * Request search from search term and tags. Separate tags must be separated by commas, while whitespace should be
+	 * Perform a Request search from search term and tags. Separate tags must be separated by commas, while whitespace should be
 	 * replaced by periods. For example, hip.hop,pop,indie
 	 * 
 	 * @param searchTerm
-	 *            the search term
+	 *      the search term
 	 * @param tags
-	 *            the tags
+	 *      the search tags
 	 * @param page
-	 *            the page
-	 * @return the requests search
+	 *      the page of results to return
+	 * @return the Requests search
 	 */
 	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String tags, int page) {
 		if (searchTerm != null) {
@@ -140,7 +141,6 @@ public class RequestsSearch {
 			try {
 				tags = tags.replace(",", "&");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			String url = "ajax.php?action=requests&page=" + page + "&search=" + searchTerm + "&tags=" + tags + "&auth=" + authkey;
@@ -151,68 +151,60 @@ public class RequestsSearch {
 	}
 
 	/**
-	 * Checks for next page.
+	 * Check if a next page of results is available
 	 * 
-	 * @return true, if successful
+	 * @return True if a next page is available
 	 */
 	public boolean hasNextPage() {
 		try {
-			if (((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0))
-				return true;
-			else
-				return false;
+			return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	/**
-	 * Checks for previous page.
+	 * Check if a previous page of results is available
 	 * 
-	 * @return true, if successful
+	 * @return True if a previous page is available
 	 */
 	public boolean hasPreviousPage() {
 		try {
-			if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
-				return true;
-			else
-				return false;
+			return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	/**
-	 * Gets the page.
+	 * Get the current page number being viewed
 	 * 
-	 * @return the page
+	 * @return the current page number
 	 */
 	public static int getPage() {
 		return page;
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response
 	 * 
-	 * @return the response
+	 * @return the API response
 	 */
 	public Response getResponse() {
 		return this.response;
 	}
 
 	/**
-	 * Gets the status.
+	 * Get the response status
 	 * 
-	 * @return the status
+	 * @return True if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return this.status.equalsIgnoreCase("success");
 	}
 
 	/**
-	 * Gets the search term.
+	 * Get the search term used
 	 * 
 	 * @return the search term
 	 */
@@ -221,19 +213,14 @@ public class RequestsSearch {
 	}
 
 	/**
-	 * Gets the tags.
+	 * Get the search tags used
 	 * 
-	 * @return the tags
+	 * @return the search tags
 	 */
 	public static String getTags() {
 		return tags;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "RequestsSearch [hasNextPage()=" + hasNextPage() + ", hasPreviousPage()=" + hasPreviousPage() + ", getResponse()="
