@@ -1,10 +1,4 @@
-/*
- * 
- */
-
 package api.torrents.torrents;
-
-import java.util.List;
 
 /**
  * The Class Producer.
@@ -14,47 +8,47 @@ import java.util.List;
  */
 public class Producer{
 
-   /** The id. */
-   private Number id;
+    /** The id. */
+    private Number id;
 
-   /** The name. */
-   private String name;
+    /** The name. */
+    private String name;
 
- 	/**
-		 * Gets the id.
-		 * 
-		 * @return the id
-		 */
-	 public Number getId(){
-		return this.id;
-	}
-	
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id
-	 *            the new id
-	 */
-	public void setId(Number id){
-		this.id = id;
-	}
- 	
-	 /**
-		 * Gets the name.
-		 * 
-		 * @return the name
-		 */
-	 public String getName(){
-		return this.name;
-	}
-	
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 *            the new name
-	 */
-	public void setName(String name){
-		this.name = name;
-	}
+    /**
+    * Gets the id.
+    *
+    * @return the id
+    */
+    public Number getId(){
+        return this.id;
+    }
+
+    /**
+    * Sets the id.
+    *
+    * @param id
+    *            the new id
+    */
+    public void setId(Number id){
+        this.id = id;
+    }
+
+    /**
+    * Gets the name.
+    *
+    * @return the name
+    */
+    public String getName(){
+        return this.name;
+    }
+
+    /**
+    * Sets the name.
+    *
+    * @param name
+    *            the new name
+    */
+    public void setName(String name){
+        this.name = name;
+    }
 }

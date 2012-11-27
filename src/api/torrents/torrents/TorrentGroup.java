@@ -1,6 +1,3 @@
-/*
- * 
- */
 package api.torrents.torrents;
 
 import java.io.FileOutputStream;
@@ -76,8 +73,17 @@ public class TorrentGroup {
 	 * @return response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
+
+    /**
+     * Get the status of the request.
+     *
+     * @return true if success
+     */
+    public boolean getStatus() {
+        return status.equalsIgnoreCase("success");
+    }
 
 	/**
 	 * Adds the bookmark.
@@ -114,15 +120,6 @@ public class TorrentGroup {
         //If it's already not bookmarked, just say we succeeded
         return true;
     }
-
-	/**
-	 * Get the status of the request.
-	 * 
-	 * @return true if success
-	 */
-	public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
-	}
 
 	/**
 	 * Gets the download links list.
@@ -263,14 +260,6 @@ public class TorrentGroup {
 		return s;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return "Torrents [id =" + id + ", response=" + response + ", status=" + status + "]";
