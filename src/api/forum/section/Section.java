@@ -179,7 +179,7 @@ public class Section {
 				list.add(new Tuple<String, String>("title", title));
 				list.add(new Tuple<String, String>("body", body));
 				MySoup.postMethod(url, list);
-				System.out.println("Thread created");
+				System.out.println("ForumThread created");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -204,7 +204,7 @@ public class Section {
 	 */
 	public int getNumberOfUnreadThreads() {
 		int counter = 0;
-        for (Threads thread : response.getThreads()){
+        for (ForumThread thread : response.getThreads()){
             if (thread.isRead())
                 ++counter;
         }

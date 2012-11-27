@@ -5,12 +5,12 @@ import api.soup.MySoup;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * The Class Thread.
+ * The Class ForumThread.
  * Describes a subscribed forum thread
  * 
  * @author Gwindow
  */
-public class Thread {
+public class ForumThread {
 	/** The forum id. */
 	private Number forumId;
 
@@ -154,7 +154,7 @@ public class Thread {
 
 	@Override
 	public String toString() {
-		return "Thread [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()
+		return "ForumThread [getForumId=" + getForumId() + ", getForumName=" + getForumName() + ", getLastPostId=" + getLastPostId()
 				+ ", isLocked=" + isLocked() + ", isNew=" + isNew() + ", getPostId=" + getPostId() + ", getThreadId="
 				+ getThreadId() + ", getThreadTitle=" + getThreadTitle() + ", getUrl=" + getUrl() + ", getLastReadUrl="
 				+ getLastReadUrl() + "]";

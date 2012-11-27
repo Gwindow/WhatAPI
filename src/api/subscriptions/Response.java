@@ -11,14 +11,14 @@ import java.util.List;
  */
 public class Response {
 	/** The subscribed threads. */
-	private List<Thread> threads;
+	private List<ForumThread> threads;
 
 	/**
 	 * Get the threads
 	 * 
 	 * @return the threads
 	 */
-	public List<Thread> getThreads() {
+	public List<ForumThread> getThreads() {
 		return threads;
 	}
 

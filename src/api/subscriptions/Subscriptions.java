@@ -65,9 +65,9 @@ public class Subscriptions {
 	 * 
 	 * @return the hash map
 	 */
-	public HashMap<String, Thread> sortThreadsBySection() {
-		HashMap<String, Thread> map = new HashMap<String, Thread>();
-		for (Thread t : response.getThreads()) {
+	public HashMap<String, ForumThread> sortThreadsBySection() {
+		HashMap<String, ForumThread> map = new HashMap<String, ForumThread>();
+		for (ForumThread t : response.getThreads()) {
 			map.put(t.getForumName(), t);
 		}
 		ArrayList<String> sortedKeys = new ArrayList<String>(map.keySet());

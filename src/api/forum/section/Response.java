@@ -22,7 +22,7 @@ public class Response {
 	private List<SpecificRules> specificRules;
 	
 	/** The threads in the forum */
-	private List<Threads> threads;
+	private List<ForumThread> threads;
 
 	/**
 	 * Get the current page.
@@ -65,7 +65,7 @@ public class Response {
 	 * 
 	 * @return the threads
 	 */
-	public List<Threads> getThreads() {
+	public List<ForumThread> getThreads() {
 		return this.threads;
 	}
 
