@@ -1,4 +1,3 @@
-
 package api.search.user;
 
 import java.io.UnsupportedEncodingException;
@@ -9,55 +8,43 @@ import api.soup.MySoup;
 
 /**
  * The Class UserSearch.
+ * For performing User Searches via the API and
+ * interacting with the result
  * 
  * @author Gwindow
  */
 public class UserSearch {
-
-	/** The response. */
+	/** The API response */
 	private Response response;
 
-	/** The status. */
+	/** The response status. */
 	private String status;
 
-	/** The page. */
+	/** The current page being viewed */
 	private transient static int page;
 
 	/** The search term. */
 	private transient static String searchTerm;
 
 	/**
-	 * User search from search term.
+	 * Perform a User search from a search term
 	 * 
 	 * @param searchTerm
-	 *            the search term
-	 * @return the user search
+	 *      the search term
+	 * @return the User search
 	 */
 	public static UserSearch userSearchFromSearchTerm(String searchTerm) {
-		if (searchTerm.trim().length() > 0) {
-			try {
-				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			UserSearch.searchTerm = searchTerm;
-			page = 1;
-			String authkey = MySoup.getAuthKey();
-			String url = "ajax.php?action=usersearch&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
-			UserSearch userSearch = (UserSearch) MySon.toObject(url, UserSearch.class);
-			return userSearch;
-		} else
-			return null;
+		return userSearchFromSearchTermAndPage(searchTerm, 1);
 	}
 
 	/**
-	 * User search from search term and page.
+	 * Perform a user search from a search term and get a specific page of the results
 	 * 
 	 * @param searchTerm
-	 *            the search term
+	 *      the search term
 	 * @param page
-	 *            the page
-	 * @return the user search
+	 *      the page to get
+	 * @return the User search at the page
 	 */
 	public static UserSearch userSearchFromSearchTermAndPage(String searchTerm, int page) {
 		if (searchTerm.trim().length() > 0) {
@@ -70,40 +57,57 @@ public class UserSearch {
 			UserSearch.page = page;
 			String authkey = MySoup.getAuthKey();
 			String url = "ajax.php?action=usersearch&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
-			UserSearch userSearch = (UserSearch) MySon.toObject(url, UserSearch.class);
-			return userSearch;
+			return (UserSearch) MySon.toObject(url, UserSearch.class);
 		} else
 			return null;
 	}
 
 	/**
-	 * User search from next page.
+	 * Get the next page of the current User search
+     * Need to make sure a next page exists
 	 * 
-	 * @return the user search
+	 * @return the next page of the User search
 	 */
 	public static UserSearch userSearchFromNextPage() {
-		page += 1;
+		++page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=usersearch&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
-		UserSearch userSearch = (UserSearch) MySon.toObject(url, UserSearch.class);
-		return userSearch;
+		return  (UserSearch) MySon.toObject(url, UserSearch.class);
 	}
 
 	/**
-	 * User search from previous page.
+	 * Get the previous page of the current User search
+     * Need to make sure a previous page exists
 	 * 
-	 * @return the user search
+	 * @return the previous page of the User search
 	 */
 	public static UserSearch userSearchFromPreviousPage() {
-		page -= 1;
+		--page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=usersearch&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
-		UserSearch userSearch = (UserSearch) MySon.toObject(url, UserSearch.class);
-		return userSearch;
+		return (UserSearch) MySon.toObject(url, UserSearch.class);
 	}
 
+    /**
+     * Check if a next page of results exists
+     *
+     * @return True if a next page exists
+     */
+    public boolean hasNextPage() {
+            return  ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
+    }
+
+    /**
+     * Check if a previous page of results exists
+     *
+     * @return True if a previous page exists
+     */
+    public boolean hasPreviousPage() {
+        return  (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
+    }
+
 	/**
-	 * Gets the response.
+	 * Get the API response
 	 * 
 	 * @return the response
 	 */
@@ -112,59 +116,25 @@ public class UserSearch {
 	}
 
 	/**
-	 * Gets the status.
+	 * Get the status of the response
 	 * 
-	 * @return the status
+	 * @return True if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+		return this.status.equalsIgnoreCase("success");
 	}
 
 	/**
-	 * Checks for next page.
+	 * Get the current page number being viewed
 	 * 
-	 * @return true, if successful
-	 */
-	public boolean hasNextPage() {
-		try {
-			if (((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0))
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Checks for previous page.
-	 * 
-	 * @return true, if successful
-	 */
-	public boolean hasPreviousPage() {
-		try {
-			if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Gets the page.
-	 * 
-	 * @return the page
+	 * @return the page number
 	 */
 	public static int getPage() {
 		return page;
 	}
 
 	/**
-	 * Gets the search term.
+	 * Get the search term
 	 * 
 	 * @return the search term
 	 */
@@ -172,11 +142,6 @@ public class UserSearch {
 		return searchTerm;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "UserSearch [getResponse=" + getResponse() + ", getStatus=" + getStatus() + ", hasNextPage=" + hasNextPage()

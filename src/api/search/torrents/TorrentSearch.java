@@ -155,11 +155,7 @@ public class TorrentSearch {
 	 * @return True if a next page is available
 	 */
 	public boolean hasNextPage() {
-		try {
-			return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
-		} catch (Exception e) {
-			return false;
-		}
+        return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
 	}
 
 	/**
@@ -168,11 +164,7 @@ public class TorrentSearch {
 	 * @return True if a previous page is available
 	 */
 	public boolean hasPreviousPage() {
-		try {
-			return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
-		} catch (Exception e) {
-			return false;
-		}
+        return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
 	}
 
 	/**
