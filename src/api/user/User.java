@@ -97,8 +97,7 @@ public class User {
 	 *            the body
 	 */
 	public void sendRippy(String body) {
-		Rippy rippy = new Rippy(id, body);
-		rippy.sendRippy();
+		new Rippy(id, body).sendRippy();
 	}
 
 	/**
@@ -126,16 +125,9 @@ public class User {
 	 * 
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", response=" + response + ", status=" + status + "]";

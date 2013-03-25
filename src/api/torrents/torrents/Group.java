@@ -1,6 +1,3 @@
-/*
- * 
- */
 package api.torrents.torrents;
 
 /**
@@ -49,6 +46,9 @@ public class Group {
 
 	/** The year. */
 	private Number year;
+
+    /** If the TorrentGroup is bookmarked */
+    private boolean isBookmarked;
 
 	/**
 	 * Gets the catalogue number.
@@ -145,7 +145,6 @@ public class Group {
 			return "Unknown";
 		else
 			return "API Error";
-
 	}
 
 	/**
@@ -196,6 +195,28 @@ public class Group {
 	public String getOriginal() {
 		return this.getYear() + " - Original Release" + " / " + this.getRecordLabel() + " / " + this.getCatalogueNumber();
 	}
+
+    /**
+     * Check if the group is bookmarked
+     *
+     * @return True if torrent is bookmarked
+     */
+    public boolean isBookmarked(){
+        return this.isBookmarked;
+    }
+
+    /**
+     * Set the is bookmarked property. We only do this since if add/removeBookmark
+     * succeeded we know what we changed the property too and want to update the
+     * Group without having to reload the entire thing. Don't change this if you
+     * don't think the API request went ok! (ie. add/remove returned false)
+     *
+     * @param val
+     *      The val to set isBookmarked too
+     */
+    public void setBookmarked(boolean val){
+        this.isBookmarked = val;
+    }
 
 	/**
 	 * {@inheritDoc}

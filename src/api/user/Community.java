@@ -1,4 +1,3 @@
-
 package api.user;
 
 /**
@@ -164,11 +163,6 @@ public class Community {
 		return this.uploaded;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Community [getPerfectFlacs()=" + getPerfectFlacs() + ", getCollagesContrib()=" + getCollagesContrib()

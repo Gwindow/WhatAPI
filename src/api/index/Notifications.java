@@ -2,59 +2,55 @@ package api.index;
 
 /**
  * The Class Notifications.
+ * Describes the notifications the user has, new messages
+ * and new torrent notifications
  * 
  * @author Gwindow
  * @since May 5, 2012 10:37:31 AM
  */
 public class Notifications {
-
-	/** The messages. */
+	/** Number of new messages. */
 	private Number messages;
 
-	/** The notifications. */
+	/** Number of torrent notifications */
 	private Number notifications;
 
 	/**
-	 * Gets the messages.
+	 * Get the number of new messages
 	 * 
-	 * @return the messages
+	 * @return number of new messages
 	 */
 	public Number getMessages() {
 		return messages;
 	}
 
 	/**
-	 * Gets the notifications.
+	 * Get the number of torrent notifications
 	 * 
-	 * @return the notifications
+	 * @return number of torrent notifications
 	 */
 	public Number getNotifications() {
 		return notifications;
 	}
 
 	/**
-	 * Checks for new messages.
+	 * Check if there are any new messages
 	 * 
-	 * @return true, if successful
+	 * @return True if there are new messages
 	 */
 	public boolean hasNewMessages() {
-		return messages.intValue() > 0;
+		return (messages.intValue() > 0);
 	}
 
 	/**
-	 * Checks for new notifications.
+	 * Check if there are any new torrent notifications
 	 * 
-	 * @return true, if successful
+	 * @return True if there are any new torrent notifications
 	 */
 	public boolean hasNewNotifications() {
-		return notifications.intValue() > 0;
-	}
+		return (notifications.intValue() > 0);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Notifications [getMessages()=" + getMessages() + ", getNotifications()=" + getNotifications()

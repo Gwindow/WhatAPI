@@ -1,4 +1,3 @@
-
 package api.search.crossreference;
 
 import java.util.ArrayList;
@@ -13,96 +12,91 @@ import api.util.Tuple;
 
 /**
  * The Class CrossReference.
- * 
- * //TODO description
- * 
+ * For usage in executing Torrent or Request searches based
+ * on product data recieved from google via ProductSearch
+ *
  * @author Gwindow
  */
 public class CrossReference {
-
 	/** The determined search term. */
 	private static String determinedSearchTerm;
 
 	/**
-	 * Cross reference requests by search term.
+	 * Cross reference a Requests search by a Google product search result
 	 * 
 	 * @param searchTerm
-	 *            the search term
-	 * @return the requests search
+	 *      the search term for the product search
+	 * @return the Requests search
 	 */
 	public static RequestsSearch crossReferenceRequestsBySearchTerm(String searchTerm) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(searchTerm);
+		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
 		determinedSearchTerm = determineSearchString(ps.getItems());
-		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
-		return r;
+		return RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
 	}
 
 	/**
-	 * Cross reference requests by upc.
+	 * Cross reference a Requests search by a Google product search result
 	 * 
 	 * @param upc
-	 *            the upc
-	 * @return the requests search
+	 *      the UPC for the product search
+	 * @return the Requests search
 	 */
 	public static RequestsSearch crossReferenceRequestsByUPC(String upc) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(upc);
+		ProductSearch ps = ProductSearch.fromTitle(upc);
 		determinedSearchTerm = determineSearchString(ps.getItems());
-		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
-		return r;
+		return RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
 	}
 
 	/**
-	 * Cross reference torrents by search term.
+	 * Cross reference a Torrents search by a Google product search result
 	 * 
 	 * @param searchTerm
-	 *            the search term
-	 * @return the torrent search
+	 *      the search term for the product search
+	 * @return the Torrent search
 	 */
 	public static TorrentSearch crossReferenceTorrentsBySearchTerm(String searchTerm) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(searchTerm);
+		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
 		determinedSearchTerm = determineSearchString(ps.getItems());
-		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
-		return t;
+		return TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
 	}
 
 	/**
-	 * Cross reference torrents by upc.
+	 * Cross reference a Torrents search by a Google product search result
 	 * 
 	 * @param upc
-	 *            the upc
-	 * @return the torrent search
+     *      the UPC for the product search
+	 * @return the Torrent search
 	 */
 	public static TorrentSearch crossReferenceTorrentsByUPC(String upc) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(upc);
+		ProductSearch ps = ProductSearch.fromTitle(upc);
 		determinedSearchTerm = determineSearchString(ps.getItems());
-		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
-		return t;
+        return TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
 	}
 
+    /**
+     * Cross reference a Torrents and Requests search by a Google product search
+     *
+     * @param searchTerm
+     *      the search term to use for the product search
+     * @return a tuple containing the Torrent search (first) and the Requests search (second)
+     */
+    public static Tuple<TorrentSearch, RequestsSearch> crossReferenceTorrentsAndRequestsBySearchTerm(String searchTerm) {
+        ProductSearch ps = ProductSearch.fromTitle(searchTerm);
+        determinedSearchTerm = determineSearchString(ps.getItems());
+        TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
+        RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
+        return new Tuple<TorrentSearch, RequestsSearch>(t, r);
+    }
+
 	/**
-	 * Cross reference torrents and requests by upc.
+	 * Cross reference a Torrents and Requests search by a Google product search
 	 * 
 	 * @param upc
-	 *            the upc
-	 * @return the tuple
+	 *      the UPC for the product search
+	 * @return a tuple containing the Torrent search (first) and the Requests search (second)
 	 */
 	public static Tuple<TorrentSearch, RequestsSearch> crossReferenceTorrentsAndRequestsByUPC(String upc) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(upc);
-		determinedSearchTerm = determineSearchString(ps.getItems());
-		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
-		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
-		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
-	}
-
-	/**
-	 * Cross reference torrents and requests by search term.
-	 * 
-	 * @param searchTerm
-	 *            the search term
-	 * @return the tuple
-	 */
-	public static Tuple<TorrentSearch, RequestsSearch> crossReferenceTorrentsAndRequestsBySearchTerm(String searchTerm) {
-		ProductSearch ps = ProductSearch.productSearchFromTitle(searchTerm);
+		ProductSearch ps = ProductSearch.fromTitle(upc);
 		determinedSearchTerm = determineSearchString(ps.getItems());
 		TorrentSearch t = TorrentSearch.torrentSearchFromSearchTerm(determinedSearchTerm);
 		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
@@ -113,7 +107,7 @@ public class CrossReference {
 	 * Determine search string.
 	 * 
 	 * @param items
-	 *            the items
+	 *      the items
 	 * @return the string
 	 */
 	public static String determineSearchString(List<Items> items) {
@@ -154,8 +148,8 @@ public class CrossReference {
 
 		int k = 0;
 		for (int i = 0; i < combinations.size(); i++) {
-			for (int j = 0; j < items.size(); j++) {
-				String title = items.get(j).getProduct().getTitle().toLowerCase();
+            for (Items itm : items){
+				String title = itm.getProduct().getTitle().toLowerCase();
 				String phrase = combinations.get(i).toLowerCase();
 				if (title.contains(phrase)) {
 					k = i;
@@ -169,10 +163,9 @@ public class CrossReference {
 	/**
 	 * Gets the determined search term.
 	 * 
-	 * @return the determinedSearchTerm
+	 * @return the determined search term
 	 */
 	public static String getDeterminedSearchTerm() {
 		return determinedSearchTerm;
 	}
-
 }

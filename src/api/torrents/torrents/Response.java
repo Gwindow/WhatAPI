@@ -1,6 +1,3 @@
-/*
- * 
- */
 package api.torrents.torrents;
 
 import java.util.List;
@@ -25,7 +22,7 @@ public class Response {
 	 * @return the group
 	 */
 	public Group getGroup() {
-		return this.group;
+		return group;
 	}
 
 	/**
@@ -34,12 +31,9 @@ public class Response {
 	 * @return the torrents
 	 */
 	public List<Torrents> getTorrents() {
-		return this.torrents;
+		return torrents;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return "Response [getGroup()=" + getGroup() + ", getTorrents()=" + getTorrents() + "]";

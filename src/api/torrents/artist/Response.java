@@ -1,7 +1,3 @@
-
-
-
-
 package api.torrents.artist;
 
 import java.util.List;
@@ -67,6 +63,19 @@ public class Response {
 		return hasBookmarked;
 	}
 
+    /**
+     * Set the is bookmarked property. We only do this since if add/removeBookmark
+     * succeeded we know what we changed the property too and want to update the
+     * Artist without having to reload the entire thing. Don't change this if you
+     * don't think the API request went ok! (ie. add/remove returned false)
+     *
+     * @param val
+     *      The val to set isBookmarked too
+     */
+    public void setBookmarked(boolean val){
+        this.hasBookmarked = val;
+    }
+
 	/**
 	 * Gets the id.
 	 * 
@@ -102,6 +111,19 @@ public class Response {
 	public boolean hasNotificationsEnabled() {
 		return notificationsEnabled;
 	}
+
+    /**
+     * Set the notifications enabled property. We only do this since if enable/disable
+     * succeeded we know what we changed the property too and want to update the
+     * Artist without having to reload the entire thing. Don't change this if you
+     * don't think the API request went ok! (ie. enable/disable returned false)
+     *
+     * @param val
+     *      The val to set isBookmarked too
+     */
+    public void setNotificationsEnabled(boolean val){
+        this.notificationsEnabled = val;
+    }
 
 	/**
 	 * Gets the requests.

@@ -1,23 +1,22 @@
-
 package api.bookmarks;
 
 import java.util.List;
 
 /**
- * The Class Response.
+ * The Class Response
+ * Contains the data returned by the bookmarks API request
  * 
  * @author Gwindow
  */
 public class Response {
+	/** The list of bookmarked torrents */
+	private List<TorrentGroup> bookmarks;
 	
-	/** The bookmarks. */
-	private List<Torrents> bookmarks;
-	
-	/** The artists. */
+	/** The list of bookmarked artists */
 	private List<Artist> artists;
 
 	/**
-	 * Gets the list of artist bookmarks.
+	 * Get the list of artist bookmarks.
 	 * 
 	 * @return the artist bookmarks
 	 */
@@ -30,13 +29,10 @@ public class Response {
 	 * 
 	 * @return the torrent bookmarks
 	 */
-	public List<Torrents> getTorrents() {
+	public List<TorrentGroup> getTorrents() {
 		return this.bookmarks;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Response [getArtists=" + getArtists() + ", getBookmarksList=" + getTorrents() + "]";

@@ -1,4 +1,3 @@
-
 package api.user;
 
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
  * @author Gwindow
  */
 public class Personal {
-	// so java doesn't get confused with the "class" keyword
 	/** The user class. */
 	@SerializedName("class")
 	private String userClass;
@@ -83,9 +81,6 @@ public class Personal {
 		return this.warned;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Personal [getUserClass=" + getUserClass() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled()

@@ -1,4 +1,3 @@
-
 package api.inbox.inbox;
 
 import api.son.MySon;
@@ -6,143 +5,120 @@ import api.soup.MySoup;
 
 /**
  * The Class Inbox.
- * 
+ * For getting and interacting with the API regarding viewing
+ * the user's inbox
+ *
  * @author Gwindow
  */
 public class Inbox {
-
-	/** The response. */
+	/** The API response */
 	private Response response;
 
-	/** The status. */
+	/** The response status. */
 	private String status;
 
-	/** The page. */
+	/** The page of the inbox being viewed. */
 	private static int page;
 
 	/**
-	 * Loads the first page of the inbox.
+	 * Get the Inbox at the first page
 	 * 
-	 * @return the inbox
+	 * @return the Inbox
 	 */
 	public static Inbox init() {
-		return inboxFromPage(1);
+		return fromPage(1);
 	}
 
 	/**
-	 * Inbox from page.
+	 * Get the Inbox at some page
 	 * 
 	 * @param page
-	 *            the page
-	 * @return the inbox
+	 *      the page to get
+	 * @return the Inbox
 	 */
-	public static Inbox inboxFromPage(int page) {
+	public static Inbox fromPage(int page) {
 		String authkey = MySoup.getAuthKey();
 		Inbox.page = page;
 		String url = "ajax.php?action=inbox&page=" + page + "&auth=" + authkey;
-		Inbox inbox = (Inbox) MySon.toObject(url, Inbox.class);
-		return inbox;
+		return (Inbox) MySon.toObject(url, Inbox.class);
 	}
 
 	/**
+     * Get the next page of the Inbox
 	 * Should only be called if hasNextPage() returned true.
 	 * 
-	 * @return the inbox
+	 * @return the Inbox at the next page
 	 */
-	public static Inbox inboxFromNextPage() {
-		page += 1;
-		return inboxFromPage(page);
+	public static Inbox fromNextPage() {
+		++page;
+		return fromPage(page);
 	}
 
 	/**
+     * Get the previous page of the Inbox
 	 * Should only be called if hasPreviousPage() returned true.
 	 * 
-	 * @return the inbox
+	 * @return the Inbox at the previous page
 	 */
-	public static Inbox inboxFromPreviousPage() {
-		page -= 1;
-		return inboxFromPage(page);
+	public static Inbox fromPreviousPage() {
+		--page;
+		return fromPage(page);
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response.
 	 * 
 	 * @return the response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
 
 	/**
-	 * Gets the status.
+	 * Get the status of the API request
 	 * 
-	 * @return the status
+	 * @return True if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/**
-	 * Gets the last page.
+	 * Get the last page number of the Inbox
 	 * 
-	 * @return the last page
+	 * @return the last page number
 	 */
 	public int getLastPage() {
-		try {
-			return response.getPages().intValue();
-		} catch (Exception e) {
-			return 1;
-		}
+        return response.getPages().intValue();
 	}
 
 	/**
-	 * Checks for next page.
+	 * Check if the Inbox has a next page
 	 * 
-	 * @return true, if successful
+	 * @return True if a next page exists
 	 */
 	public boolean hasNextPage() {
-		try {
-			if ((response.getPages().intValue() - (response.getCurrentPage().intValue())) > 0)
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
+        return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
 	}
 
 	/**
-	 * Checks for previous page.
+	 * Check if the Inbox has a previous page
 	 * 
-	 * @return true, if successful
+	 * @return True if a previous page exists
 	 */
 	public boolean hasPreviousPage() {
-		try {
-			if ((((response.getCurrentPage().intValue()) != 1) || ((response.getCurrentPage().intValue()) == 0)))
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
+        return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
 	}
 
 	/**
-	 * Gets the page.
+	 * Get the current page number being viewed
 	 * 
-	 * @return the page
+	 * @return the current page number
 	 */
 	public static int getPage() {
 		return page;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Inbox [getResponse()=" + getResponse() + ", getStatus()=" + getStatus() + ", getLastPage()=" + getLastPage()

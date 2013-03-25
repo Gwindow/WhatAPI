@@ -297,9 +297,8 @@ public class Torrent {
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
 		String passKey = MySoup.getPassKey();
-		String downloadLink =
-				site + "torrents.php?action=download&id=" + this.getId() + "&authkey=" + authKey + "&torrent_pass=" + passKey;
-		return downloadLink;
+		return site + "torrents.php?action=download&id=" + this.getId()
+                + "&authkey=" + authKey + "&torrent_pass=" + passKey;
 	}
 
 	/**
@@ -320,7 +319,6 @@ public class Torrent {
 		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
 		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
 		System.out.println("Downloaded " + name + " to " + path);
-
 	}
 
 	/*

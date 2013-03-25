@@ -1,4 +1,3 @@
-
 package api.inbox.conversation;
 
 import api.son.MySon;
@@ -6,56 +5,48 @@ import api.soup.MySoup;
 
 /**
  * The Class Conversation.
+ * For using the API to get information about a Conversation
  * 
  * @author Gwindow
  */
 public class Conversation {
-
-	/** The response. */
+	/** The API response data */
 	private Response response;
 
-	/** The status. */
+	/** The API response status */
 	private String status;
 
 	/**
-	 * Conversation from id.
+	 * Get a Conversation by its conversation id.
 	 * 
 	 * @param id
-	 *            the id
+	 *      the conversation id to get
 	 * @return the conversation
 	 */
 	public static Conversation conversationFromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=inbox&type=viewconv&id=" + id + "&auth=" + authkey;
-		Conversation conversation = (Conversation) MySon.toObject(url, Conversation.class);
-		return conversation;
+		return (Conversation) MySon.toObject(url, Conversation.class);
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response data
 	 * 
-	 * @return the response
+	 * @return the API response data
 	 */
 	public Response getResponse() {
 		return this.response;
 	}
 
 	/**
-	 * Gets the status.
+	 * Get the status of the request.
 	 * 
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return this.status.equalsIgnoreCase("success");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Conversation [getResponse()=" + getResponse() + ", getStatus()=" + getStatus() + "]";

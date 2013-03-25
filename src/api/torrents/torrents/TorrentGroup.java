@@ -1,6 +1,3 @@
-/*
- * 
- */
 package api.torrents.torrents;
 
 import java.io.FileOutputStream;
@@ -76,36 +73,53 @@ public class TorrentGroup {
 	 * @return response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
+
+    /**
+     * Get the status of the request.
+     *
+     * @return true if success
+     */
+    public boolean getStatus() {
+        return status.equalsIgnoreCase("success");
+    }
 
 	/**
 	 * Adds the bookmark.
 	 * 
 	 * @return the status
 	 */
-	/*
-	 * public void addBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
-	 * false) { MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
-	 * System.out.println("Bookmarked"); } else { System.err.println("Already bookmarked"); } }
-	 *//**
+	public boolean addBookmark() {
+        String authKey = MySoup.getAuthKey();
+        if (!response.getGroup().isBookmarked()){
+            boolean success = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
+            if (success){
+                response.getGroup().setBookmarked(true);
+                return true;
+            }
+            return false;
+        }
+        //If it's already bookmarked, just say we succeeded
+        return true;
+    }
+	 /**
 	 * Removes the bookmark.
 	 */
-	/*
-	 * public void removeBookmark() { String authKey = MySoup.getAuthKey(); if (response.getGroup().isBookmarked() ==
-	 * true) { MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
-	 * System.out.println("Removed bookmark"); } else { System.err.println("Already isn't bookmarked"); } }
-	 */
-	/**
-	 * Get the status of the request.
-	 * 
-	 * @return true if success
-	 */
-	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
-	}
+	public boolean removeBookmark() {
+        String authKey = MySoup.getAuthKey();
+        if (response.getGroup().isBookmarked()){
+            boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
+            if (success){
+                response.getGroup().setBookmarked(false);
+                return true;
+            }
+            else
+                return false;
+        }
+        //If it's already not bookmarked, just say we succeeded
+        return true;
+    }
 
 	/**
 	 * Gets the download links list.
@@ -117,9 +131,8 @@ public class TorrentGroup {
 		for (Torrents t : response.getTorrents()) {
 			String name = t.getFilePath();
 			if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
-				name =
-						response.getGroup().getName() + " - " + response.getGroup().getYear() + " (" + t.getMediaFormatEncoding()
-								+ ")";
+				name = response.getGroup().getName() + " - " + response.getGroup().getYear()
+                        + " (" + t.getMediaFormatEncoding() + ")";
 			}
 			list.add(new Tuple<String, String>(t.getDownloadLink(), name));
 		}
@@ -149,7 +162,6 @@ public class TorrentGroup {
 			}
 		}
 		return list;
-
 	}
 
 	/**
@@ -175,7 +187,6 @@ public class TorrentGroup {
 			}
 		}
 		return list;
-
 	}
 
 	/**
@@ -225,14 +236,12 @@ public class TorrentGroup {
 	 */
 	public String getSpotifyUrl() {
 		try {
-			String s = "spotify:" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8");
-			return s;
+			return "spotify:" + URLEncoder.encode(getResponse().getGroup().getName(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("Could not encode url");
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 	/**
@@ -249,17 +258,8 @@ public class TorrentGroup {
 			e.printStackTrace();
 		}
 		return s;
-
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return "Torrents [id =" + id + ", response=" + response + ", status=" + status + "]";

@@ -37,7 +37,7 @@ public class Artist {
 	 *            the id
 	 * @return the artist
 	 */
-	public static Artist artistFromId(int id) {
+	public static Artist fromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=artist&id=" + id + "&auth=" + authkey;
 		Artist artist = (Artist) MySon.toObject(url, Artist.class);
@@ -63,59 +63,89 @@ public class Artist {
 		return this.response;
 	}
 
+    /**
+     * Get the status of the request.
+     *
+     * @return true if success
+     */
+    public boolean getStatus() {
+        return status.equalsIgnoreCase("success");
+    }
+
 	/**
 	 * Adds the bookmark.
 	 */
-	public void addBookmark() {
+	public boolean addBookmark() {
 		String authKey = MySoup.getAuthKey();
-		if (response.isBookmarked() == false) {
-			MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
-			System.out.println("Bookmarked");
-		} else {
-			System.err.println("Already bookmarked");
+		if (!response.isBookmarked()) {
+			boolean success = MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
+            if (success){
+                response.setBookmarked(true);
+                return true;
+            }
+            return false;
 		}
+        //If it's already bookmarked, just say it went ok
+        return true;
 	}
 
 	/**
 	 * Removes the bookmark.
 	 */
-	public void removeBookmark() {
+	public boolean removeBookmark() {
 		String authKey = MySoup.getAuthKey();
-		if (response.isBookmarked() == true) {
-			MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
-			System.out.println("Removed bookmark");
-		} else {
-			System.err.println("Already isn't bookmarked");
+		if (response.isBookmarked()) {
+			boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
+            if (success){
+                response.setBookmarked(false);
+                return true;
+            }
+            else
+                return false;
 		}
+        //If it's already not bookmarked, say it went ok
+        return true;
 	}
 
 	/**
 	 * Enable notifications.
 	 */
-	public void enableNotifications() {
+	public boolean enableNotifications() {
 		String authkey = MySoup.getAuthKey();
-		if (response.hasNotificationsEnabled() == false) {
-			MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
-			System.out.println("Notifications enabled");
-		} else {
-			System.err.println("Notifications already enabled");
+		if (!response.hasNotificationsEnabled()) {
+			boolean success = MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
+			if (success){
+                response.setNotificationsEnabled(true);
+                System.out.println("Notifications enabled");
+                return true;
+            }
+            else
+                return false;
 		}
+        //If already enabled, just say it went ok
+        return true;
 	}
 
 	/**
-	 * Disbale notifications.
+	 * Disabale notifications.
 	 */
-	public void disbaleNotifications() {
+	public boolean disableNotifications() {
 		String authkey = MySoup.getAuthKey();
-		if (response.hasNotificationsEnabled() == true) {
-			MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
-			System.out.println("Notifications disabled");
-		} else {
-			System.err.println("Notifications already disabled");
+		if (response.hasNotificationsEnabled()) {
+			boolean success = MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
+            if (success){
+                response.setNotificationsEnabled(false);
+                System.out.println("Notifications disabled");
+                return true;
+            }
+            else
+                return false;
 		}
+        //If already disabled just say it went ok
+        return true;
 	}
 
-	// TODO fix
+	// TODO fix: What's wrong?
 	/*
 	 * public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
 	 * ArrayList<Tuple<String, String>>(); for (TorrentGroup tg : response.getTorrentgroup()) { for (Torrent t :
@@ -215,14 +245,12 @@ public class Artist {
 	 */
 	public String getSpotifyUrl() {
 		try {
-			String s = "spotify:artist" + URLEncoder.encode(getResponse().getName(), "UTF-8");
-			return s;
+			return "spotify:artist" + URLEncoder.encode(getResponse().getName(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("Could not encode url");
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 	/**
@@ -240,28 +268,9 @@ public class Artist {
 		return s;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
+    @Override
 	public String toString() {
 		return "Artist [getResponse()=" + getResponse() + ", getSpotifyUrl()=" + getSpotifyUrl() + ", getLastFMUrl()="
 				+ getLastFMUrl() + ", getStatus()=" + getStatus() + "]";
 	}
-
-	/* public boolean getStatus() { if (status.equalsIgnoreCase("success")) return true; return false; } */
-
-	/**
-	 * Get the status of the request.
-	 * 
-	 * @return true if success
-	 */
-	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
-	}
-
 }

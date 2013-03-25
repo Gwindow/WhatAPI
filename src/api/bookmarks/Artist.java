@@ -1,17 +1,14 @@
-
 package api.bookmarks;
 
 import api.soup.MySoup;
 
 /**
  * The Class Artist.
- * 
- * //TODO description
+ * The information received from the API about a bookmarked artist
  * 
  * @author Gwindow
  */
 public class Artist {
-	// TODO enable/disable notifications for artist
 	/** The artist id. */
 	private Number artistId;
 	
@@ -19,7 +16,7 @@ public class Artist {
 	private String artistName;
 
 	/**
-	 * Gets the artist id.
+	 * Get the artist id.
 	 * 
 	 * @return the artist id
 	 */
@@ -28,7 +25,7 @@ public class Artist {
 	}
 
 	/**
-	 * Gets the artist name.
+	 * Get the artist name.
 	 * 
 	 * @return the artist name
 	 */
@@ -36,8 +33,8 @@ public class Artist {
 		return this.artistName;
 	}
 
-	/**
-	 * Removes the bookmark.
+    /**
+	 * Remove the bookmark.
 	 */
 	public void removeBookmark() {
 		String authKey = MySoup.getAuthKey();
@@ -45,9 +42,6 @@ public class Artist {
 		System.out.println("Removed bookmark");
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Artist [getArtistId=" + getArtistId() + ", getArtistName=" + getArtistName() + "]";

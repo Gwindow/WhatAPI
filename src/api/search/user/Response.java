@@ -1,57 +1,51 @@
-
-
-
-
 package api.search.user;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * Stores the data returned to us by the API request
+ * for a User Search
  * 
  * @author Gwindow
  */
 public class Response {
-	
-	/** The current page. */
+	/** The current page being viewed. */
 	private Number currentPage;
 	
-	/** The pages. */
+	/** The total number of pages of results. */
 	private Number pages;
 	
 	/** The results. */
-	private List<Results> results;
+	private List<User> results;
 
 	/**
-	 * Gets the current page.
+	 * Get the current page number
 	 * 
-	 * @return the current page
+	 * @return the current page number
 	 */
 	public Number getCurrentPage() {
-		return this.currentPage;
+		return currentPage;
 	}
 
 	/**
-	 * Gets the pages.
+	 * Get the total number of pages of results
 	 * 
-	 * @return the pages
+	 * @return the total number of pages
 	 */
 	public Number getPages() {
-		return this.pages;
+		return pages;
 	}
 
 	/**
-	 * Gets the results.
+	 * Get the results
 	 * 
 	 * @return the results
 	 */
-	public List<Results> getResults() {
-		return this.results;
+	public List<User> getResults() {
+		return results;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [getCurrentPage=" + getCurrentPage() + ", getPages=" + getPages() + ", getResults=" + getResults() + "]";

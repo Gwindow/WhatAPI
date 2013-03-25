@@ -1,6 +1,3 @@
-/*
- * 
- */
 package api.torrents.torrents;
 
 /**
@@ -35,9 +32,6 @@ public class Artists {
 		return this.name;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return "Artists [getId()=" + getId() + ", getName()=" + getName() + "]";

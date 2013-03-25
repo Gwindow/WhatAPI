@@ -2,141 +2,125 @@ package api.forum.thread;
 
 /**
  * The Class Author.
+ * Stores information about a forum post author
  * 
  * @author Gwindow
  */
 public class Author {
-
-	/** The artist. */
-	private boolean artist;
-
-	/** The author id. */
+	/** The author's user id. */
 	private Number authorId;
 
-	/** The author name. */
+	/** The author user name. */
 	private String authorName;
 
-	// TODO remove
-	private String permissionId;
-
-	/** The avatar. */
+	/** The URL for the author's avatar. */
 	private String avatar;
 
-	/** The donor. */
+    /**
+     * A list of the various fields that are restricted on the
+     * user's profile based on their Paranoia settings. A + at the end
+     * of an entry denotes very restricted.
+     */
+    // private List<String> paranoia;
+    /** The extra text some users get as additional user title */
+    private String userTitle;
+
+    /** If the author is an artist */
+    private boolean artist;
+
+	/** If the author is a donor */
 	private boolean donor;
 
-	/** The enabled. */
+	/** If the author's account is enabled */
 	private boolean enabled;
-	// TODO paranoi crashes for some reason
-	// private List<String> paranoia;
-	/** The user title. */
-	private String userTitle;
-	// TODO investigate warned in php
-	/** The warned. */
-	private boolean warned;
+
+    /** If the user has received a warning */
+    private boolean warned;
 
 	/**
-	 * Checks if is artist.
+	 * Get the author's user id
 	 * 
-	 * @return the artist
-	 */
-	public boolean isArtist() {
-		return artist;
-	}
-
-	/**
-	 * Gets the author id.
-	 * 
-	 * @return the authorId
+	 * @return the author's user id
 	 */
 	public Number getAuthorId() {
-		return authorId;
+		return this.authorId;
 	}
 
 	/**
-	 * Gets the author name.
+	 * Get the author's user name
 	 * 
 	 * @return the authorName
 	 */
 	public String getAuthorName() {
-		return authorName;
+		return this.authorName;
 	}
 
 	/**
-	 * Gets the avatar.
+	 * Get the URL for the author's avatar
 	 * 
-	 * @return the avatar
+	 * @return the avatar URL
 	 */
 	public String getAvatar() {
-		return avatar;
+		return this.avatar;
 	}
 
 	/**
-	 * Checks if is donor.
+	 * Get the list of restricted profile fields resulting from
+     * the user's paranoia setting
 	 * 
-	 * @return the donor
-	 */
-	public boolean isDonor() {
-		return donor;
-	}
-
-	/**
-	 * Checks if is enabled.
-	 * 
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	/**
-	 * Gets the paranoia.
-	 * 
-	 * @return the paranoia
+	 * @return the list of restricted fields
 	 */
 	/* public List<String> getParanoia() { return paranoia; } */
 
 	/**
-	 * Gets the user title.
+	 * Get the user title
 	 * 
-	 * @return the userTitle
+	 * @return the user title
 	 */
 	public String getUserTitle() {
-		return userTitle;
+		return this.userTitle;
 	}
+
+    /**
+     * Check if the author is an artist
+     *
+     * @return True if the author is an artist
+     */
+    public boolean isArtist() {
+        return this.artist;
+    }
+
+    /**
+     * Check if the author is a donor
+     *
+     * @return True if the author is a donor
+     */
+    public boolean isDonor() {
+        return this.donor;
+    }
+
+    /**
+     * Check if the author's account is enabled
+     *
+     * @return True if the author's account is enabled
+     */
+    public boolean isEnabled() {
+        return this.enabled;
+    }
 
 	/**
-	 * Checks if is warned.
+	 * Check if the author has received a warning
 	 * 
-	 * @return the warned
+	 * @return True if the author has been warned
 	 */
 	public boolean isWarned() {
-		return warned;
+		return this.warned;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Author [isArtist=" + isArtist() + ", getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName()
 				+ ", getAvatar=" + getAvatar() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled() + ", getParanoia="
 				+ /* getParanoia() + */", getUserTitle=" + getUserTitle() + ", isWarned=" + isWarned() + "]";
-	}
-
-	/**
-	 * @return the permissionId
-	 */
-	public String getPermissionId() {
-		return permissionId;
-	}
-
-	/**
-	 * @param permissionId the permissionId to set
-	 */
-	public void setPermissionId(String permissionId) {
-		this.permissionId = permissionId;
 	}
 }

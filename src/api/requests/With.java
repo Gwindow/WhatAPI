@@ -3,40 +3,35 @@ package api.requests;
 
 /**
  * The Class With.
- * 
- * //TODO description
+ * An artist who was performed with on some media recording
  * 
  * @author Gwindow
  */
 public class With {
-	
-	/** The id. */
+	/** The artist id. */
 	private Number id;
 	
-	/** The name. */
+	/** The artist name. */
 	private String name;
 
 	/**
-	 * Gets the id.
+	 * Get the artist id.
 	 * 
 	 * @return the id
 	 */
 	public Number getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
-	 * Gets the name.
+	 * Get the artist name.
 	 * 
 	 * @return the name
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "With [getId=" + getId() + ", getName=" + getName() + "]";

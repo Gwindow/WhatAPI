@@ -2,90 +2,86 @@ package api.index;
 
 /**
  * The Class Response.
- * 
+ * Stores the data returned by the API in response
+ * to our Index API request
+ *
  * @author Gwindow
  */
 public class Response {
-
-	/** The authkey. */
+	/** The user's authkey for this session. */
 	private String authkey;
 
-	/** The id. */
+	/** The user's id */
 	private Number id;
 
-	/** The passkey. */
+	/** The user's torrent passkey */
 	private String passkey;
 
-	/** The username. */
+	/** The user's name */
 	private String username;
 
-	/** The notifications. */
+	/** The user's notifications */
 	private Notifications notifications;
 
-	/** The userstats. */
+	/** The user's stats */
 	private UserStats userstats;
 
 	/**
-	 * Gets the authkey.
+	 * Get the session authkey
 	 * 
 	 * @return the authkey
 	 */
 	public String getAuthkey() {
-		return this.authkey;
+		return authkey;
 	}
 
 	/**
-	 * Gets the id.
+	 * Get the user id
 	 * 
-	 * @return the id
+	 * @return the user id
 	 */
 	public Number getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
-	 * Gets the passkey.
+	 * Get the user's passky
 	 * 
 	 * @return the passkey
 	 */
 	public String getPasskey() {
-		return this.passkey;
+		return passkey;
 	}
 
 	/**
-	 * Gets the username.
+	 * Get the user's name
 	 * 
 	 * @return the username
 	 */
 	public String getUsername() {
-		return this.username;
+		return username;
 	}
 
 	/**
-	 * Gets the notifications.
+	 * Get the user's notifications
 	 * 
 	 * @return the notifications
 	 */
 
 	public Notifications getNotifications() {
-		return this.notifications;
+		return notifications;
 	}
 
 	/**
-	 * Gets the userstats.
+	 * Gets the user's stats
 	 * 
-	 * @return the userstats
+	 * @return the user's stats
 	 */
 
 	public UserStats getUserstats() {
-		return this.userstats;
+		return userstats;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [getAuthkey()=" + getAuthkey() + ", getId()=" + getId() + ", getPasskey()=" + getPasskey()

@@ -1,4 +1,3 @@
-
 package api.requests;
 
 import api.son.MySon;
@@ -6,56 +5,48 @@ import api.soup.MySoup;
 
 /**
  * The Class Request.
- * 
- * //TODO description
- * 
+ * For using the API related to viewing Requests
+ *
  * @author Gwindow
  */
 public class Request {
-
-	/** The response. */
+	/** The API response. */
 	private Response response;
 
-	/** The status. */
+	/** The response status */
 	private String status;
 
 	/**
-	 * Request from id.
+	 * Get a request from the request id
 	 * 
 	 * @param id
-	 *            the id
+	 *      the request id
 	 * @return the request
 	 */
-	public static Request requestFromId(int id) {
+	public static Request fromId(int id) {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=request&id=" + id + "&auth=" + authkey;
-		Request request = (Request) MySon.toObject(url, Request.class);
-		return request;
+		return (Request) MySon.toObject(url, Request.class);
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response
 	 * 
 	 * @return the response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
 
 	/**
-	 * Get the status of the request.
+	 * Get the status of the request
 	 * 
-	 * @return true if success
+	 * @return True if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Request [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

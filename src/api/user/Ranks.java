@@ -1,7 +1,3 @@
-
-
-
-
 package api.user;
 
 /**
@@ -107,9 +103,6 @@ public class Ranks {
 		return this.uploads;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Ranks [getArtists=" + getArtists() + ", getBounty=" + getBounty() + ", getDownloaded=" + getDownloaded()

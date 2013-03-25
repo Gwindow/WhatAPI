@@ -10,34 +10,32 @@ import api.util.Tuple;
 
 /**
  * The Class PrivateMessage.
- * 
- * //TODO description
+ * For use in sending Private Messages to other users
  * 
  * @author Gwindow
  */
 public class PrivateMessage {
-
-	/** The id. */
+	/** The user id to send the message to */
 	private int userId;
 
-	/** The subject. */
+	/** The subject of the message */
 	private String subject;
 
-	/** The body. */
+	/** The body text of the message */
 	private String body;
 
-	/** The conv id. */
+	/** The conversation id */
 	private int convId;
 
 	/**
-	 * A new message.
+	 * Create a new message to be sent to a user with some user id
 	 * 
 	 * @param id
-	 *            recipent's id
+	 *      recipient user id
 	 * @param subject
-	 *            subject line
+	 *      subject of message
 	 * @param body
-	 *            body of the message
+	 *      body of the message
 	 */
 	public PrivateMessage(int id, String subject, String body) {
 		this.userId = id;
@@ -46,16 +44,17 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * A new message to a user.
+	 * Create a new message to be sent to a user using the user name to
+     * lookup the id
 	 * 
 	 * @param username
-	 *            the username
+	 *      recipient user name
 	 * @param subject
-	 *            subject line
+	 *      subject of message
 	 * @param body
-	 *            body of the message
+	 *      body of the message
 	 * @throws CouldNotLoadException
-	 *             the could not load exception
+	 *      if we fail to find the user we're trying to send a PM too
 	 */
 	public PrivateMessage(String username, String subject, String body) throws CouldNotLoadException {
 		UserSearch us = UserSearch.userSearchFromSearchTerm(username.toLowerCase());
@@ -69,14 +68,14 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * A reply to a message.
+	 * Create a new message in reply to an existing message
 	 * 
 	 * @param userId
-	 *            the user id
+	 *      recipient user id
 	 * @param convId
-	 *            the conv id
+	 *      the conversation id of the conversation the message is for
 	 * @param body
-	 *            body of the message
+	 *      body of the message
 	 */
 	public PrivateMessage(int userId, int convId, String body) {
 		this.userId = userId;
@@ -85,22 +84,23 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * Instantiates a new private message.
+	 * Create a new empty message to be sent to some user
 	 * 
 	 * @param id
-	 *            recipent's id
+	 *      recipient user id
 	 */
 	public PrivateMessage(int id) {
 		this.userId = id;
 	}
 
 	/**
-	 * Instantiates a new private message.
+	 * Create a new empty message to be sent to some user, the user id is looked up
+     * from the user name passed
 	 * 
 	 * @param username
-	 *            the username
+	 *      recipient user name
 	 * @throws CouldNotLoadException
-	 *             the could not load exception
+	 *      if we fail to find the user we're trying to send PM too
 	 */
 	public PrivateMessage(String username) throws CouldNotLoadException {
 		UserSearch us = UserSearch.userSearchFromSearchTerm(username);
@@ -116,7 +116,7 @@ public class PrivateMessage {
 	 * 
 	 */
 	public void sendMessage() {
-		if ((subject.length() > 0) && (body.length() > 0)) {
+		if (subject.length() > 0 && body.length() > 0) {
 			try {
 				String url = "inbox.php?action=compose&to=" + userId;
 				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
@@ -134,10 +134,10 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * Send the message as a reply.
+	 * Send the message as a reply to an existing conversation
 	 */
 	public void replyMessage() {
-		if ((body.length() > 0)) {
+		if (body.length() > 0) {
 			try {
 				String url = "inbox.php?action=viewconv&id=" + convId;
 				List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
@@ -155,50 +155,49 @@ public class PrivateMessage {
 	}
 
 	/**
-	 * Gets the id.
+	 * Get the recipient user id
 	 * 
-	 * @return the id
+	 * @return recipient user id
 	 */
 	public int getId() {
-		return userId;
+		return this.userId;
 	}
 
 	/**
-	 * Gets the subject.
+	 * Get the message subject
 	 * 
-	 * @return the subject
+	 * @return the message subject
 	 */
 	public String getSubject() {
-		return subject;
+		return this.subject;
 	}
 
 	/**
-	 * Set the subject line of the message.
+	 * Set the subject line of the message
 	 * 
-	 * @param s
-	 *            subject line
+	 * @param subject
+	 *      the subject text to set
 	 */
-	public void setSubject(String s) {
-		subject = s;
+	public void setSubject(String subject) {
+        this.subject = subject;
 	}
 
 	/**
-	 * Gets the body.
+	 * Get the message body
 	 * 
-	 * @return the body
+	 * @return the message body
 	 */
 	public String getBody() {
-		return body;
+		return this.body;
 	}
 
 	/**
 	 * Set message body.
 	 * 
-	 * @param s
-	 *            body
+	 * @param body
+	 *      the text to set as the body
 	 */
-	public void setBody(String s) {
-		body = s;
+	public void setBody(String body) {
+        this.body = body;
 	}
-
 }
