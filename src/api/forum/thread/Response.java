@@ -1,15 +1,15 @@
-
 package api.forum.thread;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * Stores the information from the API response for
+ * a forum thread
  * 
  * @author Gwindow
  */
 public class Response {
-
 	/** The current page. */
 	private Number currentPage;
 
@@ -19,20 +19,14 @@ public class Response {
 	/** The forum name. */
 	private String forumName;
 
-	/** The locked. */
-	private boolean locked;
-
-	/** The pages. */
+	/** The number of pages in the thread */
 	private Number pages;
 
-	/** The poll. */
+	/** The poll for the thread (null if none?) */
 	private Poll poll;
 
-	/** The posts. */
-	private List<Posts> posts;
-
-	/** The subscribed. */
-	private boolean subscribed;
+	/** The posts in the thread */
+	private List<Post> posts;
 
 	/** The thread id. */
 	private Number threadId;
@@ -40,113 +34,114 @@ public class Response {
 	/** The thread title. */
 	private String threadTitle;
 
-	/** The sticky. */
+    /** If the thread is locked */
+    private boolean locked;
+
+    /** If the thread is subscribed too */
+    private boolean subscribed;
+
+	/** If the thread is a sticky */
 	private boolean sticky;
 
 	/**
-	 * Gets the current page.
+	 * Get the current page number
 	 * 
-	 * @return the currentPage
+	 * @return the current page number
 	 */
 	public Number getCurrentPage() {
-		return currentPage;
+		return this.currentPage;
 	}
 
 	/**
-	 * Gets the forum id.
+	 * Get the forum id.
 	 * 
-	 * @return the forumId
+	 * @return the forum id
 	 */
 	public Number getForumId() {
-		return forumId;
+		return this.forumId;
 	}
 
 	/**
-	 * Gets the forum name.
+	 * Get the forum name.
 	 * 
-	 * @return the forumName
+	 * @return the forum name
 	 */
 	public String getForumName() {
-		return forumName;
+		return this.forumName;
 	}
 
 	/**
-	 * Checks if is locked.
+	 * Get the total number of pages in the thread
 	 * 
-	 * @return the locked
-	 */
-	public boolean isLocked() {
-		return locked;
-	}
-
-	/**
-	 * Gets the pages.
-	 * 
-	 * @return the pages
+	 * @return the number of pages in the thread
 	 */
 	public Number getPages() {
-		return pages;
+		return this.pages;
 	}
 
 	/**
-	 * Gets the poll.
+	 * Get the thread poll
 	 * 
 	 * @return the poll
 	 */
 	public Poll getPoll() {
-		return poll;
+		return this.poll;
 	}
 
 	/**
-	 * Gets the posts.
+	 * Get the posts in the thread
 	 * 
 	 * @return the posts
 	 */
-	public List<Posts> getPosts() {
-		return posts;
+	public List<Post> getPosts() {
+		return this.posts;
 	}
 
 	/**
-	 * Checks if is subscribed.
+	 * Get the thread id.
 	 * 
-	 * @return the subscribed
-	 */
-	public boolean isSubscribed() {
-		return subscribed;
-	}
-
-	/**
-	 * Gets the thread id.
-	 * 
-	 * @return the threadId
+	 * @return the thread id
 	 */
 	public Number getThreadId() {
-		return threadId;
+		return this.threadId;
 	}
 
 	/**
-	 * Gets the thread title.
+	 * Get the thread title.
 	 * 
-	 * @return the threadTitle
+	 * @return the thread title
 	 */
 	public String getThreadTitle() {
-		return threadTitle;
+		return this.threadTitle;
 	}
+
+    /**
+     * Check if the thread is locked
+     *
+     * @return True if the thread is locked
+     */
+    public boolean isLocked() {
+        return this.locked;
+    }
+
+    /**
+     * Check if we're subscribed to the thread
+     *
+     * @return True if subscribed
+     */
+    public boolean isSubscribed() {
+        return this.subscribed;
+    }
 
 	/**
-	 * Checks if is sticky.
+	 * Check if the thread is a sticky
 	 * 
-	 * @return the sticky
+	 * @return True if it's a sticky
 	 */
 	public boolean isSticky() {
-		return sticky;
+		return this.sticky;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [isSticky=" + isSticky() + ", isLocked=" + isLocked() + ", getCurrentPage=" + getCurrentPage()

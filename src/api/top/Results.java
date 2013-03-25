@@ -1,4 +1,3 @@
-
 package api.top;
 
 import java.util.List;
@@ -60,6 +59,9 @@ public class Results {
 
 	/** The snatched. */
 	private Number snatched;
+
+    /** The size of the torrent */
+    private Number size;
 
 	/** The tags. */
 	private List<String> tags;
@@ -226,6 +228,15 @@ public class Results {
 		return this.snatched;
 	}
 
+    /**
+     * Get the size of the torrent, in bytes
+     *
+     * @return torrent size in bytes
+     */
+    public Number getSize() {
+        return this.size;
+    }
+
 	/**
 	 * Gets the tags.
 	 * 
@@ -259,18 +270,13 @@ public class Results {
 	 * @return the download link
 	 */
 	public String getDownloadLink() {
-		String link;
 		String authkey = MySoup.getAuthKey();
 		String passkey = MySoup.getPassKey();
-		link =
-				MySoup.getSite() + "torrents.php?action=download&id=" + torrentId + "5&authkey=" + authkey + "&torrent_pass="
-						+ passkey;
-		return link;
+		return MySoup.getSite() + "torrents.php?action=download&id=" + torrentId
+                + "&authkey=" + authkey
+                + "&torrent_pass=" + passkey;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Results [getArtist()=" + getArtist() + ", getData()=" + getData() + ", getEncoding()=" + getEncoding()

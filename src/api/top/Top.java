@@ -1,4 +1,3 @@
-
 package api.top;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import api.soup.MySoup;
  * @author Tim
  */
 public class Top {
-
 	/** The response. */
 	private List<Response> response;
 
@@ -30,8 +28,7 @@ public class Top {
 		if (validLimit(limit)) {
 			String authkey = MySoup.getAuthKey();
 			String url = "ajax.php?action=top10&type=torrents&limit=" + limit + "&auth=" + authkey;
-			Top top = (Top) MySon.toObject(url, Top.class);
-			return top;
+			return (Top) MySon.toObject(url, Top.class);
 		} else {
 			System.err.println("Limit " + limit + "is not invalid");
 		}
@@ -49,8 +46,7 @@ public class Top {
 		if (validLimit(limit)) {
 			String authkey = MySoup.getAuthKey();
 			String url = "ajax.php?action=top10&type=tags&limit=" + limit + "&auth=" + authkey;
-			Top top = (Top) MySon.toObject(url, Top.class);
-			return top;
+			return (Top) MySon.toObject(url, Top.class);
 		} else {
 			System.err.println("Limit " + limit + "is not invalid");
 		}
@@ -68,8 +64,7 @@ public class Top {
 		if (validLimit(limit)) {
 			String authkey = MySoup.getAuthKey();
 			String url = "ajax.php?action=top10&type=users&limit=" + limit + "&auth=" + authkey;
-			Top top = (Top) MySon.toObject(url, Top.class);
-			return top;
+			return (Top) MySon.toObject(url, Top.class);
 		} else {
 			System.err.println("Limit " + limit + "is not invalid");
 		}
@@ -84,10 +79,7 @@ public class Top {
 	 * @return true if limit is valid
 	 */
 	private static boolean validLimit(int limit) {
-		if ((limit == 10) || (limit == 100) || (limit == 250))
-			return true;
-		else
-			return false;
+        return ((limit == 10) || (limit == 100) || (limit == 250));
 	}
 
 	/**
@@ -105,9 +97,7 @@ public class Top {
 	 * @return the status
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
 	/* (non-Javadoc)

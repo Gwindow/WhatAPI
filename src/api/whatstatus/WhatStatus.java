@@ -1,4 +1,3 @@
-
 package api.whatstatus;
 
 import api.son.MySon;
@@ -22,8 +21,7 @@ public class WhatStatus {
 	 */
 	public static WhatStatus init() {
 		String url = "http://whatstatus.info/json.php";
-		WhatStatus ws = (WhatStatus) MySon.toObjectOther(url, WhatStatus.class);
-		return ws;
+		return (WhatStatus) MySon.toObjectOther(url, WhatStatus.class);
 	}
 
 	/**
@@ -35,6 +33,7 @@ public class WhatStatus {
 		return status;
 	}
 
+    //TODO: What should be done with this function?
 	/* public ArrayList<Tuple<String, String>> getTweets() { ArrayList<Tuple<String, String>> tweetList = new
 	 * ArrayList<Tuple<String, String>>(); try { Twitter unauthenticatedTwitter = new TwitterFactory().getInstance(); //
 	 * get the first 6 tweets on the first page Paging paging = new Paging(1, 6); List<twitter4j.Status> status; status
@@ -44,9 +43,6 @@ public class WhatStatus {
 	 * status.get(i).getCreatedAt().toString())); } return tweetList; } catch (TwitterException e) {
 	 * e.printStackTrace(); } return null; } */
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "WhatStatus [getStatus()=" + getStatus() + "]";

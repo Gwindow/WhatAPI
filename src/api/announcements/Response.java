@@ -1,30 +1,28 @@
-
 package api.announcements;
 
-/**
- * Contains the lists of announcements and blog posts
- */
 import java.util.List;
 
 /**
  * The Class Response.
+ * This is the actual information returned to us from
+ * the API request.
+ * Contains the lists of announcements and blog posts
  * 
  * @author Gwindow
  */
 public class Response {
+	/** The list of announcements. */
+	private List<Announcement> announcements;
 	
-	/** The announcements. */
-	private List<AnnouncementsList> announcements;
-	
-	/** The blog posts. */
-	private List<BlogPosts> blogPosts;
+	/** The list of blog posts. */
+	private List<BlogPost> blogPosts;
 
 	/**
 	 * Get the list of announcements.
 	 * 
 	 * @return the announcements list
 	 */
-	public List<AnnouncementsList> getAnnouncements() {
+	public List<Announcement> getAnnouncements() {
 		return this.announcements;
 	}
 
@@ -33,7 +31,7 @@ public class Response {
 	 * 
 	 * @return the blog posts list
 	 */
-	public List<BlogPosts> getBlogPosts() {
+	public List<BlogPost> getBlogPosts() {
 		return this.blogPosts;
 	}
 
@@ -55,9 +53,6 @@ public class Response {
 		return blogPosts.size();
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Response [getAnnouncements=" + getAnnouncements() + ", getBlogPosts=" + getBlogPosts() + "]";

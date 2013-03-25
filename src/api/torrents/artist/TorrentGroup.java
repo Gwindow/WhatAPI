@@ -1,4 +1,3 @@
-
 package api.torrents.artist;
 
 import java.util.List;
@@ -135,7 +134,6 @@ public class TorrentGroup {
 			return "Unknown";
 		else
 			return "API Error";
-
 	}
 
 	/**

@@ -1,75 +1,72 @@
-
 package api.requests;
 
 import java.util.List;
 
 /**
  * The Class Response.
- * 
- * //TODO description
+ * The API response data for torrent Requests
  * 
  * @author Gwindow
  */
 public class Response {
-
-	/** The bitrate list. */
+	/** The list of acceptable bitrates */
 	private String bitrateList;
 
-	/** The can edit. */
+	/** If we can edit the request */
 	private boolean canEdit;
 
-	/** The can vote. */
+	/** If we can vote on the request */
 	private boolean canVote;
 
 	/** The catalogue number. */
 	private String catalogueNumber;
 
-	/** The category id. */
+	/** The id of the torrent category */
 	private Number categoryId;
 
-	/** The category name. */
+	/** The category of the torrent (Music/etc.). */
 	private String categoryName;
 
-	/** The comment page. */
+	/** The comment page number being viewed */
 	private Number commentPage;
 
-	/** The comment pages. */
+	/** The comment number of comment pages */
 	private Number commentPages;
 
-	/** The comments. */
-	private List<Comments> comments;
+	/** The comments */
+	private List<Comment> comments;
 
 	/** The description. */
 	private String description;
 
-	/** The filler id. */
+	/** The filler's user id */
 	private Number fillerId;
 
-	/** The filler name. */
+	/** The filler's user name. */
 	private String fillerName;
 
-	/** The format list. */
+	/** The acceptable media format list (Lossless/MP3/etc) */
 	private String formatList;
 
-	/** The image. */
+	/** The url for the image for the request */
 	private String image;
 
-	/** The is filled. */
+	/** If the request has been filled */
 	private boolean isFilled;
 
-	/** The last vote. */
+	/** The last time the request was voted on */
 	private String lastVote;
 
 	/** The log cue. */
 	private String logCue;
 
-	/** The media list. */
+	/** The list of acceptable media formats */
 	private String mediaList;
 
-	/** The minimum vote. */
+	/** The minimum bounty required to vote, in bytes */
 	private Number minimumVote;
 
-	/** The music info. */
+	/** The information about the musicians who made the desired media */
 	private MusicInfo musicInfo;
 
 	/** The release type. */
@@ -78,196 +75,196 @@ public class Response {
 	/** The request id. */
 	private Number requestId;
 
-	/** The request tax. */
+	/** The request tax deducted by the system when voting. */
 	private Number requestTax;
 
-	/** The requestor id. */
+	/** The requestor's user id */
 	private Number requestorId;
 
-	/** The requestor name. */
+	/** The requestor's user name. */
 	private String requestorName;
 
-	/** The tags. */
+	/** The tags for the request */
 	private List<String> tags;
 
-	/** The time added. */
+	/** The time the request was added. */
 	private String timeAdded;
 
-	/** The time filled. */
+	/** The time the request was filled */
 	private String timeFilled;
 
 	/** The title. */
 	private String title;
 
-	/** The top contributors. */
-	private List<TopContributors> topContributors;
+	/** The top contributors to the bounty */
+	private List<TopContributor> topContributors;
 
-	/** The torrent id. */
+	/** The torrent id of the torrent that filled the request. */
 	private Number torrentId;
 
-	/** The total bounty. */
+	/** The total bounty, in bytes */
 	private Number totalBounty;
 
 	/** The vote count. */
 	private Number voteCount;
 
-	/** The year. */
+	/** The year the desired media was released */
 	private Number year;
 
 	/** The release name. */
 	private String releaseName;
 
 	/**
-	 * Gets the release name.
+	 * Get the release name.
 	 * 
-	 * @return the releaseName
+	 * @return the release name
 	 */
 	public String getReleaseName() {
 		return releaseName;
 	}
 
 	/**
-	 * Gets the bitrate list.
+	 * Get the list of acceptable bitrates
 	 * 
-	 * @return the bitrate list
+	 * @return acceptable bitrates
 	 */
 	public String getBitrateList() {
-		return this.bitrateList;
+		return bitrateList;
 	}
 
 	/**
-	 * Gets the can edit.
+	 * Check if we can edit the request
 	 * 
-	 * @return the can edit
+	 * @return True if we can edit it
 	 */
 	public boolean canEdit() {
-		return this.canEdit;
+		return canEdit;
 	}
 
 	/**
-	 * Gets the can vote.
+	 * Check if we can vote on the request
 	 * 
-	 * @return the can vote
+	 * @return True if we can vote
 	 */
 	public boolean canVote() {
-		return this.canVote;
+		return canVote;
 	}
 
 	/**
-	 * Gets the catalogue number.
+	 * Get the catalogue number.
 	 * 
 	 * @return the catalogue number
 	 */
 	public String getCatalogueNumber() {
-		return this.catalogueNumber;
+		return catalogueNumber;
 	}
 
 	/**
-	 * Gets the category id.
+	 * Get the id of the torrent category
 	 * 
 	 * @return the category id
 	 */
 	public Number getCategoryId() {
-		return this.categoryId;
+		return categoryId;
 	}
 
 	/**
-	 * Gets the category name.
+	 * Get the name of the torrent category (Music/etc)
 	 * 
 	 * @return the category name
 	 */
 	public String getCategoryName() {
-		return this.categoryName;
+		return categoryName;
 	}
 
 	/**
-	 * Gets the comment page.
+	 * Get the current comment page number being viewed
 	 * 
-	 * @return the comment page
+	 * @return the comment page number
 	 */
 	public Number getCommentPage() {
-		return this.commentPage;
+		return commentPage;
 	}
 
 	/**
-	 * Gets the comment pages.
+	 * Get the total number of pages of comments
 	 * 
-	 * @return the comment pages
+	 * @return the number of comment pages
 	 */
 	public Number getCommentPages() {
-		return this.commentPages;
+		return commentPages;
 	}
 
 	/**
-	 * Gets the comments.
+	 * Get the comments.
 	 * 
 	 * @return the comments
 	 */
-	public List<Comments> getComments() {
-		return this.comments;
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	/**
-	 * Gets the description.
+	 * Get the request description
 	 * 
 	 * @return the description
 	 */
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	/**
-	 * Gets the filler id.
+	 * Get the filler's user id
 	 * 
-	 * @return the filler id
+	 * @return the filler's user id
 	 */
 	public Number getFillerId() {
-		return this.fillerId;
+		return fillerId;
 	}
 
 	/**
-	 * Gets the filler name.
+	 * Gets the filler's user name.
 	 * 
-	 * @return the filler name
+	 * @return the filler's user name
 	 */
 	public String getFillerName() {
-		return this.fillerName;
+		return fillerName;
 	}
 
 	/**
-	 * Gets the format list.
+	 * Get the acceptable file format list
 	 * 
-	 * @return the format list
+	 * @return the acceptable format list
 	 */
 	public String getFormatList() {
-		return this.formatList;
+		return formatList;
 	}
 
 	/**
-	 * Gets the image.
+	 * Get the image url
 	 * 
 	 * @return the image
 	 */
 	public String getImage() {
-		return this.image;
+		return image;
 	}
 
 	/**
-	 * Gets the checks if is filled.
+	 * Check if the request has been filled
 	 * 
-	 * @return the checks if is filled
+	 * @return True if the request is filled
 	 */
 	public boolean isFilled() {
-		return this.isFilled;
+		return isFilled;
 	}
 
 	/**
-	 * Gets the last vote.
+	 * Get the last vote time
 	 * 
-	 * @return the last vote
+	 * @return the time of last vote
 	 */
 	public String getLastVote() {
-		return this.lastVote;
+		return lastVote;
 	}
 
 	/**
@@ -276,165 +273,162 @@ public class Response {
 	 * @return the log cue
 	 */
 	public String getLogCue() {
-		return this.logCue;
+		return logCue;
 	}
 
 	/**
-	 * Gets the media list.
+	 * Get the list of acceptable media
 	 * 
-	 * @return the media list
+	 * @return the list of acceptable media
 	 */
 	public String getMediaList() {
-		return this.mediaList;
+		return mediaList;
 	}
 
 	/**
-	 * Gets the minimum vote.
+	 * Get the minimum bounty cost of a vote, in bytes
 	 * 
-	 * @return the minimum vote
+	 * @return the minimum vote cost
 	 */
 	public Number getMinimumVote() {
-		return this.minimumVote;
+		return minimumVote;
 	}
 
 	/**
-	 * Gets the music info.
+	 * Get the information about the musicians who made the desired media
 	 * 
-	 * @return the music info
+	 * @return the musician information
 	 */
 	public MusicInfo getMusicInfo() {
-		return this.musicInfo;
+		return musicInfo;
 	}
 
 	/**
-	 * Gets the release type.
+	 * Get the acceptable release type
 	 * 
 	 * @return the release type
 	 */
 	public Number getReleaseType() {
-		return this.releaseType;
+		return releaseType;
 	}
 
 	/**
-	 * Gets the request id.
+	 * Get the request id.
 	 * 
 	 * @return the request id
 	 */
 	public Number getRequestId() {
-		return this.requestId;
+		return requestId;
 	}
 
 	/**
-	 * Gets the request tax.
+	 * Get the tax applied when adding to the bounty
 	 * 
 	 * @return the request tax
 	 */
 	public Number getRequestTax() {
-		return this.requestTax;
+		return requestTax;
 	}
 
 	/**
-	 * Gets the requestor id.
+	 * Get the requestor's user id
 	 * 
-	 * @return the requestor id
+	 * @return the requestor's user id
 	 */
 	public Number getRequestorId() {
-		return this.requestorId;
+		return requestorId;
 	}
 
 	/**
-	 * Gets the requestor name.
+	 * Gets the requestor's user name.
 	 * 
-	 * @return the requestor name
+	 * @return the requestor's user name
 	 */
 	public String getRequestorName() {
-		return this.requestorName;
+		return requestorName;
 	}
 
 	/**
-	 * Gets the tags.
+	 * Get the tags for the request
 	 * 
 	 * @return the tags
 	 */
 	public List<String> getTags() {
-		return this.tags;
+		return tags;
 	}
 
 	/**
-	 * Gets the time added.
+	 * Get the time the request was added
 	 * 
-	 * @return the time added
+	 * @return the time the request was added
 	 */
 	public String getTimeAdded() {
-		return this.timeAdded;
+		return timeAdded;
 	}
 
 	/**
-	 * Gets the time filled.
+	 * Get the time the request was filled
 	 * 
 	 * @return the time filled
 	 */
 	public String getTimeFilled() {
-		return this.timeFilled;
+		return timeFilled;
 	}
 
 	/**
-	 * Gets the title.
+	 * Get the title of the request
 	 * 
 	 * @return the title
 	 */
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
 	/**
-	 * Gets the top contributors.
+	 * Get the top bounty contributors.
 	 * 
 	 * @return the top contributors
 	 */
-	public List<TopContributors> getTopContributors() {
-		return this.topContributors;
+	public List<TopContributor> getTopContributors() {
+		return topContributors;
 	}
 
 	/**
-	 * Gets the torrent id.
+	 * Get the torrent id that filled the request
 	 * 
 	 * @return the torrent id
 	 */
 	public Number getTorrentId() {
-		return this.torrentId;
+		return torrentId;
 	}
 
 	/**
-	 * Gets the total bounty.
+	 * Get the total bounty, in bytes
 	 * 
 	 * @return the total bounty
 	 */
 	public Number getTotalBounty() {
-		return this.totalBounty;
+		return totalBounty;
 	}
 
 	/**
-	 * Gets the vote count.
+	 * Get the vote count
 	 * 
 	 * @return the vote count
 	 */
 	public Number getVoteCount() {
-		return this.voteCount;
+		return voteCount;
 	}
 
 	/**
-	 * Gets the year.
+	 * Get the year the desired media was released
 	 * 
-	 * @return the year
+	 * @return the release year of the media
 	 */
 	public Number getYear() {
-		return this.year;
+		return year;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Response [getBitrateList=" + getBitrateList() + ", getCanEdit=" + canEdit() + ", getCanVote=" + canVote()

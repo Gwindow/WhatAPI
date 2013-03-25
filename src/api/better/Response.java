@@ -1,17 +1,17 @@
-
 package api.better;
 
 import java.util.List;
 
 /**
- * The Class Response.
- * 
- * //TODO description
+ * The Class Response
+ * The API Response returned to us in the Better API
+ * request, contains information about a Torrent/TorrentGroup
+ * that could use improvement
  * 
  * @author Gwindow
  */
 public class Response {
-	/** The artist. */
+	/** The artists. */
 	private List<Artist> artist;
 
 	/** The download url. */
@@ -20,17 +20,17 @@ public class Response {
 	/** The group id. */
 	private Number groupId;
 
+    /** The torrent id. */
+    private Number torrentId;
+
 	/** The group name. */
 	private String groupName;
 
 	/** The group year. */
 	private Number groupYear;
 
-	/** The torrent id. */
-	private Number torrentId;
-
 	/**
-	 * Gets the artist.
+	 * Get the artists
 	 * 
 	 * @return the artist
 	 */
@@ -83,11 +83,6 @@ public class Response {
 		return this.torrentId;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [getArtist=" + getArtist() + ", getDownloadUrl=" + getDownloadUrl() + ", getGroupId=" + getGroupId()

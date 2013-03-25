@@ -75,8 +75,7 @@ public class Updater {
 	 */
 	public String getDownloadLink() {
 		if (getDoc() != null) {
-			String download = getDoc().getElementsByTag("update").text().trim();
-			return download;
+			return getDoc().getElementsByTag("update").text().trim();
 		}
 		return null;
 	}
@@ -90,11 +89,6 @@ public class Updater {
 		return doc;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	/**
 	 * To string.
 	 * 

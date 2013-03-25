@@ -1,7 +1,3 @@
-
-
-
-
 package api.top;
 
 import java.util.List;
@@ -13,7 +9,6 @@ import java.util.List;
  * 
  */
 public class Response {
-	
 	/** The caption. */
 	private String caption;
 	
@@ -62,11 +57,6 @@ public class Response {
 		return this.tag;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [caption=" + caption + ", limit=" + limit + ", results=" + results + ", tag=" + tag + "]";

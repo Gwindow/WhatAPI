@@ -1,15 +1,13 @@
-
 package api.better;
 
 /**
  * The Class Artist.
- * 
- * //TODO description
+ * Contains Artist information as returned to us
+ * in the Better API response
  * 
  * @author Gwindow
  */
 public class Artist {
-
 	/** The alias id. */
 	private Number aliasId;
 
@@ -20,7 +18,7 @@ public class Artist {
 	private String name;
 
 	/**
-	 * Gets the alias id.
+	 * Get the alias id.
 	 * 
 	 * @return the alias id
 	 */
@@ -29,7 +27,7 @@ public class Artist {
 	}
 
 	/**
-	 * Gets the id.
+	 * Get the id.
 	 * 
 	 * @return the id
 	 */
@@ -38,7 +36,7 @@ public class Artist {
 	}
 
 	/**
-	 * Gets the name.
+	 * Get the name.
 	 * 
 	 * @return the name
 	 */
@@ -46,9 +44,6 @@ public class Artist {
 		return this.name;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Artist [getAliasId=" + getAliasId() + ", getId=" + getId() + ", getName=" + getName() + "]";

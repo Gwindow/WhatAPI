@@ -1,59 +1,47 @@
-
-
-
-
 package api.inbox.conversation;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * Describes the data received in response to a Conversation
+ * API request
  * 
  * @author Gwindow
  */
 public class Response {
-	
-	/** The conv id. */
+	/** The conversation id. */
 	private Number convId;
 	
-	/** The messages. */
-	private List<Messages> messages;
+	/** The messages in the conversation. */
+	private List<Message> messages;
+
+    /** The subject of the conversation */
+    private String subject;
 	
-	/** The sticky. */
+	/** If the conversation is stickied */
 	private boolean sticky;
-	
-	/** The subject. */
-	private String subject;
 
 	/**
-	 * Gets the conv id.
+	 * Get the conversation id
 	 * 
-	 * @return the conv id
+	 * @return the conversation id
 	 */
 	public Number getConvId() {
 		return this.convId;
 	}
 
 	/**
-	 * Gets the messages.
+	 * Get the messages in the conversation
 	 * 
 	 * @return the messages
 	 */
-	public List<Messages> getMessages() {
+	public List<Message> getMessages() {
 		return this.messages;
 	}
 
 	/**
-	 * Checks if is sticky.
-	 * 
-	 * @return true, if is sticky
-	 */
-	public boolean isSticky() {
-		return sticky;
-	}
-
-	/**
-	 * Gets the subject.
+	 * Get the subject of the conversation
 	 * 
 	 * @return the subject
 	 */
@@ -61,9 +49,15 @@ public class Response {
 		return this.subject;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
+    /**
+     * Check if the conversation is stickied
+     *
+     * @return True if the conversation is stickied
+     */
+    public boolean isSticky() {
+        return sticky;
+    }
+
 	@Override
 	public String toString() {
 		return "Response [getConvId()=" + getConvId() + ", getMessages()=" + getMessages() + ", isSticky()=" + isSticky()

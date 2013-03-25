@@ -1,44 +1,40 @@
-
-
-
-
 package api.forum.section;
 
 import java.util.List;
 
 /**
  * The Class Response.
+ * Contains data returned by the API about a Forum
  * 
  * @author Gwindow
  */
 public class Response {
-	
 	/** The current page. */
 	private Number currentPage;
 	
 	/** The forum name. */
 	private String forumName;
 	
-	/** The pages. */
+	/** The number of pages in the forum. */
 	private Number pages;
 	
-	/** The specific rules. */
+	/** The forum specific rules. */
 	private List<SpecificRules> specificRules;
 	
-	/** The threads. */
-	private List<Threads> threads;
+	/** The threads in the forum */
+	private List<ForumThread> threads;
 
 	/**
-	 * Gets the current page.
+	 * Get the current page.
 	 * 
 	 * @return the current page
 	 */
 	public Number getCurrentPage() {
-		return (currentPage);
+		return this.currentPage;
 	}
 
 	/**
-	 * Gets the forum name.
+	 * Get the forum name.
 	 * 
 	 * @return the forum name
 	 */
@@ -47,16 +43,16 @@ public class Response {
 	}
 
 	/**
-	 * Gets the pages.
+	 * Get the number of pages in the forum
 	 * 
-	 * @return the pages
+	 * @return the number of pages
 	 */
 	public Number getPages() {
 		return this.pages;
 	}
 
 	/**
-	 * Gets the specific rules.
+	 * Get the forum specific rules.
 	 * 
 	 * @return the specific rules
 	 */
@@ -65,17 +61,14 @@ public class Response {
 	}
 
 	/**
-	 * Gets the threads.
+	 * Get the threads in the forum
 	 * 
 	 * @return the threads
 	 */
-	public List<Threads> getThreads() {
+	public List<ForumThread> getThreads() {
 		return this.threads;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Response [getCurrentPage=" + getCurrentPage() + ", getForumName=" + getForumName() + ", getPages=" + getPages()

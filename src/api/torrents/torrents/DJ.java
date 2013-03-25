@@ -1,7 +1,3 @@
-/*
- * 
- */
-
 package api.torrents.torrents;
 
 /**
@@ -37,12 +33,6 @@ public class DJ {
 		return this.name;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return "DJ [getId=" + getId() + ", getName=" + getName() + "]";

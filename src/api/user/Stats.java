@@ -1,4 +1,3 @@
-
 package api.user;
 
 /**
@@ -92,11 +91,6 @@ public class Stats {
 			return 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Stats [getDownloaded=" + getDownloaded() + ", getJoinedDate=" + getJoinedDate() + ", getLastAccess="

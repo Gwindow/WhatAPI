@@ -1,8 +1,5 @@
 package api.bookmarks;
 
-/**
- * The Bookmarks
- */
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -15,22 +12,23 @@ import api.soup.MySoup;
 import api.util.Tuple;
 
 /**
- * The Class Bookmarks.
+ * The Class Bookmarks
+ * Used for getting and reading the users Bookmarks
+ * from the site
  * 
  * @author Gwindow
  */
 public class Bookmarks {
-
-	/** The response. */
+	/** The API response, contains the data we want to look at */
 	private Response response;
 
-	/** The status. */
+	/** The status of the API response */
 	private String status;
 
 	/**
-	 * Inits the torrent bookmarks.
+	 * Get the user's torrent bookmarks from the site
 	 * 
-	 * @return the bookmarks
+	 * @return the torrent Bookmarks
 	 */
 	public static Bookmarks initTorrentBookmarks() {
 		String authkey = MySoup.getAuthKey();
@@ -40,9 +38,9 @@ public class Bookmarks {
 	}
 
 	/**
-	 * Inits the artist bookmarks.
+	 * Get the user's artist bookmarks from the site
 	 * 
-	 * @return the bookmarks
+	 * @return the artist Bookmarks
 	 */
 	public static Bookmarks initArtistBookmarks() {
 		String authkey = MySoup.getAuthKey();
@@ -52,29 +50,25 @@ public class Bookmarks {
 	}
 
 	/**
-	 * Checks for torrent bookmarks.
+	 * Check if the response has torrent bookmarks
 	 * 
-	 * @return true, if successful
+	 * @return True if has torrent bookmarks
 	 */
 	public boolean hasTorrentBookmarks() {
-		if ((response.getTorrents() == null) || response.getTorrents().isEmpty())
-			return false;
-		return true;
+        return !(response.getTorrents() == null || response.getTorrents().isEmpty());
 	}
 
 	/**
-	 * Checks for artist bookmarks.
+	 * Checks if the response has artist bookmarks
 	 * 
-	 * @return true, if successful
+	 * @return True if has artist bookmakrs
 	 */
 	public boolean hasArtistBookmarks() {
-		if ((response.getArtists() == null) || response.getArtists().isEmpty())
-			return false;
-		return true;
+		return !(response.getArtists() == null || response.getArtists().isEmpty());
 	}
 
 	/**
-	 * Get the response.
+	 * Get the API response data
 	 * 
 	 * @return the response
 	 */
@@ -88,13 +82,11 @@ public class Bookmarks {
 	 * @return true if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return this.status.equalsIgnoreCase("success");
 	}
 
 	/**
-	 * Download a list of torrents.
+	 * Download a list of torrents to some path
 	 * 
 	 * @param list
 	 *            list of torrents
@@ -113,7 +105,7 @@ public class Bookmarks {
 	}
 
 	/**
-	 * Download a torrent.
+	 * Download a torrent to some path with the desired file name
 	 * 
 	 * @param url
 	 *            the url of the torrent
@@ -131,14 +123,8 @@ public class Bookmarks {
 		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
 		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
 		System.out.println("Downloaded " + name + " to " + path);
-
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Bookmarks [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";

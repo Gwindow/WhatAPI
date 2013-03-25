@@ -1,4 +1,3 @@
-
 package api.notifications;
 
 import api.son.MySon;
@@ -6,35 +5,35 @@ import api.soup.MySoup;
 
 /**
  * The Class Notifications.
+ * For interacting with the site API related to notifications
  * 
  * @author Gwindow
  */
 public class Notifications {
-
-	/** The response. */
+	/** The API response. */
 	private Response response;
 
-	/** The status. */
+	/** The response status */
 	private String status;
 
-	/** The page. */
+	/** The page being viewed */
 	private static transient int page;
 
 	/**
-	 * Notifications from page 1.
+	 * Get the Notifications on the first page
 	 * 
-	 * @return the notifications
+	 * @return Notifications from page 1
 	 */
 	public static Notifications notifications() {
 		return notificationsFromPage(1);
 	}
 
 	/**
-	 * Notifications from page.
+	 * Get the Notifications from some page
 	 * 
 	 * @param page
-	 *            the page
-	 * @return the notifications
+	 *      the page to get
+	 * @return Notifications for the page
 	 */
 	public static Notifications notificationsFromPage(int page) {
 		String authkey = MySoup.getAuthKey();
@@ -45,78 +44,60 @@ public class Notifications {
 	}
 
 	/**
+     * Get the next page of Notifications
 	 * Should only be called if hasNextPage() returned true.
 	 * 
-	 * @return the notifications
+	 * @return Notifications for the next page
 	 */
 	public static Notifications notificationsFromNextPage() {
-		page += 1;
+		++page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + authkey;
-		Notifications n = (Notifications) MySon.toObject(url, Notifications.class);
-		return n;
+		return (Notifications) MySon.toObject(url, Notifications.class);
 	}
 
 	/**
+     * Get the previous page of Notifications
 	 * Should only be called if hasPreviousPage() returned true.
 	 * 
-	 * @return the notifications
+	 * @return Notifications for the previous page
 	 */
 	public static Notifications notificationsFromPreviousPage() {
-		page -= 1;
+		--page;
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + authkey;
-		Notifications n = (Notifications) MySon.toObject(url, Notifications.class);
-		return n;
+		return (Notifications) MySon.toObject(url, Notifications.class);
 	}
 
 	/**
-	 * Gets the last page.
+	 * Get the last page number of the notifications
 	 * 
-	 * @return the last page
+	 * @return the last page number
 	 */
 	public int getLastPage() {
-		try {
-			return response.getPages().intValue();
-		} catch (Exception e) {
-			return 0;
-		}
+        return response.getPages().intValue();
 	}
 
 	/**
-	 * Checks for next page.
+	 * Check if there is a next page of notifications available
 	 * 
-	 * @return true, if successful
+	 * @return True if a next page is available
 	 */
 	public boolean hasNextPage() {
-		try {
-			if ((response.getPages().intValue() - response.getCurrentPages().intValue()) > 0)
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
+        return ((response.getPages().intValue() - response.getCurrentPages().intValue()) > 0);
 	}
 
 	/**
-	 * Checks for previous page.
+	 * Check if there is a previous page of notifications available
 	 * 
-	 * @return true, if successful
+	 * @return True if a previous page is available
 	 */
 	public boolean hasPreviousPage() {
-		try {
-			if (((response.getCurrentPages().intValue()) != 1) || ((response.getCurrentPages().intValue()) == 0))
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
+        return (response.getCurrentPages().intValue() != 1 || response.getCurrentPages().intValue() == 0);
 	}
 
 	/**
-	 * Clear notifications.
+	 * Clear the notifications
 	 */
 	public void clearNotifications() {
 		String authkey = MySoup.getAuthKey();
@@ -127,30 +108,23 @@ public class Notifications {
 	}
 
 	/**
-	 * Gets the response.
+	 * Get the API response
 	 * 
-	 * @return the response
+	 * @return the API response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
 
 	/**
-	 * Gets the status.
+	 * Check the status of the response
 	 * 
-	 * @return the status
+	 * @return True if success
 	 */
 	public boolean getStatus() {
-		if (status.equalsIgnoreCase("success"))
-			return true;
-		return false;
+        return status.equalsIgnoreCase("success");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Notifications [getLastPage=" + getLastPage() + ", hasNextPage=" + hasNextPage() + ", hasPreviousPage="

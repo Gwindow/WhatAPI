@@ -1,92 +1,87 @@
-
 package api.requests;
 
 import java.util.List;
 
 /**
  * The Class MusicInfo.
- * 
- * //TODO description
+ * Stores data about the musicians who contributed to/recorded
+ * the requested media
  * 
  * @author Gwindow
  */
 public class MusicInfo {
-	
 	/** The artists. */
-	private List<Artists> artists;
+	private List<Artist> artists;
 	
 	/** The composers. */
-	private List<Composers> composers;
+	private List<Composer> composers;
 	
-	/** The conductor. */
-	private List<Conductors> conductor;
+	/** The conductors. */
+	private List<Conductor> conductor;
 	
-	/** The dj. */
+	/** The djs. */
 	private List<DJ> dj;
 	
-	/** The remixed by. */
+	/** Artist who remixed the media. */
 	private List<RemixedBy> remixedBy;
 	
-	/** The with. */
+	/** Other artists who were recorded with */
 	private List<With> with;
 
 	/**
-	 * Gets the artists.
+	 * Get the artists.
 	 * 
 	 * @return the artists
 	 */
-	public List<Artists> getArtists() {
-		return this.artists;
+	public List<Artist> getArtists() {
+		return artists;
 	}
 
 	/**
-	 * Gets the composers.
+	 * Get the composers.
 	 * 
 	 * @return the composers
 	 */
-	public List<Composers> getComposers() {
-		return this.composers;
+	public List<Composer> getComposers() {
+		return composers;
 	}
 
 	/**
-	 * Gets the conductor.
+	 * Get the conductors.
 	 * 
-	 * @return the conductor
+	 * @return the conductor.
 	 */
-	public List<Conductors> getConductor() {
-		return this.conductor;
+	public List<Conductor> getConductor() {
+		return conductor;
 	}
 
 	/**
-	 * Gets the dj.
+	 * Get the djs
 	 * 
 	 * @return the dj
 	 */
 	public List<DJ> getDj() {
-		return this.dj;
+		return dj;
 	}
 
 	/**
-	 * Gets the remixed by.
+	 * Get the artists who remixed the media
 	 * 
-	 * @return the remixed by
+	 * @return the remixers
 	 */
 	public List<RemixedBy> getRemixedBy() {
-		return this.remixedBy;
+		return remixedBy;
 	}
 
 	/**
-	 * Gets the with.
+	 * Get the other artists who were recorded with
 	 * 
-	 * @return the with
+	 * @return the other artists who were recorded with
 	 */
 	public List<With> getWith() {
-		return this.with;
+		return with;
 	}
 
-	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "MusicInfo [getArtists=" + getArtists() + ", getComposers=" + getComposers() + ", getConductor=" + getConductor()
