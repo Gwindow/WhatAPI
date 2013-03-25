@@ -60,6 +60,9 @@ public class Results {
 	/** The snatched. */
 	private Number snatched;
 
+    /** The size of the torrent */
+    private Number size;
+
 	/** The tags. */
 	private List<String> tags;
 
@@ -224,6 +227,15 @@ public class Results {
 	public Number getSnatched() {
 		return this.snatched;
 	}
+
+    /**
+     * Get the size of the torrent, in bytes
+     *
+     * @return torrent size in bytes
+     */
+    public Number getSize() {
+        return this.size;
+    }
 
 	/**
 	 * Gets the tags.
