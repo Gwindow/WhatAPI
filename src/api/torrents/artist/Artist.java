@@ -111,12 +111,10 @@ public class Artist {
 	 * Enable notifications.
 	 */
 	public boolean enableNotifications() {
-		String authkey = MySoup.getAuthKey();
 		if (!response.hasNotificationsEnabled()) {
-			boolean success = MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + authkey);
+			boolean success = MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + MySoup.getAuthKey());
 			if (success){
                 response.setNotificationsEnabled(true);
-                System.out.println("Notifications enabled");
                 return true;
             }
             else
@@ -130,12 +128,10 @@ public class Artist {
 	 * Disabale notifications.
 	 */
 	public boolean disableNotifications() {
-		String authkey = MySoup.getAuthKey();
 		if (response.hasNotificationsEnabled()) {
-			boolean success = MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + authkey);
+			boolean success = MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + MySoup.getAuthKey());
             if (success){
                 response.setNotificationsEnabled(false);
-                System.out.println("Notifications disabled");
                 return true;
             }
             else

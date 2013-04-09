@@ -105,7 +105,8 @@ public class CrossReference {
 
 	/**
 	 * Determine search string.
-	 * 
+     * TODO: check out http://www.upcdatabase.com perhaps for looking up barcodes?
+	 * will this be ok with their TOS? We may need to ask permission
 	 * @param items
 	 *      the items
 	 * @return the string

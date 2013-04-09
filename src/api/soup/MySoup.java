@@ -16,6 +16,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.ContentEncodingHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
@@ -140,7 +141,9 @@ public class MySoup {
 		ClientConnectionManager mgr = client.getConnectionManager();
 		HttpParams params = client.getParams();
         //Yes it's deprecated, no we can't change it. Using PoolingClientConnectionManager crashes on Android
-		client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
+		//client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
+        //TODO: Look into changing this to DecompressingHttpClient
+        client = new ContentEncodingHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
 		// HttpProtocolParams.setUserAgent(client.getParams(), "WhatAPI");
 		return client;
 	}

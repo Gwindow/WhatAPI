@@ -91,9 +91,9 @@ public class TorrentGroup {
 	 * @return the status
 	 */
 	public boolean addBookmark() {
-        String authKey = MySoup.getAuthKey();
         if (!response.getGroup().isBookmarked()){
-            boolean success = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + authKey + "&id=" + id);
+            boolean success = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth="
+                    + MySoup.getAuthKey() + "&id=" + id);
             if (success){
                 response.getGroup().setBookmarked(true);
                 return true;
@@ -107,9 +107,9 @@ public class TorrentGroup {
 	 * Removes the bookmark.
 	 */
 	public boolean removeBookmark() {
-        String authKey = MySoup.getAuthKey();
         if (response.getGroup().isBookmarked()){
-            boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + authKey + "&id=" + id);
+            boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth="
+                    + MySoup.getAuthKey() + "&id=" + id);
             if (success){
                 response.getGroup().setBookmarked(false);
                 return true;
@@ -151,6 +151,7 @@ public class TorrentGroup {
 		for (Torrents t : response.getTorrents()) {
 			for (int i = 0; i < formatList.length; i++) {
 				if (formatList[i].equalsIgnoreCase(t.getFormat())) {
+                    //TODO: What is going on here?
 					String name = t.getFilePath();
 					if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath().equals(null)) {
 						name =
