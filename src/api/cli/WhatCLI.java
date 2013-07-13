@@ -17,7 +17,7 @@ public class WhatCLI extends CLI {
 	public WhatCLI() {
 		MySoup.setSite("ssl.what.cd");
 		try {
-			MySoup.login("", "", "");
+			MySoup.login("", "", "", false);
 			System.out.println("logged in");
 			System.out.println(MySoup.getAuthKey());
 		} catch (CouldNotLoadException e) {

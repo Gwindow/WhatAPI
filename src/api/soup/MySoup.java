@@ -281,10 +281,12 @@ public class MySoup {
      *      the username to login with
 	 * @param password
 	 *      the password to login with
+	 * @param keepLogged
+	 *      if we want the cookie not to expire
 	 * @throws CouldNotLoadException
-     *      thrown if we fail to login
+	 *      thrown if we fail to login
 	 */
-	public static void login(String url, String username, String password) throws CouldNotLoadException {
+	public static void login(String url, String username, String password, Boolean keepLogged) throws CouldNotLoadException {
 		url = SITE + url;
 		try {
 			httpGet = getHttpGet(url);
@@ -295,6 +297,8 @@ public class MySoup {
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			nvps.add(new BasicNameValuePair("username", username));
 			nvps.add(new BasicNameValuePair("password", password));
+			if (keepLogged)
+				nvps.add(new BasicNameValuePair("keeplogged", "1"));
 
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
