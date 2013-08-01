@@ -2,7 +2,7 @@ package api.whatstatus;
 
 /**
  * The Class Status.
- * 
+ * See https://whatstatus.info/about for information about the api
  * @author Gwindow
  */
 public class Status {
@@ -17,57 +17,54 @@ public class Status {
 	private String tracker;
 
 	/**
-	 * Gets the irc.
-	 * 
-	 * @return the irc
+	 * Gets the irc status information
+	 * 1 = up, 0 = down
+	 * @return the irc status
 	 */
 	public int getIrc() {
-		if (irc.equalsIgnoreCase("up")) {
-			System.out.println("IRC Up");
-			return 0;
-		} else if (irc.equalsIgnoreCase("down")) {
-			System.out.println("IRC Down");
-			return 1;
-		} else {
-			System.out.println("IRC Maintenance");
-			return 2;
-		}
+		return Integer.parseInt(irc);
 	}
 
 	/**
-	 * Gets the site.
-	 * 
-	 * @return the site
+	 * Gets the site status information
+	 * 1 = up, 0 = down
+	 * @return the site status
 	 */
 	public int getSite() {
-		if (site.equalsIgnoreCase("up")) {
-			System.out.println("Site Up");
-			return 0;
-		} else if (site.equalsIgnoreCase("down")) {
-			System.out.println("Site Down");
-			return 1;
-		} else {
-			System.out.println("Site Maintenance");
-			return 2;
-		}
+		return Integer.parseInt(site);
 	}
 
 	/**
-	 * Gets the tracker.
-	 * 
-	 * @return the tracker
+	 * Gets the tracker status information
+	 * 1 = up, 0 = down
+	 * @return the tracker status
 	 */
 	public int getTracker() {
-		if (tracker.equalsIgnoreCase("up")) {
-			System.out.println("Tracker Up");
-			return 0;
-		} else if (tracker.equalsIgnoreCase("down")) {
-			System.out.println("Tracker Down");
-			return 1;
-		} else {
-			System.out.println("Tracker Maintenance");
-			return 2;
-		}
+		return Integer.parseInt(tracker);
+	}
+
+	/**
+	 * Check if the site is up
+	 * @return true if the site is up
+	 */
+	public boolean siteUp(){
+		return getSite() == 1;
+	}
+
+	/**
+	 * Check if the IRC is up
+	 * @return true if the IRC is up
+	 */
+	public boolean ircUp(){
+		return getIrc() == 1;
+	}
+
+	/**
+	 * Check if the tracker is up
+	 * @return true if the tracker is up
+	 */
+	public boolean trackerUp(){
+		return getTracker() == 1;
 	}
 
 	@Override
