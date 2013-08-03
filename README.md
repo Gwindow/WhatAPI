@@ -16,7 +16,8 @@ MySoup.login("login.php", username, password);
 User user = User.userFromId(id);
 //you now have an object to work with, awesome right?
 System.out.println(user); //this will print all the values that the object contains
-//Most classes also have extra methods to do special stuff, like sending messages or downloading files
+//Most classes also have extra methods to do special stuff
+//like sending messages or downloading files
 user.sendMessage(subject, body);
 ```
 
