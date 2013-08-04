@@ -127,7 +127,7 @@ public class CrossReference {
 
     /**
      * Determine search string from upc. First tries MusicBrainz then GoogleProducts
-     *
+     * 
      * @param upc
      * 		the associated upc
      * @return the string
@@ -150,7 +150,7 @@ public class CrossReference {
 
     public static String determineSearchStringByMusicBrainz(String upc) {
         try {
-            String response = MySoup.scrapeOther("http://www.musicbrainz.org/ws/2/release/?limit=1&query=barcode:"+ upc);
+            String response = MySoup.scrapeOther("http://www.musicbrainz.org/ws/2/release/?limit=1&query=barcode:" + upc);
             SAXParserFactory spfac = SAXParserFactory.newInstance();
             SAXParser sp = spfac.newSAXParser();
             MusicBrainzParser handler = new MusicBrainzParser();
@@ -170,7 +170,6 @@ public class CrossReference {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return "";
     }
 
