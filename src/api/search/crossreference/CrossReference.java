@@ -127,7 +127,7 @@ public class CrossReference {
 
     /**
      * Determine search string from upc. First tries MusicBrainz then GoogleProducts
-     * 
+     *
      * @param upc
      * 		the associated upc
      * @return the string

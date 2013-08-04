@@ -11,8 +11,6 @@ public class Barcode {
 	private String upc;
 	//The search terms determined from looking up the barcode on MusicBrainz & Google products
 	private String searchTerms;
-	//If we've searched the web site yet
-	private boolean searchedSite = false;
 
 	public Barcode(){
 
@@ -49,14 +47,6 @@ public class Barcode {
 
 	public boolean hasSearchTerms(){
 		return searchTerms != null;
-	}
-
-	public boolean haveSearchedSite(){
-		return searchedSite;
-	}
-
-	public void setSearchedSite(boolean b){
-		searchedSite = b;
 	}
 
 	@Override
