@@ -174,7 +174,7 @@ public class CrossReference {
         return "";
     }
 
-    /*
+    /**
      *	Constructs a SearchString from a Google Product query and the associated upc
      *
      *	Each result is first cleaned, then split up at " ". Each occurrence of a word is counted and all words who appears at least items-1
