@@ -10,7 +10,7 @@ public class Barcode {
 	//The upc for this barcode
 	private String upc;
 	//The search terms determined from looking up the barcode on MusicBrainz & Google products
-	private String searchTerm;
+	private String searchTerms;
 	//If we've searched the web site yet
 	private boolean searchedSite = false;
 
@@ -32,7 +32,7 @@ public class Barcode {
 	 * we should use when searching the site to see if this item is on there
 	 */
 	public void determineSearchTerms(){
-		searchTerm = CrossReference.determineSearchStringByUPC(upc);
+		searchTerms = CrossReference.determineSearchStringByUPC(upc);
 	}
 
 	public String getUpc(){
@@ -40,11 +40,15 @@ public class Barcode {
 	}
 
 	public String getSearchTerms(){
-		return searchTerm;
+		return searchTerms;
 	}
 
 	public void setSearchTerms(String terms){
-		searchTerm = terms;
+		searchTerms = terms;
+	}
+
+	public boolean hasSearchTerms(){
+		return searchTerms != null;
 	}
 
 	public boolean haveSearchedSite(){
@@ -53,5 +57,10 @@ public class Barcode {
 
 	public void setSearchedSite(boolean b){
 		searchedSite = b;
+	}
+
+	@Override
+	public String toString(){
+		return "UPC: " + getUpc() + (hasSearchTerms() ? ", Terms: " + getSearchTerms() : "");
 	}
 }
