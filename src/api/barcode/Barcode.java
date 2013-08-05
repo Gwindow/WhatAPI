@@ -46,7 +46,7 @@ public class Barcode {
 	}
 
 	public boolean hasSearchTerms(){
-		return searchTerms != null;
+		return (searchTerms != null && !searchTerms.isEmpty());
 	}
 
 	@Override
