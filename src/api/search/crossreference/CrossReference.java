@@ -150,7 +150,7 @@ public class CrossReference {
 
     public static String determineSearchStringByMusicBrainz(String upc) {
         try {
-            String response = MySoup.scrapeOther("http://www.musicbrainz.org/ws/2/release/?limit=1&query=barcode:"+ upc);
+            String response = MySoup.scrapeOther("http://www.musicbrainz.org/ws/2/release/?limit=1&query=barcode:" + upc);
             SAXParserFactory spfac = SAXParserFactory.newInstance();
             SAXParser sp = spfac.newSAXParser();
             MusicBrainzParser handler = new MusicBrainzParser();
@@ -170,11 +170,10 @@ public class CrossReference {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return "";
     }
 
-    /*
+    /**
      *	Constructs a SearchString from a Google Product query and the associated upc
      *
      *	Each result is first cleaned, then split up at " ". Each occurrence of a word is counted and all words who appears at least items-1

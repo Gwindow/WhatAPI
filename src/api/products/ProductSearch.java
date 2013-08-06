@@ -90,7 +90,6 @@ public class ProductSearch {
 				("https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&q=" + title + "&alt=json");
 		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
 		return ps;
-
 	}
 
 	/**
