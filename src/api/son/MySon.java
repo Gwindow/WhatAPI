@@ -5,8 +5,7 @@ import api.util.CouldNotLoadException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.lang.reflect.Type;
 
 /**
@@ -97,13 +96,30 @@ public class MySon {
 	 * @return the created object
 	 */
 	public static Object toObjectOther(String url, Type t) {
-		String json = null;
 		try {
-			json = MySoup.scrapeOther(url);
+			String json = MySoup.scrapeOther(url);
 			return gson.fromJson(json, t);
 		} catch (CouldNotLoadException e) {
 			e.printStackTrace();
 			System.err.println("Couldn't create json object " + t.toString());
+			return null;
+		}
+	}
+
+	/**
+	 * Read JSON contents of a file into an object using GSON
+	 * @param file the file to read
+	 * @param t The type to create from the data
+	 * @return the created object, or null if creation failed
+	 */
+	public static Object toObjectFromFile(File file, Type t){
+		try {
+			FileReader reader = new FileReader(file);
+			return gson.fromJson(reader, t);
+		}
+		catch (FileNotFoundException e){
+			System.err.println("Failed to find file " + file.getName());
+			e.printStackTrace();
 			return null;
 		}
 	}
