@@ -2,6 +2,7 @@ package api.soup;
 
 import api.forum.forumsections.ForumSections;
 import api.index.Index;
+import api.son.MySon;
 import api.util.CouldNotLoadException;
 import api.util.Tuple;
 import org.apache.http.HttpEntity;
@@ -22,6 +23,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
@@ -140,11 +142,8 @@ public class MySoup {
 		DefaultHttpClient client = new DefaultHttpClient();
 		ClientConnectionManager mgr = client.getConnectionManager();
 		HttpParams params = client.getParams();
-        //Yes it's deprecated, no we can't change it. Using PoolingClientConnectionManager crashes on Android
-		//client = new DefaultHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
-        //TODO: Look into changing this to DecompressingHttpClient
+        //TODO: We need to migrate to HttpURLConnection
         client = new ContentEncodingHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
-		// HttpProtocolParams.setUserAgent(client.getParams(), "WhatAPI");
 		return client;
 	}
 
@@ -243,15 +242,6 @@ public class MySoup {
 	}
 
 	/**
-	 * Get the cookies.
-	 * 
-	 * @return the cookies
-	 */
-	public static List<Cookie> getCookies() {
-		return cookies;
-	}
-
-	/**
 	 * Check if we're logged in
 	 * 
 	 * @return True if we're logged in
@@ -312,6 +302,38 @@ public class MySoup {
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not login");
 		}
+	}
+
+	/**
+	 * Get the cookies
+	 * @return the cookies
+	 */
+	public static List<Cookie> getCookies() {
+		return cookies;
+	}
+
+	/**
+	 * Load a saved cookie json string
+	 * @param data The json data to load the cookie from
+	 */
+	public static void loadCookie(String data){
+		try {
+			BasicClientCookie cookie = (BasicClientCookie)MySon.toObjectFromString(data, BasicClientCookie.class);
+			httpClient.getCookieStore().addCookie(cookie);
+			cookies = httpClient.getCookieStore().getCookies();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Add a cookie to the HTTP client's cookie store
+	 * @param cookie the cookie to add
+	 */
+	public static void loadCookie(BasicClientCookie cookie){
+		httpClient.getCookieStore().addCookie(cookie);
+		cookies = httpClient.getCookieStore().getCookies();
 	}
 
 	/**
