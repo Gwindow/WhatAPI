@@ -16,8 +16,13 @@ public class Stats {
 	/** The last access. */
 	private String lastAccess;
 
-	/** The ratio. */
-	private Number ratio;
+	/** The ratio from the api. Must be a string to handle the case where ratio is infinity */
+	private String ratio;
+	/**
+	 * When getRatio is called for the first time we parse the ratio string into this number
+	 * and then return it for future calls
+	 */
+	private Number r = null;
 
 	/** The required ratio. */
 	private Number requiredRatio;
@@ -58,7 +63,15 @@ public class Stats {
 	 * @return the ratio
 	 */
 	public Number getRatio() {
-		return this.ratio;
+		//If the ratio was the infinity character change it to Infinity
+		//so that it can be parsed
+		if (r == null){
+			if (ratio.equalsIgnoreCase("\u221e")){
+				ratio = "Infinity";
+			}
+			r = Double.parseDouble(ratio);
+		}
+		return r;
 	}
 
 	/**
