@@ -1,5 +1,9 @@
 package api.user.recent;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * A recently uploaded or downloaded torrent
  */
@@ -11,9 +15,9 @@ public class RecentTorrent {
 	/** The URL to the torrent image (album art) */
 	private String WikiImage;
 	/**
-	 * The artists field is being ignored for now b/c the response
-	 * is very strange. TODO: Perhaps later
+	 * The artist info from the API
 	 */
+	List<ArtistInfo> artists;
 
 	/**
 	 * Get the torrent group id
@@ -39,8 +43,35 @@ public class RecentTorrent {
 		return WikiImage;
 	}
 
+
+	/**
+	 * Get the main artist for the album
+	 *
+	 * @return album artist
+	 */
+	public RecentArtist getArtist(){
+		return artists.get(0).getArtist();
+	}
+
 	@Override
 	public String toString(){
-		return "ID: " + ID + ", Album Name: " + Name + " Image URL: " + WikiImage;
+		return "ID: " + ID + ", Album Name: " + Name
+			+ ", Artist: " + getArtist() + ", Image URL: " + WikiImage;
+	}
+
+	/**
+	 * Class to handle the strange API response for artist information here
+	 * look at the API response if you're curious why this is the way it is
+	 */
+	private class ArtistInfo {
+		@SerializedName("1")
+		private List<RecentArtist> artist;
+
+		/**
+		 * There's only ever one entry in this list, so that's what we return
+		 */
+		public RecentArtist getArtist(){
+			return artist.get(0);
+		}
 	}
 }
