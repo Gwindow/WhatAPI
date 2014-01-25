@@ -65,7 +65,7 @@ public class Stats {
 	public Number getRatio() {
 		//If the ratio was the infinity character change it to Infinity
 		//so that it can be parsed
-		if (r == null){
+		if (r == null && ratio != null){
 			if (ratio.equalsIgnoreCase("\u221e")){
 				ratio = "Infinity";
 			}
