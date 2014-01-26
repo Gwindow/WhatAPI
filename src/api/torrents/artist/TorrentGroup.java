@@ -21,6 +21,11 @@ public class TorrentGroup {
 	/** The group record label. */
 	private String groupRecordLabel;
 
+	/**
+	 * The image for the torrent group
+	 */
+	private String wikiImage;
+
 	/** The group vanity house. */
 	private boolean groupVanityHouse;
 
@@ -73,6 +78,15 @@ public class TorrentGroup {
 	 */
 	public String getGroupRecordLabel() {
 		return this.groupRecordLabel;
+	}
+
+	/**
+	 * Get the torrent group image
+	 *
+	 * @return torrent group image
+	 */
+	public String getWikiImage(){
+		return wikiImage;
 	}
 
 	/**
@@ -163,7 +177,7 @@ public class TorrentGroup {
 	public String toString() {
 		return "Torrentgroup [getGroupCatalogueNumber=" + getGroupCatalogueNumber() + ", getGroupId=" + getGroupId()
 				+ ", getGroupName=" + getGroupName() + ", getGroupRecordLabel=" + getGroupRecordLabel()
-				+ ", getGroupVanityHouse=" + isGroupVanityHouse() + ", getGroupYear=" + getGroupYear() + ", isBookmarked="
+			+ ", wikiImage=" + getWikiImage() + ", getGroupVanityHouse=" + isGroupVanityHouse() + ", getGroupYear=" + getGroupYear() + ", isBookmarked="
 				+ isBookmarked() + ", getreleaseType.toString()=" + getReleaseType() + ", getTags=" + getTags()
 				+ ", getTorrents=" + getTorrents() + "]";
 	}
