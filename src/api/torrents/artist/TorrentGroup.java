@@ -1,5 +1,9 @@
 package api.torrents.artist;
 
+import api.requests.RemixedBy;
+import api.torrents.torrents.*;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,7 +12,6 @@ import java.util.List;
  * @author Gwindow
  */
 public class TorrentGroup {
-
 	/** The group catalogue number. */
 	private String groupCatalogueNumber;
 
@@ -21,9 +24,7 @@ public class TorrentGroup {
 	/** The group record label. */
 	private String groupRecordLabel;
 
-	/**
-	 * The image for the torrent group
-	 */
+	/** The image for the torrent group */
 	private String wikiImage;
 
 	/** The group vanity house. */
@@ -43,6 +44,9 @@ public class TorrentGroup {
 
 	/** The torrent. */
 	private List<Torrent> torrent;
+
+	/** Extended artist information */
+	private ExtendedArtists extendedArtists;
 
 	/**
 	 * Gets the group catalogue number.
@@ -122,32 +126,34 @@ public class TorrentGroup {
 	 * @return the release type
 	 */
 	public String getReleaseType() {
-		if (releaseType.toString().equalsIgnoreCase("1"))
-			return "Album";
-		else if (releaseType.toString().equalsIgnoreCase("3"))
-			return "Soundtrack";
-		else if (releaseType.toString().equalsIgnoreCase("5"))
-			return "EP";
-		else if (releaseType.toString().equalsIgnoreCase("6"))
-			return "Anthology";
-		else if (releaseType.toString().equalsIgnoreCase("7"))
-			return "Compilation";
-		else if (releaseType.toString().equalsIgnoreCase("9"))
-			return "Single";
-		else if (releaseType.toString().equalsIgnoreCase("11"))
-			return "Live Album";
-		else if (releaseType.toString().equalsIgnoreCase("13"))
-			return "Remix";
-		else if (releaseType.toString().equalsIgnoreCase("14"))
-			return "Bootleg";
-		else if (releaseType.toString().equalsIgnoreCase("15"))
-			return "Interview";
-		else if (releaseType.toString().equalsIgnoreCase("16"))
-			return "Mixtape";
-		else if (releaseType.toString().equalsIgnoreCase("21"))
-			return "Unknown";
-		else
-			return "API Error";
+		switch (releaseType.intValue()){
+			case 1:
+				return "Album";
+			case 3:
+				return "Soundtrack";
+			case 5:
+				return "EP";
+			case 6:
+				return "Anthology";
+			case 7:
+				return "Compilation";
+			case 9:
+				return "Single";
+			case 11:
+				return "Live Album";
+			case 13:
+				return "Remix";
+			case 14:
+				return "Bootleg";
+			case 15:
+				return "Interview";
+			case 16:
+				return "Mixtape";
+			case 21:
+				return "Unknown";
+			default:
+				return "API Error";
+		}
 	}
 
 	/**
@@ -160,6 +166,14 @@ public class TorrentGroup {
 	}
 
 	/**
+	 * Get the extended artist information
+	 * @return extended artists
+	 */
+	public ExtendedArtists getExtendedArtists(){
+		return extendedArtists;
+	}
+
+	/**
 	 * Gets the torrents.
 	 * 
 	 * @return the torrents
@@ -168,17 +182,50 @@ public class TorrentGroup {
 		return this.torrent;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Torrentgroup [getGroupCatalogueNumber=" + getGroupCatalogueNumber() + ", getGroupId=" + getGroupId()
-				+ ", getGroupName=" + getGroupName() + ", getGroupRecordLabel=" + getGroupRecordLabel()
+			+ ", getGroupName=" + getGroupName() + ", getGroupRecordLabel=" + getGroupRecordLabel()
 			+ ", wikiImage=" + getWikiImage() + ", getGroupVanityHouse=" + isGroupVanityHouse() + ", getGroupYear=" + getGroupYear() + ", isBookmarked="
-				+ isBookmarked() + ", getreleaseType.toString()=" + getReleaseType() + ", getTags=" + getTags()
-				+ ", getTorrents=" + getTorrents() + "]";
+			+ isBookmarked() + ", getreleaseType.toString()=" + getReleaseType() + ", getTags=" + getTags() + ", extendedArtists=" + getExtendedArtists()
+			+ ", getTorrents=" + getTorrents() + "]";
+	}
+
+	/**
+	 * The API gives us information about all the extended artists from which we can infer this artists contribution
+	 * ie. main, guest, dj, etc. but it doesn't make it easy on us. The classes below make an attempt to wrap up
+	 * the puzzling extendedArtists portion of the response and make it more usable
+	 */
+	public class ExtendedArtists {
+		/** Main artists */
+		@SerializedName("1")
+		public List<Artists> artists;
+
+		/** Guest artists */
+		@SerializedName("2")
+		public List<With> with;
+
+		@SerializedName("3")
+		public List<RemixedBy> remixers;
+
+		@SerializedName("4")
+		public List<Composers> composers;
+
+		@SerializedName("5")
+		public List<Conductor> conductors;
+
+		@SerializedName("6")
+		public List<DJ> djs;
+
+		@SerializedName("7")
+		public List<Producer> producers;
+
+		@Override
+		public String toString(){
+			return "Extended Artists: [Artists = " + artists
+				+ ", Guests = " + with + ", Remixers = " + remixers
+				+ ", Composers: = " + composers + ", Conductors = " + conductors
+				+ ", DJs = " + djs + ", Producers = " + producers + "]";
+		}
 	}
 }
