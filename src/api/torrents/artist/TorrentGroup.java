@@ -1,7 +1,7 @@
 package api.torrents.artist;
 
-import api.requests.RemixedBy;
-import api.torrents.torrents.*;
+import api.torrents.ReleaseType;
+import api.torrents.torrents.Artists;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -121,38 +121,40 @@ public class TorrentGroup {
 	}
 
 	/**
-	 * Gets the release type.
+	 * Get the release type.
 	 * 
 	 * @return the release type
 	 */
-	public String getReleaseType() {
+	public ReleaseType getReleaseType(){
 		switch (releaseType.intValue()){
 			case 1:
-				return "Album";
+				return ReleaseType.ALBUM;
 			case 3:
-				return "Soundtrack";
+				return ReleaseType.SOUNDTRACK;
 			case 5:
-				return "EP";
+				return ReleaseType.EP;
 			case 6:
-				return "Anthology";
+				return ReleaseType.ANTHOLOGY;
 			case 7:
-				return "Compilation";
+				return ReleaseType.COMPILATION;
+			case 8:
+				return ReleaseType.DJ_MIX;
 			case 9:
-				return "Single";
+				return ReleaseType.SINGLE;
 			case 11:
-				return "Live Album";
+				return ReleaseType.LIVE_ALBUM;
 			case 13:
-				return "Remix";
+				return ReleaseType.REMIX;
 			case 14:
-				return "Bootleg";
+				return ReleaseType.BOOTLEG;
 			case 15:
-				return "Interview";
+				return ReleaseType.INTERVIEW;
 			case 16:
-				return "Mixtape";
-			case 21:
-				return "Unknown";
+				return ReleaseType.MIXTAPE;
+			case 22:
+				return ReleaseType.CONCERT_RECORDING;
 			default:
-				return "API Error";
+				return ReleaseType.UNKNOWN;
 		}
 	}
 
@@ -203,27 +205,89 @@ public class TorrentGroup {
 
 		/** Guest artists */
 		@SerializedName("2")
-		public List<With> with;
+		public List<Artists> guest;
 
 		@SerializedName("3")
-		public List<RemixedBy> remixers;
+		public List<Artists> remixers;
 
 		@SerializedName("4")
-		public List<Composers> composers;
+		public List<Artists> composers;
 
 		@SerializedName("5")
-		public List<Conductor> conductors;
+		public List<Artists> conductors;
 
 		@SerializedName("6")
-		public List<DJ> djs;
+		public List<Artists> djs;
 
 		@SerializedName("7")
-		public List<Producer> producers;
+		public List<Artists> producers;
+
+		/**
+		 * Find the type of appearance some artist made on this recording
+		 * I'm not sure if there's much we can do to make this nicer due to how
+		 * the api is currently structured. Fortunately all these lists will
+		 * be reasonably short so it shouldn't be too bad
+		 *
+		 * @param id artist id to find
+		 * @return type of appearance made by artist
+		 */
+		public Releases.Appearance getAppearance(int id){
+			if (artists != null){
+				for (Artists a : artists){
+					if (id == a.getId().intValue()){
+						return Releases.Appearance.ARTIST;
+					}
+				}
+			}
+			if (guest != null){
+				for (Artists w : guest){
+					if (id == w.getId().intValue()){
+						return Releases.Appearance.GUEST;
+					}
+				}
+			}
+			if (remixers != null){
+				for (Artists r : remixers){
+					if (id == r.getId().intValue()){
+						return Releases.Appearance.REMIXED;
+					}
+				}
+			}
+			if (composers != null){
+				for (Artists c : composers){
+					if (id == c.getId().intValue()){
+						return Releases.Appearance.COMPOSER;
+					}
+				}
+			}
+			if (conductors != null){
+				for (Artists c : conductors){
+					if (id == c.getId().intValue()){
+						return Releases.Appearance.CONDUCTOR;
+					}
+				}
+			}
+			if (djs != null){
+				for (Artists d : djs){
+					if (id == d.getId().intValue()){
+						return Releases.Appearance.DJ;
+					}
+				}
+			}
+			if (producers != null){
+				for (Artists p : producers){
+					if (id == p.getId().intValue()){
+						return Releases.Appearance.PRODUCER;
+					}
+				}
+			}
+			return Releases.Appearance.NONE;
+		}
 
 		@Override
 		public String toString(){
 			return "Extended Artists: [Artists = " + artists
-				+ ", Guests = " + with + ", Remixers = " + remixers
+				+ ", Guests = " + guest + ", Remixers = " + remixers
 				+ ", Composers: = " + composers + ", Conductors = " + conductors
 				+ ", DJs = " + djs + ", Producers = " + producers + "]";
 		}
