@@ -249,7 +249,7 @@ public class TorrentGroup {
 			if (remixers != null){
 				for (Artists r : remixers){
 					if (id == r.getId().intValue()){
-						return ReleaseType.REMIXER;
+						return ReleaseType.REMIXED_BY;
 					}
 				}
 			}
