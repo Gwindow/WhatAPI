@@ -231,57 +231,57 @@ public class TorrentGroup {
 		 * @param id artist id to find
 		 * @return type of appearance made by artist
 		 */
-		public Releases.Appearance getAppearance(int id){
+		public ReleaseType getAppearance(int id){
 			if (artists != null){
 				for (Artists a : artists){
 					if (id == a.getId().intValue()){
-						return Releases.Appearance.ARTIST;
+						return ReleaseType.ARTIST;
 					}
 				}
 			}
 			if (guest != null){
 				for (Artists w : guest){
 					if (id == w.getId().intValue()){
-						return Releases.Appearance.GUEST;
+						return ReleaseType.GUEST_ARTIST;
 					}
 				}
 			}
 			if (remixers != null){
 				for (Artists r : remixers){
 					if (id == r.getId().intValue()){
-						return Releases.Appearance.REMIXED;
+						return ReleaseType.REMIXER;
 					}
 				}
 			}
 			if (composers != null){
 				for (Artists c : composers){
 					if (id == c.getId().intValue()){
-						return Releases.Appearance.COMPOSER;
+						return ReleaseType.COMPOSER;
 					}
 				}
 			}
 			if (conductors != null){
 				for (Artists c : conductors){
 					if (id == c.getId().intValue()){
-						return Releases.Appearance.CONDUCTOR;
+						return ReleaseType.CONDUCTOR;
 					}
 				}
 			}
 			if (djs != null){
 				for (Artists d : djs){
 					if (id == d.getId().intValue()){
-						return Releases.Appearance.DJ;
+						return ReleaseType.DJ;
 					}
 				}
 			}
 			if (producers != null){
 				for (Artists p : producers){
 					if (id == p.getId().intValue()){
-						return Releases.Appearance.PRODUCER;
+						return ReleaseType.PRODUCER;
 					}
 				}
 			}
-			return Releases.Appearance.NONE;
+			return ReleaseType.UNKNOWN;
 		}
 
 		@Override

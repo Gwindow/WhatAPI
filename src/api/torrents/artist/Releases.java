@@ -9,22 +9,7 @@ import java.util.*;
  * and sorted by release date
  */
 public class Releases {
-	/**
-	 * Releases where the artist is one of the main artists
-	 */
 	private SortedMap<ReleaseType, SortedSet<TorrentGroup>> releases;
-
-	/**
-	 * Types of appearances the artist has made
-	 */
-	public enum Appearance {
-		ARTIST, GUEST, COMPOSER, CONDUCTOR, DJ, REMIXED, PRODUCER, NONE
-	}
-
-	/**
-	 * Other releases the artist has appeared on
-	 */
-	private SortedMap<Appearance, SortedSet<TorrentGroup>> appearances;
 
 	/**
 	 * Build the releases information for some artist
@@ -32,54 +17,24 @@ public class Releases {
 	 * @param artist artist to build information for
 	 */
 	public Releases(Artist artist){
+		releases = new TreeMap<ReleaseType, SortedSet<TorrentGroup>>();
 		List<TorrentGroup> torrents = artist.getResponse().getTorrentgroup();
 		for (TorrentGroup group : torrents){
-			Appearance type = group.getExtendedArtists().getAppearance(artist.getId());
-			switch (type){
-				case ARTIST:
-					//DJ is an odd case in that we also count DJs as a main artist
-				case DJ:
-					addRelease(group);
-					break;
-				case NONE:
-					//If somehow we got an album that we didn't appear on, ignore it
-					break;
-				default:
-					addAppearance(group, type);
+			ReleaseType appearance = group.getExtendedArtists().getAppearance(artist.getId());
+			if (appearance == ReleaseType.ARTIST){
+				ReleaseType type = group.getReleaseType();
+				if (!releases.containsKey(type)){
+					releases.put(type, new TreeSet<TorrentGroup>(new TorrentGroupComparator()));
+				}
+				releases.get(type).add(group);
+			}
+			else {
+				if (!releases.containsKey(appearance)){
+					releases.put(appearance, new TreeSet<TorrentGroup>(new TorrentGroupComparator()));
+				}
+				releases.get(appearance).add(group);
 			}
 		}
-	}
-
-	/**
-	 * Add a release the artist has appeared on as a main artist
-	 *
-	 * @param group torrent group to add
-	 */
-	private void addRelease(TorrentGroup group){
-		if (releases == null){
-			releases = new TreeMap<ReleaseType, SortedSet<TorrentGroup>>();
-		}
-		ReleaseType type = group.getReleaseType();
-		if (!releases.containsKey(type)){
-			releases.put(type, new TreeSet<TorrentGroup>(new TorrentGroupComparator()));
-		}
-		releases.get(type).add(group);
-	}
-
-	/**
-	 * Add a release the artist has appeared on but not as a main artist
-	 *
-	 * @param group torrent group to add
-	 * @param type  the type of appearance made
-	 */
-	private void addAppearance(TorrentGroup group, Appearance type){
-		if (appearances == null){
-			appearances = new TreeMap<Appearance, SortedSet<TorrentGroup>>();
-		}
-		if (!appearances.containsKey(type)){
-			appearances.put(type, new TreeSet<TorrentGroup>(new TorrentGroupComparator()));
-		}
-		appearances.get(type).add(group);
 	}
 
 	/**
@@ -107,12 +62,8 @@ public class Releases {
 		return releases;
 	}
 
-	public SortedMap<Appearance, SortedSet<TorrentGroup>> getAppearances(){
-		return appearances;
-	}
-
 	@Override
 	public String toString(){
-		return "Releases: [Releases=" + getReleases() + ", Appearances=" + getAppearances() + "]";
+		return "Releases: [Releases=" + getReleases() + "]";
 	}
 }

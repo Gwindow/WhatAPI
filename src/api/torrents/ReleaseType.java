@@ -4,13 +4,14 @@ package api.torrents;
  * Enum for different release types, like album, mixtape, etc
  */
 public enum ReleaseType {
-	ALBUM(1), SOUNDTRACK(3), EP(5), ANTHOLOGY(6), COMPILATION(7),
-	DJ_MIX(8), SINGLE(9), LIVE_ALBUM(11), REMIX(13), BOOTLEG(14),
-	INTERVIEW(15), MIXTAPE(16), UNKNOWN(21), CONCERT_RECORDING(22);
+	//These numbers don't correspond to the API numbers used since I'll
+	//be using them for array indexing
+	ALBUM(1), SOUNDTRACK(2), EP(3), ANTHOLOGY(4), COMPILATION(5),
+	DJ_MIX(6), SINGLE(7), LIVE_ALBUM(8), REMIX(9), BOOTLEG(10),
+	INTERVIEW(11), MIXTAPE(12), CONCERT_RECORDING(13), ARTIST(14),
+	GUEST_ARTIST(15), COMPOSER(16), CONDUCTOR(17), DJ(18), REMIXED_BY(19),
+	PRODUCER(20), UNKNOWN(21);
 
-	/**
-	 * This is the actual release type number used on the site
-	 */
 	private final int id;
 
 	private ReleaseType(int id){
@@ -26,30 +27,44 @@ public enum ReleaseType {
 		switch (id){
 			case 1:
 				return "Album";
-			case 3:
+			case 2:
 				return "Soundtrack";
-			case 5:
+			case 3:
 				return "EP";
-			case 6:
+			case 4:
 				return "Anthology";
-			case 7:
+			case 5:
 				return "Compilation";
-			case 8:
+			case 6:
 				return "DJ Mix";
-			case 9:
+			case 7:
 				return "Single";
-			case 11:
+			case 8:
 				return "Live Album";
-			case 13:
+			case 9:
 				return "Remix";
-			case 14:
+			case 10:
 				return "Bootleg";
-			case 15:
+			case 11:
 				return "Interview";
-			case 16:
+			case 12:
 				return "Mixtape";
-			case 22:
+			case 13:
 				return "Concert Recording";
+			case 14:
+				return "Artist";
+			case 15:
+				return "Guest Artist";
+			case 16:
+				return "Composer";
+			case 17:
+				return "Conductor";
+			case 18:
+				return "DJ";
+			case 19:
+				return "Remixed By";
+			case 20:
+				return "Producer";
 			default:
 				return "Unknown";
 		}
