@@ -1,5 +1,9 @@
 package api.torrents.artist;
 
+import api.son.MySon;
+import api.soup.MySoup;
+import api.util.Tuple;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -9,10 +13,6 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
-
-import api.son.MySon;
-import api.soup.MySoup;
-import api.util.Tuple;
 
 /**
  * The Class Artist.
@@ -28,7 +28,7 @@ public class Artist {
 	private String status;
 
 	/** The id. */
-	private static transient int id;
+	private int id;
 
 	/**
 	 * Artist from id.
@@ -41,7 +41,7 @@ public class Artist {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=artist&id=" + id + "&auth=" + authkey;
 		Artist artist = (Artist) MySon.toObject(url, Artist.class);
-		Artist.id = id;
+		artist.id = id;
 		return artist;
 	}
 
@@ -50,7 +50,7 @@ public class Artist {
 	 * 
 	 * @return the id
 	 */
-	public static int getId() {
+	public int getId(){
 		return id;
 	}
 
@@ -125,7 +125,7 @@ public class Artist {
 	}
 
 	/**
-	 * Disabale notifications.
+	 * Disable notifications.
 	 */
 	public boolean disableNotifications() {
 		if (response.hasNotificationsEnabled()) {
@@ -141,14 +141,6 @@ public class Artist {
         return true;
 	}
 
-	// TODO fix: What's wrong?
-	/*
-	 * public List<Tuple<String, String>> getDownloadLinksList() { List<Tuple<String, String>> list = new
-	 * ArrayList<Tuple<String, String>>(); for (TorrentGroup tg : response.getTorrentgroup()) { for (Torrent t :
-	 * tg.getTorrents()) { String name = t.getFilePath(); if (t.getFilePath().equalsIgnoreCase("") || t.getFilePath() ==
-	 * null) { name = tg.getGroupName() + " - " + tg.getGroupYear() + " (" + t.getMediaFormatEncoding() + ")"; }
-	 * list.add(new Tuple<String, String>(t.getDownloadLink(), name)); } } return list; }
-	 */
 	/**
 	 * Gets the download links list for.
 	 * 
