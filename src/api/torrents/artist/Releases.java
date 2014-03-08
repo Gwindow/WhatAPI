@@ -62,6 +62,21 @@ public class Releases {
 		return releases;
 	}
 
+	/**
+	 * Get a map of the sets flattened to arrays. This is needed for random access in
+	 * the list view of albums. We do still keep the ReleaseTypes so we can identify
+	 * the release types as some artists don't have certain releases
+	 *
+	 * @return A map of array lists made from the sets
+	 */
+	public SortedMap<ReleaseType, ArrayList<TorrentGroup>> flatten(){
+		SortedMap<ReleaseType, ArrayList<TorrentGroup>> flat = new TreeMap<ReleaseType, ArrayList<TorrentGroup>>();
+		for (Map.Entry<ReleaseType, SortedSet<TorrentGroup>> e : releases.entrySet()){
+			flat.put(e.getKey(), new ArrayList<TorrentGroup>(e.getValue()));
+		}
+		return flat;
+	}
+
 	@Override
 	public String toString(){
 		return "Releases: [Releases=" + getReleases() + "]";
