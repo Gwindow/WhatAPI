@@ -26,45 +26,45 @@ public enum ReleaseType {
 	public String toString(){
 		switch (id){
 			case 1:
-				return "Album";
+				return "Albums";
 			case 2:
-				return "Soundtrack";
+				return "Soundtracks";
 			case 3:
-				return "EP";
+				return "EPs";
 			case 4:
-				return "Anthology";
+				return "Anthologies";
 			case 5:
-				return "Compilation";
+				return "Compilations";
 			case 6:
-				return "DJ Mix";
+				return "DJ Mixes";
 			case 7:
-				return "Single";
+				return "Singles";
 			case 8:
-				return "Live Album";
+				return "Live Albums";
 			case 9:
-				return "Remix";
+				return "Remixes";
 			case 10:
-				return "Bootleg";
+				return "Bootlegs";
 			case 11:
-				return "Interview";
+				return "Interviews";
 			case 12:
-				return "Mixtape";
+				return "Mixtapes";
 			case 13:
-				return "Concert Recording";
+				return "Concert Recordings";
 			case 14:
 				return "Artist";
 			case 15:
-				return "Guest Artist";
+				return "Guest Appearances";
 			case 16:
-				return "Composer";
+				return "Compositions";
 			case 17:
-				return "Conductor";
+				return "Conducted By";
 			case 18:
 				return "DJ";
 			case 19:
 				return "Remixed By";
 			case 20:
-				return "Producer";
+				return "Produced By";
 			default:
 				return "Unknown";
 		}
