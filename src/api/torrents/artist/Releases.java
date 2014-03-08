@@ -21,7 +21,7 @@ public class Releases {
 		List<TorrentGroup> torrents = artist.getResponse().getTorrentgroup();
 		for (TorrentGroup group : torrents){
 			ReleaseType appearance = group.getExtendedArtists().getAppearance(artist.getId());
-			if (appearance == ReleaseType.ARTIST){
+			if (appearance == ReleaseType.ARTIST || appearance == ReleaseType.DJ){
 				ReleaseType type = group.getReleaseType();
 				if (!releases.containsKey(type)){
 					releases.put(type, new TreeSet<TorrentGroup>(new TorrentGroupComparator()));
