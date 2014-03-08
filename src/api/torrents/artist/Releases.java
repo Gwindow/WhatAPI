@@ -44,8 +44,8 @@ public class Releases {
 	private class TorrentGroupComparator implements Comparator<TorrentGroup> {
 		/**
 		 * @return -1 if o1.Year < o2.Year
-		 * 0 if o1.Year == o2.Year
 		 * 1 if o1.year > o2.Year
+		 * if years are equal we return o2.GroupName compared to o1.GroupName
 		 */
 		@Override
 		public int compare(TorrentGroup o1, TorrentGroup o2){
