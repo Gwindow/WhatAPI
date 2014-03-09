@@ -1,5 +1,9 @@
 package api.torrents.torrents;
 
+import api.son.MySon;
+import api.soup.MySoup;
+import api.util.Tuple;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -9,10 +13,6 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
-
-import api.son.MySon;
-import api.soup.MySoup;
-import api.util.Tuple;
 
 /**
  * The Class Torrents.
@@ -122,6 +122,43 @@ public class TorrentGroup {
     }
 
 	/**
+	 * Group the torrents in this torrent group by their edition and return
+	 * the list of all editions/remasters of the torrent
+	 */
+	public List<Edition> getEditions(){
+		ArrayList<Edition> editions = new ArrayList<Edition>();
+		//Add the "Original Release" if there is one since it's an awkward case as no edition information
+		//is provided on the torrent since it instead comes from the Torrent Group
+		List<Torrents> torrents = getResponse().getTorrents();
+		//Counter for where we should start reading non-original release torrents
+		int i = 0;
+		if (!torrents.get(0).isRemastered()){
+			editions.add(new Edition(getResponse().getGroup()));
+			for (Torrents t : torrents){
+				if (!t.isRemastered()){
+					editions.get(0).addTorrent(t);
+					++i;
+				}
+				else {
+					break;
+				}
+			}
+		}
+		//Now add in the rest of the releases
+		for (int j = i; j < torrents.size(); ++j){
+			Torrents t = torrents.get(j);
+			if (editions.isEmpty()){
+				editions.add(new Edition(t));
+			}
+			else if (!editions.get(editions.size() - 1).sameEdition(t)){
+				editions.add(new Edition(t));
+			}
+			editions.get(editions.size() - 1).addTorrent(t);
+		}
+		return editions;
+	}
+
+	/**
 	 * Gets the download links list.
 	 * 
 	 * @return the download links list
@@ -222,8 +259,7 @@ public class TorrentGroup {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private void downloadTorrent(String url, String path, String name) throws IOException {
-		URL u;
-		u = new URL(url);
+		URL u = new URL(url);
 		ReadableByteChannel rbc = Channels.newChannel(u.openStream());
 		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
 		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
@@ -265,4 +301,5 @@ public class TorrentGroup {
 	public String toString() {
 		return "Torrents [id =" + id + ", response=" + response + ", status=" + status + "]";
 	}
+
 }

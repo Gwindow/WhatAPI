@@ -1,12 +1,12 @@
 package api.torrents.torrents;
 
+import api.soup.MySoup;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-
-import api.soup.MySoup;
 
 /**
  * The Class Torrents.
@@ -317,6 +317,15 @@ public class Torrents {
 	}
 
 	/**
+	 * Check if this torrent is the same edition as some other one
+	 * @param t other torrent to compare
+	 * @return true if the torrents are part of the same edition of the album
+	 */
+	public boolean sameEdition(Torrents t){
+		return remastered == t.remastered && getRemaster().equals(t.getRemaster());
+	}
+
+	/**
 	 * Gets the download link.
 	 * 
 	 * @return the download link
@@ -346,8 +355,20 @@ public class Torrents {
 	 * @return the remaster
 	 */
 	public String getRemaster() {
-		return this.getRemasterYear() + " - " + this.getRemasterRecordLabel() + " / " + this.getRemasterTitle() + " / "
-				+ this.getRemasterCatalogueNumber();
+		String ed = remasterYear + " - ";
+		if (!remasterRecordLabel.isEmpty()){
+			ed += remasterRecordLabel + " / ";
+		}
+		if (!remasterTitle.isEmpty()){
+			ed += remasterTitle + " / ";
+		}
+		if (!remasterCatalogueNumber.isEmpty()){
+			ed += remasterCatalogueNumber + " / ";
+		}
+		if (!media.isEmpty()){
+			ed += media;
+		}
+		return ed;
 	}
 
 	/**
