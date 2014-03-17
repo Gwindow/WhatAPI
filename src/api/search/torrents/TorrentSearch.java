@@ -7,9 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * The Class TorrentsSearch.
- * For use in interacting with the API for performing torrent searches
- * 
+ * Perform Torrent searches on the site and get back some page of the results
  * @author Gwindow
  */
 public class TorrentSearch {
@@ -33,8 +31,8 @@ public class TorrentSearch {
 	 * @param term the term to search for
 	 * @return page 1 of the search results
 	 */
-	public static TorrentSearch searchForTerm(String term){
-		return searchForTerm(term, 1);
+	public static TorrentSearch search(String term){
+		return search(term, 1);
 	}
 
 	/**
@@ -43,7 +41,7 @@ public class TorrentSearch {
 	 * @param page page of the search results to get
 	 * @return the page of results for a torrent search for the term
 	 */
-	public static TorrentSearch searchForTerm(String term, int page){
+	public static TorrentSearch search(String term, int page){
 		String searchTerm;
 		try {
 			searchTerm = URLEncoder.encode(term, "UTF-8");
@@ -71,8 +69,8 @@ public class TorrentSearch {
 	 * @param tags search tags to use
 	 * @return the torrent search results
 	 */
-	public static TorrentSearch searchForTerm(String term, String tags){
-		return searchForTerm(term, tags, 1);
+	public static TorrentSearch search(String term, String tags){
+		return search(term, tags, 1);
 	}
 
 	/**
@@ -85,7 +83,7 @@ public class TorrentSearch {
 	 * @param page page of the search results to get
 	 * @return the torrent search results
 	 */
-	public static TorrentSearch searchForTerm(String term, String tags, int page){
+	public static TorrentSearch search(String term, String tags, int page){
 		String searchTerm;
 		try {
 			searchTerm = URLEncoder.encode(term, "UTF-8");
@@ -118,9 +116,8 @@ public class TorrentSearch {
 	 * no next page
 	 * @return the next page of search results
 	 */
-	public TorrentSearch getNextPage(){
-		return hasNextPage() ? searchForTerm(searchTerm, tags, page + 1)
-			: null;
+	public TorrentSearch nextPage(){
+		return hasNextPage() ? search(searchTerm, tags, page + 1) : null;
 	}
 
 	/**
@@ -136,9 +133,8 @@ public class TorrentSearch {
 	 * no previous page
 	 * @return the previous page of search results
 	 */
-	public TorrentSearch getPreviousPage(){
-		return hasPreviousPage() ? searchForTerm(searchTerm, tags, page - 1)
-			: null;
+	public TorrentSearch previousPage(){
+		return hasPreviousPage() ? search(searchTerm, tags, page - 1) : null;
 	}
 
 	/**

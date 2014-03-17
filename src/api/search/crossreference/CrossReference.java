@@ -71,7 +71,7 @@ public class CrossReference {
 		if (determinedSearchTerm.equals("")){
 			return null;
 		}
-		return TorrentSearch.searchForTerm(determinedSearchTerm);
+		return TorrentSearch.search(determinedSearchTerm);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class CrossReference {
 		if (determinedSearchTerm.equals("")){
 			return null;
 		}
-		return TorrentSearch.searchForTerm(determinedSearchTerm);
+		return TorrentSearch.search(determinedSearchTerm);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class CrossReference {
 		if (determinedSearchTerm.equals("")){
 			return null;
 		}
-		TorrentSearch t = TorrentSearch.searchForTerm(determinedSearchTerm);
+		TorrentSearch t = TorrentSearch.search(determinedSearchTerm);
 		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
 		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
 	}
@@ -116,7 +116,7 @@ public class CrossReference {
 		if (determinedSearchTerm.equals("")){
 			return null;
 		}
-		TorrentSearch t = TorrentSearch.searchForTerm(determinedSearchTerm);
+		TorrentSearch t = TorrentSearch.search(determinedSearchTerm);
 		RequestsSearch r = RequestsSearch.requestSearchFromSearchTerm(determinedSearchTerm);
 		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
 	}
