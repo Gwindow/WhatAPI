@@ -42,22 +42,7 @@ public class TorrentSearch {
 	 * @return the page of results for a torrent search for the term
 	 */
 	public static TorrentSearch search(String term, int page){
-		String searchTerm;
-		try {
-			searchTerm = URLEncoder.encode(term, "UTF-8");
-		}
-		catch (UnsupportedEncodingException e){
-			e.printStackTrace();
-			return null;
-		}
-		String url = "ajax.php?action=browse&searchstr=" + searchTerm
-			+ "&page=" + page + "&auth=" + MySoup.getAuthKey();
-
-		TorrentSearch t = (TorrentSearch)MySon.toObject(url, TorrentSearch.class);
-		t.searchTerm = term;
-		t.page = page;
-		t.tags = "";
-		return t;
+		return search(term, "", page);
 	}
 
 	/**
