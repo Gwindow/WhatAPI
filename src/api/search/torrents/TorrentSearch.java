@@ -32,7 +32,7 @@ public class TorrentSearch {
 	 * @return page 1 of the search results
 	 */
 	public static TorrentSearch search(String term){
-		return search(term, 1);
+		return search(term, "", 1);
 	}
 
 	/**
