@@ -1,5 +1,6 @@
 package api.torrents.torrents;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -92,6 +93,37 @@ public class MusicInfo {
 	 */
 	public List<With> getWith() {
 		return this.with;
+	}
+
+	/**
+	 * Get a list containing all the artists who appeared on the torrent group
+	 *
+	 * @return all the artists on the torrent group
+	 */
+	public List<Artist> getAllArtist(){
+		List<Artist> allArtists = new ArrayList<Artist>();
+		for (Artists a : artists){
+			allArtists.add(new Artist(a.getId(), a.getName(), Artist.Type.ARTIST));
+		}
+		for (With w : with){
+			allArtists.add(new Artist(w.getId(), w.getName(), Artist.Type.GUEST));
+		}
+		for (DJ d : dj){
+			allArtists.add(new Artist(d.getId(), d.getName(), Artist.Type.DJ));
+		}
+		for (Producer p : producer){
+			allArtists.add(new Artist(p.getId(), p.getName(), Artist.Type.PRODUCER));
+		}
+		for (RemixedBy r : remixedBy){
+			allArtists.add(new Artist(r.getId(), r.getName(), Artist.Type.REMIXER));
+		}
+		for (Composers c : composers){
+			allArtists.add(new Artist(c.getId(), c.getName(), Artist.Type.COMPOSER));
+		}
+		for (Conductor c : conductor){
+			allArtists.add(new Artist(c.getId(), c.getName(), Artist.Type.CONDUCTOR));
+		}
+		return allArtists;
 	}
 
 	/**
