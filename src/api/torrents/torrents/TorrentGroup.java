@@ -28,7 +28,7 @@ public class TorrentGroup {
 	private String status;
 
 	/** The id. */
-	private static transient int id;
+	private transient int id;
 
 	/**
 	 * create the Torrents.
@@ -37,11 +37,11 @@ public class TorrentGroup {
 	 *            the id of the torrent group
 	 * @return Torrents
 	 */
-	public static TorrentGroup torrentGroupFromId(int id) {
+	public static TorrentGroup fromId(int id){
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=torrentgroup&id=" + id + "&auth=" + authkey;
 		TorrentGroup torrents = (TorrentGroup) MySon.toObject(url, TorrentGroup.class);
-		TorrentGroup.id = id;
+		torrents.id = id;
 		return torrents;
 	}
 
@@ -50,7 +50,7 @@ public class TorrentGroup {
 	 * 
 	 * @return the torrent group id
 	 */
-	public static int getId() {
+	public int getId(){
 		return id;
 	}
 

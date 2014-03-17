@@ -7,7 +7,7 @@ import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 
 /**
- * A User, needs to be created using userFromId contains the user profile.
+ * A User, needs to be created using fromId contains the user profile.
  * 
  * @author Gwindow
  */
@@ -20,7 +20,7 @@ public class User {
 	private String status;
 
 	/** The id. */
-	private static transient int id;
+	private transient int id;
 
 	/**
 	 * Return a User object created from an id.
@@ -29,11 +29,11 @@ public class User {
 	 *            id of user
 	 * @return User object
 	 */
-	public static User userFromId(int id) {
+	public static User fromId(int id){
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=user&id=" + id + "&auth=" + authkey;
 		User user = (User) MySon.toObject(url, User.class);
-		User.id = id;
+		user.id = id;
 		return user;
 	}
 
@@ -47,9 +47,9 @@ public class User {
 	 *             the could not load exception
 	 */
 	public static User userFromName(String username) throws CouldNotLoadException {
-		UserSearch us = UserSearch.userSearchFromSearchTerm(username.toLowerCase());
+		UserSearch us = UserSearch.search(username.toLowerCase());
 		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
-			return userFromId(us.getResponse().getResults().get(0).getUserId().intValue());
+			return fromId(us.getResponse().getResults().get(0).getUserId().intValue());
 		} else {
 			throw new CouldNotLoadException("User not found");
 		}
@@ -60,20 +60,13 @@ public class User {
 	 * 
 	 */
 	public void addToFriends() {
-		if (!getProfile().IsFriend()) {
+		if (!getProfile().isFriend()){
 			MySoup.pressLink("friends.php?action=add&friendid=" + id + "&auth=" + MySoup.getAuthKey());
 			System.out.println("Added to friends");
 		} else {
 			System.out.println("Already added as friend");
 		}
 	}
-
-	// TODO complete
-	/*
-	 * public void removeFromFriends() { if (getProfile().IsFriend()) {
-	 * MySoup.pressLink("friends.php?action=remove&friendid=" + id + "&auth=" + MySoup.getAuthKey());
-	 * System.out.println("Removed from friends"); } else { System.out.println("Already isn't a friend"); } }
-	 */
 
 	/**
 	 * Send message to the user.
@@ -105,7 +98,7 @@ public class User {
 	 * 
 	 * @return user id
 	 */
-	public static int getId() {
+	public int getId(){
 		return id;
 	}
 
