@@ -100,7 +100,7 @@ public class MusicInfo {
 	 *
 	 * @return all the artists on the torrent group
 	 */
-	public List<Artist> getAllArtist(){
+	public List<Artist> getAllArtists(){
 		List<Artist> allArtists = new ArrayList<Artist>();
 		for (Artists a : artists){
 			allArtists.add(new Artist(a.getId(), a.getName(), Artist.Type.ARTIST));
