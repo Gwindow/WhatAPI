@@ -1,12 +1,12 @@
 package api.inbox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import api.search.user.UserSearch;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 import api.util.Tuple;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class PrivateMessage.
@@ -57,7 +57,7 @@ public class PrivateMessage {
 	 *      if we fail to find the user we're trying to send a PM too
 	 */
 	public PrivateMessage(String username, String subject, String body) throws CouldNotLoadException {
-		UserSearch us = UserSearch.userSearchFromSearchTerm(username.toLowerCase());
+		UserSearch us = UserSearch.search(username.toLowerCase());
 		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
 			this.userId = us.getResponse().getResults().get(0).getUserId().intValue();
 			this.subject = subject;
@@ -103,7 +103,7 @@ public class PrivateMessage {
 	 *      if we fail to find the user we're trying to send PM too
 	 */
 	public PrivateMessage(String username) throws CouldNotLoadException {
-		UserSearch us = UserSearch.userSearchFromSearchTerm(username);
+		UserSearch us = UserSearch.search(username);
 		if (us.getResponse().getResults() != null && !us.getResponse().getResults().isEmpty()) {
 			this.userId = us.getResponse().getResults().get(0).getUserId().intValue();
 		} else {
