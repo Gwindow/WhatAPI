@@ -8,9 +8,10 @@ package api.search.requests;
  */
 public class Artist {
     /** The artist id */
-    private Number id;
+    private String id;
+	private Number nid;
 
-    /** The artist name */
+	/** The artist name */
     private String name;
 
     /**
@@ -19,7 +20,10 @@ public class Artist {
      * @return the id
      */
     public Number getId() {
-        return id;
+	    if (nid == null){
+		    nid = Integer.parseInt(id);
+	    }
+	    return nid;
     }
 
     /**

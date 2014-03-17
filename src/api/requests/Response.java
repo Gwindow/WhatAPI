@@ -9,109 +9,179 @@ import java.util.List;
  * @author Gwindow
  */
 public class Response {
-	/** The list of acceptable bitrates */
+	/**
+	 * The list of acceptable bitrates
+	 */
 	private List<String> bitrateList;
 
-	/** If we can edit the request */
+	/**
+	 * If we can edit the request
+	 */
 	private boolean canEdit;
 
-	/** If we can vote on the request */
+	/**
+	 * If we can vote on the request
+	 */
 	private boolean canVote;
 
-	/** The catalogue number. */
+	/**
+	 * The catalogue number.
+	 */
 	private String catalogueNumber;
 
-	/** The id of the torrent category */
+	/**
+	 * The id of the torrent category
+	 */
 	private Number categoryId;
 
-	/** The category of the torrent (Music/etc.). */
+	/**
+	 * The category of the torrent (Music/etc.).
+	 */
 	private String categoryName;
 
-	/** The comment page number being viewed */
+	/**
+	 * The comment page number being viewed
+	 */
 	private Number commentPage;
 
-	/** The comment number of comment pages */
+	/**
+	 * The comment number of comment pages
+	 */
 	private Number commentPages;
 
-	/** The comments */
+	/**
+	 * The comments
+	 */
 	private List<Comment> comments;
 
-	/** The description. */
+	/**
+	 * The description.
+	 */
 	private String description;
 
-	/** The filler's user id */
+	/**
+	 * The filler's user id
+	 */
 	private Number fillerId;
 
-	/** The filler's user name. */
+	/**
+	 * The filler's user name.
+	 */
 	private String fillerName;
 
-	/** The acceptable media format list (Lossless/MP3/etc) */
+	/**
+	 * The acceptable media format list (Lossless/MP3/etc)
+	 */
 	private List<String> formatList;
 
-	/** The url for the image for the request */
+	/**
+	 * The url for the image for the request
+	 */
 	private String image;
 
-	/** If the request has been filled */
+	/**
+	 * If the request has been filled
+	 */
 	private boolean isFilled;
 
-	/** The last time the request was voted on */
+	/**
+	 * The last time the request was voted on
+	 */
 	private String lastVote;
 
-	/** The log cue. */
+	/**
+	 * The log cue.
+	 */
 	private String logCue;
 
-	/** The list of acceptable media formats */
+	/**
+	 * The list of acceptable media formats
+	 */
 	private List<String> mediaList;
 
-	/** The minimum bounty required to vote, in bytes */
+	/**
+	 * The minimum bounty required to vote, in bytes
+	 */
 	private Number minimumVote;
 
-	/** The information about the musicians who made the desired media */
+	/**
+	 * The information about the musicians who made the desired media
+	 */
 	private MusicInfo musicInfo;
 
-	/** The release type. */
+	/**
+	 * The release type.
+	 */
 	private Number releaseType;
 
-	/** The request id. */
+	/**
+	 * The request id.
+	 */
 	private Number requestId;
 
-	/** The request tax deducted by the system when voting. */
+	/**
+	 * The request tax deducted by the system when voting.
+	 */
 	private Number requestTax;
 
-	/** The requestor's user id */
+	/**
+	 * The requestor's user id
+	 */
 	private Number requestorId;
 
-	/** The requestor's user name. */
+	/**
+	 * The requestor's user name.
+	 */
 	private String requestorName;
 
-	/** The tags for the request */
+	/**
+	 * The tags for the request
+	 */
 	private List<String> tags;
 
-	/** The time the request was added. */
+	/**
+	 * The time the request was added.
+	 */
 	private String timeAdded;
 
-	/** The time the request was filled */
+	/**
+	 * The time the request was filled
+	 */
 	private String timeFilled;
 
-	/** The title. */
+	/**
+	 * The title.
+	 */
 	private String title;
 
-	/** The top contributors to the bounty */
+	/**
+	 * The top contributors to the bounty
+	 */
 	private List<TopContributor> topContributors;
 
-	/** The torrent id of the torrent that filled the request. */
+	/**
+	 * The torrent id of the torrent that filled the request.
+	 */
 	private Number torrentId;
 
-	/** The total bounty, in bytes */
+	/**
+	 * The total bounty, in bytes
+	 */
 	private Number totalBounty;
 
-	/** The vote count. */
+	/**
+	 * The vote count.
+	 */
 	private Number voteCount;
 
-	/** The year the desired media was released */
+	/**
+	 * The year the desired media was released
+	 */
 	private Number year;
 
-	/** The release name. */
+	/**
+	 * The release name.
+	 */
 	private String releaseName;
 
 	/**
@@ -119,7 +189,7 @@ public class Response {
 	 *
 	 * @return the release name
 	 */
-	public String getReleaseName() {
+	public String getReleaseName(){
 		return releaseName;
 	}
 
@@ -128,7 +198,7 @@ public class Response {
 	 *
 	 * @return acceptable bitrates
 	 */
-	public List<String> getBitrateList() {
+	public List<String> getBitrateList(){
 		return bitrateList;
 	}
 
@@ -137,7 +207,7 @@ public class Response {
 	 *
 	 * @return True if we can edit it
 	 */
-	public boolean canEdit() {
+	public boolean canEdit(){
 		return canEdit;
 	}
 
@@ -146,7 +216,7 @@ public class Response {
 	 *
 	 * @return True if we can vote
 	 */
-	public boolean canVote() {
+	public boolean canVote(){
 		return canVote;
 	}
 
@@ -155,7 +225,7 @@ public class Response {
 	 *
 	 * @return the catalogue number
 	 */
-	public String getCatalogueNumber() {
+	public String getCatalogueNumber(){
 		return catalogueNumber;
 	}
 
@@ -164,7 +234,7 @@ public class Response {
 	 *
 	 * @return the category id
 	 */
-	public Number getCategoryId() {
+	public Number getCategoryId(){
 		return categoryId;
 	}
 
@@ -173,7 +243,7 @@ public class Response {
 	 *
 	 * @return the category name
 	 */
-	public String getCategoryName() {
+	public String getCategoryName(){
 		return categoryName;
 	}
 
@@ -182,7 +252,7 @@ public class Response {
 	 *
 	 * @return the comment page number
 	 */
-	public Number getCommentPage() {
+	public Number getCommentPage(){
 		return commentPage;
 	}
 
@@ -191,7 +261,7 @@ public class Response {
 	 *
 	 * @return the number of comment pages
 	 */
-	public Number getCommentPages() {
+	public Number getCommentPages(){
 		return commentPages;
 	}
 
@@ -200,7 +270,7 @@ public class Response {
 	 *
 	 * @return the comments
 	 */
-	public List<Comment> getComments() {
+	public List<Comment> getComments(){
 		return comments;
 	}
 
@@ -209,7 +279,7 @@ public class Response {
 	 *
 	 * @return the description
 	 */
-	public String getDescription() {
+	public String getDescription(){
 		return description;
 	}
 
@@ -218,7 +288,7 @@ public class Response {
 	 *
 	 * @return the filler's user id
 	 */
-	public Number getFillerId() {
+	public Number getFillerId(){
 		return fillerId;
 	}
 
@@ -227,7 +297,7 @@ public class Response {
 	 *
 	 * @return the filler's user name
 	 */
-	public String getFillerName() {
+	public String getFillerName(){
 		return fillerName;
 	}
 
@@ -236,7 +306,7 @@ public class Response {
 	 *
 	 * @return the acceptable format list
 	 */
-	public List<String> getFormatList() {
+	public List<String> getFormatList(){
 		return formatList;
 	}
 
@@ -245,7 +315,7 @@ public class Response {
 	 *
 	 * @return the image
 	 */
-	public String getImage() {
+	public String getImage(){
 		return image;
 	}
 
@@ -254,7 +324,7 @@ public class Response {
 	 *
 	 * @return True if the request is filled
 	 */
-	public boolean isFilled() {
+	public boolean isFilled(){
 		return isFilled;
 	}
 
@@ -263,7 +333,7 @@ public class Response {
 	 *
 	 * @return the time of last vote
 	 */
-	public String getLastVote() {
+	public String getLastVote(){
 		return lastVote;
 	}
 
@@ -272,7 +342,7 @@ public class Response {
 	 *
 	 * @return the log cue
 	 */
-	public String getLogCue() {
+	public String getLogCue(){
 		return logCue;
 	}
 
@@ -281,7 +351,7 @@ public class Response {
 	 *
 	 * @return the list of acceptable media
 	 */
-	public List<String> getMediaList() {
+	public List<String> getMediaList(){
 		return mediaList;
 	}
 
@@ -290,7 +360,7 @@ public class Response {
 	 *
 	 * @return the minimum vote cost
 	 */
-	public Number getMinimumVote() {
+	public Number getMinimumVote(){
 		return minimumVote;
 	}
 
@@ -299,7 +369,7 @@ public class Response {
 	 *
 	 * @return the musician information
 	 */
-	public MusicInfo getMusicInfo() {
+	public MusicInfo getMusicInfo(){
 		return musicInfo;
 	}
 
@@ -308,7 +378,7 @@ public class Response {
 	 *
 	 * @return the release type
 	 */
-	public Number getReleaseType() {
+	public Number getReleaseType(){
 		return releaseType;
 	}
 
@@ -317,7 +387,7 @@ public class Response {
 	 *
 	 * @return the request id
 	 */
-	public Number getRequestId() {
+	public Number getRequestId(){
 		return requestId;
 	}
 
@@ -326,7 +396,7 @@ public class Response {
 	 *
 	 * @return the request tax
 	 */
-	public Number getRequestTax() {
+	public Number getRequestTax(){
 		return requestTax;
 	}
 
@@ -335,7 +405,7 @@ public class Response {
 	 *
 	 * @return the requestor's user id
 	 */
-	public Number getRequestorId() {
+	public Number getRequestorId(){
 		return requestorId;
 	}
 
@@ -344,7 +414,7 @@ public class Response {
 	 *
 	 * @return the requestor's user name
 	 */
-	public String getRequestorName() {
+	public String getRequestorName(){
 		return requestorName;
 	}
 
@@ -353,7 +423,7 @@ public class Response {
 	 *
 	 * @return the tags
 	 */
-	public List<String> getTags() {
+	public List<String> getTags(){
 		return tags;
 	}
 
@@ -362,7 +432,7 @@ public class Response {
 	 *
 	 * @return the time the request was added
 	 */
-	public String getTimeAdded() {
+	public String getTimeAdded(){
 		return timeAdded;
 	}
 
@@ -371,7 +441,7 @@ public class Response {
 	 *
 	 * @return the time filled
 	 */
-	public String getTimeFilled() {
+	public String getTimeFilled(){
 		return timeFilled;
 	}
 
@@ -380,7 +450,7 @@ public class Response {
 	 *
 	 * @return the title
 	 */
-	public String getTitle() {
+	public String getTitle(){
 		return title;
 	}
 
@@ -389,7 +459,7 @@ public class Response {
 	 *
 	 * @return the top contributors
 	 */
-	public List<TopContributor> getTopContributors() {
+	public List<TopContributor> getTopContributors(){
 		return topContributors;
 	}
 
@@ -398,7 +468,7 @@ public class Response {
 	 *
 	 * @return the torrent id
 	 */
-	public Number getTorrentId() {
+	public Number getTorrentId(){
 		return torrentId;
 	}
 
@@ -407,7 +477,7 @@ public class Response {
 	 *
 	 * @return the total bounty
 	 */
-	public Number getTotalBounty() {
+	public Number getTotalBounty(){
 		return totalBounty;
 	}
 
@@ -416,7 +486,7 @@ public class Response {
 	 *
 	 * @return the vote count
 	 */
-	public Number getVoteCount() {
+	public Number getVoteCount(){
 		return voteCount;
 	}
 
@@ -425,18 +495,18 @@ public class Response {
 	 *
 	 * @return the release year of the media
 	 */
-	public Number getYear() {
+	public Number getYear(){
 		return year;
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Response [getBitrateList=" + getBitrateList() + ", getCanEdit=" + canEdit() + ", getCanVote=" + canVote()
 			+ ", getCatalogueNumber=" + getCatalogueNumber() + ", getCategoryId=" + getCategoryId() + ", getCategoryName="
 			+ getCategoryName() + ", getCommentPage=" + getCommentPage() + ", getCommentPages=" + getCommentPages()
 			+ ", getComments=" + getComments() + ", getDescription=" + getDescription() + ", getFillerId=" + getFillerId()
 			+ ", getFillerName=" + getFillerName() + ", getFormatList=" + getFormatList() + ", getImage=" + getImage()
-			+ ", getIsFilled=" + isFilled() + ", getLastVote=" + getLastVote() + ", getLogCue=" + getLogCue()
+			+ ", filled=" + isFilled() + ", getLastVote=" + getLastVote() + ", getLogCue=" + getLogCue()
 			+ ", getMediaList=" + getMediaList() + ", getMinimumVote=" + getMinimumVote() + ", getMusicInfo="
 			+ getMusicInfo() + ", getReleaseType=" + getReleaseType() + ", getRequestId=" + getRequestId()
 			+ ", getRequestTax=" + getRequestTax() + ", getRequestorId=" + getRequestorId() + ", getRequestorName="

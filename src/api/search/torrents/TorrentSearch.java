@@ -1,15 +1,13 @@
 package api.search.torrents;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import api.son.MySon;
 import api.soup.MySoup;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
- * The Class TorrentsSearch.
- * For use in interacting with the API for performing torrent searches
- * 
+ * Perform Torrent searches on the site and get back some page of the results
  * @author Gwindow
  */
 public class TorrentSearch {
@@ -20,195 +18,147 @@ public class TorrentSearch {
 	private String status;
 
 	/** The current page being viewed */
-	private transient static int page;
+	private transient int page;
 
 	/** The search term. */
-	private transient static String searchTerm;
+	private transient String searchTerm;
 
 	/** The search tags. */
-	private transient static String tags;
+	private transient String tags;
 
 	/**
-	 * Perform a Torrent search from a search term.
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @return the Torrent search
+	 * Get the first page of torrent search results for the term
+	 * @param term the term to search for
+	 * @return page 1 of the search results
 	 */
-	public static TorrentSearch torrentSearchFromSearchTerm(String searchTerm) {
-		return torrentSearchFromSearchTerm(searchTerm, 1);
+	public static TorrentSearch search(String term){
+		return search(term, "", 1);
 	}
 
 	/**
-	 * Get the next page of the existing Torrent search from term
-	 * 
-	 * @return the next page of the Torrent search
+	 * Perform a torrent search for some term and request a specific page of the results
+	 * @param term the term to search for
+	 * @param page page of the search results to get
+	 * @return the page of results for a torrent search for the term
 	 */
-	public static TorrentSearch torrentSearchFromSearchTermNextPage() {
-		return torrentSearchFromSearchTerm(searchTerm, page + 1);
+	public static TorrentSearch search(String term, int page){
+		return search(term, "", page);
 	}
 
 	/**
-	 * Get the previous page of the existing Torrent search from term
-	 * 
-	 * @return the previous page of the Torrent search
+	 * Perform a Torrent search from search term and tags and return the first page of results.
+	 * Separate tags must be separated by commas. Site tags use periods to denote spaces, for example
+	 * hip.hop and so tags should follow this convention as well
+	 * Any existing whitespace will be replaced by commas
+	 * @param term the term to search for
+	 * @param tags search tags to use
+	 * @return the torrent search results
 	 */
-	public static TorrentSearch torrentSearchFromSearchTermPreviousPage() {
-		return torrentSearchFromSearchTerm(searchTerm, page - 1);
-	}
-
-	/**
-	 * Perform a Torrent search from a search term and tags
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @param tags
-	 *      the search tags
-	 * @return the Torrent search
-	 */
-	public static TorrentSearch torrentSearchFromSearchTermAndTags(String searchTerm, String tags) {
-		return torrentSearchFromSearchTermAndTags(searchTerm, tags, 1);
-	}
-
-	/**
-	 * Get the next page of the existing Torrent search from term and tags
-	 * 
-	 * @return the next page of the Torrent search
-	 */
-	public static TorrentSearch torrentSearchFromSearchTermAndTagsNextPage() {
-		return torrentSearchFromSearchTermAndTags(searchTerm, tags, page + 1);
-	}
-
-	/**
-	 * Get the previous page of the existing Torrent search from term and tags
-	 * 
-	 * @return the previous page of the Torrent search
-	 */
-	public static TorrentSearch torrentSearchFromSearchTermAndTagsPreviousPage() {
-		return torrentSearchFromSearchTermAndTags(searchTerm, tags, page - 1);
-	}
-
-	/**
-	 * Perform a torrent search from some search term and return the desired page of results
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @param page
-	 *      the page of results to get
-	 * @return the Torrent search
-	 */
-	public static TorrentSearch torrentSearchFromSearchTerm(String searchTerm, int page) {
-		if (searchTerm != null) {
-			try {
-				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			System.err.println(searchTerm);
-			TorrentSearch.searchTerm = searchTerm;
-			TorrentSearch.page = page;
-			String authkey = MySoup.getAuthKey();
-			String url = "ajax.php?action=browse&searchstr=" + searchTerm
-                    + "&page=" + page + "&auth=" + authkey;
-			return (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
-		}
-        else
-			return null;
+	public static TorrentSearch search(String term, String tags){
+		return search(term, tags, 1);
 	}
 
 	/**
 	 * Perform a Torrent search from search term and tags and return the desired page of results.
-     * Separate tags must be separated by commas, while whitespace should be replaced by periods.
-     * For example, hip.hop,pop,indie
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @param tags
-	 *      the search tags
-	 * @param page
-	 *      the page of results to get
-	 * @return the Torrent search
+	 * Separate tags must be separated by commas. Site tags use periods to denote spaces, for example
+	 * hip.hop and so tags should follow this convention as well
+	 * Any existing whitespace will be replaced by commas
+	 * @param term the term to search for
+	 * @param tags search tags to use
+	 * @param page page of the search results to get
+	 * @return the torrent search results
 	 */
-	public static TorrentSearch torrentSearchFromSearchTermAndTags(String searchTerm, String tags, int page) {
-		if (searchTerm != null) {
-			try {
-				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			TorrentSearch.searchTerm = searchTerm;
-			TorrentSearch.page = page;
-			String authkey = MySoup.getAuthKey();
-			TorrentSearch.tags = tags;
-			tags = tags.replace(",", "&");
-			String url = "ajax.php?action=browse&searchstr=" + searchTerm
-                    + "&taglist=" + tags + "&page=" + page + "&auth=" + authkey;
-			return (TorrentSearch) MySon.toObject(url, TorrentSearch.class);
+	public static TorrentSearch search(String term, String tags, int page){
+		String searchTerm;
+		try {
+			searchTerm = URLEncoder.encode(term, "UTF-8");
 		}
-        else
+		catch (UnsupportedEncodingException e){
+			e.printStackTrace();
 			return null;
+		}
+		String searchTags = tags.replace(" ", ",").replace(",", "&");
+		String url = "ajax.php?action=browse&searchstr=" + searchTerm
+			+ "&taglist=" + searchTags + "&page=" + page + "&auth=" + MySoup.getAuthKey();
+
+		TorrentSearch t = (TorrentSearch)MySon.toObject(url, TorrentSearch.class);
+		t.searchTerm = term;
+		t.page = page;
+		t.tags = tags;
+		return t;
 	}
 
 	/**
 	 * Check if a next page of results is available
-	 * 
 	 * @return True if a next page is available
 	 */
-	public boolean hasNextPage() {
-        return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
+	public boolean hasNextPage(){
+		return response.getCurrentPage().intValue() < response.getPages().intValue();
+	}
+
+	/**
+	 * Get the next page of search results. Returns null if there is
+	 * no next page
+	 * @return the next page of search results
+	 */
+	public TorrentSearch nextPage(){
+		return hasNextPage() ? search(searchTerm, tags, page + 1) : null;
 	}
 
 	/**
 	 * Check if a previous page of results is available
-	 * 
 	 * @return True if a previous page is available
 	 */
-	public boolean hasPreviousPage() {
-        return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
+	public boolean hasPreviousPage(){
+		return response.getCurrentPage().intValue() > 1;
+	}
+
+	/**
+	 * Get the previous page of search results. Returns null if there is
+	 * no previous page
+	 * @return the previous page of search results
+	 */
+	public TorrentSearch previousPage(){
+		return hasPreviousPage() ? search(searchTerm, tags, page - 1) : null;
 	}
 
 	/**
 	 * Get the current page number being viewed
-	 * 
 	 * @return the page
 	 */
-	public static int getPage() {
+	public int getPage(){
 		return page;
 	}
 
 	/**
 	 * Get the API response
-	 * 
 	 * @return the response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
 
 	/**
 	 * Get the status of the API response
-	 * 
 	 * @return the status
 	 */
 	public boolean getStatus() {
-        return this.status.equalsIgnoreCase("success");
+		return status.equalsIgnoreCase("success");
 	}
 
 	/**
 	 * Get the search term
-	 * 
 	 * @return the search term
 	 */
-	public static String getSearchTerm() {
+	public String getSearchTerm(){
 		return searchTerm;
 	}
 
 	/**
 	 * Get the search tags
-	 * 
 	 * @return the search tags
 	 */
-	public static String getTags() {
+	public String getTags(){
 		return tags;
 	}
 
@@ -217,5 +167,4 @@ public class TorrentSearch {
 		return "TorrentSearch [hasNextPage()=" + hasNextPage() + ", hasPreviousPage()=" + hasPreviousPage() + ", getResponse()="
 				+ getResponse() + ", getStatus()=" + getStatus() + "]";
 	}
-
 }

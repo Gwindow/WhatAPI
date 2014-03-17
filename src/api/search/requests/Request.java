@@ -1,5 +1,7 @@
 package api.search.requests;
 
+import java.util.List;
+
 /**
  * The Class Request.
  * Stores information about a request, as returned by
@@ -8,7 +10,13 @@ package api.search.requests;
  * @author Gwindow
  */
 public class Request {
-	// private List<Artist> artists;
+	/**
+	 * Artists on the request. For some reason it's an array of arrays
+	 * but the first array only has one entry filled, which is the array containing all
+	 * the artists.
+	 */
+	private List<List<Artist>> artists;
+
 	/** The acceptable bitrates. */
 	private String bitrateList;
 
@@ -81,9 +89,12 @@ public class Request {
 	/** The release year of the media desired */
 	private Number year;
 
-	/*
-	 * public List<Artist> getArtists() { return this.artists; }
-	 */
+
+	public List<Artist> getArtists(){
+		//Only the first entry has anything in it from the API
+		return artists.get(0);
+	}
+
 	/**
 	 * Get the acceptable bitrate list
 	 * 
@@ -179,7 +190,7 @@ public class Request {
 	 * 
 	 * @return True if filled
 	 */
-	public boolean getIsFilled() {
+	public boolean filled() {
 		return isFilled;
 	}
 
@@ -306,7 +317,7 @@ public class Request {
 				+ ", getCatalogueNumber=" + getCatalogueNumber() + ", getCategoryId=" + getCategoryId() + ", getCategoryName="
 				+ getCategoryName() + ", getDescription=" + getDescription() + ", getFillerId=" + getFillerId()
 				+ ", getFillerName=" + getFillerName() + ", getFormatList=" + getFormatList() + ", getImage=" + getImage()
-				+ ", getIsFilled=" + getIsFilled() + ", getLastVote=" + getLastVote() + ", getLogCue=" + getLogCue()
+			+ ", filled=" + filled() + ", getLastVote=" + getLastVote() + ", getLogCue=" + getLogCue()
 				+ ", getMediaList=" + getMediaList() + ", getReleaseType=" + getReleaseType() + ", getRequestId="
 				+ getRequestId() + ", getRequestorId=" + getRequestorId() + ", getRequestorName=" + getRequestorName()
 				+ ", getTimeAdded=" + getTimeAdded() + ", getTimeFilled=" + getTimeFilled() + ", getTitle=" + getTitle()

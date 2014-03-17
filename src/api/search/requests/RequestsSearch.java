@@ -1,10 +1,10 @@
 package api.search.requests;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import api.son.MySon;
 import api.soup.MySoup;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * The Class RequestsSearch.
@@ -20,154 +20,107 @@ public class RequestsSearch {
 	private String status;
 
 	/** The current page being viewed */
-	private transient static int page;
+	private transient int page;
 
 	/** The search term. */
-	private transient static String searchTerm;
+	private transient String searchTerm;
 
 	/** The search tags */
-	private transient static String tags;
+	private transient String tags;
 
 	/**
-	 * Perform a Request search from a search term.
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @return the Requests search
+	 * Get the first page of request search results for the term
+	 * @param term the term to search for
+	 * @return page 1 of the search results
 	 */
-	public static RequestsSearch requestSearchFromSearchTerm(String searchTerm) {
-		return requestSearchFromSearchTerm(searchTerm, 1);
+	public static RequestsSearch search(String term){
+		return search(term, "", 1);
 	}
 
 	/**
-	 * Get the next page of the existing Request search from term
-	 * 
-	 * @return the next page of the Requests search
+	 * Get a specific page of the requests search results for the term
+	 * @param term the search term
+	 * @return the desired page of the requests search
 	 */
-	public static RequestsSearch requestSearchFromSearchTermNextPage() {
-		return requestSearchFromSearchTerm(searchTerm, page + 1);
+	public static RequestsSearch search(String term, int page){
+		return search(term, "", 1);
 	}
 
 	/**
-	 * Get the previous page of the existing Request search from term
-	 * 
-	 * @return the previous page of the Requests search
+	 * Perform a Requests search from search term and tags and return the first page of results.
+	 * Separate tags must be separated by commas. Site tags use periods to denote spaces, for example
+	 * hip.hop and so tags should follow this convention as well
+	 * Any existing whitespace will be replaced by commas
+	 * @param term the term to search for
+	 * @param tags search tags to use
+	 * @return the torrent search results
 	 */
-	public static RequestsSearch requestSearchFromSearchTermPreviousPage() {
-		return requestSearchFromSearchTerm(searchTerm, page - 1);
+	public static RequestsSearch search(String term, String tags){
+		return search(term, tags, 1);
 	}
 
 	/**
-	 * Perform a Request search from a search term and tags
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @param tags
-	 *      the search tags
-	 * @return the Requests search
+	 * Perform a Requests search from search term and tags and return the desired page of results.
+	 * Separate tags must be separated by commas. Site tags use periods to denote spaces, for example
+	 * hip.hop and so tags should follow this convention as well
+	 * Any existing whitespace will be replaced by commas
+	 * @param term the term to search for
+	 * @param tags search tags to use
+	 * @param page page of the search results to get
+	 * @return the torrent search results
 	 */
-	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String tags) {
-		return requestSearchFromSearchTermAndTags(searchTerm, tags, 1);
-	}
-
-	/**
-	 * Get the next page of the existing Request search from term and tags
-	 * 
-	 * @return the next page of the Requests search
-	 */
-	public static RequestsSearch requestSearchFromSearchTermAndTagsNextPage() {
-		return requestSearchFromSearchTermAndTags(searchTerm, tags, page + 1);
-	}
-
-	/**
-	 * Get the previous page of the existing Request search from term and tags
-	 * 
-	 * @return the previous page of the Requests search
-	 */
-	public static RequestsSearch requestSearchFromSearchTermAndTagsPreviousPage() {
-		return requestSearchFromSearchTermAndTags(searchTerm, tags, page - 1);
-	}
-
-	/**
-	 * Perform a Request search with some search term and return the desired page
-     * of results
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @param page
-	 *      the page of results to return
-	 * @return the Requests search
-	 */
-	public static RequestsSearch requestSearchFromSearchTerm(String searchTerm, int page) {
-		if (searchTerm != null) {
-			try {
-				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			RequestsSearch.searchTerm = searchTerm;
-			RequestsSearch.page = page;
-			String authkey = MySoup.getAuthKey();
-			String url = "ajax.php?action=requests&page=" + page
-                    + "&search=" + searchTerm + "&auth=" + authkey;
-			return (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
+	public static RequestsSearch search(String term, String tags, int page){
+		String searchTerm;
+		try {
+			searchTerm = URLEncoder.encode(term, "UTF-8");
 		}
-        else
+		catch (UnsupportedEncodingException e){
+			e.printStackTrace();
 			return null;
-	}
-
-	/**
-	 * Perform a Request search from search term and tags. Separate tags must be separated by commas, while whitespace should be
-	 * replaced by periods. For example, hip.hop,pop,indie
-	 * 
-	 * @param searchTerm
-	 *      the search term
-	 * @param tags
-	 *      the search tags
-	 * @param page
-	 *      the page of results to return
-	 * @return the Requests search
-	 */
-	public static RequestsSearch requestSearchFromSearchTermAndTags(String searchTerm, String tags, int page) {
-		if (searchTerm != null) {
-			try {
-				searchTerm = URLEncoder.encode(searchTerm, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			RequestsSearch.searchTerm = searchTerm;
-			RequestsSearch.page = page;
-			String authkey = MySoup.getAuthKey();
-			RequestsSearch.tags = tags;
-			try {
-				tags = tags.replace(",", "&");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			String url = "ajax.php?action=requests&page=" + page
-                    + "&search=" + searchTerm + "&tags=" + tags + "&auth=" + authkey;
-			return (RequestsSearch) MySon.toObject(url, RequestsSearch.class);
 		}
-        else
-			return null;
+		String searchTags = tags.replace(" ", ",").replace(",", "&");
+		String url = "ajax.php?action=requests&page=" + page
+			+ "&search=" + searchTerm + "&tags=" + searchTags + "&auth=" + MySoup.getAuthKey();
+
+		RequestsSearch r = (RequestsSearch)MySon.toObject(url, RequestsSearch.class);
+		r.searchTerm = term;
+		r.page = page;
+		r.tags = tags;
+		return r;
 	}
 
 	/**
 	 * Check if a next page of results is available
-	 * 
 	 * @return True if a next page is available
 	 */
-	public boolean hasNextPage() {
-		return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
+	public boolean hasNextPage(){
+		return response.getCurrentPage().intValue() < response.getPages().intValue();
+	}
+
+	/**
+	 * Get the next page of search results. Returns null if there is
+	 * no next page
+	 * @return the next page of search results
+	 */
+	public RequestsSearch nextPage(){
+		return hasNextPage() ? search(searchTerm, tags, page + 1) : null;
 	}
 
 	/**
 	 * Check if a previous page of results is available
-	 * 
 	 * @return True if a previous page is available
 	 */
-	public boolean hasPreviousPage() {
-        return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
+	public boolean hasPreviousPage(){
+		return response.getCurrentPage().intValue() > 1;
+	}
+
+	/**
+	 * Get the previous page of search results. Returns null if there is
+	 * no previous page
+	 * @return the previous page of search results
+	 */
+	public RequestsSearch previousPage(){
+		return hasPreviousPage() ? search(searchTerm, tags, page - 1) : null;
 	}
 
 	/**
@@ -175,7 +128,7 @@ public class RequestsSearch {
 	 * 
 	 * @return the current page number
 	 */
-	public static int getPage() {
+	public int getPage(){
 		return page;
 	}
 
@@ -185,7 +138,7 @@ public class RequestsSearch {
 	 * @return the API response
 	 */
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
 
 	/**
@@ -194,7 +147,7 @@ public class RequestsSearch {
 	 * @return True if success
 	 */
 	public boolean getStatus() {
-        return this.status.equalsIgnoreCase("success");
+		return status.equalsIgnoreCase("success");
 	}
 
 	/**
@@ -202,7 +155,7 @@ public class RequestsSearch {
 	 * 
 	 * @return the search term
 	 */
-	public static String getSearchTerm() {
+	public String getSearchTerm(){
 		return searchTerm;
 	}
 
@@ -211,7 +164,7 @@ public class RequestsSearch {
 	 * 
 	 * @return the search tags
 	 */
-	public static String getTags() {
+	public String getTags(){
 		return tags;
 	}
 
