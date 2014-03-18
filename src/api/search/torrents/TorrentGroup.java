@@ -53,6 +53,11 @@ public class TorrentGroup {
 	private String artist;
 
 	/**
+	 * The album cover
+	 */
+	private String cover;
+
+	/**
 	 * Check if the torrent group is bookmarked
 	 * 
 	 * @return True if the group is bookmarked
@@ -176,6 +181,10 @@ public class TorrentGroup {
 	 */
 	public String getArtist() {
 		return artist;
+	}
+
+	public String getCover(){
+		return cover;
 	}
 
 	@Override
