@@ -93,7 +93,7 @@ public class TorrentSearch {
 	 * @return True if a next page is available
 	 */
 	public boolean hasNextPage(){
-		return response.getCurrentPage().intValue() < response.getPages().intValue();
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() < response.getPages().intValue();
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class TorrentSearch {
 	 * @return True if a previous page is available
 	 */
 	public boolean hasPreviousPage(){
-		return response.getCurrentPage().intValue() > 1;
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() > 1;
 	}
 
 	/**
