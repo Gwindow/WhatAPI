@@ -46,6 +46,25 @@ public class Artist {
 	}
 
 	/**
+	 * Load an artist from some name, returns null if no artist with that name is found
+	 * @param name name of artist to load
+	 * @return the loaded artist, or null if no such artist
+	 */
+	public static Artist fromName(String name){
+		try {
+			String url = "ajax.php?action=artist&artistname=" + URLEncoder.encode(name, "UTF-8") + "&auth=" + MySoup.getAuthKey();
+			Artist a = (Artist)MySon.toObject(url, Artist.class);
+			if (a != null && a.getStatus()){
+				return a;
+			}
+		}
+		catch (UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the id.
 	 * 
 	 * @return the id
