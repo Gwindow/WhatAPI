@@ -55,6 +55,7 @@ public class Artist {
 			String url = "ajax.php?action=artist&artistname=" + URLEncoder.encode(name, "UTF-8") + "&auth=" + MySoup.getAuthKey();
 			Artist a = (Artist)MySon.toObject(url, Artist.class);
 			if (a != null && a.getStatus()){
+				a.id = a.response.getId().intValue();
 				return a;
 			}
 		}
