@@ -13,7 +13,6 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Provides interaction with the site and external sites if desired
@@ -141,15 +140,6 @@ public class MySoup {
 			out.writeBytes(params);
 			out.flush();
 			out.close();
-
-			//Debug testing
-			for (Map.Entry<String, List<String>> e : connection.getHeaderFields().entrySet()){
-				System.out.print((e.getKey() == null ? "null" : e.getKey()) + ": ");
-				for (String s : e.getValue()){
-					System.out.print(s + ", ");
-				}
-				System.out.println();
-			}
 
 			//Android automatically picks up the cookies, regular Java doesn't
 			if (!android){
@@ -427,19 +417,23 @@ public class MySoup {
 	}
 
 	/**
-	 * Get the cookies being used to the site
+	 * Get the session cookie being used for the site
 	 *
-	 * @return the list of cookies, or null if none found
+	 * @return the session cookie, or null if not found
 	 */
-	public static List<HttpCookie> getCookies(){
-		List<HttpCookie> cookies = null;
+	public static HttpCookie getSessionCookie(){
 		try {
-			cookies = cookieManager.getCookieStore().get(URI.create(site));
+			List<HttpCookie> cookies = cookieManager.getCookieStore().get(URI.create(site));
+			for (HttpCookie c : cookies){
+				if (c.getName().equalsIgnoreCase("session")){
+					return c;
+				}
+			}
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
-		return cookies;
+		return null;
 	}
 
 	public static void addCookie(HttpCookie cookie){
