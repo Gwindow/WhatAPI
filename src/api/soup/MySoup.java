@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides interaction with the site and external sites if desired
@@ -140,6 +141,15 @@ public class MySoup {
 			out.writeBytes(params);
 			out.flush();
 			out.close();
+
+			//Debug testing
+			for (Map.Entry<String, List<String>> e : connection.getHeaderFields().entrySet()){
+				System.out.print((e.getKey() == null ? "null" : e.getKey()) + ": ");
+				for (String s : e.getValue()){
+					System.out.print(s + ", ");
+				}
+				System.out.println();
+			}
 
 			//Android automatically picks up the cookies, regular Java doesn't
 			if (!android){
