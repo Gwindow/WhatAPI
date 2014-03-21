@@ -126,7 +126,7 @@ public class MySoup {
 
 			//Receive our cookies for this session
 			List<HttpCookie> cookies = HttpCookie.parse(connection.getHeaderField("Set-Cookie"));
-			URI uri = new URI(site);
+			URI uri = URI.create(site);
 			for (HttpCookie c : cookies){
 				cookieManager.getCookieStore().add(uri, c);
 			}
@@ -329,6 +329,31 @@ public class MySoup {
 		}
 	}
 
+	/**
+	 * Get the cookies being used to the site
+	 *
+	 * @return the list of cookies, or null if none found
+	 */
+	public static List<HttpCookie> getCookies(){
+		List<HttpCookie> cookies = null;
+		try {
+			cookies = cookieManager.getCookieStore().get(URI.create(site));
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return cookies;
+	}
+
+	public static void addCookie(HttpCookie cookie){
+		try {
+			cookieManager.getCookieStore().add(URI.create(site), cookie);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	public static String getSite(){
 		return site;
 	}
@@ -339,10 +364,6 @@ public class MySoup {
 
 	public static void setUserAgent(String userAgent){
 		MySoup.userAgent = userAgent;
-	}
-
-	public static List<HttpCookie> getCookies(){
-		return cookieManager.getCookieStore().getCookies();
 	}
 
 	public static boolean isSslEnabled(){
