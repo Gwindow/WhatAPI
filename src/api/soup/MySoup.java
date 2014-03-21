@@ -145,13 +145,17 @@ public class MySoup {
 
 	/**
 	 * Logout of the site, invalidates the session with the site, clears the cookies
-	 * and index
+	 * and index. If we aren't logged in the function does nothing
 	 *
 	 * @param url the logout url path, will make request to site + url
 	 * @return true if we logged out successfully
+	 * @throws java.lang.IllegalStateException if the site was not set prior to this call
 	 */
-	public static boolean logout(String url){
-		if (!pressLink(url + "?auth=" + getAuthKey())){
+	public static boolean logout(String url) throws IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		if (isLoggedIn() && !pressLink(url + "?auth=" + getAuthKey())){
 			System.err.println("Failed to logout");
 			return false;
 		}
