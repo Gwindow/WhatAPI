@@ -282,6 +282,16 @@ public class MySoup {
 			System.out.println("Status: " + status);
 			return true;
 		}
+		catch (ProtocolException e){
+			//When we're setting notifications we're given a circular redirect back, this throws
+			//an error, but it means we succeeded to set notifications
+			if (url.contains("action=notify")){
+				return true;
+			}
+			else {
+				e.printStackTrace();
+			}
+		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
@@ -291,42 +301,6 @@ public class MySoup {
 			}
 		}
 		return false;
-		/*
-		httpGet = getHttpGet(url);
-		response = null;
-		boolean success = false;
-		try {
-			response = httpClient.execute(httpGet);
-			success = (response.getStatusLine().getStatusCode() == 200);
-		}
-		catch (ClientProtocolException e){
-			//Exception specific to receiving the circular redirect when changing notifications
-			if (e.getCause() instanceof CircularRedirectException){
-				//Double check we we're changing notifications
-				if (url.contains("notify"))
-					success = true;
-				else
-					e.printStackTrace();
-			}
-			else
-				e.printStackTrace();
-		}
-		catch (Exception e){
-			e.printStackTrace();
-			System.out.println("pressLink error: " + e.getMessage());
-			success = false;
-		}
-		finally {
-			//Clean up
-			try {
-				if (response != null && response.getEntity() != null)
-					response.getEntity().consumeContent();
-			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
-		}
-		*/
 	}
 
 
