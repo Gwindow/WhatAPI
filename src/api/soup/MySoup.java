@@ -191,9 +191,14 @@ public class MySoup {
 	private static String buildParams(List<Tuple<String, String>> params){
 		StringBuilder result = new StringBuilder();
 		try {
-			result.append(URLEncoder.encode(params.get(0).getA() + "=" + params.get(0).getB(), "UTF-8"));
+			result.append(URLEncoder.encode(params.get(0).getA(), "UTF-8"));
+			result.append("=");
+			result.append(URLEncoder.encode(params.get(0).getB(), "UTF-8"));
 			for (int i = 1; i < params.size(); ++i){
-				result.append(URLEncoder.encode("&" + params.get(i).getA() + "=" + params.get(i).getB(), "UTF-8"));
+				result.append("&");
+				result.append(URLEncoder.encode(params.get(i).getA(), "UTF-8"));
+				result.append("=");
+				result.append(URLEncoder.encode(params.get(i).getB(), "UTF-8"));
 			}
 		}
 		catch (Exception e){
@@ -278,9 +283,7 @@ public class MySoup {
 		try {
 			connection = newHttpConnection(new URL(site + url));
 			connection.setRequestProperty("User-Agent", userAgent);
-			int status = connection.getResponseCode();
-			System.out.println("Status: " + status);
-			return true;
+			return connection.getResponseCode() == 200;
 		}
 		catch (ProtocolException e){
 			//When we're setting notifications we're given a circular redirect back, this throws
@@ -288,9 +291,7 @@ public class MySoup {
 			if (url.contains("action=notify")){
 				return true;
 			}
-			else {
-				e.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 		catch (Exception e){
 			e.printStackTrace();
