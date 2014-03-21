@@ -6,9 +6,7 @@ import api.util.Tuple;
 import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.DataOutputStream;
 import java.net.*;
 import java.util.List;
 
@@ -114,16 +112,17 @@ public class MySoup {
 			connection = newHttpConnection(new URL(site + url));
 			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
-			String params = "username=" + username + "&password=" + password;
+			String params = "username=" + URLEncoder.encode(username, "UTF-8")
+				+ "&password=" + URLEncoder.encode(password, "UTF-8");
 			if (keepLogged){
 				params += "&keeplogged=1";
 			}
-			connection.setFixedLengthStreamingMode(params.length());
+			connection.setFixedLengthStreamingMode(params.getBytes().length);
 
-			OutputStream out = new BufferedOutputStream(connection.getOutputStream());
-			OutputStreamWriter writer = new OutputStreamWriter(out);
-			writer.write(params);
-			writer.flush();
+			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+			out.writeBytes(params);
+			out.flush();
+			out.close();
 
 			//Receive our cookies for this session
 			List<HttpCookie> cookies = HttpCookie.parse(connection.getHeaderField("Set-Cookie"));
@@ -159,22 +158,20 @@ public class MySoup {
 		}
 		HttpURLConnection connection = null;
 		try {
+			String urlParams = buildParams(params);
 			connection = newHttpConnection(new URL(site + url));
 			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
-			connection.setChunkedStreamingMode(0);
+			connection.setFixedLengthStreamingMode(urlParams.getBytes().length);
 
-			OutputStream out = new BufferedOutputStream(connection.getOutputStream());
-			OutputStreamWriter writer = new OutputStreamWriter(out);
-			//Debugging only
-			String urlParams = buildParams(params);
-			System.out.println("Params: " + urlParams);
-			writer.write(urlParams);
-			writer.flush();
+			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+			out.writeBytes(urlParams);
+			out.flush();
+			out.close();
 		}
 		catch (Exception e){
 			e.printStackTrace();
-			throw new CouldNotLoadException("Could not login");
+			throw new CouldNotLoadException("Could not post method to: " + url);
 		}
 		finally {
 			if (connection != null){
