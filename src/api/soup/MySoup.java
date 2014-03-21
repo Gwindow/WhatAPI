@@ -100,7 +100,7 @@ public class MySoup {
 	 * @param username   username to login with
 	 * @param password   password to login with
 	 * @param keepLogged if we want the cookie to not expire
-	 * @throws api.util.CouldNotLoadException thrown if we fail to login
+	 * @throws api.util.CouldNotLoadException  thrown if we fail to login
 	 * @throws java.lang.IllegalStateException if the site was not set prior to calling the function
 	 */
 	public static void login(String url, String username, String password, Boolean keepLogged) throws CouldNotLoadException, IllegalStateException{
@@ -144,12 +144,29 @@ public class MySoup {
 	}
 
 	/**
+	 * Logout of the site, invalidates the session with the site, clears the cookies
+	 * and index
+	 *
+	 * @param url the logout url path, will make request to site + url
+	 * @return true if we logged out successfully
+	 */
+	public static boolean logout(String url){
+		if (!pressLink(url + "?auth=" + getAuthKey())){
+			System.err.println("Failed to logout");
+			return false;
+		}
+		cookieManager.getCookieStore().removeAll();
+		index = null;
+		return true;
+	}
+
+	/**
 	 * Perform a POST to some site url with the desired list of parameters
 	 *
-	 * @param url  the url to submit to, the site will be prepended to it to form
-	 *             the final url, eg: http://site.com/url
+	 * @param url    the url to submit to, the site will be prepended to it to form
+	 *               the final url, eg: http://site.com/url
 	 * @param params the list of parameters to send
-	 * @throws api.util.CouldNotLoadException if we fail to execute the post method
+	 * @throws api.util.CouldNotLoadException  if we fail to execute the post method
 	 * @throws java.lang.IllegalStateException if the site was not set prior to calling this method
 	 */
 	public static void postMethod(String url, List<Tuple<String, String>> params) throws CouldNotLoadException, IllegalStateException{
@@ -182,6 +199,7 @@ public class MySoup {
 
 	/**
 	 * Build the POST method parameters string for some list of parameters
+	 *
 	 * @param params params to encode for a POST method
 	 * @return the parameters as a string
 	 */
@@ -209,7 +227,7 @@ public class MySoup {
 	 *
 	 * @param url the url extension to get
 	 * @return the response data as a string
-	 * @throws api.util.CouldNotLoadException if we fail to load the page
+	 * @throws api.util.CouldNotLoadException  if we fail to load the page
 	 * @throws java.lang.IllegalStateException if the site was not set prior to calling this method
 	 */
 	public static String scrape(String url) throws CouldNotLoadException, IllegalStateException{
@@ -283,9 +301,8 @@ public class MySoup {
 			return connection.getResponseCode() == 200;
 		}
 		catch (ProtocolException e){
-			//When we're setting notifications we're given a circular redirect back, this throws
-			//an error, but it means we succeeded to set notifications
-			if (url.contains("action=notify")){
+			//When we're setting notifications or logging out we're redirected too many times
+			if (url.contains("action=notify") || url.contains("logout")){
 				return true;
 			}
 			e.printStackTrace();
@@ -299,14 +316,6 @@ public class MySoup {
 			}
 		}
 		return false;
-	}
-
-
-	/**
-	 * Logout of the site, clears the user info and cookies
-	 */
-	public static void logout(String url){
-		pressLink(site + url);
 	}
 
 	/**
@@ -357,7 +366,7 @@ public class MySoup {
 	}
 
 	public static boolean isLoggedIn(){
-		return index != null;
+		return cookieManager.getCookieStore().getCookies().size() > 0 && index != null;
 	}
 
 	public static int getUserId(){
