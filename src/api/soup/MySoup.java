@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class MySoup {
 	/**
-	 * The main site to make requests to and our session id
+	 * The main site to make requests too
 	 */
-	private static String site, sessionCookie;
+	private static String site;
 	/**
 	 * The user agent to set in connections
 	 */
@@ -95,14 +95,15 @@ public class MySoup {
 	}
 
 	/**
-	 * Login to a site
+	 * Login to the site
 	 *
-	 * @param url        the url extension to submit the login information to, ie. login.php
-	 *                   the site url will be pre-pended to the url
-	 * @param username   the username to login with
-	 * @param password   the password to login with
-	 * @param keepLogged if we want the cookie not to expire
-	 * @throws CouldNotLoadException thrown if we fail to login
+	 * @param url        the url extension to submit the login information to, ie. login.php. the
+	 *                   request will be made to site + url, eg http://website.com/login.php
+	 * @param username   username to login with
+	 * @param password   password to login with
+	 * @param keepLogged if we want the cookie to not expire
+	 * @throws api.util.CouldNotLoadException thrown if we fail to login
+	 * @throws java.lang.IllegalStateException if the site was not set prior to calling the function
 	 */
 	public static void login(String url, String username, String password, Boolean keepLogged) throws CouldNotLoadException, IllegalStateException{
 		if (site == null){
@@ -144,42 +145,75 @@ public class MySoup {
 	}
 
 	/**
-	 * Perform an HttpPost method to some what.cd url with some list parameters
+	 * Perform a POST to some site url with the desired list of parameters
 	 *
-	 * @param url  the url to submit to, of the form blah.php? and the site url will be
-	 *             pre-prended to it
-	 * @param list the list of parameters
-	 * @throws Exception if we fail to execute the post method
+	 * @param url  the url to submit to, the site will be prepended to it to form
+	 *             the final url, eg: http://site.com/url
+	 * @param params the list of parameters to send
+	 * @throws api.util.CouldNotLoadException if we fail to execute the post method
+	 * @throws java.lang.IllegalStateException if the site was not set prior to calling this method
 	 */
-	public static void postMethod(String url, List<Tuple<String, String>> list) throws Exception{
-		/*
-		url = site + url;
+	public static void postMethod(String url, List<Tuple<String, String>> params) throws CouldNotLoadException, IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		HttpURLConnection connection = null;
 		try {
+			connection = newHttpConnection(new URL(site + url));
+			connection.setDoOutput(true);
+			connection.setRequestMethod("POST");
+			connection.setChunkedStreamingMode(0);
 
-			httpGet = getHttpGet(url);
-			httpPost = new HttpPost(url);
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-			for (Tuple<String, String> t : list){
-				nvps.add(new BasicNameValuePair(t.getA(), t.getB()));
-			}
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-			response = httpClient.execute(httpPost);
-			// TODO investigate
-			//Investigate what issue?
-			// EntityUtils.consume(response.getEntity());
-			// response.getEntity().consumeContent();
+			OutputStream out = new BufferedOutputStream(connection.getOutputStream());
+			OutputStreamWriter writer = new OutputStreamWriter(out);
+			//Debugging only
+			String urlParams = buildParams(params);
+			System.out.println("Params: " + urlParams);
+			writer.write(urlParams);
+			writer.flush();
 		}
-		catch (UnsupportedEncodingException e){
+		catch (Exception e){
 			e.printStackTrace();
-			throw new CouldNotLoadException("Could not post data");
+			throw new CouldNotLoadException("Could not login");
 		}
-		*/
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
 	}
 
 	/**
-	 *
+	 * Build the POST method parameters string for some list of parameters
+	 * @param params params to encode for a POST method
+	 * @return the parameters as a string
 	 */
-	public static String scrape(String url){
+	private static String buildParams(List<Tuple<String, String>> params){
+		StringBuilder result = new StringBuilder();
+		try {
+			result.append(URLEncoder.encode(params.get(0).getA() + "=" + params.get(0).getB(), "UTF-8"));
+			for (int i = 1; i < params.size(); ++i){
+				result.append(URLEncoder.encode("&" + params.get(i).getA() + "=" + params.get(i).getB(), "UTF-8"));
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return result.toString();
+	}
+
+	/**
+	 * Perform a GET request on the path site + url
+	 *
+	 * @param url the url extension to get
+	 * @return the response data as a string
+	 * @throws api.util.CouldNotLoadException if we fail to load the page
+	 * @throws java.lang.IllegalStateException if the site was not set prior to calling this method
+	 */
+	public static String scrape(String url) throws CouldNotLoadException, IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
 		String response = null;
 		HttpURLConnection connection = null;
 		try {
@@ -191,6 +225,36 @@ public class MySoup {
 		}
 		catch (Exception e){
 			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return response;
+	}
+
+	/**
+	 * Perform a GET request on some other website
+	 *
+	 * @param url the url to get
+	 * @return the response data as a string
+	 * @throws api.util.CouldNotLoadException if we fail to load the page
+	 */
+	public static String scrapeOther(String url) throws CouldNotLoadException{
+		String response = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			response = IOUtils.toString(in, "UTF-8");
+			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
 		}
 		finally {
 			if (connection != null){
@@ -203,11 +267,30 @@ public class MySoup {
 	/**
 	 * Simulate a simple link press on the site, that returns no JSON data.
 	 *
-	 * @param url the url to click
+	 * @param url the url to click, will be appended to the site url, eg: http://site.com/url
 	 * @return true if response ok, false if failed
 	 */
 	public static boolean pressLink(String url){
-		url = site + url;
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(site + url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			int status = connection.getResponseCode();
+			System.out.println("Status: " + status);
+			return true;
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return false;
 		/*
 		httpGet = getHttpGet(url);
 		response = null;
@@ -244,41 +327,14 @@ public class MySoup {
 			}
 		}
 		*/
-		return true;
 	}
 
-	/**
-	 * Perform an HttpGet on some non-site url and get the string data returned b it
-	 *
-	 * @param url the url to get data from
-	 * @return the response data as a string
-	 * @throws CouldNotLoadException if we fail to load the page
-	 */
-	public static String scrapeOther(String url) throws CouldNotLoadException{
-		/*
-		httpGet = getHttpGet(url);
-		response = null;
-		try {
-			response = httpClient.execute(httpGet);
-			entity = response.getEntity();
-			String s = EntityUtils.toString(entity);
-			entity.consumeContent();
-			return s;
-		}
-		catch (Exception e){
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could not load page");
-		}
-		*/
-		return "";
-	}
 
 	/**
 	 * Logout of the site, clears the user info and cookies
 	 */
 	public static void logout(String url){
-		String path = site + url;
-		pressLink(path);
+		pressLink(site + url);
 	}
 
 	/**
