@@ -3,10 +3,14 @@ package api.soup;
 import api.index.Index;
 import api.util.CouldNotLoadException;
 import api.util.Tuple;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.*;
 import java.util.List;
 
@@ -33,8 +37,12 @@ public class MySoup {
 	 * The site index.
 	 */
 	private static Index index;
-	private static boolean sslEnabled = true;
-	private static boolean notificationsEnabled = true;
+	/**
+	 * If ssl or notifications are enabled. Use the android flag to set whether or not the
+	 * api is running on android device. This has some implications for the way cookies are
+	 * handled and should be set accordingly.
+	 */
+	private static boolean sslEnabled = true, notificationsEnabled = true, android = false;
 
 	/**
 	 * Set the url of the gazelle site. An IllegalState exception will be thrown if any
@@ -72,6 +80,15 @@ public class MySoup {
 	public static void setSite(String url, boolean ssl){
 		sslEnabled = ssl;
 		setSite(url);
+	}
+
+	/**
+	 * Set to true if using from Android, default is false
+	 *
+	 * @param a if we're running on Android
+	 */
+	public static void setAndroid(boolean a){
+		android = a;
 	}
 
 	/**
@@ -124,11 +141,18 @@ public class MySoup {
 			out.flush();
 			out.close();
 
-			//Receive our cookies for this session
-			List<HttpCookie> cookies = HttpCookie.parse(connection.getHeaderField("Set-Cookie"));
-			URI uri = URI.create(site);
-			for (HttpCookie c : cookies){
-				cookieManager.getCookieStore().add(uri, c);
+			//Android automatically picks up the cookies, regular Java doesn't
+			if (!android){
+				List<HttpCookie> cookies = HttpCookie.parse(connection.getHeaderField("Set-Cookie"));
+				URI uri = URI.create(site);
+				for (HttpCookie c : cookies){
+					cookieManager.getCookieStore().add(uri, c);
+				}
+			}
+			else {
+				if (connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+					throw new CouldNotLoadException("Check username and password");
+				}
 			}
 		}
 		catch (Exception e){
@@ -234,7 +258,7 @@ public class MySoup {
 	 * @throws api.util.CouldNotLoadException  if we fail to load the page
 	 * @throws java.lang.IllegalStateException if the site was not set prior to calling this method
 	 */
-	public static String scrape(String url) throws CouldNotLoadException, IllegalStateException{
+	public static String scrape(String url) throws CouldNotLoadException, IllegalStateException {
 		if (site == null){
 			throw new IllegalStateException("Must call MySoup.setSite before use");
 		}
@@ -260,13 +284,49 @@ public class MySoup {
 	}
 
 	/**
+	 * Perform a GET request to get some API object and use the passed Gson to deserialize it
+	 *
+	 * @param url  the url extension to get
+	 * @param t    type of object to create
+	 * @param gson Gson deserializer to parse the stream
+	 * @return the parsed object or null if parsing failed
+	 * @throws CouldNotLoadException if the url could not be loaded
+	 * @throws IllegalStateException if the site was not set prior to this call
+	 */
+	public static Object scrape(String url, Type t, final Gson gson) throws CouldNotLoadException, IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		Object o = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(site + url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+			o = gson.fromJson(reader, t);
+			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return o;
+	}
+
+	/**
 	 * Perform a GET request on some other website
 	 *
 	 * @param url the url to get
 	 * @return the response data as a string
 	 * @throws api.util.CouldNotLoadException if we fail to load the page
 	 */
-	public static String scrapeOther(String url) throws CouldNotLoadException{
+	public static String scrapeOther(String url) throws CouldNotLoadException {
 		String response = null;
 		HttpURLConnection connection = null;
 		try {
@@ -286,6 +346,29 @@ public class MySoup {
 			}
 		}
 		return response;
+	}
+
+	public static Object scrapeOther(String url, Type t, final Gson gson) throws CouldNotLoadException{
+		Object o = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+			o = gson.fromJson(reader, t);
+			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return o;
 	}
 
 	/**
