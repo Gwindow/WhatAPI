@@ -478,7 +478,7 @@ public class MySoup {
 	}
 
 	public static boolean isLoggedIn(){
-		return cookieManager.getCookieStore().getCookies().size() > 0 && index != null;
+		return cookieManager != null && index != null && cookieManager.getCookieStore().getCookies().size() > 0;
 	}
 
 	public static int getUserId(){
