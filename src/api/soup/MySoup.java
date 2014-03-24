@@ -474,7 +474,7 @@ public class MySoup {
 	}
 
 	public static String getPassKey(){
-		return index != null ? index.getResponse().getAuthkey() : null;
+		return index != null ? index.getResponse().getPasskey() : null;
 	}
 
 	public static boolean isLoggedIn(){
