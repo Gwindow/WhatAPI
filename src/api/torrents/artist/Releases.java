@@ -24,37 +24,16 @@ public class Releases {
 			if (appearance == ReleaseType.ARTIST || appearance == ReleaseType.DJ){
 				ReleaseType type = group.getReleaseType();
 				if (!releases.containsKey(type)){
-					releases.put(type, new TreeSet<TorrentGroup>(new TorrentGroupComparator()));
+					releases.put(type, new TreeSet<TorrentGroup>());
 				}
 				releases.get(type).add(group);
 			}
 			else {
 				if (!releases.containsKey(appearance)){
-					releases.put(appearance, new TreeSet<TorrentGroup>(new TorrentGroupComparator()));
+					releases.put(appearance, new TreeSet<TorrentGroup>());
 				}
 				releases.get(appearance).add(group);
 			}
-		}
-	}
-
-	/**
-	 * Sorting order for torrent groups (aka descending chronologically) so most
-	 * recent album is first.
-	 */
-	private class TorrentGroupComparator implements Comparator<TorrentGroup> {
-		/**
-		 * @return -1 if o1.Year < o2.Year
-		 * 1 if o1.year > o2.Year
-		 * if years are equal we return o2.GroupName compared to o1.GroupName
-		 */
-		@Override
-		public int compare(TorrentGroup o1, TorrentGroup o2){
-			int year1 = o1.getGroupYear().intValue();
-			int year2 = o2.getGroupYear().intValue();
-			if (year1 != year2){
-				return year1 < year2 ? 1 : -1;
-			}
-			return o2.getGroupName().compareTo(o1.getGroupName());
 		}
 	}
 

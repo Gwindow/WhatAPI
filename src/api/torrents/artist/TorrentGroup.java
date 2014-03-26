@@ -8,79 +8,117 @@ import java.util.List;
 
 /**
  * The Class TorrentGroup.
- * 
+ *
  * @author Gwindow
  */
-public class TorrentGroup {
-	/** The group catalogue number. */
+public class TorrentGroup implements Comparable<TorrentGroup> {
+	/**
+	 * The group catalogue number.
+	 */
 	private String groupCatalogueNumber;
 
-	/** The group id. */
+	/**
+	 * The group id.
+	 */
 	private Number groupId;
 
-	/** The group name. */
+	/**
+	 * The group name.
+	 */
 	private String groupName;
 
-	/** The group record label. */
+	/**
+	 * The group record label.
+	 */
 	private String groupRecordLabel;
 
-	/** The image for the torrent group */
+	/**
+	 * The image for the torrent group
+	 */
 	private String wikiImage;
 
-	/** The group vanity house. */
+	/**
+	 * The group vanity house.
+	 */
 	private boolean groupVanityHouse;
 
-	/** The group year. */
+	/**
+	 * The group year.
+	 */
 	private Number groupYear;
 
-	/** The is bookmarked. */
+	/**
+	 * The is bookmarked.
+	 */
 	private boolean isBookmarked;
 
-	/** The release type. */
+	/**
+	 * The release type.
+	 */
 	private Number releaseType;
 
-	/** The tags. */
+	/**
+	 * The tags.
+	 */
 	private List<String> tags;
 
-	/** The torrent. */
+	/**
+	 * The torrent.
+	 */
 	private List<Torrent> torrent;
 
-	/** Extended artist information */
+	/**
+	 * Extended artist information
+	 */
 	private ExtendedArtists extendedArtists;
+
+
+	/**
+	 * @return -1 if o1.Year < o2.Year
+	 * 1 if o1.year > o2.Year
+	 * if years are equal we return o2.GroupName compared to o1.GroupName
+	 */
+	@Override
+	public int compareTo(TorrentGroup o){
+		if (groupYear.intValue() != o.groupYear.intValue()){
+			return groupYear.intValue() < o.groupYear.intValue() ? 1 : -1;
+		}
+		return o.getGroupName().compareTo(groupName);
+	}
 
 	/**
 	 * Gets the group catalogue number.
-	 * 
+	 *
 	 * @return the group catalogue number
 	 */
-	public String getGroupCatalogueNumber() {
+	public String getGroupCatalogueNumber(){
 		return this.groupCatalogueNumber;
 	}
 
 	/**
 	 * Gets the group id.
-	 * 
+	 *
 	 * @return the group id
 	 */
-	public Number getGroupId() {
+	public Number getGroupId(){
 		return this.groupId;
 	}
 
 	/**
 	 * Gets the group name.
-	 * 
+	 *
 	 * @return the group name
 	 */
-	public String getGroupName() {
+	public String getGroupName(){
 		return this.groupName;
 	}
 
 	/**
 	 * Gets the group record label.
-	 * 
+	 *
 	 * @return the group record label
 	 */
-	public String getGroupRecordLabel() {
+	public String getGroupRecordLabel(){
 		return this.groupRecordLabel;
 	}
 
@@ -95,34 +133,34 @@ public class TorrentGroup {
 
 	/**
 	 * Checks if is group vanity house.
-	 * 
+	 *
 	 * @return true, if is group vanity house
 	 */
-	public boolean isGroupVanityHouse() {
+	public boolean isGroupVanityHouse(){
 		return this.groupVanityHouse;
 	}
 
 	/**
 	 * Gets the group year.
-	 * 
+	 *
 	 * @return the group year
 	 */
-	public Number getGroupYear() {
+	public Number getGroupYear(){
 		return this.groupYear;
 	}
 
 	/**
 	 * Checks if is bookmarked.
-	 * 
+	 *
 	 * @return true, if is bookmarked
 	 */
-	public boolean isBookmarked() {
+	public boolean isBookmarked(){
 		return this.isBookmarked;
 	}
 
 	/**
 	 * Get the release type.
-	 * 
+	 *
 	 * @return the release type
 	 */
 	public ReleaseType getReleaseType(){
@@ -160,15 +198,16 @@ public class TorrentGroup {
 
 	/**
 	 * Gets the tags.
-	 * 
+	 *
 	 * @return the tags
 	 */
-	public List<String> getTags() {
+	public List<String> getTags(){
 		return this.tags;
 	}
 
 	/**
 	 * Get the extended artist information
+	 *
 	 * @return extended artists
 	 */
 	public ExtendedArtists getExtendedArtists(){
@@ -177,15 +216,15 @@ public class TorrentGroup {
 
 	/**
 	 * Gets the torrents.
-	 * 
+	 *
 	 * @return the torrents
 	 */
-	public List<Torrent> getTorrents() {
+	public List<Torrent> getTorrents(){
 		return this.torrent;
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Torrentgroup [getGroupCatalogueNumber=" + getGroupCatalogueNumber() + ", getGroupId=" + getGroupId()
 			+ ", getGroupName=" + getGroupName() + ", getGroupRecordLabel=" + getGroupRecordLabel()
 			+ ", wikiImage=" + getWikiImage() + ", getGroupVanityHouse=" + isGroupVanityHouse() + ", getGroupYear=" + getGroupYear() + ", isBookmarked="
@@ -199,11 +238,15 @@ public class TorrentGroup {
 	 * the puzzling extendedArtists portion of the response and make it more usable
 	 */
 	public class ExtendedArtists {
-		/** Main artists */
+		/**
+		 * Main artists
+		 */
 		@SerializedName("1")
 		public List<Artists> artists;
 
-		/** Guest artists */
+		/**
+		 * Guest artists
+		 */
 		@SerializedName("2")
 		public List<Artists> guest;
 
