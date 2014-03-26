@@ -1,582 +1,491 @@
 package api.soup;
 
-import api.forum.forumsections.ForumSections;
 import api.index.Index;
-import api.son.MySon;
 import api.util.CouldNotLoadException;
 import api.util.Tuple;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.CircularRedirectException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.ContentEncodingHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import org.apache.commons.io.IOUtils;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedInputStream;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.*;
 import java.util.List;
 
 /**
- * The Class MySoup.
- * 
+ * Provides interaction with the site and external sites if desired
+ * User must set site prior to usage
+ *
  * @author Gwindow
  */
 public class MySoup {
-	/** The http client. */
-	private static DefaultHttpClient httpClient = getHttpClient();
-
-	/** The authey. */
-	private static String authey;
-
-	/** The passkey. */
-	private static String passkey;
-
-	/** The cookies. */
-	private static List<Cookie> cookies;
-
-	/** The http params. */
-	private static HttpParams httpParams = httpClient.getParams();
-
-	/** The username. */
-	private static String username;
-
-	/** The user id. */
-	private static int userId;
-
-	/** The SITE. */
-	private static String SITE;
-
-	/** If the user is able to use notifications. */
-	private static boolean canNotifications = true;
-
-	/** The forum sections. */
-	private static ForumSections forumSections;
-
-	/** If the forum sections have been loaded. */
-	private static boolean forumSectionsLoaded = false;
-
-	/** The index. */
+	/**
+	 * The main site to make requests too
+	 */
+	private static String site;
+	/**
+	 * The user agent to set in connections
+	 */
+	private static String userAgent;
+	/**
+	 * The cookie manager used to save/load user cookies
+	 */
+	private static CookieManager cookieManager;
+	/**
+	 * The site index.
+	 */
 	private static Index index;
-
-	/** The httpget. */
-	private static HttpGet httpGet;
-
-	/** The response. */
-	private static HttpResponse response;
-
-	/** The entity. */
-	private static HttpEntity entity;
-
-	/** The httpost. */
-	private static HttpPost httpPost;
-
-	/** If ssl is enabled. */
-	private static boolean isSSLEnabled = true;
-
-	/** The header name. */
-	private static String headerName = "name";
-
-	/** The header value. */
-	private static String headerValue = "value";
+	/**
+	 * If ssl or notifications are enabled. Use the android flag to set whether or not the
+	 * api is running on android device. This has some implications for the way cookies are
+	 * handled and should be set accordingly.
+	 */
+	private static boolean sslEnabled = true, notificationsEnabled = true, android = false;
 
 	/**
-	 * Set the url of the gazelle site. Nothing will work if this isn't called when first starting the program
-	 * 
-	 * @param url
-	 *            url of the site following this format, http://what.cd/
+	 * Set the url of the gazelle site. An IllegalState exception will be thrown if any
+	 * site requests are made prior to the site being set. SSL enabling defaults to true
+	 * so https will be used in this case
+	 *
+	 * @param url url of the site following this format, http://website.com/
 	 */
-	public static void setSite(String url) {
-		if (!url.endsWith("/")) {
-			url = url + "/";
+	public static void setSite(String url){
+		site = url;
+		if (!site.endsWith("/")){
+			site += "/";
 		}
-		if (isSSLEnabled) {
-			if (!url.startsWith("https://")) {
-				url = "https://" + url;
-			}
-		} else {
-			if (!url.startsWith("http://")) {
-				url = "http://" + url;
+		if (sslEnabled){
+			if (!site.startsWith("https://")){
+				site = "https://" + site;
 			}
 		}
-		SITE = url;
+		else {
+			if (!site.startsWith("http://")){
+				site = "http://" + site;
+			}
+		}
+		cookieManager = new CookieManager();
+		CookieHandler.setDefault(cookieManager);
 	}
 
-	public static void setSite(String url, boolean ssl) {
-		isSSLEnabled = ssl;
+	/**
+	 * Set the url of the gazelle site. An IllegalState exception will be thrown if any
+	 * site requests are made prior to the site being set
+	 *
+	 * @param url url of the site following this format, http://website.com/
+	 * @param ssl if ssl should be enabled
+	 */
+	public static void setSite(String url, boolean ssl){
+		sslEnabled = ssl;
 		setSite(url);
 	}
 
 	/**
-	 * Gets the site.
-	 * 
-	 * @return the site
+	 * Set to true if using from Android, default is false
+	 *
+	 * @param a if we're running on Android
 	 */
-	public static String getSite() {
-		return SITE;
-
+	public static void setAndroid(boolean a){
+		android = a;
 	}
 
 	/**
-	 * Get the http client.
-	 * 
-	 * @return the http client
+	 * Use this factory method to get a properly configured HttpURLConnection for
+	 * connecting to the desired url
+	 *
+	 * @return a configured HttpURLConnection
 	 */
-	private static DefaultHttpClient getHttpClient() {
-		DefaultHttpClient client = new DefaultHttpClient();
-		ClientConnectionManager mgr = client.getConnectionManager();
-		HttpParams params = client.getParams();
-        //TODO: We need to migrate to HttpURLConnection
-        client = new ContentEncodingHttpClient(new ThreadSafeClientConnManager(params, mgr.getSchemeRegistry()), params);
-		return client;
-	}
-
-	/**
-	 * Get the HttpGet for a url
-     * TODO is this function necessary? It's equivalent to new HttpGet(url)
-	 * 
-	 * @param url
-	 *      the url to get for
-	 * @return the http get
-	 */
-	private static HttpGet getHttpGet(String url) {
-		return new HttpGet(url);
-	}
-
-	/**
-	 * Sets the header.
-     * TODO what is header for?
-	 * 
-	 * @param name
-	 *      the name
-	 * @param value
-     *      the value
-	 */
-	private static void setHeader(String name, String value) {
-		headerName = name;
-		headerValue = value;
-	}
-
-	/**
-	 * Called statically from MySoup because forum section titles never change.
-	 * 
-	 * @return the forum sections
-	 */
-	public static ForumSections loadForumSections() {
-		if (!forumSectionsLoaded) {
-			forumSections = ForumSections.init();
-			forumSectionsLoaded = true;
-		}
-		return forumSections;
-	}
-
-	/**
-	 * Get the forum sections.
-	 * 
-	 * @return the forum sections
-	 */
-	public static ForumSections getForumSections() {
-		return forumSections;
-	}
-
-	/**
-	 * Enable/Disable ssl.
-	 * 
-	 * @param b
-	 *      the new SSL enabled
-	 */
-	public static void setSSL(boolean b) {
-		isSSLEnabled = b;
-	}
-
-	/**
-	 * Check if is SSL enabled.
-	 * 
-	 * @return True if SSL is enabled
-	 */
-	public static boolean isSSLEnabled() {
-		return isSSLEnabled;
-	}
-
-	/**
-	 * Get the auth key.
-	 * 
-	 * @return the auth key
-	 */
-	public static String getAuthKey() {
-		return authey;
-	}
-
-	/**
-	 * Gets the pass key.
-	 * 
-	 * @return the pass key
-	 */
-	public static String getPassKey() {
-		return passkey;
-	}
-
-	/**
-	 * Get the session id.
-	 * 
-	 * @return the session id
-	 */
-	public static String getSessionId() {
-		return cookies.get(0).getValue();
-	}
-
-	/**
-	 * Check if we're logged in
-	 * 
-	 * @return True if we're logged in
-	 */
-	public static boolean isLoggedIn() {
-        return (cookies != null && !cookies.isEmpty());
-	}
-
-	/**
-	 * Convert some html string to quotable text
-	 * 
-	 * @param html
-	 *      the html string to parse
-	 * @return the string
-	 */
-	public static String toQuotableString(String html) {
-		return Jsoup.parse(html).text();
-	}
-
-	/**
-	 * Login to a site
-	 * 
-	 * @param url
-	 *      the url extension to submit the login information to, ie. login.php
-     *      the site url will be pre-pended to the url
-	 * @param username
-     *      the username to login with
-	 * @param password
-	 *      the password to login with
-	 * @param keepLogged
-	 *      if we want the cookie not to expire
-	 * @throws CouldNotLoadException
-	 *      thrown if we fail to login
-	 */
-	public static void login(String url, String username, String password, Boolean keepLogged) throws CouldNotLoadException {
-		url = SITE + url;
+	private static HttpURLConnection newHttpConnection(URL url){
 		try {
-			httpGet = getHttpGet(url);
-			response = httpClient.execute(httpGet);
-			entity = response.getEntity();
-
-			httpPost = new HttpPost(url);
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-			nvps.add(new BasicNameValuePair("username", username));
-			nvps.add(new BasicNameValuePair("password", password));
-			if (keepLogged)
-				nvps.add(new BasicNameValuePair("keeplogged", "1"));
-
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-
-			response = httpClient.execute(httpPost);
-			entity = response.getEntity();
-			if (entity != null)
-                entity.consumeContent();
-			cookies = httpClient.getCookieStore().getCookies();
-			loadIndex();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could not login");
-		}
-	}
-
-	/**
-	 * Get the cookies
-	 * @return the cookies
-	 */
-	public static List<Cookie> getCookies() {
-		return cookies;
-	}
-
-	/**
-	 * Load a saved cookie json string
-	 * @param data The json data to load the cookie from
-	 */
-	public static void loadCookie(String data){
-		try {
-			BasicClientCookie cookie = (BasicClientCookie)MySon.toObjectFromString(data, BasicClientCookie.class);
-			httpClient.getCookieStore().addCookie(cookie);
-			cookies = httpClient.getCookieStore().getCookies();
+			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+			connection.setRequestProperty("User-Agent", userAgent);
+			return connection;
 		}
 		catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Add a cookie to the HTTP client's cookie store
-	 * @param cookie the cookie to add
-	 */
-	public static void loadCookie(BasicClientCookie cookie){
-		httpClient.getCookieStore().addCookie(cookie);
-		cookies = httpClient.getCookieStore().getCookies();
-	}
-
-	/**
-	 * Load the user information index
-	 */
-	public static void loadIndex() {
-		index = Index.init();
-		MySoup.username = index.getResponse().getUsername();
-		MySoup.userId = index.getResponse().getId().intValue();
-		MySoup.authey = index.getResponse().getAuthkey();
-		MySoup.passkey = index.getResponse().getPasskey();
-		if (!index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
-				&& !index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("User")) {
-			MySoup.canNotifications = true;
-		}
-	}
-
-	/**
-	 * Get the user index
-	 * 
-	 * @return the index
-	 */
-	public static Index getIndex() {
-		return index;
-	}
-
-	/**
-	 * Perform an HttpPost method to some what.cd url with some list parameters
-	 * 
-	 * @param url
-	 *      the url to submit to, of the form blah.php? and the site url will be
-     *      pre-prended to it
-	 * @param list
-	 *      the list of parameters
-	 * @throws Exception
-	 *      if we fail to execute the post method
-	 */
-	public static void postMethod(String url, List<Tuple<String, String>> list) throws Exception {
-		url = SITE + url;
-		try {
-			httpGet = getHttpGet(url);
-			httpPost = new HttpPost(url);
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-			for (Tuple<String, String> t : list) {
-				nvps.add(new BasicNameValuePair(t.getA(), t.getB()));
-			}
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-			response = httpClient.execute(httpPost);
-			// TODO investigate
-            //Investigate what issue?
-			// EntityUtils.consume(response.getEntity());
-			// response.getEntity().consumeContent();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			throw new CouldNotLoadException("Could not post data");
-		}
-	}
-
-	/**
-	 * Perform an HttpGet on some site url to get some data from it
-	 * 
-	 * @param url
-	 *      the url to scrape, of the form blah.php? and the site url will
-     *      be pre-prended to it
-	 * @return the string of data received in response
-	 */
-	public static String scrape(String url) {
-		url = SITE + url;
-		httpGet = getHttpGet(url);
-		response = null;
-		try {
-			response = httpClient.execute(httpGet);
-			entity = response.getEntity();
-			// String s = Jsoup.parse(entity.getContent(), "utf-8", "").text();
-            //Using HTTP.USER_AGENT crashes, UnupportedCharsetException on desktop (not in app for some reason)
-			String s = EntityUtils.toString(entity, HTTP.UTF_8);
-            entity.consumeContent();
-            return s;
-			// EntityUtils.consume(entity);
-			// InputStream s = entity.getContent();
-			// System.err.println("encoding " + entity.getContentEncoding());
-		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
 	/**
-	 * Read an input stream into a string
-	 * 
-	 * @param is
-	 *      the input stream
-	 * @return the string
+	 * Login to the site
+	 *
+	 * @param url        the url extension to submit the login information to, ie. login.php. the
+	 *                   request will be made to site + url, eg http://website.com/login.php
+	 * @param username   username to login with
+	 * @param password   password to login with
+	 * @param keepLogged if we want the cookie to not expire
+	 * @throws api.util.CouldNotLoadException  thrown if we fail to login
+	 * @throws java.lang.IllegalStateException if the site was not set prior to calling the function
 	 */
-	private static String inputStreamToString(InputStream is) {
-		String line = "";
-		StringBuilder total = new StringBuilder();
-		BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
-		// Read response until the end
+	public static void login(String url, String username, String password, Boolean keepLogged) throws CouldNotLoadException, IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		HttpURLConnection connection = null;
 		try {
-			while ((line = rd.readLine()) != null) {
-				total.append(line);
+			connection = newHttpConnection(new URL(site + url));
+			connection.setDoOutput(true);
+			connection.setRequestMethod("POST");
+			String params = "username=" + URLEncoder.encode(username, "UTF-8")
+				+ "&password=" + URLEncoder.encode(password, "UTF-8");
+			if (keepLogged){
+				params += "&keeplogged=1";
 			}
-		} catch (IOException e) {
+			connection.setFixedLengthStreamingMode(params.getBytes().length);
+
+			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+			out.writeBytes(params);
+			out.flush();
+			out.close();
+
+			//Android automatically picks up the cookies, regular Java doesn't
+			if (!android){
+				List<HttpCookie> cookies = HttpCookie.parse(connection.getHeaderField("Set-Cookie"));
+				URI uri = URI.create(site);
+				for (HttpCookie c : cookies){
+					cookieManager.getCookieStore().add(uri, c);
+				}
+			}
+			else {
+				if (connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+					throw new CouldNotLoadException("Check username and password");
+				}
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not login");
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		loadIndex();
+	}
+
+	/**
+	 * Logout of the site, invalidates the session with the site, clears the cookies
+	 * and index. If we aren't logged in the function does nothing
+	 *
+	 * @param url the logout url path, will make request to site + url
+	 * @return true if we logged out successfully
+	 * @throws java.lang.IllegalStateException if the site was not set prior to this call
+	 */
+	public static boolean logout(String url) throws IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		if (isLoggedIn() && !pressLink(url + "?auth=" + getAuthKey())){
+			System.err.println("Failed to logout");
+			return false;
+		}
+		cookieManager.getCookieStore().removeAll();
+		index = null;
+		return true;
+	}
+
+	/**
+	 * Perform a POST to some site url with the desired list of parameters
+	 *
+	 * @param url    the url to submit to, the site will be prepended to it to form
+	 *               the final url, eg: http://site.com/url
+	 * @param params the list of parameters to send
+	 * @throws api.util.CouldNotLoadException  if we fail to execute the post method
+	 * @throws java.lang.IllegalStateException if the site was not set prior to calling this method
+	 */
+	public static void postMethod(String url, List<Tuple<String, String>> params) throws CouldNotLoadException, IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		HttpURLConnection connection = null;
+		try {
+			String urlParams = buildParams(params);
+			connection = newHttpConnection(new URL(site + url));
+			connection.setDoOutput(true);
+			connection.setRequestMethod("POST");
+			connection.setFixedLengthStreamingMode(urlParams.getBytes().length);
+
+			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+			out.writeBytes(urlParams);
+			out.flush();
+			out.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not post method to: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+	}
+
+	/**
+	 * Build the POST method parameters string for some list of parameters
+	 *
+	 * @param params params to encode for a POST method
+	 * @return the parameters as a string
+	 */
+	private static String buildParams(List<Tuple<String, String>> params){
+		StringBuilder result = new StringBuilder();
+		try {
+			result.append(URLEncoder.encode(params.get(0).getA(), "UTF-8"));
+			result.append("=");
+			result.append(URLEncoder.encode(params.get(0).getB(), "UTF-8"));
+			for (int i = 1; i < params.size(); ++i){
+				result.append("&");
+				result.append(URLEncoder.encode(params.get(i).getA(), "UTF-8"));
+				result.append("=");
+				result.append(URLEncoder.encode(params.get(i).getB(), "UTF-8"));
+			}
+		}
+		catch (Exception e){
 			e.printStackTrace();
 		}
-		return total.toString();
+		return result.toString();
+	}
+
+	/**
+	 * Perform a GET request on the path site + url
+	 *
+	 * @param url the url extension to get
+	 * @return the response data as a string
+	 * @throws api.util.CouldNotLoadException  if we fail to load the page
+	 * @throws java.lang.IllegalStateException if the site was not set prior to calling this method
+	 */
+	public static String scrape(String url) throws CouldNotLoadException, IllegalStateException {
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		String response = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(site + url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			response = IOUtils.toString(in, "UTF-8");
+			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return response;
+	}
+
+	/**
+	 * Perform a GET request to get some API object and use the passed Gson to deserialize it
+	 *
+	 * @param url  the url extension to get
+	 * @param t    type of object to create
+	 * @param gson Gson deserializer to parse the stream
+	 * @return the parsed object or null if parsing failed
+	 * @throws CouldNotLoadException if the url could not be loaded
+	 * @throws IllegalStateException if the site was not set prior to this call
+	 */
+	public static Object scrape(String url, Type t, final Gson gson) throws CouldNotLoadException, IllegalStateException{
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		Object o = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(site + url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+			o = gson.fromJson(reader, t);
+			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return o;
+	}
+
+	/**
+	 * Perform a GET request on some other website
+	 *
+	 * @param url the url to get
+	 * @return the response data as a string
+	 * @throws api.util.CouldNotLoadException if we fail to load the page
+	 */
+	public static String scrapeOther(String url) throws CouldNotLoadException {
+		String response = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			response = IOUtils.toString(in, "UTF-8");
+			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return response;
+	}
+
+	public static Object scrapeOther(String url, Type t, final Gson gson) throws CouldNotLoadException{
+		Object o = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = newHttpConnection(new URL(url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+			o = gson.fromJson(reader, t);
+			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return o;
 	}
 
 	/**
 	 * Simulate a simple link press on the site, that returns no JSON data.
-	 * 
-	 * @param url
-	 *      the url to click
-     * @return
-     *      true if response ok, false if failed
+	 *
+	 * @param url the url to click, will be appended to the site url, eg: http://site.com/url
+	 * @return true if response ok, false if failed
 	 */
-	public static boolean pressLink(String url) {
-		url = SITE + url;
-		httpGet = getHttpGet(url);
-		response = null;
-        boolean success = false;
+	public static boolean pressLink(String url){
+		if (site == null){
+			throw new IllegalStateException("Must call MySoup.setSite before use");
+		}
+		HttpURLConnection connection = null;
 		try {
-			response = httpClient.execute(httpGet);
-            success = (response.getStatusLine().getStatusCode() == 200);
+			connection = newHttpConnection(new URL(site + url));
+			connection.setRequestProperty("User-Agent", userAgent);
+			return connection.getResponseCode() == 200;
 		}
-        catch (ClientProtocolException e){
-            //Exception specific to receiving the circular redirect when changing notifications
-            if (e.getCause() instanceof CircularRedirectException){
-                //Double check we we're changing notifications
-                if (url.contains("notify"))
-                    success = true;
-                else
-                    e.printStackTrace();
-            }
-            else
-                e.printStackTrace();
-        }
-        catch (Exception e) {
+		catch (ProtocolException e){
+			//When we're setting notifications or logging out we're redirected too many times
+			if (url.contains("action=notify") || url.contains("logout")){
+				return true;
+			}
 			e.printStackTrace();
-            System.out.println("pressLink error: " + e.getMessage());
-            success = false;
 		}
-        finally {
-            //Clean up
-            try {
-                if (response != null && response.getEntity() != null)
-                    response.getEntity().consumeContent();
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        return success;
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return false;
 	}
 
-    /**
-     * Perform an HttpGet on some non-site url and get the string data returned b it
-     *
-     * @param url
-     *      the url to get data from
-     * @return the response data as a string
-     * @throws CouldNotLoadException
-     *      if we fail to load the page
-     */
-	public static String scrapeOther(String url) throws CouldNotLoadException {
-		httpGet = getHttpGet(url);
-		response = null;
+	/**
+	 * Load the user information index
+	 */
+	public static void loadIndex(){
+		index = Index.init();
+		if (!index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
+			&& !index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("User")){
+			MySoup.notificationsEnabled = true;
+		}
+	}
+
+	/**
+	 * Get the session cookie being used for the site
+	 *
+	 * @return the session cookie, or null if not found
+	 */
+	public static HttpCookie getSessionCookie(){
 		try {
-			response = httpClient.execute(httpGet);
-			entity = response.getEntity();
-			String s = EntityUtils.toString(entity);
-            entity.consumeContent();
-            return s;
-		} catch (Exception e) {
+			List<HttpCookie> cookies = cookieManager.getCookieStore().get(URI.create(site));
+			for (HttpCookie c : cookies){
+				if (c.getName().equalsIgnoreCase("session")){
+					return c;
+				}
+			}
+		}
+		catch (Exception e){
 			e.printStackTrace();
-			throw new CouldNotLoadException("Could not load page");
+		}
+		return null;
+	}
+
+	public static void addCookie(HttpCookie cookie){
+		try {
+			cookieManager.getCookieStore().add(URI.create(site), cookie);
+		}
+		catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * Get the user id.
-	 * 
-	 * @return the user id
-	 */
-	public static int getUserId() {
-		return userId;
+	public static String getSite(){
+		return site;
 	}
 
-	/**
-	 * Get the username.
-	 * 
-	 * @return the username
-	 */
-	public static String getUsername() {
-		return username;
+	public static String getUserAgent(){
+		return userAgent;
 	}
 
-	/**
-	 * Set the session id.
-	 * 
-	 * @param sessionId
-     *      the new session id
-	 */
-	public static void setSessionId(String sessionId) {
-		Cookie cookie = new BasicClientCookie("", sessionId);
-		CookieStore cs = new BasicCookieStore();
-		cs.addCookie(cookie);
-		httpClient.setCookieStore(cs);
-		cookies = httpClient.getCookieStore().getCookies();
+	public static void setUserAgent(String userAgent){
+		MySoup.userAgent = userAgent;
 	}
 
-	/**
-	 * Convert a string to plain text
-	 * 
-	 * @param s
-	 *      the string to convert
-	 * @return the converted string
-	 */
-	public static String toPlainText(String s) {
-		s = Jsoup.parse(s.replaceAll("(?i)<br[^>]*>", "\n")).text();
-		return s;
+	public static boolean isSslEnabled(){
+		return sslEnabled;
 	}
 
-	/**
-	 * Clean some string of unsafe html characters
-	 * 
-	 * @param s
-	 *      the string to clean
-	 * @return the cleaned string
-	 */
-	public static String clean(String s) {
-		return Jsoup.clean(s, Whitelist.relaxed());
+	public static boolean isNotificationsEnabled(){
+		return notificationsEnabled;
 	}
 
-	/**
-	 * Check if the user can read torrent notifications
-	 * 
-	 * @return True if the user can read torrent notifications
-	 */
-	public static boolean canNotifications() {
-		return canNotifications;
+	public static Index getIndex(){
+		return index;
 	}
 
+	public static String getAuthKey(){
+		return index != null ? index.getResponse().getAuthkey() : null;
+	}
+
+	public static String getPassKey(){
+		return index != null ? index.getResponse().getPasskey() : null;
+	}
+
+	public static boolean isLoggedIn(){
+		return cookieManager != null && index != null && cookieManager.getCookieStore().getCookies().size() > 0;
+	}
+
+	public static int getUserId(){
+		return index != null ? index.getResponse().getId().intValue() : -1;
+	}
+
+	public static String getUsername(){
+		return index != null ? index.getResponse().getUsername() : null;
+	}
 }
