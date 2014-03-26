@@ -99,6 +99,6 @@ public class Edition {
 
 	@Override
 	public String toString(){
-		return "Edition: [" + getEdition() + "]";
+		return getEdition();
 	}
 }
