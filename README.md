@@ -4,6 +4,12 @@ This is a Java API for What.CD that provides a wrapper around the AJAX API of Ga
 
 Licensed under the 2-Clause BSD License, see LICENSE for full terms.
 
+Dependencies
+--------
+- Apache Commons libraries: codec, io, lang3, logging
+- Gson
+- Jsoup
+
 Example
 -------
 ```Java
