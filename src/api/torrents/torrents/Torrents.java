@@ -10,314 +10,371 @@ import java.nio.channels.ReadableByteChannel;
 
 /**
  * The Class Torrents.
- * 
+ *
  * @author Gwindow
  * @since Jun 2, 2012 12:08:53 AM
  */
 public class Torrents {
 
-	/** The description. */
+	/**
+	 * The description.
+	 */
 	private String description;
 
-	/** The encoding. */
+	/**
+	 * The encoding.
+	 */
 	private String encoding;
 
-	/** The file count. */
+	/**
+	 * The file count.
+	 */
 	private Number fileCount;
 
-	/** The file list. */
+	/**
+	 * The file list.
+	 */
 	private String fileList;
 
-	/** The file path. */
+	/**
+	 * The file path.
+	 */
 	private String filePath;
 
-	/** The format. */
+	/**
+	 * The format.
+	 */
 	private String format;
 
-	/** The free torrent. */
+	/**
+	 * The free torrent.
+	 */
 	private boolean freeTorrent;
 
-	/** The has cue. */
+	private boolean reported;
+
+	/**
+	 * The has cue.
+	 */
 	private boolean hasCue;
 
-	/** The has log. */
+	/**
+	 * The has log.
+	 */
 	private boolean hasLog;
 
-	/** The id. */
+	/**
+	 * The id.
+	 */
 	private Number id;
 
-	/** The leechers. */
+	/**
+	 * The leechers.
+	 */
 	private Number leechers;
 
-	/** The log score. */
+	/**
+	 * The log score.
+	 */
 	private Number logScore;
 
-	/** The media. */
+	/**
+	 * The media.
+	 */
 	private String media;
 
-	/** The remaster catalogue number. */
+	/**
+	 * The remaster catalogue number.
+	 */
 	private String remasterCatalogueNumber;
 
-	/** The remaster record label. */
+	/**
+	 * The remaster record label.
+	 */
 	private String remasterRecordLabel;
 
-	/** The remaster title. */
+	/**
+	 * The remaster title.
+	 */
 	private String remasterTitle;
 
-	/** The remaster year. */
+	/**
+	 * The remaster year.
+	 */
 	private Number remasterYear;
 
-	/** The remastered. */
+	/**
+	 * The remastered.
+	 */
 	private boolean remastered;
 
-	/** The scene. */
+	/**
+	 * The scene.
+	 */
 	private boolean scene;
 
-	/** The seeders. */
+	/**
+	 * The seeders.
+	 */
 	private Number seeders;
 
-	/** The size. */
+	/**
+	 * The size.
+	 */
 	private Number size;
 
-	/** The snatched. */
+	/**
+	 * The snatched.
+	 */
 	private Number snatched;
 
-	/** The time. */
+	/**
+	 * The time.
+	 */
 	private String time;
 
-	/** The user id. */
+	/**
+	 * The user id.
+	 */
 	private Number userId;
 
-	/** The username. */
+	/**
+	 * The username.
+	 */
 	private String username;
 
 	/**
 	 * Gets the description.
-	 * 
+	 *
 	 * @return the description
 	 */
-	public String getDescription() {
+	public String getDescription(){
 		return this.description;
 	}
 
 	/**
 	 * Gets the encoding.
-	 * 
+	 *
 	 * @return the encoding
 	 */
-	public String getEncoding() {
+	public String getEncoding(){
 		return this.encoding;
 	}
 
 	/**
 	 * Gets the file count.
-	 * 
+	 *
 	 * @return the file count
 	 */
-	public Number getFileCount() {
+	public Number getFileCount(){
 		return this.fileCount;
 	}
 
 	/**
 	 * Gets the file list.
-	 * 
+	 *
 	 * @return the file list
 	 */
-	public String getFileList() {
+	public String getFileList(){
 		return this.fileList;
 	}
 
 	/**
 	 * Gets the file path.
-	 * 
+	 *
 	 * @return the file path
 	 */
-	public String getFilePath() {
+	public String getFilePath(){
 		return this.filePath;
 	}
 
 	/**
 	 * Gets the format.
-	 * 
+	 *
 	 * @return the format
 	 */
-	public String getFormat() {
+	public String getFormat(){
 		return this.format;
 	}
 
 	/**
 	 * Gets the free torrent.
-	 * 
+	 *
 	 * @return the free torrent
 	 */
-	public boolean isFreeTorrent() {
+	public boolean isFreeTorrent(){
 		return this.freeTorrent;
+	}
+
+	public boolean isReported(){
+		return reported;
 	}
 
 	/**
 	 * Checks for cue.
-	 * 
+	 *
 	 * @return true, if successful
 	 */
-	public boolean hasCue() {
+	public boolean hasCue(){
 		return this.hasCue;
 	}
 
 	/**
 	 * Checks for log.
-	 * 
+	 *
 	 * @return true, if successful
 	 */
-	public boolean hasLog() {
+	public boolean hasLog(){
 		return this.hasLog;
 	}
 
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
-	public Number getId() {
+	public Number getId(){
 		return this.id;
 	}
 
 	/**
 	 * Gets the leechers.
-	 * 
+	 *
 	 * @return the leechers
 	 */
-	public Number getLeechers() {
+	public Number getLeechers(){
 		return this.leechers;
 	}
 
 	/**
 	 * Gets the log score.
-	 * 
+	 *
 	 * @return the log score
 	 */
-	public Number getLogScore() {
+	public Number getLogScore(){
 		return this.logScore;
 	}
 
 	/**
 	 * Gets the media.
-	 * 
+	 *
 	 * @return the media
 	 */
-	public String getMedia() {
+	public String getMedia(){
 		return this.media;
 	}
 
 	/**
 	 * Gets the remaster catalogue number.
-	 * 
+	 *
 	 * @return the remaster catalogue number
 	 */
-	public String getRemasterCatalogueNumber() {
+	public String getRemasterCatalogueNumber(){
 		return this.remasterCatalogueNumber;
 	}
 
 	/**
 	 * Gets the remaster record label.
-	 * 
+	 *
 	 * @return the remaster record label
 	 */
-	public String getRemasterRecordLabel() {
+	public String getRemasterRecordLabel(){
 		return this.remasterRecordLabel;
 	}
 
 	/**
 	 * Gets the remaster title.
-	 * 
+	 *
 	 * @return the remaster title
 	 */
-	public String getRemasterTitle() {
+	public String getRemasterTitle(){
 		return this.remasterTitle;
 	}
 
 	/**
 	 * Gets the remaster year.
-	 * 
+	 *
 	 * @return the remaster year
 	 */
-	public Number getRemasterYear() {
+	public Number getRemasterYear(){
 		return this.remasterYear;
 	}
 
 	/**
 	 * Checks if is remastered.
-	 * 
+	 *
 	 * @return true, if is remastered
 	 */
-	public boolean isRemastered() {
+	public boolean isRemastered(){
 		return this.remastered;
 	}
 
 	/**
 	 * Checks if is scene.
-	 * 
+	 *
 	 * @return true, if is scene
 	 */
-	public boolean isScene() {
+	public boolean isScene(){
 		return this.scene;
 	}
 
 	/**
 	 * Gets the seeders.
-	 * 
+	 *
 	 * @return the seeders
 	 */
-	public Number getSeeders() {
+	public Number getSeeders(){
 		return this.seeders;
 	}
 
 	/**
 	 * Gets the size.
-	 * 
+	 *
 	 * @return the size
 	 */
-	public Number getSize() {
+	public Number getSize(){
 		return this.size;
 	}
 
 	/**
 	 * Gets the snatched.
-	 * 
+	 *
 	 * @return the snatched
 	 */
-	public Number getSnatched() {
+	public Number getSnatched(){
 		return this.snatched;
 	}
 
 	/**
 	 * Gets the time.
-	 * 
+	 *
 	 * @return the time
 	 */
-	public String getTime() {
+	public String getTime(){
 		return this.time;
 	}
 
 	/**
 	 * Gets the user id.
-	 * 
+	 *
 	 * @return the user id
 	 */
-	public Number getUserId() {
+	public Number getUserId(){
 		return this.userId;
 	}
 
 	/**
 	 * Gets the username.
-	 * 
+	 *
 	 * @return the username
 	 */
-	public String getUsername() {
+	public String getUsername(){
 		return this.username;
 	}
 
 	/**
 	 * Check if this torrent is the same edition as some other one
+	 *
 	 * @param t other torrent to compare
 	 * @return true if the torrents are part of the same edition of the album
 	 */
@@ -327,23 +384,23 @@ public class Torrents {
 
 	/**
 	 * Gets the download link.
-	 * 
+	 *
 	 * @return the download link
 	 */
-	public String getDownloadLink() {
+	public String getDownloadLink(){
 		String site = MySoup.getSite();
 		String authKey = MySoup.getAuthKey();
 		String passKey = MySoup.getPassKey();
 		return site + "torrents.php?action=download&id=" + this.getId()
-                + "&authkey=" + authKey + "&torrent_pass=" + passKey;
+			+ "&authkey=" + authKey + "&torrent_pass=" + passKey;
 	}
 
 	/**
 	 * Get a concise representation of the torrent media, format and encoding. For example "CD - AAC - 320"
-	 * 
+	 *
 	 * @return the media, format, and encoding
 	 */
-	public String getMediaFormatEncoding() {
+	public String getMediaFormatEncoding(){
 		String log = hasLog ? " - " + logScore.toString() : "";
 		String cue = hasCue ? " - " + "Cue" : "";
 		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding() + log + cue;
@@ -351,10 +408,10 @@ public class Torrents {
 
 	/**
 	 * Gets the remaster.
-	 * 
+	 *
 	 * @return the remaster
 	 */
-	public String getRemaster() {
+	public String getRemaster(){
 		String ed = remasterYear + " - ";
 		if (!remasterRecordLabel.isEmpty()){
 			ed += remasterRecordLabel + " / ";
@@ -373,17 +430,14 @@ public class Torrents {
 
 	/**
 	 * Download file.
-	 * 
-	 * @param url
-	 *            the url
-	 * @param path
-	 *            the path
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 *
+	 * @param url  the url
+	 * @param path the path
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public void downloadFile(String url, String path) throws IOException {
+	public void downloadFile(String url, String path) throws IOException{
 		String name = getFilePath();
-		if (getFilePath().equalsIgnoreCase("") || getFilePath().equals(null)) {
+		if (getFilePath().equalsIgnoreCase("") || getFilePath().equals(null)){
 			// todo fix this
 			name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
 		}
@@ -399,15 +453,16 @@ public class Torrents {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Torrents [getDescription()=" + getDescription() + ", getEncoding()=" + getEncoding() + ", getFileCount()="
-				+ getFileCount() + ", getFileList()=" + getFileList() + ", getFilePath()=" + getFilePath() + ", getFormat()="
-				+ getFormat() + ", getFreeTorrent()=" + isFreeTorrent() + ", hasCue()=" + hasCue() + ", hasLog()=" + hasLog()
-				+ ", getId()=" + getId() + ", getLeechers()=" + getLeechers() + ", getLogScore()=" + getLogScore()
-				+ ", getMedia()=" + getMedia() + ", getRemasterCatalogueNumber()=" + getRemasterCatalogueNumber()
-				+ ", getRemasterRecordLabel()=" + getRemasterRecordLabel() + ", getRemasterTitle()=" + getRemasterTitle()
-				+ ", getRemasterYear()=" + getRemasterYear() + ", isRemastered()=" + isRemastered() + ", isScene()=" + isScene()
-				+ ", getSeeders()=" + getSeeders() + ", getSize()=" + getSize() + ", getSnatched()=" + getSnatched()
-				+ ", getTime()=" + getTime() + ", getUserId()=" + getUserId() + ", getUsername()=" + getUsername() + "]";
+			+ getFileCount() + ", getFileList()=" + getFileList() + ", getFilePath()=" + getFilePath() + ", getFormat()="
+			+ getFormat() + ", getFreeTorrent()=" + isFreeTorrent() + ", isReported()=" + isReported()
+			+ ", hasCue()=" + hasCue() + ", hasLog()=" + hasLog()
+			+ ", getId()=" + getId() + ", getLeechers()=" + getLeechers() + ", getLogScore()=" + getLogScore()
+			+ ", getMedia()=" + getMedia() + ", getRemasterCatalogueNumber()=" + getRemasterCatalogueNumber()
+			+ ", getRemasterRecordLabel()=" + getRemasterRecordLabel() + ", getRemasterTitle()=" + getRemasterTitle()
+			+ ", getRemasterYear()=" + getRemasterYear() + ", isRemastered()=" + isRemastered() + ", isScene()=" + isScene()
+			+ ", getSeeders()=" + getSeeders() + ", getSize()=" + getSize() + ", getSnatched()=" + getSnatched()
+			+ ", getTime()=" + getTime() + ", getUserId()=" + getUserId() + ", getUsername()=" + getUsername() + "]";
 	}
 }
