@@ -125,37 +125,28 @@ public class TorrentGroup {
 	 * Group the torrents in this torrent group by their edition and return
 	 * the list of all editions/remasters of the torrent
 	 */
-	public List<Edition> getEditions(){
-		ArrayList<Edition> editions = new ArrayList<Edition>();
-		//Add the "Original Release" if there is one since it's an awkward case as no edition information
-		//is provided on the torrent since it instead comes from the Torrent Group
+	public List<EditionTorrents> getEditions(){
+		ArrayList<EditionTorrents> editionTorrents = new ArrayList<EditionTorrents>();
 		List<Torrents> torrents = getResponse().getTorrents();
-		//Counter for where we should start reading non-original release torrents
+		//Start by adding the first edition
+		Edition e = new Edition(torrents.get(0), getResponse().getGroup());
+		editionTorrents.add(new EditionTorrents(e));
+		editionTorrents.get(0).addTorrent(torrents.get(0));
+
 		int i = 0;
-		if (!torrents.get(0).isRemastered()){
-			editions.add(new Edition(getResponse().getGroup()));
-			for (Torrents t : torrents){
-				if (!t.isRemastered()){
-					editions.get(0).addTorrent(t);
-					++i;
-				}
-				else {
-					break;
-				}
+		for (Torrents t : torrents.subList(1, torrents.size())){
+			System.out.println("Inspecting torrent: " + t.getId());
+			e = new Edition(t, getResponse().getGroup());
+			if (editionTorrents.get(i).getEdition().equals(e)){
+				editionTorrents.get(i).addTorrent(t);
+			}
+			else {
+				editionTorrents.add(new EditionTorrents(e));
+				++i;
+				editionTorrents.get(i).addTorrent(t);
 			}
 		}
-		//Now add in the rest of the releases
-		for (int j = i; j < torrents.size(); ++j){
-			Torrents t = torrents.get(j);
-			if (editions.isEmpty()){
-				editions.add(new Edition(t));
-			}
-			else if (!editions.get(editions.size() - 1).sameEdition(t)){
-				editions.add(new Edition(t));
-			}
-			editions.get(editions.size() - 1).addTorrent(t);
-		}
-		return editions;
+		return editionTorrents;
 	}
 
 	/**
