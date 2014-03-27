@@ -134,14 +134,15 @@ public class MySoup {
 			if (keepLogged){
 				params += "&keeplogged=1";
 			}
-			connection.setFixedLengthStreamingMode(params.getBytes().length);
+			byte bytes[] = params.getBytes("UTF-8");
+			connection.setFixedLengthStreamingMode(bytes.length);
 
 			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-			out.writeBytes(params);
-			out.flush();
+			out.write(bytes);
 			out.close();
 
 			//Android automatically picks up the cookies, regular Java doesn't
+			//TODO: Instead we should check for a set cookie header and then load the cookie if we find such a header
 			if (!android){
 				List<HttpCookie> cookies = HttpCookie.parse(connection.getHeaderField("Set-Cookie"));
 				URI uri = URI.create(site);
@@ -207,10 +208,12 @@ public class MySoup {
 			connection = newHttpConnection(new URL(site + url));
 			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
-			connection.setFixedLengthStreamingMode(urlParams.getBytes().length);
+			byte bytes[] = urlParams.getBytes("UTF-8");
+			connection.setFixedLengthStreamingMode(bytes.length);
+			System.out.println("UrlParams.bytes length: " + bytes.length);
 
 			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-			out.writeBytes(urlParams);
+			out.write(bytes);
 			out.flush();
 			out.close();
 		}
@@ -335,6 +338,38 @@ public class MySoup {
 			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
 			response = IOUtils.toString(in, "UTF-8");
 			in.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new CouldNotLoadException("Could not load: " + url);
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return response;
+	}
+
+	public static String postOther(String url, List<Tuple<String, String>> params) throws CouldNotLoadException{
+		String response = null;
+		HttpURLConnection connection = null;
+		try {
+			String urlParams = buildParams(params);
+			connection = newHttpConnection(new URL(url));
+			connection.setDoOutput(true);
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("Content-Length", Integer.toString(urlParams.getBytes().length));
+			connection.setFixedLengthStreamingMode(urlParams.getBytes().length);
+
+			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+			out.writeBytes(urlParams);
+			out.flush();
+			System.out.println("Sent bytes");
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			response = IOUtils.toString(in, "UTF-8");
+			in.close();
+			out.close();
 		}
 		catch (Exception e){
 			e.printStackTrace();
