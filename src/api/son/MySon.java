@@ -20,7 +20,7 @@ public class MySon {
 	 * The Gson serializer/deserializer, using our custom string deserializer.
 	 */
 	private final static Gson gson = new GsonBuilder().registerTypeAdapter(String.class,
-		new MyStringDeserializer()).serializeNulls().create();
+		new MyStringDeserializer()).serializeNulls().serializeSpecialFloatingPointValues().create();
 
 	/**
 	 * If debugging is enabled.
