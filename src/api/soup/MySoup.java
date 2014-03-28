@@ -7,9 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedInputStream;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.net.*;
 import java.util.List;
@@ -38,11 +36,9 @@ public class MySoup {
 	 */
 	private static Index index;
 	/**
-	 * If ssl or notifications are enabled. Use the android flag to set whether or not the
-	 * api is running on android device. This has some implications for the way cookies are
-	 * handled and should be set accordingly.
+	 * If ssl or notifications are enabled.
 	 */
-	private static boolean sslEnabled = true, notificationsEnabled = true, android = false;
+	private static boolean sslEnabled = true, notificationsEnabled = true;
 
 	/**
 	 * Set the url of the gazelle site. An IllegalState exception will be thrown if any
@@ -83,15 +79,6 @@ public class MySoup {
 	}
 
 	/**
-	 * Set to true if using from Android, default is false
-	 *
-	 * @param a if we're running on Android
-	 */
-	public static void setAndroid(boolean a){
-		android = a;
-	}
-
-	/**
 	 * Use this factory method to get a properly configured HttpURLConnection for
 	 * connecting to the desired url
 	 *
@@ -103,7 +90,7 @@ public class MySoup {
 			connection.setRequestProperty("User-Agent", userAgent);
 			return connection;
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 		}
 		return null;
@@ -134,29 +121,12 @@ public class MySoup {
 			if (keepLogged){
 				params += "&keeplogged=1";
 			}
-			byte bytes[] = params.getBytes("UTF-8");
-			connection.setFixedLengthStreamingMode(bytes.length);
-
-			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-			out.write(bytes);
+			OutputStream out = connection.getOutputStream();
+			out.write(params.getBytes("UTF-8"));
 			out.close();
-
-			//Android automatically picks up the cookies, regular Java doesn't
-			//TODO: Instead we should check for a set cookie header and then load the cookie if we find such a header
-			if (!android){
-				List<HttpCookie> cookies = HttpCookie.parse(connection.getHeaderField("Set-Cookie"));
-				URI uri = URI.create(site);
-				for (HttpCookie c : cookies){
-					cookieManager.getCookieStore().add(uri, c);
-				}
-			}
-			else {
-				if (connection.getResponseCode() != HttpURLConnection.HTTP_OK){
-					throw new CouldNotLoadException("Check username and password");
-				}
-			}
+			connection.getResponseCode();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not login");
 		}
@@ -208,16 +178,13 @@ public class MySoup {
 			connection = newHttpConnection(new URL(site + url));
 			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
-			byte bytes[] = urlParams.getBytes("UTF-8");
-			connection.setFixedLengthStreamingMode(bytes.length);
-			System.out.println("UrlParams.bytes length: " + bytes.length);
 
-			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-			out.write(bytes);
-			out.flush();
+			BufferedOutputStream out = new BufferedOutputStream(connection.getOutputStream());
+			out.write(urlParams.getBytes("UTF-8"));
 			out.close();
+			connection.getResponseCode();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not post method to: " + url);
 		}
@@ -247,7 +214,7 @@ public class MySoup {
 				result.append(URLEncoder.encode(params.get(i).getB(), "UTF-8"));
 			}
 		}
-		catch (Exception e){
+		catch (UnsupportedEncodingException e){
 			e.printStackTrace();
 		}
 		return result.toString();
@@ -274,7 +241,7 @@ public class MySoup {
 			response = IOUtils.toString(in, "UTF-8");
 			in.close();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not load: " + url);
 		}
@@ -310,7 +277,7 @@ public class MySoup {
 			o = gson.fromJson(reader, t);
 			in.close();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not load: " + url);
 		}
@@ -339,7 +306,7 @@ public class MySoup {
 			response = IOUtils.toString(in, "UTF-8");
 			in.close();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not load: " + url);
 		}
@@ -360,18 +327,16 @@ public class MySoup {
 			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("Content-Length", Integer.toString(urlParams.getBytes().length));
-			connection.setFixedLengthStreamingMode(urlParams.getBytes().length);
 
-			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-			out.writeBytes(urlParams);
-			out.flush();
-			System.out.println("Sent bytes");
+			BufferedOutputStream out = new BufferedOutputStream(connection.getOutputStream());
+			out.write(urlParams.getBytes("UTF-8"));
+			out.close();
+
 			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
 			response = IOUtils.toString(in, "UTF-8");
 			in.close();
-			out.close();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not load: " + url);
 		}
@@ -394,7 +359,7 @@ public class MySoup {
 			o = gson.fromJson(reader, t);
 			in.close();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not load: " + url);
 		}
@@ -429,7 +394,7 @@ public class MySoup {
 			}
 			e.printStackTrace();
 		}
-		catch (Exception e){
+		catch (IOException e){
 			e.printStackTrace();
 		}
 		finally {
