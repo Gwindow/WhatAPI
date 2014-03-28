@@ -9,11 +9,14 @@ import java.util.List;
  */
 public class RecentTorrent {
 	/** The torrent group id */
-	private int ID;
+	@SerializedName("ID")
+	private int id;
 	/** The album name */
-	private String Name;
+	@SerializedName("Name")
+	private String name;
 	/** The URL to the torrent image (album art) */
-	private String WikiImage;
+	@SerializedName("WikiImage")
+	private String wikiImage;
 	/**
 	 * The artist info from the API
 	 */
@@ -23,8 +26,8 @@ public class RecentTorrent {
 	 * Get the torrent group id
 	 * @return Torrent group id
 	 */
-	public int getID(){
-		return ID;
+	public int getId(){
+		return id;
 	}
 
 	/**
@@ -32,7 +35,7 @@ public class RecentTorrent {
 	 * @return album name
 	 */
 	public String getName(){
-		return Name;
+		return name;
 	}
 
 	/**
@@ -40,7 +43,7 @@ public class RecentTorrent {
 	 * @return album art URL
 	 */
 	public String getWikiImage(){
-		return WikiImage;
+		return wikiImage;
 	}
 
 
@@ -49,14 +52,14 @@ public class RecentTorrent {
 	 *
 	 * @return album artist
 	 */
-	public RecentArtist getArtist(){
-		return artists.get(0).getArtist();
+	public List<RecentArtist> getArtists(){
+		return artists.get(0).getArtists();
 	}
 
 	@Override
 	public String toString(){
-		return "ID: " + ID + ", Album Name: " + Name
-			+ ", Artist: " + getArtist() + ", Image URL: " + WikiImage;
+		return "RecentTorrent: [id=" + id + ", name=" + name
+			+ ", artist=" + getArtists() + ", wikiImage=" + wikiImage + "]";
 	}
 
 	/**
@@ -65,13 +68,13 @@ public class RecentTorrent {
 	 */
 	private class ArtistInfo {
 		@SerializedName("1")
-		private List<RecentArtist> artist;
+		private List<RecentArtist> artists;
 
 		/**
 		 * There's only ever one entry in this list, so that's what we return
 		 */
-		public RecentArtist getArtist(){
-			return artist.get(0);
+		public List<RecentArtist> getArtists(){
+			return artists;
 		}
 	}
 }
