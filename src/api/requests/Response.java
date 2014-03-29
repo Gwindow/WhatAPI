@@ -1,5 +1,7 @@
 package api.requests;
 
+import api.torrents.torrents.MusicInfo;
+
 import java.util.List;
 
 /**
