@@ -1,21 +1,11 @@
 package api.user;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 /**
  * User's stats.
  *
  * @author Tim
  */
 public class Stats {
-	/**
-	 * Format that dates are returned (site uses GMT time)
-	 */
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 	/**
 	 * The downloaded.
 	 */
@@ -25,13 +15,11 @@ public class Stats {
 	 * The joined date.
 	 */
 	private String joinedDate;
-	private transient Date joined;
 
 	/**
 	 * The last access.
 	 */
 	private String lastAccess;
-	private transient Date accessed;
 
 	/**
 	 * The ratio from the api. Must be a string to handle the case where ratio is infinity
@@ -67,21 +55,8 @@ public class Stats {
 	 *
 	 * @return the joined date
 	 */
-	public String getJoinedString(){
+	public String getJoinedDate(){
 		return this.joinedDate;
-	}
-
-	public Date getJoinedDate(){
-		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-		if (joined == null){
-			try {
-				joined = dateFormat.parse(joinedDate);
-			}
-			catch (ParseException e){
-				e.printStackTrace();
-			}
-		}
-		return joined;
 	}
 
 	/**
@@ -91,19 +66,6 @@ public class Stats {
 	 */
 	public String getLastAccess(){
 		return this.lastAccess;
-	}
-
-	public Date getAccessedDate(){
-		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-		if (accessed == null){
-			try {
-				accessed = dateFormat.parse(lastAccess);
-			}
-			catch (ParseException e){
-				e.printStackTrace();
-			}
-		}
-		return accessed;
 	}
 
 	/**

@@ -10,7 +10,11 @@ import org.apache.commons.io.IOUtils;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Provides interaction with the site and external sites if desired
@@ -39,6 +43,10 @@ public class MySoup {
 	 * If ssl or notifications are enabled.
 	 */
 	private static boolean sslEnabled = true, notificationsEnabled = true;
+	/**
+	 * Format that dates are returned (site uses GMT time)
+	 */
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	/**
 	 * Set the url of the gazelle site. An IllegalState exception will be thrown if any
@@ -64,6 +72,8 @@ public class MySoup {
 		}
 		cookieManager = new CookieManager();
 		CookieHandler.setDefault(cookieManager);
+		//Also set the date format time zone to GMT
+		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 	}
 
 	/**
@@ -76,6 +86,19 @@ public class MySoup {
 	public static void setSite(String url, boolean ssl){
 		sslEnabled = ssl;
 		setSite(url);
+	}
+
+	/**
+	 * Parse a date string returned by the site using the site's date format and time zone
+	 */
+	public static Date parseDate(String d){
+		try {
+			return dateFormat.parse(d);
+		}
+		catch (ParseException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
