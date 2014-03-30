@@ -38,6 +38,18 @@ public class Request {
 		MySoup.pressLink(url);
 	}
 
+	public void addBookmark(){
+		String url = "bookmarks.php?action=add&type=request&auth=" + MySoup.getAuthKey()
+			+ "&id=" + response.getRequestId();
+		MySoup.pressLink(url);
+	}
+
+	public void removeBookmark(){
+		String url = "bookmarks.php?action=remove&type=request&auth=" + MySoup.getAuthKey()
+			+ "&id=" + response.getRequestId();
+		MySoup.pressLink(url);
+	}
+
 	/**
 	 * Get the API response
 	 * 
