@@ -1,6 +1,8 @@
 
 package api.torrents.artist;
 
+import api.soup.MySoup;
+
 /**
  * The Class Requests.
  * 
@@ -28,6 +30,29 @@ public class Requests {
 
 	/** The year. */
 	private Number year;
+
+	/**
+	 * Add some bounty to the request
+	 *
+	 * @param amount bounty to add in bytes
+	 */
+	public void vote(long amount){
+		String url = "requests.php?action=takevote&id=" + requestId
+			+ "&auth=" + MySoup.getAuthKey() + "&amount=" + Long.toString(amount);
+		MySoup.pressLink(url);
+	}
+
+	public void addBookmark(){
+		String url = "bookmarks.php?action=add&type=request&auth=" + MySoup.getAuthKey()
+			+ "&id=" + requestId;
+		MySoup.pressLink(url);
+	}
+
+	public void removeBookmark(){
+		String url = "bookmarks.php?action=remove&type=request&auth=" + MySoup.getAuthKey()
+			+ "&id=" + requestId;
+		MySoup.pressLink(url);
+	}
 
 	/**
 	 * Gets the bounty.
