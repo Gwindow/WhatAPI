@@ -24,9 +24,18 @@ public class Request {
 	 * @return the request
 	 */
 	public static Request fromId(int id) {
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=request&id=" + id + "&auth=" + authkey;
+		String url = "ajax.php?action=request&id=" + id + "&auth=" + MySoup.getAuthKey();
 		return (Request) MySon.toObject(url, Request.class);
+	}
+
+	/**
+	 * Add some bounty to the request
+	 * @param amount bounty to add in bytes
+	 */
+	public void vote(long amount){
+		String url = "requests.php?action=takevote&id=" + response.getRequestId()
+			+ "&auth=" + MySoup.getAuthKey() + "&amount=" + Long.toString(amount);
+		MySoup.pressLink(url);
 	}
 
 	/**
