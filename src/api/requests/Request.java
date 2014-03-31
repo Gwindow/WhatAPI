@@ -30,12 +30,18 @@ public class Request {
 
 	/**
 	 * Add some bounty to the request
+	 * @param id id of request to add to
 	 * @param amount bounty to add in bytes
+	 * @return true if successful
 	 */
-	public void vote(long amount){
-		String url = "requests.php?action=takevote&id=" + response.getRequestId()
-			+ "&auth=" + MySoup.getAuthKey() + "&amount=" + Long.toString(amount);
-		MySoup.pressLink(url);
+	public static boolean addBounty(int id, long amount){
+		String url = "requests.php?action=takevote&id=" + id
+			+ "&auth=" + MySoup.getAuthKey() + "&amount=" + amount;
+		return MySoup.pressLink(url);
+	}
+
+	public boolean addBounty(long amount){
+		return addBounty(response.getRequestId().intValue(), amount);
 	}
 
 	public void addBookmark(){
