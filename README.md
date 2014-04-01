@@ -6,8 +6,8 @@ Licensed under the 2-Clause BSD License, see LICENSE for full terms.
 
 Dependencies
 --------
-- [commons-io-2.4](https://commons.apache.org/proper/commons-io/download_io.cgi),
-- [commons-lang3-3.1](https://commons.apache.org/proper/commons-lang/download_lang.cgi),
+- [commons-io-2.4](https://commons.apache.org/proper/commons-io/download_io.cgi)
+- [commons-lang3-3.1](https://commons.apache.org/proper/commons-lang/download_lang.cgi)
 - [gson-2.2.4](https://code.google.com/p/google-gson/downloads/list)
 - [signpost-core-1.2.1.2.jar](http://code.google.com/p/oauth-signpost/downloads/list)
 
