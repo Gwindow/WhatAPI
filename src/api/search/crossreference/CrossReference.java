@@ -1,6 +1,6 @@
 package api.search.crossreference;
 
-import api.products.Items;
+import api.products.Product;
 import api.products.ProductSearch;
 import api.search.requests.RequestsSearch;
 import api.search.torrents.TorrentSearch;
@@ -15,33 +15,16 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.*;
+import java.util.List;
 
 /**
- * CrossReference is used to perform Torrent/Request searches
- * based on information received from Google Product search or
- * for UPC searching uses MusicBrainz with a fallback to Google Products
- *
- * @author Gwindow
+ * Perform Torrent and/or Request searches based on terms determined from looking
+ * up a UPC. The UPC is first checked against MusicBrainz and then Semantics3 if
+ * MusicBrainz doesn't have it
  */
 public class CrossReference {
 	/**
-	 * Cross reference a Requests search by a Google product search result
-	 *
-	 * @param searchTerm the search term for the product search
-	 * @return the Requests search
-	 */
-	public static RequestsSearch requestsByTerm(String searchTerm){
-		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
-		String term = determineSearchString(ps.getItems());
-		return !term.isEmpty() ? RequestsSearch.search(term) : null;
-	}
-
-	/**
-	 * Cross reference a Requests search by a Google product search result
-	 *
-	 * @param upc the UPC for the product search
-	 * @return the Requests search
+	 * Run a requests search using the search terms determined for the UPC
 	 */
 	public static RequestsSearch requestsByUpc(String upc){
 		String term = termsFromUpc(upc);
@@ -49,22 +32,7 @@ public class CrossReference {
 	}
 
 	/**
-	 * Cross reference a Torrents search by a Google product search result
-	 *
-	 * @param searchTerm the search term for the product search
-	 * @return the Torrent search
-	 */
-	public static TorrentSearch torrentsByTerm(String searchTerm){
-		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
-		String term = determineSearchString(ps.getItems());
-		return !term.isEmpty() ? TorrentSearch.search(term) : null;
-	}
-
-	/**
-	 * Cross reference a Torrents search by a Google product search result
-	 *
-	 * @param upc the UPC for the product search
-	 * @return the Torrent search
+	 * Run a torrent search using the search terms determined for the UPC
 	 */
 	public static TorrentSearch torrentsByUpc(String upc){
 		String term = termsFromUpc(upc);
@@ -72,58 +40,37 @@ public class CrossReference {
 	}
 
 	/**
-	 * Cross reference a Torrents and Requests search by a Google product search
+	 * Run a torrent and request search for using the terms determined for the UPC
 	 *
-	 * @param searchTerm the search term to use for the product search
-	 * @return a tuple containing the Torrent search (first) and the Requests search (second)
-	 */
-	public static Tuple<TorrentSearch, RequestsSearch> torrentsAndRequestsByTerm(String searchTerm){
-		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
-		String term = determineSearchString(ps.getItems());
-		if (term.isEmpty()){
-			return null;
-		}
-		TorrentSearch t = TorrentSearch.search(term);
-		RequestsSearch r = RequestsSearch.search(term);
-		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
-	}
-
-	/**
-	 * Cross reference a Torrents and Requests search by a Google product search
-	 *
-	 * @param upc the UPC for the product search
-	 * @return a tuple containing the Torrent search (first) and the Requests search (second)
+	 * @return a tuple containing both searches { torrent search, requests search }
 	 */
 	public static Tuple<TorrentSearch, RequestsSearch> torrentsAndRequestsByUpc(String upc){
 		String term = termsFromUpc(upc);
 		if (term.isEmpty()){
 			return null;
 		}
-		TorrentSearch t = TorrentSearch.search(term);
-		RequestsSearch r = RequestsSearch.search(term);
-		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
+		return new Tuple<TorrentSearch, RequestsSearch>(TorrentSearch.search(term), RequestsSearch.search(term));
 	}
 
 	/**
-	 * Determine search string from upc. First tries MusicBrainz then GoogleProducts
-	 *
-	 * @param upc the associated upc
-	 * @return the string
+	 * Determine search terms for some UPC. First tries MusicBrainz and falls back
+	 * to Semantics3 if we MusicBrainz doesn't have anything
 	 */
 	public static String termsFromUpc(String upc){
-		String ss = termsFromMusicBrainz(upc);
-		if (ss.equals("")){
-			ProductSearch ps = ProductSearch.fromTitle(upc);
-			ss = termsFromGoogle(ps.getItems(), upc);
+		String term = termsFromMusicBrainz(upc);
+		if (term.isEmpty()){
+			System.out.println("Semantics3 Fallback");
+			List<Product> products = ProductSearch.fromUPC(upc);
+			//We really only get one product back for UPC searches
+			if (!products.isEmpty()){
+				term = products.get(0).getName();
+			}
 		}
-		return ss;
+		return term;
 	}
 
 	/**
-	 * queries MusicBrainz
-	 *
-	 * @return SearchString
-	 * if fails ""
+	 * Query MusicBrainz for terms for some UPC
 	 */
 	public static String termsFromMusicBrainz(String upc){
 		try {
@@ -147,158 +94,5 @@ public class CrossReference {
 			e.printStackTrace();
 		}
 		return "";
-	}
-
-	/**
-	 * Constructs a SearchString from a Google Product query and the associated upc
-	 * <p/>
-	 * Each result is first cleaned, then split up at " ". Each occurrence of a word is counted and all words who appears at least items-1
-	 * times are added to the search string. Additionally the function tries to find the artist name, if found the words are counted
-	 * to give them more weight.
-	 */
-	public static String termsFromGoogle(List<Items> items, String upc){
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		String[] keywords;
-		String s = "";
-		String tmp, author;
-
-		if (items != null){
-			for (Items i : items){
-				tmp = i.getProduct().getTitle().toLowerCase();
-				author = determineAuthor(tmp);
-				//System.out.println("Entry " + tmp + " Author: " + author);
-				if (author != null){
-					author = cleanString(author, upc);
-					keywords = author.split("\\s+");
-					for (String e : keywords){
-						if (!map.containsKey(e)){
-							map.put(e, items.size());
-						}
-						else {
-							map.put(e, map.get(e) + items.size());
-						}
-					}
-				}
-
-				tmp = cleanString(tmp, upc);
-				keywords = tmp.split("\\s+");
-
-				for (String e : keywords){
-					if (!map.containsKey(e)){
-						map.put(e, 1);
-					}
-					else {
-						map.put(e, map.get(e) + 1);
-					}
-				}
-
-			}
-			for (Map.Entry<String, Integer> entry : map.entrySet()){
-				if (entry.getValue() >= items.size() - 1){
-					s += entry.getKey() + " ";
-				}
-			}
-		}
-		return s;
-	}
-
-	/**
-	 * Helper for determineSearchStringByGoogleProducts
-	 * Tries to find the artists by looking for the two common patterns "artists - title" and "artist : "
-	 */
-	public static String determineAuthor(String s){
-		Integer i;
-
-		for (i = 2; i < s.length() - 1; i++){
-			if (s.charAt(i) == '-' && s.charAt(i - 1) == ' ' && s.charAt(i + 1) == ' '){
-				return s.substring(0, i);
-			}
-
-			if (s.charAt(i) == ':' && s.charAt(i + 1) == ' '){
-				return s.substring(0, i);
-			}
-
-		}
-
-		return null;
-	}
-
-	/**
-	 * Helper for determineSearchStringByGoogleProducts
-	 */
-	public static String cleanString(String s, String upc){
-		s = s.replace(',', ' ');
-		s = s.replace('-', ' ');
-		s = s.replace(':', ' ');
-		s = s.replaceAll("new", "");
-		s = s.replaceAll("used", "");
-		s = s.replaceAll("cd", "");
-		s = s.replaceAll("dvd", "");
-		s = s.replaceAll("\\(.*\\)", "");
-		s = s.replaceAll("\\[.*\\]", "");
-		s = s.replaceAll("audio", "");
-		s = s.replaceAll(upc, "");
-
-		return s;
-	}
-
-	/**
-	 * Determine search string. This is the old version and still used for simple by terms searches
-	 *
-	 * @param items the items
-	 * @return the string
-	 */
-	public static String determineSearchString(List<Items> items){
-		StringTokenizer tokenizer;
-		ArrayList<String> words = new ArrayList<String>();
-		ArrayList<String> combinations = new ArrayList<String>();
-		String shortestString = "";
-		int length = 0;
-		if (items == null){
-			return "";
-		}
-		for (int i = 0; i < items.size(); i++){
-			if (i == 0){
-				length = items.get(i).getProduct().getTitle().length();
-				shortestString = items.get(i).getProduct().getTitle();
-			}
-			else {
-				if (items.get(i).getProduct().getTitle().length() < length){
-					length = items.get(i).getProduct().getTitle().length();
-					shortestString = items.get(i).getProduct().getTitle();
-				}
-			}
-		}
-		tokenizer = new StringTokenizer(shortestString);
-		while (tokenizer.hasMoreTokens()){
-			String s = tokenizer.nextToken();
-			words.add(s);
-		}
-
-		for (int i = 0; i < words.size(); i++){
-			String s = "";
-			for (int j = 0; j <= i; j++){
-				if (j != 0){
-					s += " " + words.get(j);
-				}
-				else {
-					s += words.get(j);
-				}
-			}
-			combinations.add(s);
-		}
-
-		int k = 0;
-		for (int i = 0; i < combinations.size(); i++){
-			for (Items itm : items){
-				String title = itm.getProduct().getTitle().toLowerCase();
-				String phrase = combinations.get(i).toLowerCase();
-				if (title.contains(phrase)){
-					k = i;
-				}
-			}
-		}
-
-		return combinations.get(k);
 	}
 }
