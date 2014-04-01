@@ -68,4 +68,9 @@ public class UserRecents {
 	private class Response {
 		public List<RecentTorrent> snatches, uploads;
 	}
+
+	@Override
+	public String toString(){
+		return "UserRecents: [snatches=" + getSnatches() + ", uploads=" + getUploads() + "]";
+	}
 }

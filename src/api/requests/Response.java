@@ -1,5 +1,7 @@
 package api.requests;
 
+import api.torrents.torrents.MusicInfo;
+
 import java.util.List;
 
 /**
@@ -23,6 +25,8 @@ public class Response {
 	 * If we can vote on the request
 	 */
 	private boolean canVote;
+
+	private String recordLabel;
 
 	/**
 	 * The catalogue number.
@@ -218,6 +222,10 @@ public class Response {
 	 */
 	public boolean canVote(){
 		return canVote;
+	}
+
+	public String getRecordLabel(){
+		return recordLabel;
 	}
 
 	/**
@@ -501,7 +509,7 @@ public class Response {
 
 	@Override
 	public String toString(){
-		return "Response [getBitrateList=" + getBitrateList() + ", getCanEdit=" + canEdit() + ", getCanVote=" + canVote()
+		return "Response [getBitrateList=" + getBitrateList() + ", getCanEdit=" + canEdit() + ", getCanVote=" + canVote() + ", recordLabel=" + getRecordLabel()
 			+ ", getCatalogueNumber=" + getCatalogueNumber() + ", getCategoryId=" + getCategoryId() + ", getCategoryName="
 			+ getCategoryName() + ", getCommentPage=" + getCommentPage() + ", getCommentPages=" + getCommentPages()
 			+ ", getComments=" + getComments() + ", getDescription=" + getDescription() + ", getFillerId=" + getFillerId()

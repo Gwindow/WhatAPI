@@ -56,13 +56,14 @@ public class UserSearch {
 		return u;
 	}
 
-    /**
-     * Check if a next page of results exists
-     * @return True if a next page exists
-     */
-    public boolean hasNextPage() {
-	    return response.getCurrentPage().intValue() < response.getPages().intValue();
-    }
+	/**
+	 * Check if a next page of results is available
+	 *
+	 * @return True if a next page is available
+	 */
+	public boolean hasNextPage(){
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() < response.getPages().intValue();
+	}
 
 	/**
 	 * Get the next page of results for the user search. Returns null if no next page
@@ -74,12 +75,12 @@ public class UserSearch {
 	}
 
 	/**
-	 * Check if a previous page of results exists
-	 * @return True if a previous page exists
+	 * Check if a previous page of results is available
+	 * @return True if a previous page is available
 	 */
-    public boolean hasPreviousPage(){
-	    return response.getCurrentPage().intValue() > 1;
-    }
+	public boolean hasPreviousPage(){
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() > 1;
+	}
 
 	/**
 	 * Get the previous page of results for the user search. Returns null if no previous page

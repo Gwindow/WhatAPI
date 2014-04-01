@@ -37,6 +37,6 @@ public class RecentArtist {
 
 	@Override
 	public String toString(){
-		return "Name: " + name + " id: " + getID();
+		return "RecentArtist: [name=" + name + ", id=" + getID() + "]";
 	}
 }

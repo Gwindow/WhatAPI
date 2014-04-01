@@ -24,9 +24,36 @@ public class Request {
 	 * @return the request
 	 */
 	public static Request fromId(int id) {
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=request&id=" + id + "&auth=" + authkey;
+		String url = "ajax.php?action=request&id=" + id + "&auth=" + MySoup.getAuthKey();
 		return (Request) MySon.toObject(url, Request.class);
+	}
+
+	/**
+	 * Add some bounty to the request
+	 * @param id id of request to add to
+	 * @param amount bounty to add in bytes
+	 * @return true if successful
+	 */
+	public static boolean addBounty(int id, long amount){
+		String url = "requests.php?action=takevote&id=" + id
+			+ "&auth=" + MySoup.getAuthKey() + "&amount=" + amount;
+		return MySoup.pressLink(url);
+	}
+
+	public boolean addBounty(long amount){
+		return addBounty(response.getRequestId().intValue(), amount);
+	}
+
+	public void addBookmark(){
+		String url = "bookmarks.php?action=add&type=request&auth=" + MySoup.getAuthKey()
+			+ "&id=" + response.getRequestId();
+		MySoup.pressLink(url);
+	}
+
+	public void removeBookmark(){
+		String url = "bookmarks.php?action=remove&type=request&auth=" + MySoup.getAuthKey()
+			+ "&id=" + response.getRequestId();
+		MySoup.pressLink(url);
 	}
 
 	/**
