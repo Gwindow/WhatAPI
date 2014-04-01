@@ -9,3 +9,6 @@ res/.DS_Store
 src/api/cli/Tester.java
 .idea/
 *.iml
+libs
+*.swp
+

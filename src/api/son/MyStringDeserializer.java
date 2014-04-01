@@ -1,14 +1,12 @@
 package api.son;
 
-import java.lang.reflect.Type;
-
-import api.util.StringUtils;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.lang.reflect.Type;
 
 /**
  * The Class MyStringDeserializer.
