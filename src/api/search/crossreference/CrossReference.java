@@ -26,23 +26,15 @@ import java.util.*;
  */
 public class CrossReference {
 	/**
-	 * The determined search term.
-	 */
-	private static String determinedSearchTerm;
-
-	/**
 	 * Cross reference a Requests search by a Google product search result
 	 *
 	 * @param searchTerm the search term for the product search
 	 * @return the Requests search
 	 */
-	public static RequestsSearch crossReferenceRequestsBySearchTerm(String searchTerm){
+	public static RequestsSearch requestsByTerm(String searchTerm){
 		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
-		determinedSearchTerm = determineSearchString(ps.getItems());
-		if (determinedSearchTerm.equals("")){
-			return null;
-		}
-		return RequestsSearch.search(determinedSearchTerm);
+		String term = determineSearchString(ps.getItems());
+		return !term.isEmpty() ? RequestsSearch.search(term) : null;
 	}
 
 	/**
@@ -51,12 +43,9 @@ public class CrossReference {
 	 * @param upc the UPC for the product search
 	 * @return the Requests search
 	 */
-	public static RequestsSearch crossReferenceRequestsByUPC(String upc){
-		determinedSearchTerm = determineSearchStringByUPC(upc);
-		if (determinedSearchTerm.equals("")){
-			return null;
-		}
-		return RequestsSearch.search(determinedSearchTerm);
+	public static RequestsSearch requestsByUpc(String upc){
+		String term = termsFromUpc(upc);
+		return !term.isEmpty() ? RequestsSearch.search(term) : null;
 	}
 
 	/**
@@ -65,13 +54,10 @@ public class CrossReference {
 	 * @param searchTerm the search term for the product search
 	 * @return the Torrent search
 	 */
-	public static TorrentSearch crossReferenceTorrentsBySearchTerm(String searchTerm){
+	public static TorrentSearch torrentsByTerm(String searchTerm){
 		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
-		determinedSearchTerm = determineSearchString(ps.getItems());
-		if (determinedSearchTerm.equals("")){
-			return null;
-		}
-		return TorrentSearch.search(determinedSearchTerm);
+		String term = determineSearchString(ps.getItems());
+		return !term.isEmpty() ? TorrentSearch.search(term) : null;
 	}
 
 	/**
@@ -80,12 +66,9 @@ public class CrossReference {
 	 * @param upc the UPC for the product search
 	 * @return the Torrent search
 	 */
-	public static TorrentSearch crossReferenceTorrentsByUPC(String upc){
-		determinedSearchTerm = determineSearchStringByUPC(upc);
-		if (determinedSearchTerm.equals("")){
-			return null;
-		}
-		return TorrentSearch.search(determinedSearchTerm);
+	public static TorrentSearch torrentsByUpc(String upc){
+		String term = termsFromUpc(upc);
+		return !term.isEmpty() ? TorrentSearch.search(term) : null;
 	}
 
 	/**
@@ -94,14 +77,14 @@ public class CrossReference {
 	 * @param searchTerm the search term to use for the product search
 	 * @return a tuple containing the Torrent search (first) and the Requests search (second)
 	 */
-	public static Tuple<TorrentSearch, RequestsSearch> crossReferenceTorrentsAndRequestsBySearchTerm(String searchTerm){
+	public static Tuple<TorrentSearch, RequestsSearch> torrentsAndRequestsByTerm(String searchTerm){
 		ProductSearch ps = ProductSearch.fromTitle(searchTerm);
-		determinedSearchTerm = determineSearchString(ps.getItems());
-		if (determinedSearchTerm.equals("")){
+		String term = determineSearchString(ps.getItems());
+		if (term.isEmpty()){
 			return null;
 		}
-		TorrentSearch t = TorrentSearch.search(determinedSearchTerm);
-		RequestsSearch r = RequestsSearch.search(determinedSearchTerm);
+		TorrentSearch t = TorrentSearch.search(term);
+		RequestsSearch r = RequestsSearch.search(term);
 		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
 	}
 
@@ -111,13 +94,13 @@ public class CrossReference {
 	 * @param upc the UPC for the product search
 	 * @return a tuple containing the Torrent search (first) and the Requests search (second)
 	 */
-	public static Tuple<TorrentSearch, RequestsSearch> crossReferenceTorrentsAndRequestsByUPC(String upc){
-		determinedSearchTerm = determineSearchStringByUPC(upc);
-		if (determinedSearchTerm.equals("")){
+	public static Tuple<TorrentSearch, RequestsSearch> torrentsAndRequestsByUpc(String upc){
+		String term = termsFromUpc(upc);
+		if (term.isEmpty()){
 			return null;
 		}
-		TorrentSearch t = TorrentSearch.search(determinedSearchTerm);
-		RequestsSearch r = RequestsSearch.search(determinedSearchTerm);
+		TorrentSearch t = TorrentSearch.search(term);
+		RequestsSearch r = RequestsSearch.search(term);
 		return new Tuple<TorrentSearch, RequestsSearch>(t, r);
 	}
 
@@ -127,11 +110,11 @@ public class CrossReference {
 	 * @param upc the associated upc
 	 * @return the string
 	 */
-	public static String determineSearchStringByUPC(String upc){
-		String ss = determineSearchStringByMusicBrainz(upc);
+	public static String termsFromUpc(String upc){
+		String ss = termsFromMusicBrainz(upc);
 		if (ss.equals("")){
 			ProductSearch ps = ProductSearch.fromTitle(upc);
-			ss = determineSearchStringByGoogle(ps.getItems(), upc);
+			ss = termsFromGoogle(ps.getItems(), upc);
 		}
 		return ss;
 	}
@@ -142,8 +125,7 @@ public class CrossReference {
 	 * @return SearchString
 	 * if fails ""
 	 */
-
-	public static String determineSearchStringByMusicBrainz(String upc){
+	public static String termsFromMusicBrainz(String upc){
 		try {
 			String response = MySoup.scrapeOther("http://www.musicbrainz.org/ws/2/release/?limit=1&query=barcode:" + upc);
 			SAXParserFactory spfac = SAXParserFactory.newInstance();
@@ -151,22 +133,17 @@ public class CrossReference {
 			MusicBrainzParser handler = new MusicBrainzParser();
 			sp.parse(new InputSource(new StringReader(response)), handler);
 			return handler.searchString;
-			//TODO: On error should we just throw something and then catch it to show a toast?
 		}
 		catch (SAXException e){
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (IOException e){
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (CouldNotLoadException e){
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (ParserConfigurationException e){
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";
@@ -179,7 +156,7 @@ public class CrossReference {
 	 * times are added to the search string. Additionally the function tries to find the artist name, if found the words are counted
 	 * to give them more weight.
 	 */
-	public static String determineSearchStringByGoogle(List<Items> items, String upc){
+	public static String termsFromGoogle(List<Items> items, String upc){
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		String[] keywords;
 		String s = "";
@@ -216,20 +193,17 @@ public class CrossReference {
 				}
 
 			}
-
-		}
-		for (Map.Entry<String, Integer> entry : map.entrySet()){
-			if (entry.getValue() >= items.size() - 1){
-				s += entry.getKey() + " ";
+			for (Map.Entry<String, Integer> entry : map.entrySet()){
+				if (entry.getValue() >= items.size() - 1){
+					s += entry.getKey() + " ";
+				}
 			}
 		}
-
 		return s;
 	}
 
 	/**
-	 * Helper for determineSearchStrinByGoogleProducts
-	 * <p/>
+	 * Helper for determineSearchStringByGoogleProducts
 	 * Tries to find the artists by looking for the two common patterns "artists - title" and "artist : "
 	 */
 	public static String determineAuthor(String s){
@@ -269,7 +243,7 @@ public class CrossReference {
 	}
 
 	/**
-	 * Determine search string. This is the old version and still used for simple
+	 * Determine search string. This is the old version and still used for simple by terms searches
 	 *
 	 * @param items the items
 	 * @return the string
@@ -326,14 +300,5 @@ public class CrossReference {
 		}
 
 		return combinations.get(k);
-	}
-
-	/**
-	 * Gets the determined search term.
-	 *
-	 * @return the determined search term
-	 */
-	public static String getDeterminedSearchTerm(){
-		return determinedSearchTerm;
 	}
 }

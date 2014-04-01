@@ -18,6 +18,7 @@ public class Barcode {
 
 	/**
 	 * Create the barcode for some upc
+	 *
 	 * @param upc the barcode's upc
 	 */
 	public Barcode(String upc){
@@ -30,7 +31,7 @@ public class Barcode {
 	 * we should use when searching the site to see if this item is on there
 	 */
 	public void determineSearchTerms(){
-		searchTerms = CrossReference.determineSearchStringByUPC(upc);
+		searchTerms = CrossReference.termsFromUpc(upc);
 	}
 
 	public String getUpc(){

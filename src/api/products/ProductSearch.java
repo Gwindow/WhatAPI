@@ -1,11 +1,11 @@
 
 package api.products;
 
+import api.son.MySon;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
-
-import api.son.MySon;
 
 /**
  * The Class ProductSearch.
@@ -47,11 +47,13 @@ public class ProductSearch {
 	/** The total items. */
 	private Number totalItems;
 
+	/**
+	 * The url.
+	 */
+	private String url;
+
 	/** The Constant KEY. */
 	private static String KEY = "AIzaSyDOPEJep1GSxaWylXm7Tvdytozve8odmuo";
-
-	/** The url. */
-	private static String url;
 
 	/**
 	 * Product search from upc.
@@ -66,10 +68,10 @@ public class ProductSearch {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		url =
-				("https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&restrictBy=gtin="
-						+ upc + "&alt=json");
-		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
+		String url = "https://www.googleapis.com/shopping/search/v1/public/products?key="
+			+ KEY + "&country=US&restrictBy=gtin=" + upc + "&alt=json";
+		ProductSearch ps = (ProductSearch)MySon.toObjectOther(url, ProductSearch.class);
+		ps.url = url;
 		return ps;
 	}
 
@@ -86,9 +88,10 @@ public class ProductSearch {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		url =
-				("https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&q=" + title + "&alt=json");
-		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
+		String url = "https://www.googleapis.com/shopping/search/v1/public/products?key="
+			+ KEY + "&country=US&q=" + title + "&alt=json";
+		ProductSearch ps = (ProductSearch)MySon.toObjectOther(url, ProductSearch.class);
+		ps.url = url;
 		return ps;
 	}
 
@@ -98,7 +101,7 @@ public class ProductSearch {
 	 * @param key
 	 *            the key
 	 */
-	public static void overrideAPIKey(String key) {
+	public static void setAPIKey(String key) {
 		KEY = key;
 	}
 
@@ -107,10 +110,8 @@ public class ProductSearch {
 	 * 
 	 * @return true, if successful
 	 */
-	public boolean hasItems() {
-		if (totalItems.intValue() > 0)
-			return true;
-		return false;
+	public boolean hasItems(){
+		return totalItems.intValue() > 0;
 	}
 
 	/**
@@ -322,25 +323,19 @@ public class ProductSearch {
 		this.totalItems = totalItems;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ProductSearch [currentItemCount=" + currentItemCount + ", etag=" + etag + ", id=" + id + ", items=" + items
-				+ ", itemsPerPage=" + itemsPerPage + ", kind=" + kind + ", nextLink=" + nextLink + ", requestId=" + requestId
-				+ ", selfLink=" + selfLink + ", startIndex=" + startIndex + ", totalItems=" + totalItems + "]";
-	}
-
 	/**
 	 * Gets the url.
-	 * 
+	 *
 	 * @return the url
 	 */
-	public static String getUrl() {
+	public String getUrl(){
 		return url;
 	}
 
+	@Override
+	public String toString(){
+		return "ProductSearch [currentItemCount=" + currentItemCount + ", etag=" + etag + ", id=" + id + ", items=" + items
+			+ ", itemsPerPage=" + itemsPerPage + ", kind=" + kind + ", nextLink=" + nextLink + ", requestId=" + requestId
+			+ ", selfLink=" + selfLink + ", startIndex=" + startIndex + ", totalItems=" + totalItems + "]";
+	}
 }
