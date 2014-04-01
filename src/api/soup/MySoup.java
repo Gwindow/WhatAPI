@@ -1,10 +1,9 @@
 package api.soup;
 
 import api.index.Index;
+import api.son.MySon;
 import api.util.CouldNotLoadException;
 import api.util.Tuple;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
@@ -281,12 +280,11 @@ public class MySoup {
 	 *
 	 * @param url  the url extension to get
 	 * @param t    type of object to create
-	 * @param gson Gson deserializer to parse the stream
 	 * @return the parsed object or null if parsing failed
 	 * @throws CouldNotLoadException if the url could not be loaded
 	 * @throws IllegalStateException if the site was not set prior to this call
 	 */
-	public static Object scrape(String url, Type t, final Gson gson) throws CouldNotLoadException, IllegalStateException{
+	public static Object scrape(String url, Type t) throws CouldNotLoadException, IllegalStateException{
 		if (site == null){
 			throw new IllegalStateException("Must call MySoup.setSite before use");
 		}
@@ -296,8 +294,7 @@ public class MySoup {
 			connection = newHttpConnection(new URL(site + url));
 			connection.setRequestProperty("User-Agent", userAgent);
 			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
-			JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-			o = gson.fromJson(reader, t);
+			o = MySon.toObject(in, t);
 			in.close();
 		}
 		catch (IOException e){
@@ -371,15 +368,14 @@ public class MySoup {
 		return response;
 	}
 
-	public static Object scrapeOther(String url, Type t, final Gson gson) throws CouldNotLoadException{
+	public static Object scrapeOther(String url, Type t) throws CouldNotLoadException{
 		Object o = null;
 		HttpURLConnection connection = null;
 		try {
 			connection = newHttpConnection(new URL(url));
 			connection.setRequestProperty("User-Agent", userAgent);
 			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
-			JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-			o = gson.fromJson(reader, t);
+			o = MySon.toObject(in, t);
 			in.close();
 		}
 		catch (IOException e){
@@ -480,7 +476,7 @@ public class MySoup {
 		MySoup.userAgent = userAgent;
 	}
 
-	public static boolean isSslEnabled(){
+	public static boolean isSSlEnabled(){
 		return sslEnabled;
 	}
 

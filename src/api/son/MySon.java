@@ -4,6 +4,7 @@ import api.soup.MySoup;
 import api.util.CouldNotLoadException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -46,7 +47,7 @@ public class MySon {
 			startTime = System.currentTimeMillis();
 		}
 		try {
-			Object o = MySoup.scrape(url, t, gson);
+			Object o = MySoup.scrape(url, t);
 			if (isDebugEnabled){
 				endTime = System.currentTimeMillis();
 				float totalTime = (endTime - startTime) / 1000f;
@@ -90,6 +91,24 @@ public class MySon {
 	}
 
 	/**
+	 * Deserialize a JSON object from an input stream
+	 *
+	 * @param stream stream to deserialize from
+	 * @param t      type to deserialize
+	 * @return the deserialized object or null if deserializing failed
+	 */
+	public static Object toObject(InputStream stream, Type t){
+		try {
+			JsonReader reader = new JsonReader(new InputStreamReader(stream, "UTF-8"));
+			return gson.fromJson(reader, t);
+		}
+		catch (UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
 	 * Create an Object of some Type from a non-What.CD url response
 	 *
 	 * @param url url to get the JSON data from
@@ -98,7 +117,7 @@ public class MySon {
 	 */
 	public static Object toObjectOther(String url, Type t){
 		try {
-			return MySoup.scrapeOther(url, t, gson);
+			return MySoup.scrapeOther(url, t);
 		}
 		catch (CouldNotLoadException e){
 			e.printStackTrace();
@@ -135,28 +154,6 @@ public class MySon {
 	 */
 	public static String toJson(Object o, Type t){
 		return gson.toJson(o, t);
-	}
-
-	/**
-	 * Prints the stream from some reader
-	 *
-	 * @param reader the reader to get the stream from
-	 */
-	private void printStream(Reader reader){
-		char[] arr = new char[8 * 1024]; // 8K at a time
-		StringBuilder builder = new StringBuilder();
-		int numChars;
-
-		try {
-			while ((numChars = reader.read(arr, 0, arr.length)) > 0){
-				builder.append(arr, 0, numChars);
-			}
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-
-		System.out.println(builder.toString());
 	}
 
 	/**

@@ -1,346 +1,136 @@
 
 package api.products;
 
+import api.son.MySon;
+import api.soup.MySoup;
+import com.google.gson.annotations.SerializedName;
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+import oauth.signpost.exception.OAuthException;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-import api.son.MySon;
-
 /**
- * The Class ProductSearch.
- * 
- * @author Gwindow
+ * Use this class to look up product UPCs using the Semantics3 API
+ * Be sure to set your credentials prior to use or an IllegalStateException will be thrown
  */
 public class ProductSearch {
-
-	/** The current item count. */
-	private Number currentItemCount;
-
-	/** The etag. */
-	private String etag;
-
-	/** The id. */
-	private String id;
-
-	/** The items. */
-	private List<Items> items;
-
-	/** The items per page. */
-	private Number itemsPerPage;
-
-	/** The kind. */
-	private String kind;
-
-	/** The next link. */
-	private String nextLink;
-
-	/** The request id. */
-	private String requestId;
-
-	/** The self link. */
-	private String selfLink;
-
-	/** The start index. */
-	private Number startIndex;
-
-	/** The total items. */
-	private Number totalItems;
-
-	/** The Constant KEY. */
-	private static String KEY = "AIzaSyDOPEJep1GSxaWylXm7Tvdytozve8odmuo";
-
-	/** The url. */
-	private static String url;
+	/**
+	 * Semantics3 products testing and production API endpoints
+	 */
+	private static final String PRODUCTION = "https://api.semantics3.com/v1/products?q=",
+		TESTING = "https://api.semantics3.com/test/v1/products?q=";
+	/**
+	 * API authentication key, secret and OAuth consumer
+	 */
+	private static String key, secret;
+	private OAuthConsumer consumer;
+	/**
+	 * If we should hit the production API or the testing api
+	 */
+	private static boolean testing;
 
 	/**
-	 * Product search from upc.
-	 * 
-	 * @param upc
-	 *            the upc
-	 * @return the product search
+	 * Set the api key and secret to be used for authentication. This must be done
+	 * prior to making any API calls
+	 *
+	 * @param k API key
+	 * @param s API secret
 	 */
-	public static ProductSearch fromUPC(String upc) {
+	public static void setCredentials(String k, String s, boolean t){
+		key = k;
+		secret = s;
+		testing = t;
+	}
+
+	/**
+	 * Load a product search for some UPC
+	 *
+	 * @return the products returned by the API or null if loading failed
+	 * @throws java.lang.IllegalStateException if api key & secret have not been set
+	 */
+	public static List<Product> fromUPC(String upc) throws IllegalStateException{
+		if (key == null || secret == null){
+			throw new IllegalStateException("Must set API key and secret prior to use");
+		}
+		ProductSearch search = new ProductSearch();
+		HttpURLConnection connection = null;
 		try {
-			upc = URLEncoder.encode(upc, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
+			String request = testing ? TESTING : PRODUCTION;
+			request += URLEncoder.encode("{\"upc\":\"" + upc + "\"}", "UTF-8");
+			URL url = new URL(request);
+			connection = (HttpURLConnection)url.openConnection();
+			connection.setRequestProperty("User-Agent", MySoup.getUserAgent());
+			//Use basic header auth for testing
+			if (testing){
+				connection.setRequestProperty("api_key", key);
+			}
+			else {
+				search.consumer.sign(connection);
+			}
+			connection.connect();
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			SemanticsResponse response = (SemanticsResponse)MySon.toObject(in, SemanticsResponse.class);
+			in.close();
+			return response != null ? response.getResults() : null;
+		}
+		catch (UnsupportedEncodingException e){
 			e.printStackTrace();
 		}
-		url =
-				("https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&restrictBy=gtin="
-						+ upc + "&alt=json");
-		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
-		return ps;
-	}
-
-	/**
-	 * Product search from title.
-	 * 
-	 * @param title
-	 *            the title
-	 * @return the product search
-	 */
-	public static ProductSearch fromTitle(String title) {
-		try {
-			title = URLEncoder.encode(title, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
+		catch (IOException e){
 			e.printStackTrace();
 		}
-		url =
-				("https://www.googleapis.com/shopping/search/v1/public/products?key=" + KEY + "&country=US&q=" + title + "&alt=json");
-		ProductSearch ps = (ProductSearch) MySon.toObjectOther(getUrl(), ProductSearch.class);
-		return ps;
+		catch (OAuthException e){
+			e.printStackTrace();
+		}
+		finally {
+			if (connection != null){
+				connection.disconnect();
+			}
+		}
+		return null;
+	}
+
+	private ProductSearch(){
+		consumer = new DefaultOAuthConsumer(key, secret);
+		consumer.setTokenWithSecret("", "");
 	}
 
 	/**
-	 * Override api key.
-	 * 
-	 * @param key
-	 *            the key
+	 * We don't need to expose some of the top level fields of the response to the user, just the
+	 * list of products returned
 	 */
-	public static void overrideAPIKey(String key) {
-		KEY = key;
-	}
+	private static class SemanticsResponse {
+		@SerializedName("total_results_count")
+		private Integer totalResultsCount;
+		private Integer offset, results_count;
+		private String code;
+		private List<Product> results;
 
-	/**
-	 * Checks for items.
-	 * 
-	 * @return true, if successful
-	 */
-	public boolean hasItems() {
-		if (totalItems.intValue() > 0)
-			return true;
-		return false;
-	}
+		public Integer getTotalResultsCount(){
+			return totalResultsCount;
+		}
 
-	/**
-	 * Gets the current item count.
-	 * 
-	 * @return the current item count
-	 */
-	public Number getCurrentItemCount() {
-		return this.currentItemCount;
-	}
+		public Integer getOffset(){
+			return offset;
+		}
 
-	/**
-	 * Sets the current item count.
-	 * 
-	 * @param currentItemCount
-	 *            the new current item count
-	 */
-	public void setCurrentItemCount(Number currentItemCount) {
-		this.currentItemCount = currentItemCount;
-	}
+		public Integer getResults_count(){
+			return results_count;
+		}
 
-	/**
-	 * Gets the etag.
-	 * 
-	 * @return the etag
-	 */
-	public String getEtag() {
-		return this.etag;
-	}
+		public String getCode(){
+			return code;
+		}
 
-	/**
-	 * Sets the etag.
-	 * 
-	 * @param etag
-	 *            the new etag
-	 */
-	public void setEtag(String etag) {
-		this.etag = etag;
+		public List<Product> getResults(){
+			return results;
+		}
 	}
-
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	public String getId() {
-		return this.id;
-	}
-
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id
-	 *            the new id
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * Gets the items.
-	 * 
-	 * @return the items
-	 */
-	public List<Items> getItems() {
-		return this.items;
-	}
-
-	/**
-	 * Sets the items.
-	 * 
-	 * @param items
-	 *            the new items
-	 */
-	public void setItems(List<Items> items) {
-		this.items = items;
-	}
-
-	/**
-	 * Gets the items per page.
-	 * 
-	 * @return the items per page
-	 */
-	public Number getItemsPerPage() {
-		return this.itemsPerPage;
-	}
-
-	/**
-	 * Sets the items per page.
-	 * 
-	 * @param itemsPerPage
-	 *            the new items per page
-	 */
-	public void setItemsPerPage(Number itemsPerPage) {
-		this.itemsPerPage = itemsPerPage;
-	}
-
-	/**
-	 * Gets the kind.
-	 * 
-	 * @return the kind
-	 */
-	public String getKind() {
-		return this.kind;
-	}
-
-	/**
-	 * Sets the kind.
-	 * 
-	 * @param kind
-	 *            the new kind
-	 */
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-
-	/**
-	 * Gets the next link.
-	 * 
-	 * @return the next link
-	 */
-	public String getNextLink() {
-		return this.nextLink;
-	}
-
-	/**
-	 * Sets the next link.
-	 * 
-	 * @param nextLink
-	 *            the new next link
-	 */
-	public void setNextLink(String nextLink) {
-		this.nextLink = nextLink;
-	}
-
-	/**
-	 * Gets the request id.
-	 * 
-	 * @return the request id
-	 */
-	public String getRequestId() {
-		return this.requestId;
-	}
-
-	/**
-	 * Sets the request id.
-	 * 
-	 * @param requestId
-	 *            the new request id
-	 */
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
-	}
-
-	/**
-	 * Gets the self link.
-	 * 
-	 * @return the self link
-	 */
-	public String getSelfLink() {
-		return this.selfLink;
-	}
-
-	/**
-	 * Sets the self link.
-	 * 
-	 * @param selfLink
-	 *            the new self link
-	 */
-	public void setSelfLink(String selfLink) {
-		this.selfLink = selfLink;
-	}
-
-	/**
-	 * Gets the start index.
-	 * 
-	 * @return the start index
-	 */
-	public Number getStartIndex() {
-		return this.startIndex;
-	}
-
-	/**
-	 * Sets the start index.
-	 * 
-	 * @param startIndex
-	 *            the new start index
-	 */
-	public void setStartIndex(Number startIndex) {
-		this.startIndex = startIndex;
-	}
-
-	/**
-	 * Gets the total items.
-	 * 
-	 * @return the total items
-	 */
-	public Number getTotalItems() {
-		return this.totalItems;
-	}
-
-	/**
-	 * Sets the total items.
-	 * 
-	 * @param totalItems
-	 *            the new total items
-	 */
-	public void setTotalItems(Number totalItems) {
-		this.totalItems = totalItems;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ProductSearch [currentItemCount=" + currentItemCount + ", etag=" + etag + ", id=" + id + ", items=" + items
-				+ ", itemsPerPage=" + itemsPerPage + ", kind=" + kind + ", nextLink=" + nextLink + ", requestId=" + requestId
-				+ ", selfLink=" + selfLink + ", startIndex=" + startIndex + ", totalItems=" + totalItems + "]";
-	}
-
-	/**
-	 * Gets the url.
-	 * 
-	 * @return the url
-	 */
-	public static String getUrl() {
-		return url;
-	}
-
 }

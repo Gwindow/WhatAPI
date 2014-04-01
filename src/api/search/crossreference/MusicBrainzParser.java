@@ -26,7 +26,8 @@ public class MusicBrainzParser extends DefaultHandler {
     public void characters(char ch[], int start, int length) throws SAXException {
         if((artist && name) || title){
             searchString += new String(ch, start, length);
-            searchString += " ";        }
+	        searchString += " ";
+        }
     }
     public void endElement(String uri, String localName, String qName)throws SAXException {
         if(qName.equalsIgnoreCase("name")) {
