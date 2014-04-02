@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -185,7 +185,7 @@ public class Torrents {
 	 * Get a list of files that are in the torrent and their sizes
 	 */
 	public List<TorrentFile> getTorrentFiles(){
-		List<TorrentFile> files = new LinkedList<TorrentFile>();
+		List<TorrentFile> files = new ArrayList<TorrentFile>();
 		//Torrent files are formatted: file{{{size}}}|||file2{{{size2}}}
 		for (String f : fileList.split("[|]{3}")){
 			files.add(new TorrentFile(f));
