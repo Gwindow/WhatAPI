@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The Class Torrents.
@@ -177,6 +179,18 @@ public class Torrents {
 	 */
 	public String getFileList(){
 		return this.fileList;
+	}
+
+	/**
+	 * Get a list of files that are in the torrent and their sizes
+	 */
+	public List<TorrentFile> getTorrentFiles(){
+		List<TorrentFile> files = new LinkedList<TorrentFile>();
+		//Torrent files are formatted: file{{{size}}}|||file2{{{size2}}}
+		for (String f : fileList.split("[|]{3}")){
+			files.add(new TorrentFile(f));
+		}
+		return files;
 	}
 
 	/**
