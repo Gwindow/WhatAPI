@@ -2,6 +2,7 @@ package api.torrents.torrents;
 
 import api.son.MySon;
 import api.soup.MySoup;
+import api.torrents.torrents.comments.TorrentComments;
 import api.util.Tuple;
 
 import java.io.FileOutputStream;
@@ -286,6 +287,13 @@ public class TorrentGroup {
 			e.printStackTrace();
 		}
 		return s;
+	}
+
+	/**
+	 * Load the comments for this torrent
+	 */
+	public TorrentComments loadComments(){
+		return TorrentComments.fromId(getId());
 	}
 
 	@Override
