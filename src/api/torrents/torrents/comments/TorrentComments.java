@@ -1,11 +1,11 @@
-package api.comments;
-
-import java.util.ArrayList;
-import java.util.List;
+package api.torrents.torrents.comments;
 
 import api.son.MySon;
 import api.soup.MySoup;
 import api.util.Tuple;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class TorrentComments
