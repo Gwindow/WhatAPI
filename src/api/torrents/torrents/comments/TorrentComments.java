@@ -27,12 +27,16 @@ public class TorrentComments {
 	private transient int groupId;
 
 	/**
-	 * Get the first page of comments for some torrent group
+	 * Get the last page of comments for some torrent group, this mimics the
+	 * site behavior of showing latest comments first.
 	 *
 	 * @param id id of torrent group to get comments
 	 */
 	public static TorrentComments fromId(int id){
-		return fromId(id, 1);
+		String url = "ajax.php?action=tcomments&id=" + id;
+		TorrentComments tc = (TorrentComments)MySon.toObject(url, TorrentComments.class);
+		tc.groupId = id;
+		return tc;
 	}
 
 	/**
@@ -104,7 +108,7 @@ public class TorrentComments {
 	 * Check if a next page of comments is available
 	 */
 	public boolean hasNextPage(){
-		return response.getPage() != null && response.getPages().intValue() < response.getPages().intValue();
+		return response.getPage() != null && response.getPage().intValue() < response.getPages().intValue();
 	}
 
 	/**
