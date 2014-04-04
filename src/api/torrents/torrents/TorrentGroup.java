@@ -38,6 +38,11 @@ public class TorrentGroup {
 	private transient TorrentComments comments;
 
 	/**
+	 * The torrent editions, initialize with getEditions
+	 */
+	private transient List<EditionTorrents> editions;
+
+	/**
 	 * The id.
 	 */
 	private transient int id;
@@ -138,26 +143,29 @@ public class TorrentGroup {
 	 * the list of all editions/remasters of the torrent
 	 */
 	public List<EditionTorrents> getEditions(){
-		ArrayList<EditionTorrents> editionTorrents = new ArrayList<EditionTorrents>();
+		if (editions != null){
+			return editions;
+		}
+		editions = new ArrayList<EditionTorrents>();
 		List<Torrents> torrents = getResponse().getTorrents();
 		//Start by adding the first edition
 		Edition e = new Edition(torrents.get(0), getResponse().getGroup());
-		editionTorrents.add(new EditionTorrents(e));
-		editionTorrents.get(0).addTorrent(torrents.get(0));
+		editions.add(new EditionTorrents(e));
+		editions.get(0).addTorrent(torrents.get(0));
 
 		int i = 0;
 		for (Torrents t : torrents.subList(1, torrents.size())){
 			e = new Edition(t, getResponse().getGroup());
-			if (editionTorrents.get(i).getEdition().equals(e)){
-				editionTorrents.get(i).addTorrent(t);
+			if (editions.get(i).getEdition().equals(e)){
+				editions.get(i).addTorrent(t);
 			}
 			else {
-				editionTorrents.add(new EditionTorrents(e));
+				editions.add(new EditionTorrents(e));
 				++i;
-				editionTorrents.get(i).addTorrent(t);
+				editions.get(i).addTorrent(t);
 			}
 		}
-		return editionTorrents;
+		return editions;
 	}
 
 	/**
