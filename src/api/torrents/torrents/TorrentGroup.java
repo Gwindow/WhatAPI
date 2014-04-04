@@ -33,6 +33,11 @@ public class TorrentGroup {
 	private String status;
 
 	/**
+	 * The torrent comments. Must be loaded separately with loadComments
+	 */
+	private transient TorrentComments comments;
+
+	/**
 	 * The id.
 	 */
 	private transient int id;
@@ -293,7 +298,15 @@ public class TorrentGroup {
 	 * Load the comments for this torrent
 	 */
 	public TorrentComments loadComments(){
-		return TorrentComments.fromId(getId());
+		comments = TorrentComments.fromId(getId());
+		return comments;
+	}
+
+	/**
+	 * Get the torrent comments, or null if they haven't been loaded (call loadComments)
+	 */
+	public TorrentComments getComments(){
+		return comments;
 	}
 
 	@Override
