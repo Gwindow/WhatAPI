@@ -485,7 +485,7 @@ public class Torrents {
 			title.append(remasterTitle).append(" / ");
 		}
 		if (!remasterCatalogueNumber.isEmpty()){
-			title.append(remasterCatalogueNumber).append(" / ");
+			title.append(remasterCatalogueNumber);
 		}
 		return title.toString();
 	}
