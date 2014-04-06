@@ -5,6 +5,7 @@ import api.util.CouldNotLoadException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -154,6 +155,20 @@ public class MySon {
 	 */
 	public static String toJson(Object o, Type t){
 		return gson.toJson(o, t);
+	}
+
+	/**
+	 * Serialize an Object of some type to a JSON file
+	 *
+	 * @param o    the object to serialize
+	 * @param file writer to write to. Will be closed after writing is finished
+	 * @param t    type of object
+	 * @throws IOException if writing fails
+	 */
+	public static void toFile(Object o, Writer file, Type t) throws IOException{
+		JsonWriter writer = new JsonWriter(file);
+		gson.toJson(o, t, writer);
+		writer.close();
 	}
 
 	/**
