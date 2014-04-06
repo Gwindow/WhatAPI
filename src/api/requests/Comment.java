@@ -1,14 +1,18 @@
 package api.requests;
 
+import api.comments.SimpleComment;
+import api.soup.MySoup;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
- * The Class Comment.
+ * The Class SimpleComment.
  * Stores information about a user's comment on a Request
  * 
  * @author Gwindow
  */
-public class Comment {
+public class Comment implements SimpleComment {
 	/** The time the comment was made */
 	private String addedTime;
 	
@@ -49,129 +53,86 @@ public class Comment {
 	/** If the author is warned */
 	private boolean warned;
 
-	/**
-	 * Get the time the comment was added
-	 * 
-	 * @return the time the comment was added
-	 */
-	public String getAddedTime() {
-		return addedTime;
-	}
-
-	/**
-	 * Get the author's user id
-	 * 
-	 * @return the author's user id
-	 */
-	public Number getAuthorId() {
-		return authorId;
-	}
-
-	/**
-	 * Get the author's avatar URL
-	 * 
-	 * @return the avatar url
-	 */
-	public String getAvatar() {
-		return avatar;
-	}
-
-	/**
-	 * Get the author's user class
-	 * 
-	 * @return the user class
-	 */
-	public String getUserClass() {
+	public String getUserClass(){
 		return userClass;
 	}
 
-	/**
-	 * Get the comment text
-	 * 
-	 * @return the comment text
-	 */
-	public String getComment() {
-		return comment;
-	}
-
-	/**
-	 * Check if the author is a donor
-	 * 
-	 * @return True if the author is a donor
-	 */
-	public boolean isDonor() {
-		return donor;
-	}
-
-	/**
-	 * Get the time the comment was edited
-	 * 
-	 * @return the time the comment was edited
-	 */
-	public String getEditedTime() {
-		return editedTime;
-	}
-
-	/**
-	 * Get the editor's user id.
-	 * 
-	 * @return the editor's user id
-	 */
-	public Number getEditedUserId() {
-		return editedUserId;
-	}
-
-	/**
-	 * Get the editor's user name
-	 * 
-	 * @return the editor's user name
-	 */
-	public String getEditedUsername() {
-		return editedUsername;
-	}
-
-	/**
-	 * Check if the author's account is enabled
-	 * 
-	 * @return True if the account is enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	/**
-	 * Get the author's user name
-	 * 
-	 * @return the author's user name
-	 */
-	public String getName() {
+	@Override
+	public String getAuthor(){
 		return name;
 	}
 
-	/**
-	 * Get the comment post id
-	 * 
-	 * @return the post id
-	 */
-	public Number getPostId() {
-		return postId;
+	@Override
+	public int getAuthorId(){
+		return authorId.intValue();
 	}
 
-	/**
-	 * Check if the author has been warned
-	 * 
-	 * @return True if they've been warned
-	 */
-	public boolean isWarned() {
+	@Override
+	public String getAvatar(){
+		return avatar;
+	}
+
+	@Override
+	public Date getTimePosted(){
+		return MySoup.parseDate(addedTime);
+	}
+
+	@Override
+	public String getEditor(){
+		return editedUsername;
+	}
+
+	@Override
+	public int getEditorId(){
+		return editedUserId.intValue();
+	}
+
+	@Override
+	public Date getTimeEdited(){
+		return MySoup.parseDate(editedTime);
+	}
+
+	@Override
+	public String getBody(){
+		return comment;
+	}
+
+	@Override
+	public void setBody(String s){
+		comment = s;
+	}
+
+	@Override
+	public String getQuote(){
+		return "[quote=" + name + "]" + comment + "[/quote]";
+	}
+
+	@Override
+	public int getPostId(){
+		return postId.intValue();
+	}
+
+	@Override
+	public boolean isDonor(){
+		return donor;
+	}
+
+	@Override
+	public boolean isWarned(){
 		return warned;
 	}
 
 	@Override
+	public boolean isBanned(){
+		return !enabled;
+	}
+
+	@Override
 	public String toString() {
-		return "Comment [getAddedTime=" + getAddedTime() + ", getAuthorId=" + getAuthorId() + ", getAvatar=" + getAvatar()
-				+ ", getUserClass=" + getUserClass() + ", getComment=" + getComment() + ", isDonor=" + isDonor()
-				+ ", getEditedTime=" + getEditedTime() + ", getEditedUserId=" + getEditedUserId() + ", getEditedUsername="
-				+ getEditedUsername() + ", isEnabled=" + isEnabled() + ", getName=" + getName() + ", getPostId=" + getPostId()
-				+ ", isWarned=" + isWarned() + "]";
+		return "Comment [getAddedTime=" + addedTime + ", getAuthorId=" + getAuthorId() + ", getAvatar=" + getAvatar()
+			+ ", getUserClass=" + userClass + ", getComment=" + comment + ", isDonor=" + isDonor()
+			+ ", getEditedTime=" + editedTime + ", getEditedUserId=" + editedUserId + ", getEditedUsername="
+			+ editedUsername + ", isEnabled=" + enabled + ", getName=" + name + ", getPostId=" + getPostId()
+			+ ", isWarned=" + isWarned() + "]";
 	}
 }

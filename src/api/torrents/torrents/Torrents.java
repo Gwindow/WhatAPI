@@ -426,20 +426,74 @@ public class Torrents {
 	 * @return the remaster
 	 */
 	public String getRemaster(){
-		String ed = remasterYear + " - ";
+		StringBuilder ed = new StringBuilder();
+		ed.append(remasterYear).append(" - ");
 		if (!remasterRecordLabel.isEmpty()){
-			ed += remasterRecordLabel + " / ";
+			ed.append(remasterRecordLabel).append(" / ");
 		}
 		if (!remasterTitle.isEmpty()){
-			ed += remasterTitle + " / ";
+			ed.append(remasterTitle).append(" / ");
 		}
 		if (!remasterCatalogueNumber.isEmpty()){
-			ed += remasterCatalogueNumber + " / ";
+			ed.append(remasterCatalogueNumber).append(" / ");
 		}
 		if (!media.isEmpty()){
-			ed += media;
+			ed.append(media);
 		}
-		return ed;
+		return ed.toString();
+	}
+
+	/**
+	 * Get a short title that identifies this torrent and edition.
+	 * Title is format remaster title/media/format
+	 */
+	public String getShortTitle(){
+		StringBuilder title = new StringBuilder();
+		if (remasterTitle.isEmpty()){
+			title.append("Original Release");
+		}
+		else {
+			title.append(remasterTitle);
+		}
+		title.append("/")
+			.append(media)
+			.append("/");
+		//Display FLAC or 320/V0/V2 as appropriate.
+		if (format.equalsIgnoreCase("MP3")){
+			title.append(encoding);
+		}
+		else {
+			title.append(format);
+		}
+		return title.toString();
+	}
+
+	/**
+	 * Get a string describing the title of this edition. May instead want to change
+	 * where the built up edition information is stored
+	 */
+	public String getEditionTitle(){
+		if (!isRemastered()){
+			return "Original Release";
+		}
+		StringBuilder title = new StringBuilder();
+		title.append(remasterYear).append(" - ");
+		if (!remasterRecordLabel.isEmpty()){
+			title.append(remasterRecordLabel);
+			if (!remasterTitle.isEmpty() || !remasterCatalogueNumber.isEmpty()){
+				title.append(" / ");
+			}
+		}
+		if (!remasterTitle.isEmpty()){
+			title.append(remasterTitle);
+			if (!remasterCatalogueNumber.isEmpty()){
+				title.append(" / ");
+			}
+		}
+		if (!remasterCatalogueNumber.isEmpty()){
+			title.append(remasterCatalogueNumber);
+		}
+		return title.toString();
 	}
 
 	/**

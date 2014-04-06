@@ -1,12 +1,17 @@
 package api.forum.thread;
 
+import api.comments.SimpleComment;
+import api.soup.MySoup;
+
+import java.util.Date;
+
 /**
  * The Class Post.
  * Stores information about a forum post
  *
  * @author Gwindow
  */
-public class Post {
+public class Post implements SimpleComment {
 	/** The time the post was made */
 	private String addedTime;
 
@@ -31,93 +36,85 @@ public class Post {
 	/** The post id. */
 	private Number postId;
 
-	/**
-	 * Get the time the post was made
-	 * 
-	 * @return the time the post was made
-	 */
-	public String getAddedTime() {
-		return this.addedTime;
+	public String getBbBody(){
+		return bbBody;
 	}
 
-	/**
-	 * Get the post author
-	 * 
-	 * @return the post author
-	 */
-	public Author getAuthor() {
-		return this.author;
+	@Override
+	public String getAuthor(){
+		return author.getAuthorName();
 	}
 
-	/**
-	 * Get the post body
-	 * 
-	 * @return the body
-	 */
-	public String getBody() {
-		return this.body;
+	@Override
+	public int getAuthorId(){
+		return author.getAuthorId().intValue();
 	}
 
-    /**
-     * Get the bulletin board formatted body of the post, for quoting
-     *
-     * @return the bulletin board formatted body
-     */
-    public String getBBBody() {
-        return this.bbBody.replace("\r", "");
-    }
-
-	/**
-	 * Get the time the post was edited
-	 * 
-	 * @return the time the post was edited
-	 */
-	public String getEditedTime() {
-		return this.editedTime;
+	@Override
+	public String getAvatar(){
+		return author.getAvatar();
 	}
 
-	/**
-	 * Get the user id of the editor
-	 * 
-	 * @return the editor's user id
-	 */
-	public Number getEditedUserId() {
-		return this.editedUserId;
+	@Override
+	public Date getTimePosted(){
+		return MySoup.parseDate(addedTime);
 	}
 
-	/**
-	 * Get the user name of the editor
-	 * 
-	 * @return the editor's username
-	 */
-	public String getEditedUsername() {
-		return this.editedUsername;
+	@Override
+	public String getEditor(){
+		return editedUsername;
 	}
 
-	/**
-	 * Get the post id.
-	 * 
-	 * @return the post id
-	 */
-	public Number getPostId() {
-		return this.postId;
+	@Override
+	public int getEditorId(){
+		return editedUserId.intValue();
 	}
 
-	/**
-	 * Get the post body as a bulletin board quote,
-     * ie. [quote=author name]bbBody[/quote]
-	 * 
-	 * @return the quoted post
-	 */
-	public String getQuotableBody() {
-		return "[quote=" + author.getAuthorName() + "]" + getBBBody() + "[/quote]";
+	@Override
+	public Date getTimeEdited(){
+		return MySoup.parseDate(editedTime);
+	}
+
+	@Override
+	public String getBody(){
+		return body;
+	}
+
+	@Override
+	public void setBody(String s){
+		body = s;
+	}
+
+	@Override
+	public String getQuote(){
+		return "[quote=" + getAuthor() + "]" + bbBody + "[/quote]";
+	}
+
+	@Override
+	public int getPostId(){
+		return postId.intValue();
+	}
+
+	@Override
+	public boolean isDonor(){
+		return author.isDonor();
+	}
+
+	@Override
+	public boolean isWarned(){
+		return author.isWarned();
+	}
+
+	@Override
+	public boolean isBanned(){
+		return !author.isEnabled();
 	}
 
 	@Override
 	public String toString() {
-		return "Post [getBBBody()=" + getBBBody() + ", getAddedTime()=" + getAddedTime() + ", getAuthor()=" + getAuthor()
-				+ ", getBody()=" + getBody() + ", getEditedTime()=" + getEditedTime() + ", getEditedUserId()="
-				+ getEditedUserId() + ", getEditedUsername()=" + getEditedUsername() + ", getPostId()=" + getPostId()
-				+ ", getQuotableBody()=" + getQuotableBody() + "]";
+		return "Post [getBBBody()=" + bbBody + ", getAddedTime()=" + addedTime + ", getAuthor()=" + getAuthor()
+			+ ", getBody()=" + getBody() + ", getEditedTime()=" + editedTime + ", getEditedUserId()="
+			+ editedUserId + ", getEditedUsername()=" + editedUsername + ", getPostId()=" + getPostId()
+			+ ", getQuotableBody()=" + getQuote() + "]";
 	}
 }
