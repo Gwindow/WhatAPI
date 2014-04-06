@@ -49,6 +49,12 @@ public interface SimpleComment {
 	public String getBody();
 
 	/**
+	 * Set the body html of text of the post
+	 * (this is used for the apps emoticon -> emoji step)
+	 */
+	public void setBody(String s);
+
+	/**
 	 * Get the post body as a quote
 	 */
 	public String getQuote();

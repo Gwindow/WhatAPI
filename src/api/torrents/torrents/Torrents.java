@@ -479,10 +479,16 @@ public class Torrents {
 		StringBuilder title = new StringBuilder();
 		title.append(remasterYear).append(" - ");
 		if (!remasterRecordLabel.isEmpty()){
-			title.append(remasterRecordLabel).append(" / ");
+			title.append(remasterRecordLabel);
+			if (!remasterTitle.isEmpty() || !remasterCatalogueNumber.isEmpty()){
+				title.append(" / ");
+			}
 		}
 		if (!remasterTitle.isEmpty()){
-			title.append(remasterTitle).append(" / ");
+			title.append(remasterTitle);
+			if (!remasterCatalogueNumber.isEmpty()){
+				title.append(" / ");
+			}
 		}
 		if (!remasterCatalogueNumber.isEmpty()){
 			title.append(remasterCatalogueNumber);

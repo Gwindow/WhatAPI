@@ -66,6 +66,11 @@ public class Comment implements SimpleComment {
 	}
 
 	@Override
+	public void setBody(String s){
+		body = s;
+	}
+
+	@Override
 	public String getQuote(){
 		return "[quote=" + getAuthor() + "]" + bbBody + "[/quote]";
 	}
