@@ -1,5 +1,6 @@
 package api.comments;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -8,6 +9,15 @@ import java.util.Date;
  * but all structured differently, this cleans it up
  */
 public interface SimpleComment {
+	/**
+	 * Comparator to sort the comments by time posted
+	 */
+	public static class DateComparator implements Comparator<SimpleComment> {
+		public int compare(SimpleComment a, SimpleComment b){
+			return a.getTimePosted().compareTo(b.getTimePosted());
+		}
+	}
+
 	/**
 	 * Get the author of the post
 	 */
