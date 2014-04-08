@@ -28,6 +28,11 @@ public class UserProfile {
 		return user != null && user.getStatus() && userRecents != null && userRecents.getStatus();
 	}
 
+	public String getError(){
+		return user.getError() != null ? user.getError()
+			: userRecents.getError() != null ? userRecents.getError() : null;
+	}
+
 	@Override
 	public String toString(){
 		return "UserProfile [status=" + (getStatus() ? "true" : "false") + ", user=" + user
