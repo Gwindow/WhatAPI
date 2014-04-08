@@ -27,6 +27,8 @@ public class Artist {
 	/** The status. */
 	private String status;
 
+	private String error;
+
 	/** The id. */
 	private int id;
 
@@ -91,6 +93,10 @@ public class Artist {
     public boolean getStatus() {
         return status.equalsIgnoreCase("success");
     }
+
+	public String getError(){
+		return error;
+	}
 
 	/**
 	 * Adds the bookmark.

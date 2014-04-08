@@ -21,6 +21,8 @@ public class Subscriptions {
 	/** The response status. */
 	private String status;
 
+	private String error;
+
 	/**
 	 * Get the list subscripts that have new posts
 	 * 
@@ -57,6 +59,10 @@ public class Subscriptions {
 	 */
 	public boolean getStatus() {
         return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	/**

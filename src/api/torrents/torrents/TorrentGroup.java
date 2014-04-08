@@ -32,6 +32,8 @@ public class TorrentGroup {
 	 */
 	private String status;
 
+	private String error;
+
 	/**
 	 * The torrent comments. Must be loaded separately with loadComments
 	 */
@@ -99,6 +101,10 @@ public class TorrentGroup {
 	 */
 	public boolean getStatus(){
 		return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	/**

@@ -19,6 +19,8 @@ public class User {
 	/** The status. */
 	private String status;
 
+	private String error;
+
 	/** The id. */
 	private transient int id;
 
@@ -119,6 +121,10 @@ public class User {
 	 */
 	public boolean getStatus() {
         return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	@Override

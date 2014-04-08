@@ -10,27 +10,33 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class Request {
-	/** The API response. */
+	/**
+	 * The API response.
+	 */
 	private Response response;
 
-	/** The response status */
+	/**
+	 * The response status
+	 */
 	private String status;
+
+	private String error;
 
 	/**
 	 * Get a request from the request id
-	 * 
-	 * @param id
-	 *      the request id
+	 *
+	 * @param id the request id
 	 * @return the request
 	 */
-	public static Request fromId(int id) {
+	public static Request fromId(int id){
 		String url = "ajax.php?action=request&id=" + id + "&auth=" + MySoup.getAuthKey();
-		return (Request) MySon.toObject(url, Request.class);
+		return (Request)MySon.toObject(url, Request.class);
 	}
 
 	/**
 	 * Add some bounty to the request
-	 * @param id id of request to add to
+	 *
+	 * @param id     id of request to add to
 	 * @param amount bounty to add in bytes
 	 * @return true if successful
 	 */
@@ -58,24 +64,28 @@ public class Request {
 
 	/**
 	 * Get the API response
-	 * 
+	 *
 	 * @return the response
 	 */
-	public Response getResponse() {
+	public Response getResponse(){
 		return response;
 	}
 
 	/**
 	 * Get the status of the request
-	 * 
+	 *
 	 * @return True if success
 	 */
-	public boolean getStatus() {
-        return status.equalsIgnoreCase("success");
+	public boolean getStatus(){
+		return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Request [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
 	}
 }

@@ -9,6 +9,7 @@ import api.soup.MySoup;
  */
 public class Torrent {
 	private String status;
+	private String error;
 	private Response response;
 
 	public static Torrent fromId(int id){
@@ -18,6 +19,10 @@ public class Torrent {
 
 	public boolean getStatus(){
 		return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	public Group getGroup(){

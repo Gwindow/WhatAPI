@@ -17,6 +17,8 @@ public class UserSearch {
 	/** The response status. */
 	private String status;
 
+	private String error;
+
 	/** The current page being viewed */
 	private transient int page;
 
@@ -105,6 +107,10 @@ public class UserSearch {
 	 */
 	public boolean getStatus() {
 		return this.status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	/**

@@ -21,6 +21,8 @@ public class TorrentComments {
     /** The status of the API response */
 	private String status;
 
+	private String error;
+
 	/**
 	 * The torrent group id we're viewing comments for
 	 */
@@ -103,6 +105,10 @@ public class TorrentComments {
     public boolean getStatus(){
 	    return status.equalsIgnoreCase("success");
     }
+
+	public String getError(){
+		return error;
+	}
 
 	/**
 	 * Check if a next page of comments is available
