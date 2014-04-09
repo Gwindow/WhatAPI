@@ -34,6 +34,17 @@ public class Request {
 	}
 
 	/**
+	 * Load a request by id and get some page of the comments
+	 *
+	 * @param id the request id
+	 * @param page page number of comments to load
+	 */
+	public static Request fromId(int id, int page){
+		String url = "ajax.php?action=request&id=" + id + "&page=" + page + "&auth=" + MySoup.getAuthKey();
+		return (Request)MySon.toObject(url, Request.class);
+	}
+
+	/**
 	 * Add some bounty to the request
 	 *
 	 * @param id     id of request to add to
