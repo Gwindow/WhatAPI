@@ -99,9 +99,11 @@ public class RequestsSearch {
 			+ "&search=" + searchTerm + "&tags=" + searchTags + "&auth=" + MySoup.getAuthKey();
 
 		RequestsSearch r = (RequestsSearch)MySon.toObject(url, RequestsSearch.class);
-		r.searchTerm = term;
-		r.page = page;
-		r.tags = tags;
+		if (r != null){
+			r.searchTerm = term;
+			r.page = page;
+			r.tags = tags;
+		}
 		return r;
 	}
 

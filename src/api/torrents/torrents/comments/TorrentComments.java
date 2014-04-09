@@ -37,7 +37,9 @@ public class TorrentComments {
 	public static TorrentComments fromId(int id){
 		String url = "ajax.php?action=tcomments&id=" + id;
 		TorrentComments tc = (TorrentComments)MySon.toObject(url, TorrentComments.class);
-		tc.groupId = id;
+		if (tc != null){
+			tc.groupId = id;
+		}
 		return tc;
 	}
 
@@ -52,7 +54,9 @@ public class TorrentComments {
 	public static TorrentComments fromId(int id, int page){
 		String url = "ajax.php?action=tcomments&id=" + id + "&page=" + page;
 		TorrentComments tc = (TorrentComments)MySon.toObject(url, TorrentComments.class);
-		tc.groupId = id;
+		if (tc != null){
+			tc.groupId = id;
+		}
 		return tc;
 	}
 

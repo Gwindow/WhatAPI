@@ -30,7 +30,9 @@ public class Artist {
 	private String error;
 
 	/** The id. */
-	private int id;
+	private transient int id;
+
+	private transient Releases releases;
 
 	/**
 	 * Artist from id.
@@ -43,7 +45,10 @@ public class Artist {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=artist&id=" + id + "&auth=" + authkey;
 		Artist artist = (Artist) MySon.toObject(url, Artist.class);
-		artist.id = id;
+		if (artist != null){
+			artist.id = id;
+
+		}
 		return artist;
 	}
 
@@ -96,6 +101,13 @@ public class Artist {
 
 	public String getError(){
 		return error;
+	}
+
+	public Releases getReleases(){
+		if (releases == null){
+			releases = new Releases(this);
+		}
+		return releases;
 	}
 
 	/**

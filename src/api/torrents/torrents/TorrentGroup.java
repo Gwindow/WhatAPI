@@ -59,7 +59,9 @@ public class TorrentGroup {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=torrentgroup&id=" + id + "&auth=" + authkey;
 		TorrentGroup torrents = (TorrentGroup)MySon.toObject(url, TorrentGroup.class);
-		torrents.id = id;
+		if (torrents != null){
+			torrents.id = id;
+		}
 		return torrents;
 	}
 

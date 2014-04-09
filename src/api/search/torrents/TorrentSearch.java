@@ -84,9 +84,11 @@ public class TorrentSearch {
 			+ "&taglist=" + searchTags + "&page=" + page + "&auth=" + MySoup.getAuthKey();
 
 		TorrentSearch t = (TorrentSearch)MySon.toObject(url, TorrentSearch.class);
-		t.searchTerm = term;
-		t.page = page;
-		t.tags = tags;
+		if (t != null){
+			t.searchTerm = term;
+			t.page = page;
+			t.tags = tags;
+		}
 		return t;
 	}
 

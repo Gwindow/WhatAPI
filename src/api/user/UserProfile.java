@@ -29,8 +29,8 @@ public class UserProfile {
 	}
 
 	public String getError(){
-		return user.getError() != null ? user.getError()
-			: userRecents.getError() != null ? userRecents.getError() : null;
+		return user != null && user.getError() != null ? user.getError()
+			: userRecents != null && userRecents.getError() != null ? userRecents.getError() : null;
 	}
 
 	@Override

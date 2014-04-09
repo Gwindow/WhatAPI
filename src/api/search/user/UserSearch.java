@@ -53,8 +53,10 @@ public class UserSearch {
 		String url = "ajax.php?action=usersearch&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
 
 		UserSearch u = (UserSearch)MySon.toObject(url, UserSearch.class);
-		u.searchTerm = term;
-		u.page = page;
+		if (u != null){
+			u.searchTerm = term;
+			u.page = page;
+		}
 		return u;
 	}
 
