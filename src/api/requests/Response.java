@@ -273,6 +273,37 @@ public class Response {
 		return commentPages;
 	}
 
+
+	/**
+	 * Check if a next page of comments is available
+	 */
+	public boolean hasNextPage(){
+		return commentPage != null && commentPage.intValue() < commentPages.intValue();
+	}
+
+	/**
+	 * Get the next page of comments. Returns null if there is
+	 * no next page
+	 */
+	public Request nextPage(){
+		return hasNextPage() ? Request.fromId(requestId.intValue(), commentPage.intValue() + 1) : null;
+	}
+
+	/**
+	 * Check if a previous page of comments is available
+	 */
+	public boolean hasPreviousPage(){
+		return commentPage != null && commentPage.intValue() > 1;
+	}
+
+	/**
+	 * Get the previous page of comments. Returns null if there is
+	 * no previous page
+	 */
+	public Request previousPage(){
+		return hasPreviousPage() ? Request.fromId(requestId.intValue(), commentPage.intValue() - 1) : null;
+	}
+
 	/**
 	 * Get the comments.
 	 *
