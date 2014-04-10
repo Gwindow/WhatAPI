@@ -23,6 +23,9 @@ public class Barcode {
 	 */
 	private Date added;
 
+	public Barcode(){
+	}
+
 	/**
 	 * Create the barcode for some upc
 	 */
