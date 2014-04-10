@@ -1,57 +1,89 @@
 package api.barcode;
 
+import api.products.Product;
+import api.products.ProductSearch;
 import api.search.crossreference.CrossReference;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Stores information about a barcode's UPC, the determined
  * search strings for it and if we've searched the site for it yet
  */
 public class Barcode {
-	//The upc for this barcode
 	private String upc;
-	//The search terms determined from looking up the barcode on MusicBrainz & Google products
-	private String searchTerms;
+	/**
+	 * Looked up search terms (and optionally tags from Semantics) or set by the user
+	 * and an optional user label for the barcode
+	 */
+	private String searchTerms, searchTags, userLabel;
+	/**
+	 * Date the barcode was added/scanned by the user
+	 */
+	private Date added;
 
 	public Barcode(){
-
 	}
 
 	/**
 	 * Create the barcode for some upc
-	 *
-	 * @param upc the barcode's upc
 	 */
-	public Barcode(String upc){
+	public Barcode(String upc, Date added){
 		this.upc = upc;
+		this.added = added;
 	}
 
-	/**
-	 * Search MusicBrainz and Google products (only if MB turns up nothing)
-	 * for information about the search terms (ideally the artist and album name)
-	 * we should use when searching the site to see if this item is on there
-	 */
-	public void determineSearchTerms(){
+	public void loadSearchTerms(){
 		searchTerms = CrossReference.termsFromUpc(upc);
+	}
+
+	public void loadSearchTags(){
+		//There's only really one result for UPC lookups
+		List<Product> results = ProductSearch.fromUPC(upc);
+		if (results != null && !results.isEmpty()){
+			searchTags = results.get(0).getSiteTags();
+		}
+		else {
+			searchTags = "";
+		}
 	}
 
 	public String getUpc(){
 		return upc;
 	}
 
+	public Date getAdded(){
+		return added;
+	}
+
 	public String getSearchTerms(){
 		return searchTerms;
 	}
 
-	public void setSearchTerms(String terms){
-		searchTerms = terms;
+	public void setSearchTerms(String searchTerms){
+		this.searchTerms = searchTerms;
 	}
 
-	public boolean hasSearchTerms(){
-		return (searchTerms != null && !searchTerms.isEmpty());
+	public String getSearchTags(){
+		return searchTags;
+	}
+
+	public void setSearchTags(String searchTags){
+		this.searchTags = searchTags;
+	}
+
+	public String getUserLabel(){
+		return userLabel;
+	}
+
+	public void setUserLabel(String userLabel){
+		this.userLabel = userLabel;
 	}
 
 	@Override
 	public String toString(){
-		return "UPC: " + getUpc() + (hasSearchTerms() ? ", Terms: " + getSearchTerms() : "");
+		return "Barcode [upc=" + upc + ", searchTerms=" + searchTerms + ", searchTags=" + searchTags
+			+ ", userLabel=" + userLabel + ", added=" + added + "]";
 	}
 }

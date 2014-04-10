@@ -59,7 +59,6 @@ public class CrossReference {
 	public static String termsFromUpc(String upc){
 		String term = termsFromMusicBrainz(upc);
 		if (term.isEmpty()){
-			System.out.println("Semantics3 Fallback");
 			List<Product> products = ProductSearch.fromUPC(upc);
 			//We really only get one product back for UPC searches
 			if (!products.isEmpty()){
