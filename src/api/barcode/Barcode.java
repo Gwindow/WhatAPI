@@ -32,6 +32,17 @@ public class Barcode {
 	public Barcode(String upc, Date added){
 		this.upc = upc;
 		this.added = added;
+		searchTerms = "";
+		searchTags = "";
+		userLabel = "";
+	}
+
+	public Barcode(String upc, Date added, String terms, String tags, String label){
+		this.upc = upc;
+		this.added = added;
+		searchTerms = terms;
+		searchTags = tags;
+		userLabel = label;
 	}
 
 	public void loadSearchTerms(){

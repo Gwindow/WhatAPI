@@ -40,13 +40,14 @@ public class ProductSearch {
 	 * Set the api key and secret to be used for authentication. This must be done
 	 * prior to making any API calls
 	 *
-	 * @param k API key
-	 * @param s API secret
+	 * @param key API key
+	 * @param secret API secret
+	 * @param useTesting if we should use the testing api or production api
 	 */
-	public static void setCredentials(String k, String s, boolean t){
-		key = k;
-		secret = s;
-		testing = t;
+	public static void setCredentials(String key, String secret, boolean useTesting){
+		ProductSearch.key = key;
+		ProductSearch.secret = secret;
+		ProductSearch.testing = useTesting;
 	}
 
 	/**
