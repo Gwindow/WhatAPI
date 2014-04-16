@@ -12,33 +12,45 @@ import java.util.Date;
  * @author Gwindow
  */
 public class Post implements SimpleComment {
-	/** The time the post was made */
+	/**
+	 * The time the post was made
+	 */
 	private String addedTime;
 
-	/** The post author */
+	/**
+	 * The post author
+	 */
 	private Author author;
 
-	/** The body of the post */
+	/**
+	 * The body of the post
+	 */
 	private String body;
 
-    /** The bulletin board formatted body of the post, for quoting */
-    private String bbBody;
+	/**
+	 * The bulletin board formatted body of the post, for quoting
+	 */
+	private String bbBody;
 
-	/** The time the post was edited */
+	/**
+	 * The time the post was edited
+	 */
 	private String editedTime;
 
-	/** The user id of the post editor */
+	/**
+	 * The user id of the post editor
+	 */
 	private Number editedUserId;
 
-	/** The user name of the post editor */
+	/**
+	 * The user name of the post editor
+	 */
 	private String editedUsername;
 
-	/** The post id. */
+	/**
+	 * The post id.
+	 */
 	private Number postId;
-
-	public String getBbBody(){
-		return bbBody;
-	}
 
 	@Override
 	public String getAuthor(){
@@ -116,7 +128,7 @@ public class Post implements SimpleComment {
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Post [getBBBody()=" + bbBody + ", getAddedTime()=" + addedTime + ", getAuthor()=" + getAuthor()
 			+ ", getBody()=" + getBody() + ", getEditedTime()=" + editedTime + ", getEditedUserId()="
 			+ editedUserId + ", getEditedUsername()=" + editedUsername + ", getPostId()=" + getPostId()
