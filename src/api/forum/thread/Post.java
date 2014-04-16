@@ -86,6 +86,11 @@ public class Post implements SimpleComment {
 	}
 
 	@Override
+	public String getBBbody(){
+		return bbBody;
+	}
+
+	@Override
 	public String getQuote(){
 		return "[quote=" + getAuthor() + "]" + bbBody + "[/quote]";
 	}

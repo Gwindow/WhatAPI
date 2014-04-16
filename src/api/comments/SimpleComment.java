@@ -59,6 +59,11 @@ public interface SimpleComment {
 	public String getBody();
 
 	/**
+	 * Get the bb formatted body of the post
+	 */
+	public String getBBbody();
+
+	/**
 	 * Set the body html of text of the post
 	 * (this is used for the apps emoticon -> emoji step)
 	 */

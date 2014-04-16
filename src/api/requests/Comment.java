@@ -93,6 +93,12 @@ public class Comment implements SimpleComment {
 	}
 
 	@Override
+	public String getBBbody(){
+		//We don't get this field from the api for request comments
+		return null;
+	}
+
+	@Override
 	public String getBody(){
 		return comment;
 	}
