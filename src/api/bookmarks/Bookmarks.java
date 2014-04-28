@@ -2,14 +2,6 @@ package api.bookmarks;
 
 import api.son.MySon;
 import api.soup.MySoup;
-import api.util.Tuple;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.util.List;
 
 /**
  * The Class Bookmarks
@@ -36,11 +28,9 @@ public class Bookmarks {
 	 *
 	 * @return the torrent Bookmarks
 	 */
-	public static Bookmarks initTorrentBookmarks(){
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=bookmarks&type=torrents&auth=" + authkey;
-		Bookmarks bookmarks = (Bookmarks)MySon.toObject(url, Bookmarks.class);
-		return bookmarks;
+	public static Bookmarks torrents(){
+		String url = "ajax.php?action=bookmarks&type=torrents&auth=" + MySoup.getAuthKey();
+		return (Bookmarks)MySon.toObject(url, Bookmarks.class);
 	}
 
 	/**
@@ -48,11 +38,9 @@ public class Bookmarks {
 	 *
 	 * @return the artist Bookmarks
 	 */
-	public static Bookmarks initArtistBookmarks(){
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=bookmarks&type=artists&auth=" + authkey;
-		Bookmarks bookmarks = (Bookmarks)MySon.toObject(url, Bookmarks.class);
-		return bookmarks;
+	public static Bookmarks artists(){
+		String url = "ajax.php?action=bookmarks&type=artists&auth=" + MySoup.getAuthKey();
+		return (Bookmarks)MySon.toObject(url, Bookmarks.class);
 	}
 
 	/**
@@ -88,46 +76,11 @@ public class Bookmarks {
 	 * @return true if success
 	 */
 	public boolean getStatus(){
-		return this.status.equalsIgnoreCase("success");
+		return status.equalsIgnoreCase("success");
 	}
 
 	public String getError(){
 		return error;
-	}
-
-	/**
-	 * Download a list of torrents to some path
-	 *
-	 * @param list list of torrents
-	 * @param path the local path to download them to
-	 */
-	public void downloadList(List<Tuple<String, String>> list, String path){
-		for (Tuple<String, String> t : list){
-			try {
-				downloadTorrent(t.getA(), path, t.getB());
-			}
-			catch (IOException e){
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * Download a torrent to some path with the desired file name
-	 *
-	 * @param url  the url of the torrent
-	 * @param path the local path to download it to
-	 * @param name the name to save it as
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void downloadTorrent(String url, String path, String name) throws IOException{
-		URL u;
-		u = new URL(url);
-		ReadableByteChannel rbc = Channels.newChannel(u.openStream());
-		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
-		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
-		System.out.println("Downloaded " + name + " to " + path);
 	}
 
 	@Override
