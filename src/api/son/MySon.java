@@ -1,6 +1,7 @@
 package api.son;
 
 import api.soup.MySoup;
+import api.torrents.artist.TorrentGroup;
 import api.util.CouldNotLoadException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +23,9 @@ public class MySon {
 	 * The Gson serializer/deserializer, using our custom string deserializer.
 	 */
 	private final static Gson gson = new GsonBuilder().registerTypeAdapter(String.class,
-		new MyStringDeserializer()).serializeNulls().serializeSpecialFloatingPointValues().create();
+		new MyStringDeserializer()).serializeNulls().serializeSpecialFloatingPointValues()
+		.registerTypeAdapter(TorrentGroup.ExtendedArtists.class, new ExtendedArtistsDeserializer())
+		.create();
 
 	/**
 	 * If debugging is enabled.
