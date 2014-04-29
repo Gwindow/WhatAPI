@@ -110,15 +110,32 @@ public class TorrentGroup {
 	}
 
 	/**
+	 * Add bookmark to torrent
+	 * @param id id of torrent to bookmark
+	 * @return true if bookmarked successfully
+	 */
+	public static boolean addBookmark(int id){
+		return MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + MySoup.getAuthKey() + "&id=" + id);
+	}
+
+	/**
+	 * Remove bookmark from torrent
+	 *
+	 * @param id id of torrent to remove bookmark from
+	 * @return true if removed successfully
+	 */
+	public static boolean removeBookmark(int id){
+		return MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + MySoup.getAuthKey() + "&id=" + id);
+	}
+
+	/**
 	 * Adds the bookmark.
 	 *
 	 * @return the status
 	 */
 	public boolean addBookmark(){
 		if (!response.getGroup().isBookmarked()){
-			boolean success = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth="
-				+ MySoup.getAuthKey() + "&id=" + id);
-			if (success){
+			if (addBookmark(id)){
 				response.getGroup().setBookmarked(true);
 				return true;
 			}
@@ -133,9 +150,7 @@ public class TorrentGroup {
 	 */
 	public boolean removeBookmark(){
 		if (response.getGroup().isBookmarked()){
-			boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth="
-				+ MySoup.getAuthKey() + "&id=" + id);
-			if (success){
+			if (removeBookmark(id)){
 				response.getGroup().setBookmarked(false);
 				return true;
 			}
