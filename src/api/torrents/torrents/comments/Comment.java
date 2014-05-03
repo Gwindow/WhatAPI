@@ -42,15 +42,6 @@ public class Comment implements SimpleComment {
     /** The user info of the comment poster */
 	private Userinfo userinfo;
 
-    /**
-     * Get the bulletin board formatted body of the comment
-     *
-     * @return the bulletin board body
-     */
-	public String getBbBody() {
-		return this.bbBody;
-	}
-
 	/**
 	 * Get the user info of the commenter
 	 *
@@ -68,6 +59,11 @@ public class Comment implements SimpleComment {
 	@Override
 	public void setBody(String s){
 		body = s;
+	}
+
+	@Override
+	public String getBBbody(){
+		return bbBody;
 	}
 
 	@Override
@@ -133,7 +129,7 @@ public class Comment implements SimpleComment {
 
 	@Override
 	public String toString(){
-		return "Comment [getAddedTime()=" + addedTime + ", getBbBody()=" + getBbBody() + ", getBody()=" + getBody()
+		return "Comment [getAddedTime()=" + addedTime + ", getBbBody()=" + getBBbody() + ", getBody()=" + getBody()
 			+ ", getEditedTime()=" + editedTime + ", getEditedUserId()=" + getEditorId() + ", getEditedUsername()="
 			+ getEditor() + ", getPostId()=" + getPostId() + ", getUserinfo()=" + getUserinfo() + "]";
 	}

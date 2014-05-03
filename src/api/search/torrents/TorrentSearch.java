@@ -17,6 +17,8 @@ public class TorrentSearch {
 	/** The response status. */
 	private String status;
 
+	private String error;
+
 	/** The current page being viewed */
 	private transient int page;
 
@@ -82,9 +84,11 @@ public class TorrentSearch {
 			+ "&taglist=" + searchTags + "&page=" + page + "&auth=" + MySoup.getAuthKey();
 
 		TorrentSearch t = (TorrentSearch)MySon.toObject(url, TorrentSearch.class);
-		t.searchTerm = term;
-		t.page = page;
-		t.tags = tags;
+		if (t != null){
+			t.searchTerm = term;
+			t.page = page;
+			t.tags = tags;
+		}
 		return t;
 	}
 
@@ -144,6 +148,10 @@ public class TorrentSearch {
 	 */
 	public boolean getStatus() {
 		return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	/**

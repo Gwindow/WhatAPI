@@ -20,19 +20,27 @@ public class Releases {
 		releases = new TreeMap<ReleaseType, SortedSet<TorrentGroup>>();
 		List<TorrentGroup> torrents = artist.getResponse().getTorrentgroup();
 		for (TorrentGroup group : torrents){
-			ReleaseType appearance = group.getExtendedArtists().getAppearance(artist.getId());
-			if (appearance == ReleaseType.ARTIST || appearance == ReleaseType.DJ){
-				ReleaseType type = group.getReleaseType();
-				if (!releases.containsKey(type)){
-					releases.put(type, new TreeSet<TorrentGroup>());
+			if (group.getExtendedArtists() == null){
+				if (!releases.containsKey(ReleaseType.UNKNOWN)){
+					releases.put(ReleaseType.UNKNOWN, new TreeSet<TorrentGroup>());
 				}
-				releases.get(type).add(group);
+				releases.get(ReleaseType.UNKNOWN).add(group);
 			}
 			else {
-				if (!releases.containsKey(appearance)){
-					releases.put(appearance, new TreeSet<TorrentGroup>());
+				ReleaseType appearance = group.getExtendedArtists().getAppearance(artist.getId());
+				if (appearance == ReleaseType.ARTIST || appearance == ReleaseType.DJ){
+					ReleaseType type = group.getReleaseType();
+					if (!releases.containsKey(type)){
+						releases.put(type, new TreeSet<TorrentGroup>());
+					}
+					releases.get(type).add(group);
 				}
-				releases.get(appearance).add(group);
+				else {
+					if (!releases.containsKey(appearance)){
+						releases.put(appearance, new TreeSet<TorrentGroup>());
+					}
+					releases.get(appearance).add(group);
+				}
 			}
 		}
 	}

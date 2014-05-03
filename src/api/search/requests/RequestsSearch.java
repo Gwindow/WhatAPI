@@ -9,27 +9,40 @@ import java.net.URLEncoder;
 /**
  * The Class RequestsSearch.
  * For performing and interacting with the results of a Request search
- * 
+ *
  * @author Gwindow
  */
 public class RequestsSearch {
-	/** The API response. */
+	/**
+	 * The API response.
+	 */
 	private Response response;
 
-	/** The response status. */
+	/**
+	 * The response status.
+	 */
 	private String status;
 
-	/** The current page being viewed */
+	private String error;
+
+	/**
+	 * The current page being viewed
+	 */
 	private transient int page;
 
-	/** The search term. */
+	/**
+	 * The search term.
+	 */
 	private transient String searchTerm;
 
-	/** The search tags */
+	/**
+	 * The search tags
+	 */
 	private transient String tags;
 
 	/**
 	 * Get the first page of request search results for the term
+	 *
 	 * @param term the term to search for
 	 * @return page 1 of the search results
 	 */
@@ -39,6 +52,7 @@ public class RequestsSearch {
 
 	/**
 	 * Get a specific page of the requests search results for the term
+	 *
 	 * @param term the search term
 	 * @return the desired page of the requests search
 	 */
@@ -51,6 +65,7 @@ public class RequestsSearch {
 	 * Separate tags must be separated by commas. Site tags use periods to denote spaces, for example
 	 * hip.hop and so tags should follow this convention as well
 	 * Any existing whitespace will be replaced by commas
+	 *
 	 * @param term the term to search for
 	 * @param tags search tags to use
 	 * @return the torrent search results
@@ -64,6 +79,7 @@ public class RequestsSearch {
 	 * Separate tags must be separated by commas. Site tags use periods to denote spaces, for example
 	 * hip.hop and so tags should follow this convention as well
 	 * Any existing whitespace will be replaced by commas
+	 *
 	 * @param term the term to search for
 	 * @param tags search tags to use
 	 * @param page page of the search results to get
@@ -83,14 +99,17 @@ public class RequestsSearch {
 			+ "&search=" + searchTerm + "&tags=" + searchTags + "&auth=" + MySoup.getAuthKey();
 
 		RequestsSearch r = (RequestsSearch)MySon.toObject(url, RequestsSearch.class);
-		r.searchTerm = term;
-		r.page = page;
-		r.tags = tags;
+		if (r != null){
+			r.searchTerm = term;
+			r.page = page;
+			r.tags = tags;
+		}
 		return r;
 	}
 
 	/**
 	 * Check if a next page of results is available
+	 *
 	 * @return True if a next page is available
 	 */
 	public boolean hasNextPage(){
@@ -100,6 +119,7 @@ public class RequestsSearch {
 	/**
 	 * Get the next page of search results. Returns null if there is
 	 * no next page
+	 *
 	 * @return the next page of search results
 	 */
 	public RequestsSearch nextPage(){
@@ -108,6 +128,7 @@ public class RequestsSearch {
 
 	/**
 	 * Check if a previous page of results is available
+	 *
 	 * @return True if a previous page is available
 	 */
 	public boolean hasPreviousPage(){
@@ -117,6 +138,7 @@ public class RequestsSearch {
 	/**
 	 * Get the previous page of search results. Returns null if there is
 	 * no previous page
+	 *
 	 * @return the previous page of search results
 	 */
 	public RequestsSearch previousPage(){
@@ -125,7 +147,7 @@ public class RequestsSearch {
 
 	/**
 	 * Get the current page number being viewed
-	 * 
+	 *
 	 * @return the current page number
 	 */
 	public int getPage(){
@@ -134,25 +156,29 @@ public class RequestsSearch {
 
 	/**
 	 * Get the API response
-	 * 
+	 *
 	 * @return the API response
 	 */
-	public Response getResponse() {
+	public Response getResponse(){
 		return response;
 	}
 
 	/**
 	 * Get the response status
-	 * 
+	 *
 	 * @return True if success
 	 */
-	public boolean getStatus() {
+	public boolean getStatus(){
 		return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	/**
 	 * Get the search term used
-	 * 
+	 *
 	 * @return the search term
 	 */
 	public String getSearchTerm(){
@@ -161,7 +187,7 @@ public class RequestsSearch {
 
 	/**
 	 * Get the search tags used
-	 * 
+	 *
 	 * @return the search tags
 	 */
 	public String getTags(){
@@ -169,9 +195,9 @@ public class RequestsSearch {
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "RequestsSearch [hasNextPage()=" + hasNextPage() + ", hasPreviousPage()=" + hasPreviousPage() + ", getResponse()="
-				+ getResponse() + ", getStatus()=" + getStatus() + "]";
+			+ getResponse() + ", getStatus()=" + getStatus() + "]";
 	}
 
 }

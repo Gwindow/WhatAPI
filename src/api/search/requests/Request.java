@@ -90,9 +90,8 @@ public class Request {
 	private Number year;
 
 
-	public List<Artist> getArtists(){
-		//Only the first entry has anything in it from the API
-		return artists.get(0);
+	public List<List<Artist>> getArtists(){
+		return artists;
 	}
 
 	/**

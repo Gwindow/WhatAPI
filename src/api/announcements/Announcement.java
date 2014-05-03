@@ -10,7 +10,9 @@ package api.announcements;
 public class Announcement {
 	/** The body text. */
 	private String body;
-	
+
+	private String bbBody;
+
 	/** The news id. */
 	private Number newsId;
 	
@@ -27,6 +29,10 @@ public class Announcement {
 	 */
 	public String getBody() {
 		return this.body;
+	}
+
+	public String getBbBody(){
+		return bbBody;
 	}
 
 	/**

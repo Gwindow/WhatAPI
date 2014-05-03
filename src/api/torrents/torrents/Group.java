@@ -174,6 +174,10 @@ public class Group {
 		return this.wikiBody;
 	}
 
+	public void setWikiBody(String wikiBody){
+		this.wikiBody = wikiBody;
+	}
+
 	/**
 	 * Gets the wiki image.
 	 * 

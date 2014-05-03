@@ -1,9 +1,9 @@
 package api.top;
 
-import java.util.List;
-
 import api.son.MySon;
 import api.soup.MySoup;
+
+import java.util.List;
 
 /**
  * The top torrents,tags,users.
@@ -16,6 +16,8 @@ public class Top {
 
 	/** The status. */
 	private String status;
+
+	private String error;
 
 	/**
 	 * Load the top torrents.
@@ -100,9 +102,13 @@ public class Top {
         return status.equalsIgnoreCase("success");
 	}
 
+	public String getError(){
+		return error;
+	}
+
 	/* (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString() */
+		 *
+		 * @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return "Top [response=" + response + ", status=" + status + "]";

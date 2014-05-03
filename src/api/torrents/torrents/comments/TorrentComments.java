@@ -21,6 +21,8 @@ public class TorrentComments {
     /** The status of the API response */
 	private String status;
 
+	private String error;
+
 	/**
 	 * The torrent group id we're viewing comments for
 	 */
@@ -35,7 +37,9 @@ public class TorrentComments {
 	public static TorrentComments fromId(int id){
 		String url = "ajax.php?action=tcomments&id=" + id;
 		TorrentComments tc = (TorrentComments)MySon.toObject(url, TorrentComments.class);
-		tc.groupId = id;
+		if (tc != null){
+			tc.groupId = id;
+		}
 		return tc;
 	}
 
@@ -50,7 +54,9 @@ public class TorrentComments {
 	public static TorrentComments fromId(int id, int page){
 		String url = "ajax.php?action=tcomments&id=" + id + "&page=" + page;
 		TorrentComments tc = (TorrentComments)MySon.toObject(url, TorrentComments.class);
-		tc.groupId = id;
+		if (tc != null){
+			tc.groupId = id;
+		}
 		return tc;
 	}
 
@@ -103,6 +109,10 @@ public class TorrentComments {
     public boolean getStatus(){
 	    return status.equalsIgnoreCase("success");
     }
+
+	public String getError(){
+		return error;
+	}
 
 	/**
 	 * Check if a next page of comments is available

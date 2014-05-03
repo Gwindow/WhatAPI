@@ -27,8 +27,12 @@ public class Artist {
 	/** The status. */
 	private String status;
 
+	private String error;
+
 	/** The id. */
-	private int id;
+	private transient int id;
+
+	private transient Releases releases;
 
 	/**
 	 * Artist from id.
@@ -41,7 +45,10 @@ public class Artist {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=artist&id=" + id + "&auth=" + authkey;
 		Artist artist = (Artist) MySon.toObject(url, Artist.class);
-		artist.id = id;
+		if (artist != null){
+			artist.id = id;
+
+		}
 		return artist;
 	}
 
@@ -92,16 +99,45 @@ public class Artist {
         return status.equalsIgnoreCase("success");
     }
 
+	public String getError(){
+		return error;
+	}
+
+	public Releases getReleases(){
+		if (releases == null){
+			releases = new Releases(this);
+		}
+		return releases;
+	}
+
+	/**
+	 * Bookmark some artist
+	 *
+	 * @param id artist id to bookmark
+	 * @return true if bookmarked successfully
+	 */
+	public static boolean addBookmark(int id){
+		return MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + MySoup.getAuthKey() + "&id=" + id);
+	}
+
+	/**
+	 * Remove some artist bookmark
+	 *
+	 * @param id artist id to remove bookmark from
+	 * @return true if removed successfully
+	 */
+	public static boolean removeBookmark(int id){
+		return MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + MySoup.getAuthKey() + "&id=" + id);
+	}
+
 	/**
 	 * Adds the bookmark.
 	 */
-	public boolean addBookmark() {
-		String authKey = MySoup.getAuthKey();
-		if (!response.isBookmarked()) {
-			boolean success = MySoup.pressLink("bookmarks.php?action=add&type=artist&auth=" + authKey + "&id=" + id);
-            if (success){
-                response.setBookmarked(true);
-                return true;
+	public boolean addBookmark(){
+		if (!response.isBookmarked()){
+			if (addBookmark(id)){
+				response.setBookmarked(true);
+				return true;
             }
             return false;
 		}
@@ -112,19 +148,36 @@ public class Artist {
 	/**
 	 * Removes the bookmark.
 	 */
-	public boolean removeBookmark() {
-		String authKey = MySoup.getAuthKey();
-		if (response.isBookmarked()) {
-			boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=artist&auth=" + authKey + "&id=" + id);
-            if (success){
-                response.setBookmarked(false);
-                return true;
-            }
-            else
-                return false;
+	public boolean removeBookmark(){
+		if (response.isBookmarked()){
+			if (removeBookmark(id)){
+				response.setBookmarked(false);
+				return true;
+			}
+			return false;
 		}
         //If it's already not bookmarked, say it went ok
         return true;
+	}
+
+	/**
+	 * Enable notifications for some artist
+	 *
+	 * @param id artist id to enable notifications for
+	 * @return true if successful
+	 */
+	public static boolean enableNotifications(int id){
+		return MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + MySoup.getAuthKey());
+	}
+
+	/**
+	 * Disable notifications for some artist
+	 *
+	 * @param id artist id to disable notifications for
+	 * @return true if successful
+	 */
+	public static boolean disableNotifications(int id){
+		return MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + MySoup.getAuthKey());
 	}
 
 	/**
@@ -132,13 +185,11 @@ public class Artist {
 	 */
 	public boolean enableNotifications() {
 		if (!response.hasNotificationsEnabled()) {
-			boolean success = MySoup.pressLink("artist.php?action=notify&artistid=" + id + "&auth=" + MySoup.getAuthKey());
-			if (success){
-                response.setNotificationsEnabled(true);
-                return true;
+			if (enableNotifications(id)){
+				response.setNotificationsEnabled(true);
+				return true;
             }
-            else
-                return false;
+			return false;
 		}
         //If already enabled, just say it went ok
         return true;
@@ -148,14 +199,12 @@ public class Artist {
 	 * Disable notifications.
 	 */
 	public boolean disableNotifications() {
-		if (response.hasNotificationsEnabled()) {
-			boolean success = MySoup.pressLink("artist.php?action=notifyremove&artistid=" + id + "&auth=" + MySoup.getAuthKey());
-            if (success){
+		if (response.hasNotificationsEnabled()){
+			if (disableNotifications(id)){
                 response.setNotificationsEnabled(false);
-                return true;
+	            return true;
             }
-            else
-                return false;
+			return false;
 		}
         //If already disabled just say it went ok
         return true;

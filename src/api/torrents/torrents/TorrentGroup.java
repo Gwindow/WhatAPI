@@ -32,6 +32,8 @@ public class TorrentGroup {
 	 */
 	private String status;
 
+	private String error;
+
 	/**
 	 * The torrent comments. Must be loaded separately with loadComments
 	 */
@@ -57,7 +59,9 @@ public class TorrentGroup {
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=torrentgroup&id=" + id + "&auth=" + authkey;
 		TorrentGroup torrents = (TorrentGroup)MySon.toObject(url, TorrentGroup.class);
-		torrents.id = id;
+		if (torrents != null){
+			torrents.id = id;
+		}
 		return torrents;
 	}
 
@@ -101,6 +105,29 @@ public class TorrentGroup {
 		return status.equalsIgnoreCase("success");
 	}
 
+	public String getError(){
+		return error;
+	}
+
+	/**
+	 * Add bookmark to torrent
+	 * @param id id of torrent to bookmark
+	 * @return true if bookmarked successfully
+	 */
+	public static boolean addBookmark(int id){
+		return MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth=" + MySoup.getAuthKey() + "&id=" + id);
+	}
+
+	/**
+	 * Remove bookmark from torrent
+	 *
+	 * @param id id of torrent to remove bookmark from
+	 * @return true if removed successfully
+	 */
+	public static boolean removeBookmark(int id){
+		return MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth=" + MySoup.getAuthKey() + "&id=" + id);
+	}
+
 	/**
 	 * Adds the bookmark.
 	 *
@@ -108,9 +135,7 @@ public class TorrentGroup {
 	 */
 	public boolean addBookmark(){
 		if (!response.getGroup().isBookmarked()){
-			boolean success = MySoup.pressLink("bookmarks.php?action=add&type=torrent&auth="
-				+ MySoup.getAuthKey() + "&id=" + id);
-			if (success){
+			if (addBookmark(id)){
 				response.getGroup().setBookmarked(true);
 				return true;
 			}
@@ -125,9 +150,7 @@ public class TorrentGroup {
 	 */
 	public boolean removeBookmark(){
 		if (response.getGroup().isBookmarked()){
-			boolean success = MySoup.pressLink("bookmarks.php?action=remove&type=torrent&auth="
-				+ MySoup.getAuthKey() + "&id=" + id);
-			if (success){
+			if (removeBookmark(id)){
 				response.getGroup().setBookmarked(false);
 				return true;
 			}

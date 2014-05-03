@@ -12,8 +12,11 @@ import java.util.List;
 public class UserRecents {
 	/** The actual response */
 	private Response response;
+
 	/** The status of the api request */
 	private String status;
+
+	private String error;
 
 	/**
 	 * Load the list of recent uploads and snatches for the user using the default
@@ -59,6 +62,10 @@ public class UserRecents {
 	 */
 	public boolean getStatus(){
 		return status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	/**

@@ -17,6 +17,8 @@ public class UserSearch {
 	/** The response status. */
 	private String status;
 
+	private String error;
+
 	/** The current page being viewed */
 	private transient int page;
 
@@ -51,8 +53,10 @@ public class UserSearch {
 		String url = "ajax.php?action=usersearch&page=" + page + "&search=" + searchTerm + "&auth=" + authkey;
 
 		UserSearch u = (UserSearch)MySon.toObject(url, UserSearch.class);
-		u.searchTerm = term;
-		u.page = page;
+		if (u != null){
+			u.searchTerm = term;
+			u.page = page;
+		}
 		return u;
 	}
 
@@ -105,6 +109,10 @@ public class UserSearch {
 	 */
 	public boolean getStatus() {
 		return this.status.equalsIgnoreCase("success");
+	}
+
+	public String getError(){
+		return error;
 	}
 
 	/**
