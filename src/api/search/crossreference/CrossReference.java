@@ -61,7 +61,7 @@ public class CrossReference {
 		if (term.isEmpty()){
 			List<Product> products = ProductSearch.fromUPC(upc);
 			//We really only get one product back for UPC searches
-			if (!products.isEmpty()){
+			if (products != null && !products.isEmpty()){
 				term = products.get(0).getName();
 			}
 		}
