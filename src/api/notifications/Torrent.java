@@ -1,376 +1,274 @@
 package api.notifications;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-
-import api.soup.MySoup;
-
 /**
  * The Class Torrent.
  * Describes a torrent we're being notified about
- * 
+ *
  * @author Gwindow
  */
 public class Torrent {
-	/** The encoding (Lossless/320/V0/etc) */
-	private String encoding;
+	/**
+	 * The torrent id.
+	 */
+	private Number torrentId;
 
-	/** The number of files in the torrent. */
-	private Number fileCount;
-
-	/** The file format of the torrent (FLAC/MP3/etc) */
-	private String format;
-
-	/** The group category id. TODO: What is this? */
-	private Number groupCategoryId;
-
-	/** The torrent group id */
+	/**
+	 * The torrent group id
+	 */
 	private Number groupId;
 
-    /** The torrent id. */
-    private Number torrentId;
-
-	/** The torrent group name */
+	/**
+	 * The torrent group name
+	 */
 	private String groupName;
 
-	/** The release year */
-	private Number groupYear;
+	/**
+	 * The group category id.
+	 */
+	private Number groupCategoryId;
 
-	/** The log in db. TODO What is this? */
-	private String logInDb;
+	/**
+	 * Album art url
+	 */
+	private String wikiImage;
 
-	/** The log score. */
-	private Number logScore;
+	/**
+	 * The torrent tags.
+	 */
+	private String torrentTags;
 
-	/** The media the torrent was ripped from */
+	/**
+	 * The size of the torrent
+	 */
+	private Number size;
+
+	/**
+	 * The number of files in the torrent.
+	 */
+	private Number fileCount;
+
+	/**
+	 * The file format of the torrent (FLAC/MP3/etc)
+	 */
+	private String format;
+
+	/**
+	 * The encoding (Lossless/320/V0/etc)
+	 */
+	private String encoding;
+
+	/**
+	 * The media the torrent was ripped from
+	 */
 	private String media;
 
-	/** The time we were notified of the torrent */
-	private String notificationTime;
+	/**
+	 * If the torrent is a scene release
+	 */
+	private Boolean scene;
 
-	/** The remaster title. */
-	private String remasterTitle;
+	/**
+	 * The release year
+	 */
+	private Number groupYear;
 
-	/** The remaster year. */
+	/**
+	 * The remaster year.
+	 */
 	private Number remasterYear;
 
-    /** The torrent tags. */
-    private String torrentTags;
+	/**
+	 * The remaster title.
+	 */
+	private String remasterTitle;
 
-    /** The size of the torrent */
-    private Number size;
-
-	/** The number of seeders */
-	private Number seeders;
-
-    /** The number of leechers */
-    private Number leechers;
-
-	/** The number of snatches */
+	/**
+	 * The number of snatches
+	 */
 	private Number snatched;
 
-    /** If the torrent is freeleech */
-    private Boolean freeTorrent;
+	/**
+	 * The number of seeders
+	 */
+	private Number seeders;
 
-    /** If the torrent is a scene release */
-    private Boolean scene;
+	/**
+	 * The number of leechers
+	 */
+	private Number leechers;
 
-    /** If the torrent has a cue file */
-    private Boolean hasCue;
+	/**
+	 * The time we were notified of the torrent
+	 */
+	private String notificationTime;
 
-    /** If the torrent has a log file */
-    private Boolean hasLog;
+	/**
+	 * If the torrent has a log file
+	 */
+	private Boolean hasLog;
 
-	/** If the notification is unread */
+	/**
+	 * If the torrent has a cue file
+	 */
+	private Boolean hasCue;
+
+	/**
+	 * The log score.
+	 */
+	private Number logScore;
+
+	/**
+	 * If the torrent is freeleech
+	 */
+	private Boolean freeTorrent;
+
+	/**
+	 * The log in db
+	 */
+	private String logInDb;
+
+	/**
+	 * If the notification is unread
+	 */
 	private Boolean unread;
 
-	/**
-	 * Get the encoding.
-	 * 
-	 * @return the encoding
-	 */
-	public String getEncoding() {
-		return encoding;
+	public Number getTorrentId(){
+		return torrentId;
 	}
 
-	/**
-	 * Get the number of files.
-	 * 
-	 * @return the file count
-	 */
-	public Number getFileCount() {
-		return fileCount;
-	}
-
-	/**
-	 * Get the format.
-	 * 
-	 * @return the format
-	 */
-	public String getFormat() {
-		return format;
-	}
-
-	/**
-	 * Get the group category id.
-	 * 
-	 * @return the group category id
-	 */
-	public Number getGroupCategoryId() {
-		return groupCategoryId;
-	}
-
-	/**
-	 * Get the group id.
-	 * 
-	 * @return the group id
-	 */
-	public Number getGroupId() {
+	public Number getGroupId(){
 		return groupId;
 	}
 
-    /**
-     * Get the torrent id.
-     *
-     * @return the torrent id
-     */
-    public Number getTorrentId() {
-        return torrentId;
-    }
-
-	/**
-	 * Get the group name.
-	 * 
-	 * @return the group name
-	 */
-	public String getGroupName() {
+	public String getGroupName(){
 		return groupName;
 	}
 
-	/**
-	 * Get the group year.
-	 * 
-	 * @return the group year
-	 */
-	public Number getGroupYear() {
-		return groupYear;
+	public Number getGroupCategoryId(){
+		return groupCategoryId;
 	}
 
-	/**
-	 * Get the log in db.
-	 * 
-	 * @return the log in db
-	 */
-	public String getLogInDb() {
-		return logInDb;
+	public String getWikiImage(){
+		return wikiImage;
 	}
 
-	/**
-	 * Get the log score.
-	 * 
-	 * @return the log score
-	 */
-	public Number getLogScore() {
-		return logScore;
+	public String getTorrentTags(){
+		return torrentTags;
 	}
 
-	/**
-	 * Get the media type the torrent was ripped from
-	 * 
-	 * @return the media type
-	 */
-	public String getMedia() {
+	public Number getSize(){
+		return size;
+	}
+
+	public Number getFileCount(){
+		return fileCount;
+	}
+
+	public String getFormat(){
+		return format;
+	}
+
+	public String getEncoding(){
+		return encoding;
+	}
+
+	public String getMedia(){
 		return media;
 	}
 
-	/**
-	 * Get the time we were notified of the torrent
-	 * 
-	 * @return the notification time
-	 */
-	public String getNotificationTime() {
-		return notificationTime;
+	public Boolean isScene(){
+		return scene;
 	}
 
-	/**
-	 * Get the remaster title.
-	 * 
-	 * @return the remaster title
-	 */
-	public String getRemasterTitle() {
-		return remasterTitle;
+	public Number getGroupYear(){
+		return groupYear;
 	}
 
-	/**
-	 * Gets the remaster year.
-	 * 
-	 * @return the remaster year
-	 */
-	public Number getRemasterYear() {
+	public Number getRemasterYear(){
 		return remasterYear;
 	}
 
-    /**
-     * Get the torrent tags.
-     *
-     * @return the torrent tags
-     */
-    public String getTorrentTags() {
-        return torrentTags;
-    }
+	public String getRemasterTitle(){
+		return remasterTitle;
+	}
 
-    /**
-     * Get the size of the torrent
-     *
-     * @return the size of the torrent
-     */
-    public Number getSize() {
-        return size;
-    }
-
-    /**
-     * Get the number of seeders
-     *
-     * @return number of seeders
-     */
-    public Number getSeeders() {
-        return seeders;
-    }
-
-    /**
-     * Get the number of leechers
-     *
-     * @return number of leechers
-     */
-    public Number getLeechers() {
-        return leechers;
-    }
-
-	/**
-	 * Get the number of snatches
-	 * 
-	 * @return number of snatches
-	 */
-	public Number getSnatched() {
+	public Number getSnatched(){
 		return snatched;
 	}
 
-    /**
-     * Check if the torrent is freeleech
-     *
-     * @return True if it's freeleech
-     */
-    public Boolean isFreeTorrent() {
-        return freeTorrent;
-    }
+	public Number getSeeders(){
+		return seeders;
+	}
 
-    /**
-     * Check if the torrent is a scene release
-     *
-     * @return True if it's a scene release
-     */
-    public Boolean isScene() {
-        return scene;
-    }
+	public Number getLeechers(){
+		return leechers;
+	}
 
-    /**
-     * Check if the torrent has a cue file
-     *
-     * @return True if it has a cue file
-     */
-    public Boolean hasCue() {
-        return hasCue;
-    }
+	public String getNotificationTime(){
+		return notificationTime;
+	}
 
-    /**
-     * Check if the torrent has a log file
-     *
-     * @return True if it has a log file
-     */
-    public Boolean hasLog() {
-        return hasLog;
-    }
+	public Boolean hasLog(){
+		return hasLog;
+	}
 
-	/**
-	 * Check if the notification is unread
-	 * 
-	 * @return True if it's unread
-	 */
-	public Boolean isUnread() {
+	public Boolean hasCue(){
+		return hasCue;
+	}
+
+	public Number getLogScore(){
+		return logScore;
+	}
+
+	public Boolean isFreeTorrent(){
+		return freeTorrent;
+	}
+
+	public String isLogInDb(){
+		return logInDb;
+	}
+
+	public Boolean isUnread(){
 		return unread;
+	}
+
+	public Boolean isRemastered(){
+		return remasterYear.intValue() != 0;
 	}
 
 	/**
 	 * Get a concise representation of the torrent media, format and encoding. For example "CD - AAC - 320"
-	 * 
+	 *
 	 * @return the media, format, and encoding
 	 */
-	public String getMediaFormatEncoding() {
+	public String getMediaFormatEncoding(){
 		String log = hasLog ? " - " + logScore.toString() : "";
 		String cue = hasCue ? " - " + "Cue" : "";
-		return (getMedia() + " - " + getFormat() + " - " + getEncoding() + log + cue);
+		return media + " - " + format + " - " + encoding + log + cue;
 
 	}
 
 	/**
-	 * Get a concise representation of the information about the torrent remastering
-	 * ex. 2005 - Remaster Title
-     *
-	 * @return the remaster
+	 * Get a concise representation of the information about the torrent edition
+	 * ex. 2005 - Remaster Title or 1998 - Original Release
 	 */
-	public String getRemaster() {
-		return (getRemasterYear() + " - " + getRemasterTitle());
-	}
-
-	/**
-	 * Get the download link for the torrent
-	 * 
-	 * @return the download link
-	 */
-	public String getDownloadLink() {
-		String site = MySoup.getSite();
-		String authKey = MySoup.getAuthKey();
-		String passKey = MySoup.getPassKey();
-		return site + "torrents.php?action=download&id=" + torrentId + "&authkey=" + authKey
-            + "&torrent_pass=" + passKey;
-	}
-
-	/**
-	 * Download the torrent file
-	 * 
-	 * @param url
-	 *      the torrent download url TODO Why not used?
-	 * @param path
-	 *      the path to save too
-	 * @throws IOException
-	 *      Signals that an I/O exception has occurred.
-	 */
-	public void downloadFile(String url, String path) throws IOException {
-		// todo fix this
-        //What's broken?
-		String name = "Unknown " + "(" + getMediaFormatEncoding() + ")";
-		URL u;
-		u = new URL(getDownloadLink());
-		ReadableByteChannel rbc = Channels.newChannel(u.openStream());
-		FileOutputStream fos = new FileOutputStream(path + name + ".torrent");
-		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
-		System.out.println("Downloaded " + name + " to " + path);
+	public String getEdition(){
+		if (remasterYear.intValue() == 0){
+			return groupYear + " - " + "Original Release";
+		}
+		return remasterYear + " - " + remasterTitle;
 	}
 
 	@Override
-	public String toString() {
-		return "Torrent [getEncoding=" + getEncoding() + ", getFileCount=" + getFileCount() + ", getFormat=" + getFormat()
-				+ ", isFreeTorrent=" + isFreeTorrent() + ", getGroupCategoryId=" + getGroupCategoryId() + ", getGroupId="
-				+ getGroupId() + ", getGroupName=" + getGroupName() + ", getGroupYear=" + getGroupYear() + ", hasCue=" + hasCue()
-				+ ", hasLog=" + hasLog() + ", getLeechers=" + getLeechers() + ", getLogInDb=" + getLogInDb() + ", getLogScore="
-				+ getLogScore() + ", getMedia=" + getMedia() + ", getNotificationTime=" + getNotificationTime()
-				+ ", getRemasterTitle=" + getRemasterTitle() + ", getRemasterYear=" + getRemasterYear() + ", isScene="
-				+ isScene() + ", getSeeders=" + getSeeders() + ", getSize=" + getSize() + ", getSnatched=" + getSnatched()
-				+ ", getTorrentId=" + getTorrentId() + ", getTorrentTags=" + getTorrentTags() + ", isUnread=" + isUnread()
-				+ ", getMediaFormatEncoding=" + getMediaFormatEncoding() + ", getYearMediaFormatEncoding="
-				+ getMediaFormatEncoding() + ", getDownloadLink=" + getDownloadLink() + "]";
+	public String toString(){
+		return "Torrent [ torrentId=" + torrentId + ", groupId=" + groupId + ", groupName=" + groupName
+			+ ", groupCategoryId=" + groupCategoryId + ", wikiImage=" + wikiImage
+			+ ", torrentTags=" + torrentTags + ", size=" + size + ", fileCount=" + fileCount
+			+ ", format=" + format + ", encoding=" + encoding + ", media=" + media + ", scene=" + scene
+			+ ", groupYear=" + groupYear + ", remasterYear=" + remasterYear + ", remasterTitle=" + remasterTitle
+			+ ", snatched=" + snatched + ", seeders=" + seeders + ", leechers=" + leechers
+			+ ", notificationTime=" + notificationTime + ", hasLog=" + hasLog + ", hasCue=" + hasCue
+			+ ", logScore=" + logScore + ", freeTorrent=" + freeTorrent + ", logInDb=" + logInDb
+			+ ", unread=" + unread + "]";
 	}
 }
