@@ -256,7 +256,7 @@ public class Torrent {
 		if (remasterYear.intValue() == 0){
 			return groupYear + " - " + "Original Release";
 		}
-		return remasterYear + " - " + remasterTitle;
+		return remasterYear + (!remasterTitle.isEmpty() ? " - " + remasterTitle : "");
 	}
 
 	@Override
