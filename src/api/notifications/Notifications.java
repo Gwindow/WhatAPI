@@ -84,9 +84,8 @@ public class Notifications {
 	/**
 	 * Clear the notifications
 	 */
-	public boolean clearNotifications(){
+	public static boolean clearNotifications(){
 		String url = "torrents.php?action=notify_clear&auth=" + MySoup.getAuthKey();
-		response.clear();
 		return MySoup.pressLink(url);
 	}
 
