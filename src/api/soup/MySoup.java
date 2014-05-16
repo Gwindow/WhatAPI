@@ -41,7 +41,7 @@ public class MySoup {
 	/**
 	 * If ssl or notifications are enabled.
 	 */
-	private static boolean sslEnabled = true, notificationsEnabled = true;
+	private static boolean sslEnabled = true, notificationsEnabled = false;
 	/**
 	 * Format that dates are returned (site uses GMT time)
 	 */
@@ -431,7 +431,10 @@ public class MySoup {
 		index = Index.init();
 		if (!index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
 			&& !index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("User")){
-			MySoup.notificationsEnabled = true;
+			notificationsEnabled = true;
+		}
+		else {
+			notificationsEnabled = false;
 		}
 	}
 
