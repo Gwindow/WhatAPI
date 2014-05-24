@@ -112,6 +112,27 @@ public class Forum {
 	}
 
 	/**
+	 * Get the name of this forum
+	 */
+	public String getForumName(){
+		return response.getForumName();
+	}
+
+	/**
+	 * Get the list of specific rules threads for the forum
+	 */
+	public List<SpecificRules> getSpecificRules(){
+		return response.getSpecificRules();
+	}
+
+	/**
+	 * Get the threads in the forum
+	 */
+	public List<ForumThread> getThreads(){
+		return response.getThreads();
+	}
+
+	/**
 	 * Gets the status of the API request
 	 *
 	 * @return True if success
@@ -139,6 +160,13 @@ public class Forum {
 	 */
 	public int getPage(){
 		return page;
+	}
+
+	/**
+	 * Get the total number of pages in the forum
+	 */
+	public int getPages(){
+		return response.getPages().intValue();
 	}
 
 	/**

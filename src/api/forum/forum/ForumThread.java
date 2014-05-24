@@ -9,46 +9,74 @@ import api.soup.MySoup;
  * @author Gwindow
  */
 public class ForumThread {
-	/** The author id. */
-	private Number authorId;
-
-	/** The author name. */
-	private String authorName;
-
-	/** The last post author id. */
-	private Number lastAuthorId;
-
-	/** The last post author name. */
-	private String lastAuthorName;
-
-	/** The last post id. */
-	private Number lastID;
-
-	/** The last read page. */
-	private Number lastReadPage;
-
-	/** The last read post id. */
-	private Number lastReadPostId;
-
-	/** The last post time. */
-	private String lastTime;
-
-	/** The thread post count */
-	private Number postCount;
-
-	/** The thread title. */
-	private String title;
-
-	/** The topic id. */
+	/**
+	 * The topic id.
+	 */
 	private Number topicId;
 
-    /** If the thread is locked */
-    private boolean locked;
+	/**
+	 * The thread title.
+	 */
+	private String title;
 
-    /** If the thread is stickied */
-    private boolean sticky;
+	/**
+	 * The author id.
+	 */
+	private Number authorId;
 
-    /** If the thread has been read */
+	/**
+	 * The author name
+	 */
+	private String authorName;
+
+	/**
+	 * The thread post count
+	 */
+	private Number postCount;
+
+	/**
+	 * The last post time.
+	 */
+	private String lastTime;
+
+	/**
+	 * The last post author id.
+	 */
+	private Number lastAuthorId;
+
+	/**
+	 * The last post author name.
+	 */
+	private String lastAuthorName;
+
+	/**
+	 * The last post id.
+	 */
+	private Number lastID;
+
+	/**
+	 * The last read page.
+	 */
+	private Number lastReadPage;
+
+	/**
+	 * The last read post id.
+	 */
+	private Number lastReadPostId;
+
+	/**
+	 * If the thread is locked
+	 */
+	private boolean locked;
+
+	/**
+	 * If the thread is stickied
+	 */
+	private boolean sticky;
+
+	/**
+	 * If the thread has been read
+	 */
 	private boolean read;
 
 	/**
@@ -92,7 +120,7 @@ public class ForumThread {
 	 * 
 	 * @return the last post id
 	 */
-	public Number getLastID() {
+	public Number getLastPostId() {
 		return this.lastID;
 	}
 
@@ -197,38 +225,31 @@ public class ForumThread {
 
 	/**
 	 * Subscribe to the thread.
+	 *
+	 * @return true if successful
 	 */
-	public void subscribe() {
-		try {
-			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + getTopicId().intValue() + "&auth="
-					+ MySoup.getAuthKey());
-			System.out.println("Subscribed");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public boolean subscribe(){
+		return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid="
+			+ getTopicId().intValue() + "&auth=" + MySoup.getAuthKey());
 	}
 
 	/**
-	 * Unsubscribe to the thread.
+	 * Unsubscribe from the thread.
+	 *
+	 * @return true if successful
 	 */
-	public void unsubscribe() {
-		try {
-			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + getTopicId().intValue() + "&auth="
-					+ MySoup.getAuthKey());
-			System.out.println("Unsubscribed");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+	public boolean unsubscribe(){
+		return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid="
+			+ getTopicId().intValue() + "&auth=" + MySoup.getAuthKey());
 	}
 
 	@Override
 	public String toString() {
 		return "ForumThread [getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName() + ", getLastAuthorId="
-				+ getLastAuthorId() + ", getLastAuthorName=" + getLastAuthorName() + ", getLastID=" + getLastID()
-				+ ", getLastReadPage=" + getLastReadPage() + ", getLastReadPostId=" + getLastReadPostId() + ", getLastTime="
-				+ getLastTime() + ", isLocked=" + isLocked() + ", getPostCount=" + getPostCount() + ", isSticky=" + isSticky()
-				+ ", getTitle=" + getTitle() + ", getTopicId=" + getTopicId() + ", getUrl=" + getUrl() + ", getLastReadUrl="
-				+ getLastReadUrl() + ", isRead=" + isRead() + "]";
+			+ getLastAuthorId() + ", getLastAuthorName=" + getLastAuthorName() + ", getLastPostId=" + getLastPostId()
+			+ ", getLastReadPage=" + getLastReadPage() + ", getLastReadPostId=" + getLastReadPostId() + ", getLastTime="
+			+ getLastTime() + ", isLocked=" + isLocked() + ", getPostCount=" + getPostCount() + ", isSticky=" + isSticky()
+			+ ", getTitle=" + getTitle() + ", getTopicId=" + getTopicId() + ", getUrl=" + getUrl() + ", getLastReadUrl="
+			+ getLastReadUrl() + ", isRead=" + isRead() + "]";
 	}
 }
