@@ -1,16 +1,16 @@
-package api.forum.forumsections;
+package api.forum.categories;
 
 import api.son.MySon;
 import api.soup.MySoup;
 
 /**
- * The Class ForumSections.
+ * The Class ForumCategories.
  * For getting and using the API related to
  * viewing the forum section page.
  *
  * @author Gwindow
  */
-public class ForumSections {
+public class ForumCategories {
 	/**
 	 * The API response, contains the data we want.
 	 */
@@ -30,15 +30,15 @@ public class ForumSections {
 	//private ArrayList<Forum> forumsList;
 
 	/**
-	 * Get the ForumSections from the site and return them
+	 * Get the ForumCategories from the site and return them
 	 * as an instance of the class
 	 *
 	 * @return the forum sections
 	 */
-	public static ForumSections init(){
+	public static ForumCategories init(){
 		String authkey = MySoup.getAuthKey();
 		String url = "ajax.php?action=forum&type=main&auth=" + authkey;
-		return (ForumSections)MySon.toObject(url, ForumSections.class);
+		return (ForumCategories)MySon.toObject(url, ForumCategories.class);
 	}
 
 	/**
@@ -86,6 +86,6 @@ public class ForumSections {
 
 	@Override
 	public String toString(){
-		return "ForumSections [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
+		return "ForumCategories [getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
 	}
 }
