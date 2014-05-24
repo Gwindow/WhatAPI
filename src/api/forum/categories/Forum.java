@@ -10,11 +10,6 @@ import java.util.List;
  */
 public class Forum {
 	/**
-	 * The forum description.
-	 */
-	private String forumDescription;
-
-	/**
 	 * The forum id.
 	 */
 	private Number forumId;
@@ -23,6 +18,26 @@ public class Forum {
 	 * The forum name.
 	 */
 	private String forumName;
+
+	/**
+	 * The forum description.
+	 */
+	private String forumDescription;
+
+	/**
+	 * The number of topics in the forum
+	 */
+	private Number numTopics;
+
+	/**
+	 * The number of posts in the forum
+	 */
+	private Number numPosts;
+
+	/**
+	 * The last post id.
+	 */
+	private Number lastPostId;
 
 	/**
 	 * The last post author id.
@@ -35,9 +50,9 @@ public class Forum {
 	private String lastPostAuthorName;
 
 	/**
-	 * The last post id.
+	 * The last post topic id.
 	 */
-	private Number lastPostId;
+	private Number lastTopicId;
 
 	/**
 	 * The last post time.
@@ -50,34 +65,19 @@ public class Forum {
 	private String lastTopic;
 
 	/**
-	 * The last post topic id.
-	 */
-	private Number lastTopicId;
-
-	/**
-	 * The number of posts in the forum
-	 */
-	private Number numPosts;
-
-	/**
-	 * The number of topics in the forum
-	 */
-	private Number numTopics;
-
-	/**
 	 * The forum specific rules.
 	 */
 	private List<String> specificRules;
 
 	/**
-	 * If the last post is in a locked thread
-	 */
-	private boolean locked;
-
-	/**
 	 * If the last post has been read
 	 */
 	private boolean read;
+
+	/**
+	 * If the last post is in a locked thread
+	 */
+	private boolean locked;
 
 	/**
 	 * If the last post is in a sticky thread

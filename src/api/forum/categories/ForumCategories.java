@@ -3,10 +3,10 @@ package api.forum.categories;
 import api.son.MySon;
 import api.soup.MySoup;
 
+import java.util.List;
+
 /**
- * The Class ForumCategories.
- * For getting and using the API related to
- * viewing the forum section page.
+ * For getting and using the API related to viewing the forum section page.
  *
  * @author Gwindow
  */
@@ -17,17 +17,9 @@ public class ForumCategories {
 	private Response response;
 
 	/**
-	 * The status of the API request.
+	 * The status of the API request and error message, if any
 	 */
-	private String status;
-
-	private String error;
-
-	/** The forum list.
-	 * TODO: Is this used for anything? The forum list looks to be
-	 * stored under Category, which is contained in the response.
-	 */
-	//private ArrayList<Forum> forumsList;
+	private String status, error;
 
 	/**
 	 * Get the ForumCategories from the site and return them
@@ -36,25 +28,9 @@ public class ForumCategories {
 	 * @return the forum sections
 	 */
 	public static ForumCategories init(){
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=forum&type=main&auth=" + authkey;
+		String url = "ajax.php?action=forum&type=main&auth=" + MySoup.getAuthKey();
 		return (ForumCategories)MySon.toObject(url, ForumCategories.class);
 	}
-
-	/**
-	 * Load forums list from the response's categories section
-	 * into the class member forumsList.
-	 */
-	/*
-	public void loadForumsList() {
-		forumsList = new ArrayList<Forum>();
-		for (Category c : response.getCategories()) {
-			for (Forum f : c.getForums()) {
-				forumsList.add(f);
-			}
-		}
-	}
-	*/
 
 	/**
 	 * Get the API response
@@ -62,7 +38,14 @@ public class ForumCategories {
 	 * @return the response
 	 */
 	public Response getResponse(){
-		return this.response;
+		return response;
+	}
+
+	/**
+	 * Get the list of forum categories
+	 */
+	public List<Category> getCategories(){
+		return response.getCategories();
 	}
 
 	/**
@@ -71,18 +54,12 @@ public class ForumCategories {
 	 * @return True if success
 	 */
 	public boolean getStatus(){
-		return this.status.equalsIgnoreCase("success");
+		return status.equalsIgnoreCase("success");
 	}
 
 	public String getError(){
 		return error;
 	}
-
-	/*
-    public List<Forum> getForumsList() {
-        return forumsList;
-    }
-    */
 
 	@Override
 	public String toString(){

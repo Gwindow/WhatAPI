@@ -54,7 +54,7 @@ public class Category {
 
 	@Override
 	public String toString(){
-		return "Category [getCategoryID=" + getCategoryID() + ", getCategoryName=" + getCategoryName() + ", getForums="
-			+ getForums() + "]";
+		return "Category [getCategoryID=" + getCategoryID() + ", getCategoryName="
+			+ getCategoryName() + ", getForums=" + getForums() + "]";
 	}
 }
