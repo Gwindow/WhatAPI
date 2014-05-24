@@ -4,60 +4,54 @@ package api.forum.thread;
  * The Class Answer.
  * Stores information about an possible answer selection
  * for a Poll
- * 
+ *
  * @author Gwindow
  */
 public class Answer {
-	/** The answer text */
+	/**
+	 * The answer text
+	 */
 	private String answer;
-	
-	/** The percent of votes it's gotten */
+
+	/**
+	 * The percent of votes it's gotten
+	 */
 	private Number percent;
-	
-	/** The ratio of votes it's gotten */
+
+	/**
+	 * The ratio of votes it's gotten
+	 */
 	private Number ratio;
 
 	/**
 	 * Get the answer text
-	 * 
+	 *
 	 * @return the answer text
 	 */
-	public String getAnswer() {
-		try {
-			return this.answer;
-		} catch (Exception e) {
-			return null;
-		}
+	public String getAnswer(){
+		return this.answer;
 	}
 
 	/**
 	 * Get the percent of votes the answers received
-	 * 
+	 *
 	 * @return the percent of votes received
 	 */
-	public Number getPercent() {
-		try {
-			return this.percent;
-		} catch (Exception e) {
-			return null;
-		}
+	public Number getPercent(){
+		return this.percent;
 	}
 
 	/**
 	 * Get the ratio of votes the answers received
-	 * 
+	 *
 	 * @return the ratio of votes received
 	 */
-	public Number getRatio() {
-		try {
-			return this.ratio;
-		} catch (Exception e) {
-			return null;
-		}
+	public Number getRatio(){
+		return this.ratio;
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Answer [getAnswer=" + getAnswer() + ", getPercent=" + getPercent() + ", getRatio=" + getRatio() + "]";
 	}
 }

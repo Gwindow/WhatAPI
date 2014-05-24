@@ -15,11 +15,13 @@ public class Poll {
 
 	/** The possible answers */
 	private List<Answer> answers;
-	
-    /** The featured. TODO: What is this? */
+
+	/**
+	 * If the poll's been featured on the home page
+	 */
 	private String featured;
-	
-	/** The max votes. TODO: What is this? */
+
+	/** The max votes. */
 	private Number maxVotes;
 
 	/** The total votes. */

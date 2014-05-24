@@ -1,5 +1,7 @@
 package api.forum.thread;
 
+import java.util.List;
+
 /**
  * The Class Author.
  * Stores information about a forum post author
@@ -21,8 +23,9 @@ public class Author {
      * user's profile based on their Paranoia settings. A + at the end
      * of an entry denotes very restricted.
      */
-    // private List<String> paranoia;
-    /** The extra text some users get as additional user title */
+    private List<String> paranoia;
+
+	/** The extra text some users get as additional user title */
     private String userTitle;
 
     /** If the author is an artist */
@@ -70,7 +73,9 @@ public class Author {
 	 * 
 	 * @return the list of restricted fields
 	 */
-	/* public List<String> getParanoia() { return paranoia; } */
+	public List<String> getParanoia(){
+		return paranoia;
+	}
 
 	/**
 	 * Get the user title
@@ -121,6 +126,6 @@ public class Author {
 	public String toString() {
 		return "Author [isArtist=" + isArtist() + ", getAuthorId=" + getAuthorId() + ", getAuthorName=" + getAuthorName()
 				+ ", getAvatar=" + getAvatar() + ", isDonor=" + isDonor() + ", isEnabled=" + isEnabled() + ", getParanoia="
-				+ /* getParanoia() + */", getUserTitle=" + getUserTitle() + ", isWarned=" + isWarned() + "]";
+			+ getParanoia() + ", getUserTitle=" + getUserTitle() + ", isWarned=" + isWarned() + "]";
 	}
 }

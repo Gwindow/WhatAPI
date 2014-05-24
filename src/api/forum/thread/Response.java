@@ -22,7 +22,9 @@ public class Response {
 	/** The number of pages in the thread */
 	private Number pages;
 
-	/** The poll for the thread (null if none?) */
+	/**
+	 * The poll for the thread (null if no poll)
+	 */
 	private Poll poll;
 
 	/** The posts in the thread */
