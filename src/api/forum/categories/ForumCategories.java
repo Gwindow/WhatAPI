@@ -6,7 +6,7 @@ import api.soup.MySoup;
 import java.util.List;
 
 /**
- * For getting and using the API related to viewing the forum section page.
+ * For getting and using the API related to viewing the forum forum page.
  *
  * @author Gwindow
  */

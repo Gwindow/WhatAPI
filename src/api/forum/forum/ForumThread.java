@@ -1,4 +1,4 @@
-package api.forum.section;
+package api.forum.forum;
 
 import api.soup.MySoup;
 
