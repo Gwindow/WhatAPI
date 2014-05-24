@@ -94,15 +94,6 @@ public class Forum {
 	}
 
 	/**
-	 * Get the last page number
-	 *
-	 * @return the last page number
-	 */
-	public int getLastPage(){
-		return response.getPages().intValue();
-	}
-
-	/**
 	 * Get the API response.
 	 *
 	 * @return the response
