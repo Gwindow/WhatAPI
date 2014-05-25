@@ -1,5 +1,10 @@
 package api.forum.thread;
 
+import api.soup.MySoup;
+import api.util.CouldNotLoadException;
+import api.util.Tuple;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +20,13 @@ public class Poll {
 
 	/** The possible answers */
 	private List<Answer> answers;
-	
-    /** The featured. TODO: What is this? */
+
+	/**
+	 * If the poll's been featured on the home page
+	 */
 	private String featured;
-	
-	/** The max votes. TODO: What is this? */
+
+	/** The max votes. */
 	private Number maxVotes;
 
 	/** The total votes. */
@@ -92,6 +99,24 @@ public class Poll {
 	 */
 	public boolean hasVoted() {
 		return this.voted;
+	}
+
+	public static boolean vote(int threadid, int vote){
+		try {
+			System.out.println("Voting on thread " + threadid + ", vote " + vote);
+			String url = "index.php";
+			List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+			list.add(new Tuple<String, String>("action", "poll"));
+			list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+			list.add(new Tuple<String, String>("topicid", Integer.toString(threadid)));
+			list.add(new Tuple<String, String>("vote", Integer.toString(vote)));
+			MySoup.postMethod(url, list);
+		}
+		catch (CouldNotLoadException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override

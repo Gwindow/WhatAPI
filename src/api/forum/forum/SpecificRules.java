@@ -1,4 +1,4 @@
-package api.forum.section;
+package api.forum.forum;
 
 /**
  * The Class SpecificRules.

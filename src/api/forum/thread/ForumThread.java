@@ -2,15 +2,15 @@ package api.forum.thread;
 
 import api.son.MySon;
 import api.soup.MySoup;
+import api.util.CouldNotLoadException;
 import api.util.Tuple;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Class ForumThread.
- * For getting API response and working with information for viewing
- * a specific forum thread
+ * For getting API response and working with information
+ * for viewing a forum thread
  *
  * @author Gwindow
  */
@@ -22,219 +22,99 @@ public class ForumThread {
 	private Response response;
 
 	/**
-	 * The status of the API response
+	 * The status of the API response and error if an error occurred
 	 */
-	private String status;
-
-	private String error;
+	private String status, error;
 
 	/**
 	 * The thread id
 	 */
-	private transient static int id;
+	private transient int id;
 
 	/**
 	 * The page of the thread being viewed.
 	 */
-	private transient static int page;
+	private transient int page;
 
 	/**
-	 * The posts per page to view
-	 */
-	private transient static int pp = 25;
-
-	/**
-	 * If we're override the posts per page value
-	 */
-	private transient static boolean overridePostsPerPage = false;
-
-	/**
-	 * Set the posts per page to view, default number is 25.
-	 *
-	 * @param postsPerPage the posts per page
-	 */
-	public static void setPostsPerPage(int postsPerPage){
-		ForumThread.pp = postsPerPage;
-	}
-
-	/**
-	 * Get the posts per page to view
-	 *
-	 * @return the posts per page to view
-	 */
-	public static int getPostsPerPage(){
-		return pp;
-	}
-
-	/**
-	 * Get a ForumThread and begin viewing at the first page
+	 * Get some page of a forum thread
 	 *
 	 * @param id the thread id
-	 * @return the ForumThread
+	 * @param page page of to view
 	 */
-	public static ForumThread fromFirstPage(int id){
-		String authkey = MySoup.getAuthKey();
-		String url;
-		if (!overridePostsPerPage)
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&auth=" + authkey;
-		else
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&pp=" + pp + "&auth=" + authkey;
-
+	public static ForumThread thread(int id, int page){
+		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id
+			+ "&page=" + page + "&auth=" + MySoup.getAuthKey();
 		ForumThread thread = (ForumThread)MySon.toObject(url, ForumThread.class);
-		ForumThread.id = id;
-		ForumThread.page = 1;
+		if (thread != null){
+			thread.id = id;
+			thread.page = page;
+		}
 		return thread;
 	}
 
 	/**
-	 * Get a ForumThread from its thread id and begin viewing at a desired page
+	 * Get the first page of a forum thread
 	 *
 	 * @param id   the thread id
-	 * @param page the page to view
-	 * @return the ForumThread
 	 */
-	public static ForumThread fromIdAndPage(int id, int page){
-		String authkey = MySoup.getAuthKey();
-		String url;
-		if (!overridePostsPerPage)
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&auth=" + authkey;
-		else
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
-
-		ForumThread thread = (ForumThread)MySon.toObject(url, ForumThread.class);
-		ForumThread.id = id;
-		ForumThread.page = page;
-		return thread;
+	public static ForumThread thread(int id){
+		return thread(id, 1);
 	}
 
 	/**
-	 * Get a ForumThread and begin viewing at its last page
-	 * Warning: This method is slow since it needs to access the thread twice, once to get max
-	 * number of pages and once to create the ForumThread object from the last page
-	 *
-	 * @param id the thread id
-	 * @return the ForumThread
-	 */
-	public static ForumThread fromLastPage(int id){
-		String authkey = MySoup.getAuthKey();
-		String url;
-		// get the number of pages
-		if (!overridePostsPerPage)
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&auth=" + authkey;
-		else
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + 1 + "&pp=" + pp + "&auth=" + authkey;
-
-		ForumThread thread = (ForumThread)MySon.toObject(url, ForumThread.class);
-
-		// create thread from last page
-		if (!overridePostsPerPage)
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + thread.getLastPage() + "&auth=" + authkey;
-		else
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + thread.getLastPage() + "&pp=" + pp
-				+ "&auth=" + authkey;
-
-		thread = (ForumThread)MySon.toObject(url, ForumThread.class);
-		ForumThread.id = id;
-		ForumThread.page = thread.getLastPage();
-		return thread;
-	}
-
-	/**
-	 * Get a ForumThread from its thread id and being viewing at some post
+	 * Get the forum thread viewing the page containing the post
 	 *
 	 * @param id     the thread id
 	 * @param postId the post id of the post to view
-	 * @return the ForumThread
 	 */
-	public static ForumThread fromIdAndPostId(int id, int postId){
-		String authkey = MySoup.getAuthKey();
-		String url;
-		if (!overridePostsPerPage)
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid=" + postId + "&auth=" + authkey;
-		else
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&postid=" + postId + "&pp=" + pp + "&auth=" + authkey;
-
+	public static ForumThread threadAtPost(int id, int postId){
+		String url = "ajax.php?action=forum&type=viewthread&threadid=" + id
+			+ "&postid=" + postId + "&auth=" + MySoup.getAuthKey();
 		ForumThread thread = (ForumThread)MySon.toObject(url, ForumThread.class);
-		ForumThread.id = id;
-		ForumThread.page = thread.getResponse().getCurrentPage().intValue();
+		if (thread != null && thread.getStatus()){
+			thread.id = id;
+			thread.page = thread.getResponse().getCurrentPage().intValue();
+		}
 		return thread;
 	}
 
 	/**
-	 * Get a ForumThread from the next page of the current ForumThread
-	 * Should only be called if hasNextPage() returned true.
+	 * Check if a next page of results is available
 	 *
-	 * @return the ForumThread for the next page
-	 */
-	public static ForumThread fromNextPage(){
-		page += 1;
-		String authkey = MySoup.getAuthKey();
-		String url;
-		if (!overridePostsPerPage){
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&auth=" + authkey;
-		}
-		else {
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
-		}
-		ForumThread thread = (ForumThread)MySon.toObject(url, ForumThread.class);
-		return thread;
-	}
-
-	/**
-	 * Get a ForumThread from the previous page of the current ForumThread
-	 * Should only be called if hasPreviousPage() returned true.
-	 *
-	 * @return the ForumThread for the previous page
-	 */
-	public static ForumThread fromPreviousPage(){
-		page -= 1;
-		String authkey = MySoup.getAuthKey();
-		String url;
-		if (!overridePostsPerPage){
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&auth=" + authkey;
-		}
-		else {
-			url = "ajax.php?action=forum&type=viewthread&threadid=" + id + "&page=" + page + "&pp=" + pp + "&auth=" + authkey;
-		}
-		ForumThread thread = (ForumThread)MySon.toObject(url, ForumThread.class);
-		return thread;
-	}
-
-	/**
-	 * Get the last page number
-	 *
-	 * @return the last page number
-	 */
-	public int getLastPage(){
-		return response.getPages().intValue();
-	}
-
-	/**
-	 * Check if the ForumThread has a next page
-	 *
-	 * @return True if a next page exists
+	 * @return True if a next page is available
 	 */
 	public boolean hasNextPage(){
-		try {
-			return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
-		}
-		catch (Exception e){
-			return false;
-		}
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() < response.getPages().intValue();
 	}
 
 	/**
-	 * Check if the ForumThread has a previous page
+	 * Get the next page of search results. Returns null if there is
+	 * no next page
 	 *
-	 * @return True if a previous page exists
+	 * @return the next page of search results
+	 */
+	public ForumThread nextPage(){
+		return hasNextPage() ? thread(id, page + 1) : null;
+	}
+
+	/**
+	 * Check if a previous page of results is available
+	 *
+	 * @return True if a previous page is available
 	 */
 	public boolean hasPreviousPage(){
-		try {
-			return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
-		}
-		catch (Exception e){
-			return false;
-		}
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() > 1;
+	}
+
+	/**
+	 * Get the previous page of search results. Returns null if there is
+	 * no previous page
+	 *
+	 * @return the previous page of search results
+	 */
+	public ForumThread previousPage(){
+		return hasPreviousPage() ? thread(id, page - 1) : null;
 	}
 
 	/**
@@ -251,9 +131,10 @@ public class ForumThread {
 	 *
 	 * @param id        thread id of the thread to post too
 	 * @param body      the body text of the post to make
-	 * @param subscribe if we want to subscribe to thread as well (T/F)
+	 * @param subscribe if we want to subscribe to thread as well
+	 * @return true if successful
 	 */
-	public static void postReply(int id, String body, boolean subscribe){
+	public static boolean postReply(int id, String body, boolean subscribe){
 		if (body.length() > 0){
 			try {
 				String url = "forums.php?action=new&forumid=" + id;
@@ -266,38 +147,49 @@ public class ForumThread {
 					list.add(new Tuple<String, String>("subscribe", "checked"));
 				}
 				MySoup.postMethod(url, list);
-				System.out.println("Reply posted");
 			}
-			catch (Exception e){
+			catch (CouldNotLoadException e){
 				e.printStackTrace();
+				return false;
 			}
+			return true;
 		}
+		return false;
+	}
+
+	/**
+	 * Post a reply to this thread
+	 *
+	 * @param body      body text to post
+	 * @param subscribe if we should subscribe to the thread
+	 * @return true if successful
+	 */
+	public boolean postReply(String body, boolean subscribe){
+		return postReply(id, body, subscribe);
 	}
 
 	/**
 	 * Subscribe to the ForumThread
+	 *
+	 * @return true if successful
 	 */
-	public void subscribe(){
+	public boolean subscribe(){
 		if (!getResponse().isSubscribed()){
-			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
-			System.out.println("Subscribed");
+			return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
 		}
-		else {
-			System.out.println("Already subscribed");
-		}
+		return true;
 	}
 
 	/**
 	 * Unsubscribe from the ForumThread
+	 *
+	 * @return true if successful
 	 */
-	public void unsubscribe(){
+	public boolean unsubscribe(){
 		if (getResponse().isSubscribed()){
-			MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
-			System.out.println("Unsubscribed");
+			return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
 		}
-		else {
-			System.out.println("Already unsubscribed");
-		}
+		return true;
 	}
 
 	/**
@@ -306,7 +198,7 @@ public class ForumThread {
 	 * @return the API response
 	 */
 	public Response getResponse(){
-		return this.response;
+		return response;
 	}
 
 	/**
@@ -315,7 +207,7 @@ public class ForumThread {
 	 * @return True if successful
 	 */
 	public boolean getStatus(){
-		return this.status.equalsIgnoreCase("success");
+		return status.equalsIgnoreCase("success");
 	}
 
 	public String getError(){
@@ -327,7 +219,7 @@ public class ForumThread {
 	 *
 	 * @return the thread id
 	 */
-	public static int getId(){
+	public int getId(){
 		return id;
 	}
 
@@ -336,33 +228,21 @@ public class ForumThread {
 	 *
 	 * @return the page number
 	 */
-	public static int getPage(){
+	public int getPage(){
 		return page;
 	}
 
 	/**
-	 * Check if the posts per page value is being overridden
-	 *
-	 * @return True if it's being overridden
+	 * Get the number of pages
 	 */
-	public static boolean isOverridePostsPerPage(){
-		return overridePostsPerPage;
-	}
-
-	/**
-	 * Set whether or not the posts per page value is being overridden
-	 *
-	 * @param overridePostsPerPage the value to set for overridePostsPerPage
-	 */
-	public static void setOverridePostsPerPage(boolean overridePostsPerPage){
-		ForumThread.overridePostsPerPage = overridePostsPerPage;
+	public int getPages(){
+		return response.getPages().intValue();
 	}
 
 	@Override
 	public String toString(){
-		return "ForumThread [id = " + id + ", page = " + page + "  hasNextPage=" + hasNextPage() + ", getUrl=" + getUrl()
+		return "ForumThread [id=" + id + ", page=" + page + "  hasNextPage=" + hasNextPage()
+			+ ", hasPreviousPage=" + hasPreviousPage() + ", getUrl=" + getUrl()
 			+ ", getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
 	}
-
-
 }
