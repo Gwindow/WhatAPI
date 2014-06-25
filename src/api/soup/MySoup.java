@@ -429,12 +429,9 @@ public class MySoup {
 	 */
 	public static void loadIndex(){
 		index = Index.init();
-		if (!index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
-			&& !index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("User")){
-			notificationsEnabled = true;
-		}
-		else {
-			notificationsEnabled = false;
+		if (index != null){
+			String userClass = index.getResponse().getUserstats().getUserClass();
+			notificationsEnabled = !userClass.equalsIgnoreCase("Member") && !userClass.equalsIgnoreCase("User");
 		}
 	}
 
