@@ -173,8 +173,11 @@ public class ForumThread {
 	 * @return true if successful
 	 */
 	public boolean subscribe(){
-		return getResponse().isSubscribed()
-			|| MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
+		return getResponse().isSubscribed() || subscribe(id);
+	}
+
+	public static boolean subscribe(int thread){
+		return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + thread + "&auth=" + MySoup.getAuthKey());
 	}
 
 	/**
@@ -183,8 +186,11 @@ public class ForumThread {
 	 * @return true if successful
 	 */
 	public boolean unsubscribe(){
-		return !getResponse().isSubscribed()
-			|| MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
+		return !getResponse().isSubscribed() || unsubscribe(id);
+	}
+
+	public static boolean unsubscribe(int thread){
+		return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + thread + "&auth=" + MySoup.getAuthKey());
 	}
 
 	/**
