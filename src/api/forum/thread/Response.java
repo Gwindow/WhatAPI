@@ -91,6 +91,14 @@ public class Response {
 	}
 
 	/**
+	 * Check if the thread has a poll
+	 * @return true if the thread has a poll
+	 */
+	public boolean hasPoll(){
+		return poll != null;
+	}
+
+	/**
 	 * Get the posts in the thread
 	 * 
 	 * @return the posts

@@ -15,7 +15,6 @@ import java.util.List;
  * @author Gwindow
  */
 public class ForumThread {
-	// TODO voting on polls
 	/**
 	 * The API response
 	 */
@@ -174,10 +173,8 @@ public class ForumThread {
 	 * @return true if successful
 	 */
 	public boolean subscribe(){
-		if (!getResponse().isSubscribed()){
-			return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
-		}
-		return true;
+		return getResponse().isSubscribed()
+			|| MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
 	}
 
 	/**
@@ -186,10 +183,8 @@ public class ForumThread {
 	 * @return true if successful
 	 */
 	public boolean unsubscribe(){
-		if (getResponse().isSubscribed()){
-			return MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
-		}
-		return true;
+		return !getResponse().isSubscribed()
+			|| MySoup.pressLink("userhistory.php?action=thread_subscribe&topicid=" + id + "&auth=" + MySoup.getAuthKey());
 	}
 
 	/**
