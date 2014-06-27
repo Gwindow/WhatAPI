@@ -148,7 +148,7 @@ public class MySoup {
 			out.close();
 			connection.getResponseCode();
 		}
-		catch (IOException e){
+		catch (Exception e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not login");
 		}
@@ -426,12 +426,17 @@ public class MySoup {
 
 	/**
 	 * Load the user information index
+	 *
+	 * @throws api.util.CouldNotLoadException if index failed to load
 	 */
-	public static void loadIndex(){
+	public static void loadIndex() throws CouldNotLoadException{
 		index = Index.init();
 		if (index != null){
 			String userClass = index.getResponse().getUserstats().getUserClass();
 			notificationsEnabled = !userClass.equalsIgnoreCase("Member") && !userClass.equalsIgnoreCase("User");
+		}
+		else {
+			throw new CouldNotLoadException("Failed to load index");
 		}
 	}
 
