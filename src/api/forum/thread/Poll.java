@@ -11,14 +11,18 @@ import java.util.List;
  * The Class Poll.
  * Stores information returned from the API about a
  * thread's Poll
- * 
+ *
  * @author Gwindow
  */
 public class Poll {
-    /** The question. */
-    private String question;
+	/**
+	 * The question.
+	 */
+	private String question;
 
-	/** The possible answers */
+	/**
+	 * The possible answers
+	 */
 	private List<Answer> answers;
 
 	/**
@@ -26,78 +30,86 @@ public class Poll {
 	 */
 	private String featured;
 
-	/** The max votes. */
+	/**
+	 * The max votes.
+	 */
 	private Number maxVotes;
 
-	/** The total votes. */
+	/**
+	 * The total votes.
+	 */
 	private Number totalVotes;
 
-    /** If the poll is closed */
-    private boolean closed;
-	
-	/** If we've voted on the poll */
+	/**
+	 * If the poll is closed
+	 */
+	private boolean closed;
+
+	/**
+	 * If we've voted on the poll
+	 */
 	private boolean voted;
 
-    /**
-     * Get the question.
-     *
-     * @return the question
-     */
-    public String getQuestion() {
-        return this.question;
-    }
+	/**
+	 * Get the question.
+	 *
+	 * @return the question
+	 */
+	public String getQuestion(){
+		return this.question;
+	}
 
-    /**
-     * Get the possible answers
-     *
-     * @return the answers
-     */
-    public List<Answer> getAnswers() {
-        return this.answers;
-    }
+	/**
+	 * Get the possible answers
+	 *
+	 * @return the answers
+	 */
+	public List<Answer> getAnswers(){
+		return this.answers;
+	}
 
 	/**
 	 * Check if the poll is featured
-	 * 
+	 *
 	 * @return True if featured
 	 */
-	public boolean isFeatured() {
-        return this.featured.equalsIgnoreCase("0000-00-00 00:00:00");
+	public boolean isFeatured(){
+		return this.featured.equalsIgnoreCase("0000-00-00 00:00:00");
 	}
 
 	/**
 	 * Get the max votes
-	 * 
+	 *
 	 * @return the max votes
 	 */
-	public Number getMaxVotes() {
+	public Number getMaxVotes(){
 		return this.maxVotes;
 	}
 
 	/**
 	 * Get the total votes
-	 * 
+	 *
 	 * @return the total votes
 	 */
-	public Number getTotalVotes() {
+	public Number getTotalVotes(){
 		return this.totalVotes;
 	}
 
-    /**
-     * Check if the poll is closed
-     *
-     * @return True if the poll is closed
-     */
-    public boolean isClosed() {
-        return this.closed;
-    }
+	/**
+	 * Check if the poll is closed
+	 *
+	 * @return True if the poll is closed
+	 */
+	public boolean isClosed(){
+		return this.closed;
+	}
 
 	/**
 	 * Check if we've voted on the poll
-	 * 
+	 *
 	 * @return True if we've voted
 	 */
-	public boolean hasVoted() {
+	public boolean hasVoted(){
 		return this.voted;
 	}
 
@@ -148,7 +160,6 @@ public class Poll {
 	 */
 	public static boolean vote(int threadid, int vote){
 		try {
-			System.out.println("Voting on thread " + threadid + ", vote " + vote);
 			String url = "index.php";
 			List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
 			list.add(new Tuple<String, String>("action", "poll"));
@@ -165,9 +176,9 @@ public class Poll {
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Poll [getAnswers=" + getAnswers() + ", isClosed=" + isClosed() + ", isFeatured=" + isFeatured()
-				+ ", getMaxVotes=" + getMaxVotes() + ", getQuestion=" + getQuestion() + ", getTotalVotes=" + getTotalVotes()
-				+ ", hasVoted=" + hasVoted() + "]";
+			+ ", getMaxVotes=" + getMaxVotes() + ", getQuestion=" + getQuestion() + ", getTotalVotes=" + getTotalVotes()
+			+ ", hasVoted=" + hasVoted() + "]";
 	}
 }
