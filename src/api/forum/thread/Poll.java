@@ -101,6 +101,51 @@ public class Poll {
 		return this.voted;
 	}
 
+	/**
+	 * Apply some vote to the local copy of the poll data to update it
+	 * without needing to make another API request
+	 *
+	 * @param answer response to vote for, note that 0: blank vote
+	 *               and the answers start at 1
+	 */
+	public void applyVote(int answer){
+		voted = true;
+		if (answer == 0){
+			return;
+		}
+		--answer;
+		ArrayList<Integer> votes = new ArrayList<Integer>(answers.size());
+		//Run through and tally up the new vote counts for all the answers, We also find the max
+		//here so we can compute the new ratios
+		maxVotes = -1;
+		for (int i = 0; i < answers.size(); ++i){
+			//The API doesn't give us the actual number of votes so we have to estimate like so,
+			//this should be accurate enough though for forum polls
+			int v = (int)(totalVotes.intValue() * answers.get(i).getPercent().floatValue());
+			if (i == answer){
+				++v;
+			}
+			votes.add(v);
+			if (maxVotes.intValue() < v){
+				maxVotes = v;
+			}
+		}
+		totalVotes = totalVotes.intValue() + 1;
+		//Update all the answers in the poll
+		for (int i = 0; i < answers.size(); ++i){
+			Answer a = answers.get(i);
+			a.setPercent(votes.get(i) / totalVotes.floatValue());
+			a.setRatio(votes.get(i) / maxVotes.floatValue());
+		}
+	}
+
+	/**
+	 * Vote for some response on the poll in the thread
+	 *
+	 * @param threadid thread containing the poll to vote on
+	 * @param vote     response to vote for
+	 * @return true if successful
+	 */
 	public static boolean vote(int threadid, int vote){
 		try {
 			System.out.println("Voting on thread " + threadid + ", vote " + vote);

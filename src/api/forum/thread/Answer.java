@@ -50,14 +50,12 @@ public class Answer {
 		return this.ratio;
 	}
 
-	/**
-	 * Update the percentage of votes this answer has received
-	 *
-	 * @param votes votes for this answer
-	 * @param total total votes in the poll
-	 */
-	public void setVotes(int votes, int total){
-		percent = ((float)votes) / total;
+	public void setPercent(float percent){
+		this.percent = percent;
+	}
+
+	public void setRatio(float ratio){
+		this.ratio = ratio;
 	}
 
 	@Override
