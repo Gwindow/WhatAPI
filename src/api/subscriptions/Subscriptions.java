@@ -4,11 +4,11 @@ import api.son.MySon;
 import api.soup.MySoup;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
- * The Class Subscriptions.
  * For getting and interacting with the site API related to viewing
  * forum thread subscriptions
  * 
@@ -24,32 +24,41 @@ public class Subscriptions {
 	private String error;
 
 	/**
-	 * Get the list subscripts that have new posts
-	 * 
-	 * @return the subscriptions
+	 * Load the user's unread subscriptions
 	 */
-	public static Subscriptions init() {
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=subscriptions&auth=" + authkey;
-		return (Subscriptions) MySon.toObject(url, Subscriptions.class);
+	public static Subscriptions init(){
+		return init(false);
 	}
 
 	/**
-	 * Get the API response
-	 * 
-	 * @return the response
+	 * Load the list of subscriptions, optionally showing all of them, not just those
+	 * with unread posts
+	 * @param showAll True if we want to load all subscriptions, not just those with
+	 *                new posts
 	 */
-	public Response getResponse() {
-		return response;
+	public static Subscriptions init(boolean showAll){
+		String url = "ajax.php?action=subscriptions&auth=" + MySoup.getAuthKey();
+		if (showAll){
+			url += "&showunread=0";
+		}
+		return (Subscriptions)MySon.toObject(url, Subscriptions.class);
+	}
+
+	/**
+	 * Get the list of subscribed threads
+	 */
+	public List<ForumThread> getThreads(){
+		return response.getThreads();
 	}
 
 	/**
 	 * Check if there are any unread posts in the subscribed threads
-	 * 
+	 * Note: this has no meaning if you requested to load all subscribed
+	 * threads, check thread.hasUnreadPosts in this case.
 	 * @return True if unread posts exist
 	 */
 	public boolean hasUnreadThreads() {
-        return !(response.getThreads().isEmpty() || response.getThreads() == null);
+		return response.getThreads() != null && !response.getThreads().isEmpty();
 	}
 
 	/**
@@ -61,40 +70,38 @@ public class Subscriptions {
         return status.equalsIgnoreCase("success");
 	}
 
+	/**
+	 * Get the error string for the error that occurred, null if no error
+	 */
 	public String getError(){
 		return error;
 	}
 
 	/**
-	 * Dont call me just yet!.
-     * TODO: Finish this function
-	 * 
-	 * @return the hash map
+	 * Get the list of subscribed threads grouped by their section
 	 */
-	public HashMap<String, ForumThread> sortThreadsBySection() {
-		HashMap<String, ForumThread> map = new HashMap<String, ForumThread>();
-		for (ForumThread t : response.getThreads()) {
-			map.put(t.getForumName(), t);
+	public Map<String, List<ForumThread>> groupThreadsBySection(){
+		Map<String, List<ForumThread>> map = new TreeMap<String, List<ForumThread>>();
+		for (ForumThread t : response.getThreads()){
+			//If we haven't started a list for this section yet, start one
+			if (!map.containsKey(t.getForumName())){
+				map.put(t.getForumName(), new ArrayList<ForumThread>());
+			}
+			map.get(t.getForumName()).add(t);
 		}
-		ArrayList<String> sortedKeys = new ArrayList<String>(map.keySet());
-		Collections.sort(sortedKeys);
 		return map;
 	}
 
-    /**
-     * Catch up with all subscribed topics
-     */
-	public static void catchUp() {
-		try {
-			MySoup.pressLink("userhistory.php?action=catchup&auth=" + MySoup.getAuthKey());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	/**
+	 * Catch up with all subscribed threads
+	 */
+	public static void catchUp(){
+		MySoup.pressLink("userhistory.php?action=catchup&auth=" + MySoup.getAuthKey());
 	}
 
 	@Override
-	public String toString() {
-		return "Subscriptions [getResponse()=" + getResponse() + ", hasUnreadThreads()=" + hasUnreadThreads() + ", getStatus()="
-				+ getStatus() + ", sortThreadsBySection()=" + sortThreadsBySection() + "]";
+	public String toString(){
+		return "Subscriptions [getThreads()=" + getThreads() + ", hasUnreadThreads()=" + hasUnreadThreads() + ", getStatus()="
+			+ getStatus() + ", groupThreadsBySection()=" + groupThreadsBySection() + "]";
 	}
 }
