@@ -24,6 +24,12 @@ public class Subscriptions {
 	private String error;
 
 	/**
+	 * The threads grouped by section, cached so we don't
+	 * need to re-compute it each time it's needed
+	 */
+	Map<String, List<ForumThread>> groupedSubscriptions;
+
+	/**
 	 * Load the user's unread subscriptions
 	 */
 	public static Subscriptions init(){
@@ -81,15 +87,18 @@ public class Subscriptions {
 	 * Get the list of subscribed threads grouped by their section
 	 */
 	public Map<String, List<ForumThread>> groupThreadsBySection(){
-		Map<String, List<ForumThread>> map = new TreeMap<String, List<ForumThread>>();
+		if (groupedSubscriptions != null){
+			return groupedSubscriptions;
+		}
+		groupedSubscriptions = new TreeMap<String, List<ForumThread>>();
 		for (ForumThread t : response.getThreads()){
 			//If we haven't started a list for this section yet, start one
-			if (!map.containsKey(t.getForumName())){
-				map.put(t.getForumName(), new ArrayList<ForumThread>());
+			if (!groupedSubscriptions.containsKey(t.getForumName())){
+				groupedSubscriptions.put(t.getForumName(), new ArrayList<ForumThread>());
 			}
-			map.get(t.getForumName()).add(t);
+			groupedSubscriptions.get(t.getForumName()).add(t);
 		}
-		return map;
+		return groupedSubscriptions;
 	}
 
 	/**
