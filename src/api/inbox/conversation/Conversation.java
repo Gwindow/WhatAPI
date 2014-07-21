@@ -16,11 +16,9 @@ public class Conversation {
 	private Response response;
 
 	/**
-	 * The API response status
+	 * The API response status and error if an error occurred
 	 */
-	private String status;
-
-	private String error;
+	private String status, error;
 
 	/**
 	 * Get a Conversation by its conversation id.
@@ -28,9 +26,9 @@ public class Conversation {
 	 * @param id the conversation id to get
 	 * @return the conversation
 	 */
-	public static Conversation conversationFromId(int id){
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=inbox&type=viewconv&id=" + id + "&auth=" + authkey;
+	public static Conversation conversation(int id){
+		String url = "ajax.php?action=inbox&type=viewconv&id=" + id
+			+ "&auth=" + MySoup.getAuthKey();
 		return (Conversation)MySon.toObject(url, Conversation.class);
 	}
 
