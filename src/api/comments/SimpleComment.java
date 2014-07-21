@@ -64,12 +64,6 @@ public interface SimpleComment {
 	public String getBBbody();
 
 	/**
-	 * Set the body html of text of the post
-	 * (this is used for the apps emoticon -> emoji step)
-	 */
-	public void setBody(String s);
-
-	/**
 	 * Get the post body as a quote
 	 */
 	public String getQuote();
@@ -78,19 +72,4 @@ public interface SimpleComment {
 	 * Get the post id
 	 */
 	public int getPostId();
-
-	/**
-	 * True if the author is a donor
-	 */
-	public boolean isDonor();
-
-	/**
-	 * True if the author is warned
-	 */
-	public boolean isWarned();
-
-	/**
-	 * True if the author is banned
-	 */
-	public boolean isBanned();
 }

@@ -9,48 +9,74 @@ import java.util.Date;
 /**
  * The Class SimpleComment.
  * Stores information about a user's comment on a Request
- * 
+ *
  * @author Gwindow
  */
 public class Comment implements SimpleComment {
-	/** The time the comment was made */
+	/**
+	 * The time the comment was made
+	 */
 	private String addedTime;
-	
-	/** The author's user id */
+
+	/**
+	 * The author's user id
+	 */
 	private Number authorId;
-	
-	/** The author's avatar url. */
+
+	/**
+	 * The author's avatar url.
+	 */
 	private String avatar;
-	
-	/** The author's user class. */
+
+	/**
+	 * The author's user class.
+	 */
 	@SerializedName("class")
 	private String userClass;
-	
-	/** The comment text */
+
+	/**
+	 * The comment text
+	 */
 	private String comment;
-	
-	/** If the user is a donor. */
+
+	/**
+	 * If the user is a donor.
+	 */
 	private boolean donor;
-	
-	/** The time the comment was edited. */
+
+	/**
+	 * The time the comment was edited.
+	 */
 	private String editedTime;
-	
-	/** The editor's user id */
+
+	/**
+	 * The editor's user id
+	 */
 	private Number editedUserId;
-	
-	/** The editor's user name */
+
+	/**
+	 * The editor's user name
+	 */
 	private String editedUsername;
-	
-	/** If the author's account is enabled */
+
+	/**
+	 * If the author's account is enabled
+	 */
 	private boolean enabled;
-	
-	/** The author's user name */
+
+	/**
+	 * The author's user name
+	 */
 	private String name;
-	
-	/** The comment post id */
+
+	/**
+	 * The comment post id
+	 */
 	private Number postId;
-	
-	/** If the author is warned */
+
+	/**
+	 * If the author is warned
+	 */
 	private boolean warned;
 
 	public String getUserClass(){
@@ -104,11 +130,6 @@ public class Comment implements SimpleComment {
 	}
 
 	@Override
-	public void setBody(String s){
-		comment = s;
-	}
-
-	@Override
 	public String getQuote(){
 		return "[quote=" + name + "]" + comment + "[/quote]";
 	}
@@ -118,23 +139,20 @@ public class Comment implements SimpleComment {
 		return postId.intValue();
 	}
 
-	@Override
 	public boolean isDonor(){
 		return donor;
 	}
 
-	@Override
 	public boolean isWarned(){
 		return warned;
 	}
 
-	@Override
 	public boolean isBanned(){
 		return !enabled;
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		return "Comment [getAddedTime=" + addedTime + ", getAuthorId=" + getAuthorId() + ", getAvatar=" + getAvatar()
 			+ ", getUserClass=" + userClass + ", getComment=" + comment + ", isDonor=" + isDonor()
 			+ ", getEditedTime=" + editedTime + ", getEditedUserId=" + editedUserId + ", getEditedUsername="
