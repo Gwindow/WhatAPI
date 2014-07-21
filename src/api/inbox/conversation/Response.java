@@ -60,7 +60,7 @@ public class Response {
 
 	@Override
 	public String toString() {
-		return "Response [getConvId()=" + getConvId() + ", getMessages()="
-			+ getMessages() + ", isSticky()=" + isSticky() + ", getSubject()=" + getSubject() + "]";
+		return "Response [getConvId()=" + getConvId() + ", isSticky()=" + isSticky()
+			+ ", getSubject()=" + getSubject() + ", getMessages()=" + getMessages() + "]";
 	}
 }
