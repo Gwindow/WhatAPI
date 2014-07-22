@@ -1,10 +1,13 @@
 package api.user;
 
-import api.inbox.PrivateMessage;
 import api.search.user.UserSearch;
 import api.son.MySon;
 import api.soup.MySoup;
 import api.util.CouldNotLoadException;
+import api.util.Tuple;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A User, needs to be created using fromId contains the user profile.
@@ -77,15 +80,39 @@ public class User {
 	}
 
 	/**
+	 * Send a message to a user
+	 *
+	 * @param id user id to send to
+	 * @param subject message subject
+	 * @param body message body
+	 * @return true if sent successfully
+	 */
+	public static boolean sendMessage(int id, String subject, String body){
+		try {
+			List<Tuple<String, String>> list = new ArrayList<Tuple<String, String>>();
+			list.add(new Tuple<String, String>("action", "takecompose"));
+			list.add(new Tuple<String, String>("toid", Integer.toString(id)));
+			list.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+			list.add(new Tuple<String, String>("subject", subject));
+			list.add(new Tuple<String, String>("body", body));
+			MySoup.postMethod("inbox.php", list);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Send message to the user.
 	 *
 	 * @param subject the subject
 	 * @param body    the body
-	 * @throws CouldNotLoadException the could not load exception
+	 * @return true if message sent successfully
 	 */
-	public void sendMessage(String subject, String body) throws CouldNotLoadException{
-		PrivateMessage pm = new PrivateMessage(id, subject, body);
-		pm.sendMessage();
+	public boolean sendMessage(String subject, String body){
+		return sendMessage(id, subject, body);
 	}
 
 	/**
