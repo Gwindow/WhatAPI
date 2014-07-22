@@ -38,6 +38,41 @@ public class Conversation {
 	}
 
 	/**
+	 * Post a reply to a conversation
+	 *
+	 * @param convId id of conversation to reply to
+	 * @param toid id of user to send message to
+	 * @param body text to reply
+	 * @return true if successfully replied
+	 */
+	public static boolean reply(int convId, int toid, String body){
+		try {
+			List<Tuple<String, String>> params = new ArrayList<Tuple<String, String>>();
+			params.add(new Tuple<String, String>("action", "takecompose"));
+			params.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+			params.add(new Tuple<String, String>("toid", Integer.toString(toid)));
+			params.add(new Tuple<String, String>("convid", Integer.toString(convId)));
+			params.add(new Tuple<String, String>("body", body));
+			MySoup.postMethod("inbox.php", params);
+		}
+		catch (CouldNotLoadException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Post a reply to this conversation
+	 *
+	 * @param body text to reply
+	 * @return true if successfully replied
+	 */
+	public boolean reply(String body){
+		return reply(response.getConvId().intValue(), response.getToId(), body);
+	}
+
+	/**
 	 * Manage the properties of a conversation
 	 *
 	 * @param convId     id of conversation to manage

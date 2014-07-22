@@ -1,5 +1,7 @@
 package api.inbox.conversation;
 
+import api.soup.MySoup;
+
 import java.util.List;
 
 /**
@@ -47,6 +49,20 @@ public class Response {
 	 */
 	public String getSubject() {
 		return this.subject;
+	}
+
+	/**
+	 * Get the id of the user we're having the conversation with,
+	 * will return 0 if we somehow couldn't find the other users id.
+	 */
+	public int getToId(){
+		//Just run through the messages and find the id that isn't our own
+		for (Message m : messages){
+			if (m.getAuthorId() != MySoup.getUserId()){
+				return m.getAuthorId();
+			}
+		}
+		return 0;
 	}
 
     /**
