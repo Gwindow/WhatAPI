@@ -1,5 +1,9 @@
 package api.inbox.inbox;
 
+import api.soup.MySoup;
+
+import java.util.Date;
+
 /**
  * The Class Message.
  * Describes a message in the inbox
@@ -59,8 +63,15 @@ public class Message {
 	 * 
 	 * @return the sent date
 	 */
-	public String getDate() {
+	public String getDateString(){
 		return date;
+	}
+
+	/**
+	 * Get the sent date of the message as a date
+	 */
+	public Date getDate(){
+		return MySoup.parseDate(date);
 	}
 
 	/**
@@ -167,7 +178,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [getConvId()=" + getConvId() + ", getDate()=" + getDate() + ", isDonor()=" + isDonor()
+		return "Message [getConvId()=" + getConvId() + ", getDateString()=" + getDateString() + ", isDonor()=" + isDonor()
 			+ ", getEnabled()=" + isEnabled() + ", getForwardedId()=" + getForwardedId() + ", getForwardedName()="
 			+ getForwardedName() + ", getSenderId()=" + getSenderId() + ", isSticky()=" + isSticky() + ", getSubject()="
 			+ getSubject() + ", isUnread()=" + isUnread() + ", getUsername()=" + getUsername() + ", isWarned()=" + isWarned()
