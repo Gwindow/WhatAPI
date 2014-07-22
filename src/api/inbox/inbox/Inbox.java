@@ -4,7 +4,6 @@ import api.son.MySon;
 import api.soup.MySoup;
 
 /**
- * The Class Inbox.
  * For getting and interacting with the API regarding viewing
  * the user's inbox
  *
@@ -17,16 +16,14 @@ public class Inbox {
 	private Response response;
 
 	/**
-	 * The response status.
+	 * The response status and error message (if an error occurred)
 	 */
-	private String status;
-
-	private String error;
+	private String status, error;
 
 	/**
 	 * The page of the inbox being viewed.
 	 */
-	private static int page;
+	private transient int page;
 
 	/**
 	 * Get the Inbox at the first page
@@ -34,7 +31,7 @@ public class Inbox {
 	 * @return the Inbox
 	 */
 	public static Inbox init(){
-		return fromPage(1);
+		return page(1);
 	}
 
 	/**
@@ -43,37 +40,55 @@ public class Inbox {
 	 * @param page the page to get
 	 * @return the Inbox
 	 */
-	public static Inbox fromPage(int page){
-		String authkey = MySoup.getAuthKey();
-		Inbox.page = page;
-		String url = "ajax.php?action=inbox&page=" + page + "&auth=" + authkey;
-		return (Inbox)MySon.toObject(url, Inbox.class);
+	public static Inbox page(int page){
+		String url = "ajax.php?action=inbox&page=" + page + "&auth=" + MySoup.getAuthKey();
+		Inbox i = (Inbox)MySon.toObject(url, Inbox.class);
+		if (i != null){
+			i.page = page;
+		}
+		return i;
 	}
 
 	/**
-	 * Get the next page of the Inbox
-	 * Should only be called if hasNextPage() returned true.
+	 * Check if a next page of results is available
 	 *
-	 * @return the Inbox at the next page
+	 * @return True if a next page is available
 	 */
-	public static Inbox fromNextPage(){
-		++page;
-		return fromPage(page);
+	public boolean hasNextPage(){
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() < response.getPages().intValue();
 	}
 
 	/**
-	 * Get the previous page of the Inbox
-	 * Should only be called if hasPreviousPage() returned true.
+	 * Get the next page of search results. Returns null if there is
+	 * no next page
 	 *
-	 * @return the Inbox at the previous page
+	 * @return the next page of search results
 	 */
-	public static Inbox fromPreviousPage(){
-		--page;
-		return fromPage(page);
+	public Inbox nextPage(){
+		return hasNextPage() ? page(page + 1) : null;
 	}
 
 	/**
-	 * Get the API response.
+	 * Check if a previous page of results is available
+	 *
+	 * @return True if a previous page is available
+	 */
+	public boolean hasPreviousPage(){
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() > 1;
+	}
+
+	/**
+	 * Get the previous page of search results. Returns null if there is
+	 * no previous page
+	 *
+	 * @return the previous page of search results
+	 */
+	public Inbox previousPage(){
+		return hasPreviousPage() ? page(page - 1) : null;
+	}
+
+	/**
+	 * Get the API response containing the list of messages in the inbox
 	 *
 	 * @return the response
 	 */
@@ -90,35 +105,13 @@ public class Inbox {
 		return status.equalsIgnoreCase("success");
 	}
 
+	/**
+	 * Get the error string describing the error that occurred
+	 *
+	 * @return error message from the API, null if no error
+	 */
 	public String getError(){
 		return error;
-	}
-
-	/**
-	 * Get the last page number of the Inbox
-	 *
-	 * @return the last page number
-	 */
-	public int getLastPage(){
-		return response.getPages().intValue();
-	}
-
-	/**
-	 * Check if the Inbox has a next page
-	 *
-	 * @return True if a next page exists
-	 */
-	public boolean hasNextPage(){
-		return ((response.getPages().intValue() - response.getCurrentPage().intValue()) > 0);
-	}
-
-	/**
-	 * Check if the Inbox has a previous page
-	 *
-	 * @return True if a previous page exists
-	 */
-	public boolean hasPreviousPage(){
-		return (response.getCurrentPage().intValue() != 1 || response.getCurrentPage().intValue() == 0);
 	}
 
 	/**
@@ -126,14 +119,13 @@ public class Inbox {
 	 *
 	 * @return the current page number
 	 */
-	public static int getPage(){
+	public int getPage(){
 		return page;
 	}
 
 	@Override
 	public String toString(){
-		return "Inbox [getResponse()=" + getResponse() + ", getStatus()=" + getStatus() + ", getLastPage()=" + getLastPage()
+		return "Inbox [getResponse()=" + getResponse() + ", getStatus()=" + getStatus()
 			+ ", hasNextPage()=" + hasNextPage() + ", hasPreviousPage()=" + hasPreviousPage() + "]";
 	}
-
 }

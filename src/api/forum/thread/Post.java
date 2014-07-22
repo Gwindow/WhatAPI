@@ -93,11 +93,6 @@ public class Post implements SimpleComment {
 	}
 
 	@Override
-	public void setBody(String s){
-		body = s;
-	}
-
-	@Override
 	public String getBBbody(){
 		return bbBody;
 	}
@@ -112,17 +107,14 @@ public class Post implements SimpleComment {
 		return postId.intValue();
 	}
 
-	@Override
 	public boolean isDonor(){
 		return author.isDonor();
 	}
 
-	@Override
 	public boolean isWarned(){
 		return author.isWarned();
 	}
 
-	@Override
 	public boolean isBanned(){
 		return !author.isEnabled();
 	}

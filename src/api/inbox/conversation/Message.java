@@ -1,110 +1,113 @@
 package api.inbox.conversation;
 
+import api.comments.SimpleComment;
+import api.soup.MySoup;
+
+import java.util.Date;
 
 /**
  * The Class Message.
  * 
  * @author Gwindow
  */
-public class Message {
-	/** The body text of the message. */
-	private String body;
-
-    /** The bulletin board formatted body */
-    private String bbBody;
-
-	/** The message id. */
+public class Message implements SimpleComment {
+	/**
+	 * The message id.
+	 */
 	private Number messageId;
 
-	/** The sender's user id */
+	/**
+	 * The sender's user id
+	 */
 	private Number senderId;
 
-	/** The sender's user name */
+	/**
+	 * The sender's user name
+	 */
 	private String senderName;
 
-	/** The date the message was sent */
+	/**
+	 * The date the message was sent
+	 */
 	private String sentDate;
 
 	/**
-	 * Get the body text
-	 * 
-	 * @return the body text
+	 * Image url for the sender's avatar
 	 */
-	public String getBody() {
-		return body;
-	}
-
-    /**
-     * Get the bulletin board formatted body text
-     *
-     * @return the bulletin board formatted body
-     */
-    public String getBBBody() {
-        return bbBody.replace("\r", "");
-    }
+	private String avatar;
 
 	/**
-	 * Get the message id
-	 * 
-	 * @return the message id
+	 * The bulletin board formatted body
 	 */
-	public Number getMessageId() {
-		return messageId;
-	}
+	private String bbBody;
 
 	/**
-	 * Get the sender's user id
-	 * 
-	 * @return the sender's user id
+	 * The body text of the message.
 	 */
-	public Number getSenderId() {
-		return senderId;
-	}
+	private String body;
 
-	/**
-	 * Get the sender's user name
-	 * 
-	 * @return the sender's user name
-	 */
-	public String getSenderName() {
-		if (senderName == null || senderName.length() == 0)
+	@Override
+	public String getAuthor(){
+		if (senderName == null || senderName.length() == 0){
 			senderName = "System";
+		}
 		return senderName;
 	}
 
-    /**
-     * Check if the message was sent by the system
-     *
-     * @return True if the message was sent by the system
-     */
-	public boolean isSystem() {
-		return getSenderName().equals("System");
-	}
-
-	/**
-	 * Get the date the message was sent
-	 * 
-	 * @return the sent date
-	 */
-	public String getSentDate() {
-		return sentDate;
-	}
-
-	/**
-	 * Get the bulletin board quote formatted body
-	 * 
-	 * @return the quoted message body
-	 */
-	public String getQuotableBody() {
-		return "[quote=" + senderName + "]" + getBBBody() + "[/quote]";
-
+	@Override
+	public int getAuthorId(){
+		return senderId.intValue();
 	}
 
 	@Override
-	public String toString() {
-		return "Message [getBBBody()=" + getBBBody() + ", getBody()=" + getBody() + ", getMessageId()=" + getMessageId()
-				+ ", getSenderId()=" + getSenderId() + ", getSenderName()=" + getSenderName() + ", isSystem()=" + isSystem()
-				+ ", getSentDate()=" + getSentDate() + ", getQuotableBody()=" + getQuotableBody() + "]";
+	public String getAvatar(){
+		return avatar;
 	}
 
+	@Override
+	public Date getTimePosted(){
+		return MySoup.parseDate(sentDate);
+	}
+
+	@Override
+	public String getEditor(){
+		return null;
+	}
+
+	@Override
+	public int getEditorId(){
+		return 0;
+	}
+
+	@Override
+	public Date getTimeEdited(){
+		return null;
+	}
+
+	@Override
+	public String getBBbody(){
+		return bbBody;
+	}
+
+	@Override
+	public String getBody(){
+		return body;
+	}
+
+	@Override
+	public String getQuote(){
+		return "[quote=" + getAuthor() + "]" + getBBbody() + "[/quote]";
+	}
+
+	@Override
+	public int getPostId(){
+		return messageId.intValue();
+	}
+
+	@Override
+	public String toString(){
+		return "Message [getBBBody()=" + getBBbody() + ", getBody()=" + getBody() + ", getPostId()=" + getPostId()
+			+ ", getAuthorId()=" + getAuthorId() + ", getAuthor()=" + getAuthor() + ", getAvatar()=" + getAvatar()
+			+ ", getTimePosted()=" + getTimePosted() + ", getQuote()=" + getQuote() + "]";
+	}
 }

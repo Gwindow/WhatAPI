@@ -7,16 +7,18 @@ package api.inbox.inbox;
  * @author Gwindow
  */
 public class Message {
-	/** The conversation id */
+	/**
+	 * The conversation id, use to load the conversation for this message
+	 */
 	private Number convId;
 
 	/** The sent data of the message */
 	private String date;
 
-	/** The forwarded id. TODO: what is this? */
+	/** The user if of the person who forwarded the message(?) */
 	private Number forwardedId;
 
-	/** The forwarded name. TODO: what is this? */
+	/** The name of the user who forwarded the message(?) */
 	private String forwardedName;
 
 	/** The sender's user id */
@@ -93,9 +95,10 @@ public class Message {
 	 * 
 	 * @return the sender's username
 	 */
-	public String getUsername() {
-		if (username == null || username.length() == 0)
+	public String getUsername(){
+		if (username == null || username.length() == 0){
 			username = "System";
+		}
 		return username;
 	}
 
@@ -165,9 +168,9 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [getConvId()=" + getConvId() + ", getDate()=" + getDate() + ", isDonor()=" + isDonor()
-				+ ", getEnabled()=" + isEnabled() + ", getForwardedId()=" + getForwardedId() + ", getForwardedName()="
-				+ getForwardedName() + ", getSenderId()=" + getSenderId() + ", isSticky()=" + isSticky() + ", getSubject()="
-				+ getSubject() + ", isUnread()=" + isUnread() + ", getUsername()=" + getUsername() + ", isWarned()=" + isWarned()
-				+ "]";
+			+ ", getEnabled()=" + isEnabled() + ", getForwardedId()=" + getForwardedId() + ", getForwardedName()="
+			+ getForwardedName() + ", getSenderId()=" + getSenderId() + ", isSticky()=" + isSticky() + ", getSubject()="
+			+ getSubject() + ", isUnread()=" + isUnread() + ", getUsername()=" + getUsername() + ", isWarned()=" + isWarned()
+			+ "]";
 	}
 }
