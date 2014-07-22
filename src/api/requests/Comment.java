@@ -151,6 +151,10 @@ public class Comment implements SimpleComment {
 		return !enabled;
 	}
 
+	public void setBody(String body){
+		comment = body;
+	}
+
 	@Override
 	public String toString(){
 		return "Comment [getAddedTime=" + addedTime + ", getAuthorId=" + getAuthorId() + ", getAvatar=" + getAvatar()
