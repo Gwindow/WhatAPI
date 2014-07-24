@@ -27,7 +27,7 @@ public class Subscriptions {
 	 * The threads grouped by section, cached so we don't
 	 * need to re-compute it each time it's needed
 	 */
-	Map<String, List<ForumThread>> groupedSubscriptions;
+	private Map<String, List<ForumThread>> groupedSubscriptions;
 
 	/**
 	 * Load the user's unread subscriptions
