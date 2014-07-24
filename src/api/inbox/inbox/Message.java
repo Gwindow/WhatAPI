@@ -2,6 +2,7 @@ package api.inbox.inbox;
 
 import api.soup.MySoup;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -11,6 +12,23 @@ import java.util.Date;
  * @author Gwindow
  */
 public class Message {
+	/**
+	 * Sort messages based on their stickyness, sticky messages are interpreted as
+	 * less than non-sticky messages so they come before them in an ascending sorted order
+	 */
+	public static class StickyMessageComparator implements Comparator<Message> {
+		@Override
+		public int compare(Message a, Message b){
+			if (a.sticky && !b.sticky){
+				return -1;
+			}
+			if (!a.sticky && b.sticky){
+				return 1;
+			}
+			return 0;
+		}
+	}
+
 	/**
 	 * The conversation id, use to load the conversation for this message
 	 */
@@ -140,8 +158,12 @@ public class Message {
         return unread;
     }
 
-    /**
-     * Check if the message is stickied
+	public void setUnread(boolean unread){
+		this.unread = unread;
+	}
+
+	/**
+	 * Check if the message is stickied
      *
      * @return True if message is stickied
      */
@@ -149,8 +171,12 @@ public class Message {
         return sticky;
     }
 
-    /**
-     * Check if the sender is a donor
+	public void setSticky(boolean sticky){
+		this.sticky = sticky;
+	}
+
+	/**
+	 * Check if the sender is a donor
      *
      * @return True if the sender is a donor
      */
