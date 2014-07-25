@@ -74,6 +74,10 @@ public class Response {
         return sticky;
     }
 
+	public void setSticky(boolean sticky){
+		this.sticky = sticky;
+	}
+
 	@Override
 	public String toString() {
 		return "Response [getConvId()=" + getConvId() + ", isSticky()=" + isSticky()

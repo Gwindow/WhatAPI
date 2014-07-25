@@ -2,6 +2,11 @@ package api.inbox.inbox;
 
 import api.son.MySon;
 import api.soup.MySoup;
+import api.util.CouldNotLoadException;
+import api.util.Tuple;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * For getting and interacting with the API regarding viewing
@@ -47,6 +52,42 @@ public class Inbox {
 			i.page = page;
 		}
 		return i;
+	}
+
+	/**
+	 * Apply mass changes to messages in the inbox
+	 *
+	 * @param ids    ids of conversations to be managed
+	 * @param read   if we want to mark them as read
+	 * @param unread if we want to mark them as unread
+	 * @param delete if we want to delete them
+	 * @return true if successful
+	 */
+	public static boolean manage(List<Integer> ids, boolean read, boolean unread, boolean delete){
+		try {
+			List<Tuple<String, String>> params = new ArrayList<Tuple<String, String>>();
+			params.add(new Tuple<String, String>("action", "masschange"));
+			params.add(new Tuple<String, String>("auth", MySoup.getAuthKey()));
+			//Is this really the best way to pass an array through?
+			for (Integer i : ids){
+				params.add(new Tuple<String, String>("messages[]", Integer.toString(i)));
+			}
+			if (read){
+				params.add(new Tuple<String, String>("read", "on"));
+			}
+			if (unread){
+				params.add(new Tuple<String, String>("unread", "on"));
+			}
+			if (delete){
+				params.add(new Tuple<String, String>("delete", "on"));
+			}
+			MySoup.postMethod("inbox.php", params);
+		}
+		catch (CouldNotLoadException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	/**
