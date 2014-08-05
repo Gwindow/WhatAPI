@@ -4,7 +4,6 @@ import api.son.MySon;
 import api.soup.MySoup;
 
 /**
- * The Class Notifications.
  * For interacting with the site API related to notifications
  *
  * @author Gwindow
@@ -16,102 +15,78 @@ public class Notifications {
 	private Response response;
 
 	/**
-	 * The response status
+	 * The response status and possible error message
 	 */
-	private String status;
-
-	private String error;
+	private String status, error;
 
 	/**
 	 * The page being viewed
 	 */
-	private static transient int page;
+	private transient int page;
 
 	/**
-	 * Get the Notifications on the first page
-	 *
-	 * @return Notifications from page 1
+	 * Get the first page of notifications
 	 */
 	public static Notifications notifications(){
-		return notificationsFromPage(1);
+		return page(1);
 	}
 
 	/**
-	 * Get the Notifications from some page
-	 *
-	 * @param page the page to get
-	 * @return Notifications for the page
+	 * Get some page of notifications
 	 */
-	public static Notifications notificationsFromPage(int page){
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + authkey;
+	public static Notifications page(int page){
+		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + MySoup.getAuthKey();
 		Notifications n = (Notifications)MySon.toObject(url, Notifications.class);
-		Notifications.page = page;
+		if (n != null){
+			n.page = page;
+		}
 		return n;
 	}
 
 	/**
-	 * Get the next page of Notifications
-	 * Should only be called if hasNextPage() returned true.
-	 *
-	 * @return Notifications for the next page
-	 */
-	public static Notifications notificationsFromNextPage(){
-		++page;
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + authkey;
-		return (Notifications)MySon.toObject(url, Notifications.class);
-	}
-
-	/**
-	 * Get the previous page of Notifications
-	 * Should only be called if hasPreviousPage() returned true.
-	 *
-	 * @return Notifications for the previous page
-	 */
-	public static Notifications notificationsFromPreviousPage(){
-		--page;
-		String authkey = MySoup.getAuthKey();
-		String url = "ajax.php?action=notifications&page=" + page + "&auth=" + authkey;
-		return (Notifications)MySon.toObject(url, Notifications.class);
-	}
-
-	/**
-	 * Get the last page number of the notifications
-	 *
-	 * @return the last page number
-	 */
-	public int getLastPage(){
-		return response.getPages().intValue();
-	}
-
-	/**
-	 * Check if there is a next page of notifications available
+	 * Check if a next page of results is available
 	 *
 	 * @return True if a next page is available
 	 */
 	public boolean hasNextPage(){
-		return ((response.getPages().intValue() - response.getCurrentPages().intValue()) > 0);
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() < response.getPages().intValue();
 	}
 
 	/**
-	 * Check if there is a previous page of notifications available
+	 * Get the next page of search results. Returns null if there is
+	 * no next page
 	 *
-	 * @return True if a previous page is available
+	 * @return the next page of search results
+	 */
+	public Notifications nextPage(){
+		return hasNextPage() ? page(page + 1) : null;
+	}
+
+	/**
+	 * Check if a previous page of results is available
+	 *
+	 * @return true if a previous page is available
 	 */
 	public boolean hasPreviousPage(){
-		return (response.getCurrentPages().intValue() != 1 || response.getCurrentPages().intValue() == 0);
+		return response.getCurrentPage() != null && response.getCurrentPage().intValue() > 1;
+	}
+
+	/**
+	 * Get the previous page of search results. Returns null if there is
+	 * no previous page
+	 *
+	 * @return the previous page of search results
+	 */
+	public Notifications previousPage(){
+		return hasPreviousPage() ? page(page - 1) : null;
 	}
 
 	/**
 	 * Clear the notifications
 	 */
-	public void clearNotifications(){
-		String authkey = MySoup.getAuthKey();
-		String url = "torrents.php?action=notify_clear&auth=" + authkey;
-		MySoup.pressLink(url);
-		response.clear();
-		System.out.println("Notifications cleared");
+	public static boolean clearNotifications(){
+		String url = "torrents.php?action=notify_clear&auth=" + MySoup.getAuthKey();
+		return MySoup.pressLink(url);
 	}
 
 	/**
@@ -121,6 +96,13 @@ public class Notifications {
 	 */
 	public Response getResponse(){
 		return response;
+	}
+
+	/**
+	 * Get the page number being viewed
+	 */
+	public int getPage(){
+		return page;
 	}
 
 	/**
@@ -138,8 +120,7 @@ public class Notifications {
 
 	@Override
 	public String toString(){
-		return "Notifications [getLastPage=" + getLastPage() + ", hasNextPage=" + hasNextPage() + ", hasPreviousPage="
-			+ hasPreviousPage() + ", getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
+		return "Notifications [hasNextPage=" + hasNextPage() + ", hasPreviousPage=" + hasPreviousPage()
+			+ ", getResponse=" + getResponse() + ", getStatus=" + getStatus() + "]";
 	}
-
 }

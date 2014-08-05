@@ -1,34 +1,47 @@
 package api.torrents.artist;
 
 
+import java.util.Comparator;
+
 /**
  * The Class Tags.
- * 
+ *
  * @author Gwindow
  */
 public class Tags {
-	
-	/** The count. */
+	public static class TagComparator implements Comparator<Tags> {
+		@Override
+		public int compare(Tags a, Tags b){
+			return a.count.intValue() < b.count.intValue() ? -1
+				: a.count.intValue() > b.count.intValue() ? 1 : 0;
+		}
+	}
+
+	/**
+	 * The count.
+	 */
 	private Number count;
-	
-	/** The name. */
+
+	/**
+	 * The name.
+	 */
 	private String name;
 
 	/**
 	 * Gets the count.
-	 * 
+	 *
 	 * @return the count
 	 */
-	public Number getCount() {
+	public Number getCount(){
 		return this.count;
 	}
 
 	/**
 	 * Gets the name.
-	 * 
+	 *
 	 * @return the name
 	 */
-	public String getName() {
+	public String getName(){
 		return this.name;
 	}
 
@@ -36,7 +49,7 @@ public class Tags {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-		return "Tags [getCount=" + getCount() + ", getName=" + getName() + "]";
+	public String toString(){
+		return getName();
 	}
 }

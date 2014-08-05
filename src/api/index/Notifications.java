@@ -16,6 +16,21 @@ public class Notifications {
 	private Number notifications;
 
 	/**
+	 * If a new announcement has been posted
+	 */
+	private Boolean newAnnouncement;
+
+	/**
+	 * If a new blog has been posted
+	 */
+	private Boolean newBlog;
+
+	/**
+	 * If we have new subscription notifications
+	 */
+	private Boolean newSubscriptions;
+
+	/**
 	 * Get the number of new messages
 	 * 
 	 * @return number of new messages
@@ -29,7 +44,7 @@ public class Notifications {
 	 * 
 	 * @return number of torrent notifications
 	 */
-	public Number getNotifications() {
+	public Number getTorrentNotifications() {
 		return notifications;
 	}
 
@@ -38,8 +53,8 @@ public class Notifications {
 	 * 
 	 * @return True if there are new messages
 	 */
-	public boolean hasNewMessages() {
-		return (messages.intValue() > 0);
+	public boolean hasMessages() {
+		return messages.intValue() > 0;
 	}
 
 	/**
@@ -47,14 +62,35 @@ public class Notifications {
 	 * 
 	 * @return True if there are any new torrent notifications
 	 */
-	public boolean hasNewNotifications() {
-		return (notifications.intValue() > 0);
-    }
-
-	@Override
-	public String toString() {
-		return "Notifications [getMessages()=" + getMessages() + ", getNotifications()=" + getNotifications()
-				+ ", hasNewMessages()=" + hasNewMessages() + ", hasNewNotifications()=" + hasNewNotifications() + "]";
+	public boolean hasTorrentNotifications(){
+		return notifications.intValue() > 0;
 	}
 
+	/**
+	 * True if a new announcement has been posted on the site
+	 */
+	public Boolean hasNewAnnouncement(){
+		return newAnnouncement;
+	}
+
+	/**
+	 * True if the user has new subscription notifications
+	 */
+	public Boolean hasNewSubscriptions(){
+		return newSubscriptions;
+	}
+
+	/**
+	 * True if a new blog post has been posted on the site
+	 */
+	public Boolean hasNewBlog(){
+		return newBlog;
+	}
+
+	@Override
+	public String toString(){
+		return "Notifications [getMessages()=" + getMessages() + ", getNotifications()=" + getTorrentNotifications()
+			+ ", hasNewAnnouncement()=" + hasNewAnnouncement() + ", hasNewSubscriptions()=" + hasNewSubscriptions()
+			+ ", hasNewBlog()=" + hasNewBlog() + "]";
+	}
 }

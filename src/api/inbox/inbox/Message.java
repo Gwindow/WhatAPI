@@ -1,5 +1,10 @@
 package api.inbox.inbox;
 
+import api.soup.MySoup;
+
+import java.util.Comparator;
+import java.util.Date;
+
 /**
  * The Class Message.
  * Describes a message in the inbox
@@ -7,16 +12,35 @@ package api.inbox.inbox;
  * @author Gwindow
  */
 public class Message {
-	/** The conversation id */
+	/**
+	 * Sort messages based on their stickyness, sticky messages are interpreted as
+	 * less than non-sticky messages so they come before them in an ascending sorted order
+	 */
+	public static class StickyMessageComparator implements Comparator<Message> {
+		@Override
+		public int compare(Message a, Message b){
+			if (a.sticky && !b.sticky){
+				return -1;
+			}
+			if (!a.sticky && b.sticky){
+				return 1;
+			}
+			return 0;
+		}
+	}
+
+	/**
+	 * The conversation id, use to load the conversation for this message
+	 */
 	private Number convId;
 
 	/** The sent data of the message */
 	private String date;
 
-	/** The forwarded id. TODO: what is this? */
+	/** The user if of the person who forwarded the message(?) */
 	private Number forwardedId;
 
-	/** The forwarded name. TODO: what is this? */
+	/** The name of the user who forwarded the message(?) */
 	private String forwardedName;
 
 	/** The sender's user id */
@@ -57,8 +81,15 @@ public class Message {
 	 * 
 	 * @return the sent date
 	 */
-	public String getDate() {
+	public String getDateString(){
 		return date;
+	}
+
+	/**
+	 * Get the sent date of the message as a date
+	 */
+	public Date getDate(){
+		return MySoup.parseDate(date);
 	}
 
 	/**
@@ -93,9 +124,10 @@ public class Message {
 	 * 
 	 * @return the sender's username
 	 */
-	public String getUsername() {
-		if (username == null || username.length() == 0)
+	public String getUsername(){
+		if (username == null || username.length() == 0){
 			username = "System";
+		}
 		return username;
 	}
 
@@ -126,8 +158,12 @@ public class Message {
         return unread;
     }
 
-    /**
-     * Check if the message is stickied
+	public void setUnread(boolean unread){
+		this.unread = unread;
+	}
+
+	/**
+	 * Check if the message is stickied
      *
      * @return True if message is stickied
      */
@@ -135,8 +171,12 @@ public class Message {
         return sticky;
     }
 
-    /**
-     * Check if the sender is a donor
+	public void setSticky(boolean sticky){
+		this.sticky = sticky;
+	}
+
+	/**
+	 * Check if the sender is a donor
      *
      * @return True if the sender is a donor
      */
@@ -164,10 +204,10 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [getConvId()=" + getConvId() + ", getDate()=" + getDate() + ", isDonor()=" + isDonor()
-				+ ", getEnabled()=" + isEnabled() + ", getForwardedId()=" + getForwardedId() + ", getForwardedName()="
-				+ getForwardedName() + ", getSenderId()=" + getSenderId() + ", isSticky()=" + isSticky() + ", getSubject()="
-				+ getSubject() + ", isUnread()=" + isUnread() + ", getUsername()=" + getUsername() + ", isWarned()=" + isWarned()
-				+ "]";
+		return "Message [getConvId()=" + getConvId() + ", getDateString()=" + getDateString() + ", isDonor()=" + isDonor()
+			+ ", getEnabled()=" + isEnabled() + ", getForwardedId()=" + getForwardedId() + ", getForwardedName()="
+			+ getForwardedName() + ", getSenderId()=" + getSenderId() + ", isSticky()=" + isSticky() + ", getSubject()="
+			+ getSubject() + ", isUnread()=" + isUnread() + ", getUsername()=" + getUsername() + ", isWarned()=" + isWarned()
+			+ "]";
 	}
 }

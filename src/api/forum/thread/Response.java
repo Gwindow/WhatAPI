@@ -22,7 +22,9 @@ public class Response {
 	/** The number of pages in the thread */
 	private Number pages;
 
-	/** The poll for the thread (null if none?) */
+	/**
+	 * The poll for the thread (null if no poll)
+	 */
 	private Poll poll;
 
 	/** The posts in the thread */
@@ -86,6 +88,14 @@ public class Response {
 	 */
 	public Poll getPoll() {
 		return this.poll;
+	}
+
+	/**
+	 * Check if the thread has a poll
+	 * @return true if the thread has a poll
+	 */
+	public boolean hasPoll(){
+		return poll != null;
 	}
 
 	/**

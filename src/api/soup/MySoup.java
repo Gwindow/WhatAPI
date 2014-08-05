@@ -41,7 +41,7 @@ public class MySoup {
 	/**
 	 * If ssl or notifications are enabled.
 	 */
-	private static boolean sslEnabled = true, notificationsEnabled = true;
+	private static boolean sslEnabled = true, notificationsEnabled = false;
 	/**
 	 * Format that dates are returned (site uses GMT time)
 	 */
@@ -148,7 +148,7 @@ public class MySoup {
 			out.close();
 			connection.getResponseCode();
 		}
-		catch (IOException e){
+		catch (Exception e){
 			e.printStackTrace();
 			throw new CouldNotLoadException("Could not login");
 		}
@@ -426,12 +426,17 @@ public class MySoup {
 
 	/**
 	 * Load the user information index
+	 *
+	 * @throws api.util.CouldNotLoadException if index failed to load
 	 */
-	public static void loadIndex(){
+	public static void loadIndex() throws CouldNotLoadException{
 		index = Index.init();
-		if (!index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("Member")
-			&& !index.getResponse().getUserstats().getUserClass().equalsIgnoreCase("User")){
-			MySoup.notificationsEnabled = true;
+		if (index != null){
+			String userClass = index.getResponse().getUserstats().getUserClass();
+			notificationsEnabled = !userClass.equalsIgnoreCase("Member") && !userClass.equalsIgnoreCase("User");
+		}
+		else {
+			throw new CouldNotLoadException("Failed to load index");
 		}
 	}
 

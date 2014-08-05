@@ -57,11 +57,6 @@ public class Comment implements SimpleComment {
 	}
 
 	@Override
-	public void setBody(String s){
-		body = s;
-	}
-
-	@Override
 	public String getBBbody(){
 		return bbBody;
 	}
@@ -112,17 +107,14 @@ public class Comment implements SimpleComment {
 		return MySoup.parseDate(editedTime);
 	}
 
-	@Override
 	public boolean isDonor(){
 		return userinfo.isDonor();
 	}
 
-	@Override
 	public boolean isWarned(){
 		return userinfo.isWarned();
 	}
 
-	@Override
 	public boolean isBanned(){
 		return !userinfo.isEnabled();
 	}

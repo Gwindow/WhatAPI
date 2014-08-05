@@ -1,5 +1,7 @@
 package api.inbox.conversation;
 
+import api.soup.MySoup;
+
 import java.util.List;
 
 /**
@@ -49,6 +51,20 @@ public class Response {
 		return this.subject;
 	}
 
+	/**
+	 * Get the id of the user we're having the conversation with,
+	 * will return 0 if we somehow couldn't find the other users id.
+	 */
+	public int getToId(){
+		//Just run through the messages and find the id that isn't our own
+		for (Message m : messages){
+			if (m.getAuthorId() != MySoup.getUserId()){
+				return m.getAuthorId();
+			}
+		}
+		return 0;
+	}
+
     /**
      * Check if the conversation is stickied
      *
@@ -58,9 +74,13 @@ public class Response {
         return sticky;
     }
 
+	public void setSticky(boolean sticky){
+		this.sticky = sticky;
+	}
+
 	@Override
 	public String toString() {
-		return "Response [getConvId()=" + getConvId() + ", getMessages()=" + getMessages() + ", isSticky()=" + isSticky()
-				+ ", getSubject()=" + getSubject() + "]";
+		return "Response [getConvId()=" + getConvId() + ", isSticky()=" + isSticky()
+			+ ", getSubject()=" + getSubject() + ", getMessages()=" + getMessages() + "]";
 	}
 }
