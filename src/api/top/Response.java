@@ -8,7 +8,7 @@ import java.util.List;
  * @author Tim
  * 
  */
-public class Response {
+public class Response<T> {
 	/** The caption. */
 	private String caption;
 	
@@ -16,7 +16,7 @@ public class Response {
 	private Number limit;
 	
 	/** The results. */
-	private List<Results> results;
+	private List<T> results;
 	
 	/** The tag. */
 	private String tag;
@@ -44,7 +44,7 @@ public class Response {
 	 * 
 	 * @return List of Results
 	 */
-	public List<Results> getResults() {
+	public List<T> getResults(){
 		return this.results;
 	}
 
