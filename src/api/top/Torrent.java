@@ -1,21 +1,22 @@
 package api.top;
 
-import java.util.List;
-
 import api.soup.MySoup;
 
-//TODO add user and tags.
+import java.util.List;
+
 /**
- * The Class Results.
+ * Stores information about a top 10 torrent
  * 
  * @author Gwindow
  */
-public class Results {
+public class Torrent {
 
 	/** The artist. */
 	private String artist;
 
-	/** The data. */
+	/**
+	 * The total number of bytes downloaded on this torrent.
+	 */
 	private Number data;
 
 	/** The encoding. */
@@ -69,7 +70,10 @@ public class Results {
 	/** The torrent id. */
 	private Number torrentId;
 
-	/** The year. */
+	/**
+	 * The remaster year if this torrent is a remaster/other edition
+	 * is 0 if this is the original release
+	 */
 	private Number year;
 
 	/** The name. */
@@ -94,7 +98,7 @@ public class Results {
 	}
 
 	/**
-	 * Gets the data.
+	 * Get the total number of bytes downloaded for this torrent
 	 * 
 	 * @return the data
 	 */
@@ -270,16 +274,80 @@ public class Results {
 	 * @return the download link
 	 */
 	public String getDownloadLink() {
-		String authkey = MySoup.getAuthKey();
-		String passkey = MySoup.getPassKey();
 		return MySoup.getSite() + "torrents.php?action=download&id=" + torrentId
-                + "&authkey=" + authkey
-                + "&torrent_pass=" + passkey;
+			+ "&authkey=" + MySoup.getAuthKey() + "&torrent_pass=" + MySoup.getPassKey();
 	}
 
+	public boolean isRemastered(){
+		return !remasterTitle.isEmpty();
+	}
+
+	/**
+	 * Get a concise representation of the torrent media, format and encoding. For example "CD - AAC - 320"
+	 *
+	 * @return the media, format, and encoding
+	 */
+	public String getMediaFormatEncoding(){
+		String cue = hasCue ? " - " + "Cue" : "";
+		return this.getMedia() + " - " + this.getFormat() + " - " + this.getEncoding() + cue;
+	}
+
+	/**
+	 * Gets the remaster.
+	 *
+	 * @return the remaster
+	 */
+	public String getRemaster(){
+		StringBuilder ed = new StringBuilder();
+		ed.append(year).append(" - ");
+		if (!remasterTitle.isEmpty()){
+			ed.append(remasterTitle).append(" / ");
+		}
+		if (!media.isEmpty()){
+			ed.append(media);
+		}
+		return ed.toString();
+	}
+
+	/**
+	 * Get a short title that identifies this torrent and edition.
+	 * Title is format remaster title/media/format
+	 */
+	public String getShortTitle(){
+		StringBuilder title = new StringBuilder();
+		title.append(getEditionTitle());
+		title.append("/")
+			.append(media)
+			.append("/");
+		//Display FLAC or 320/V0/V2 as appropriate.
+		if (format.equalsIgnoreCase("MP3")){
+			title.append(encoding);
+		}
+		else {
+			title.append(format);
+		}
+		return title.toString();
+	}
+
+	/**
+	 * Get a string describing the title of this edition.
+	 */
+	public String getEditionTitle(){
+		if (!isRemastered()){
+			return "Original Release";
+		}
+		StringBuilder title = new StringBuilder();
+		title.append(year).append(" - ");
+		if (!remasterTitle.isEmpty()){
+			title.append(remasterTitle);
+		}
+		return title.toString();
+	}
+
+
 	@Override
-	public String toString() {
-		return "Results [getArtist()=" + getArtist() + ", getData()=" + getData() + ", getEncoding()=" + getEncoding()
+	public String toString(){
+		return "top.Torrent [getArtist()=" + getArtist() + ", getData()=" + getData() + ", getEncoding()=" + getEncoding()
 				+ ", getFormat()=" + getFormat() + ", getGroupCategory()=" + getGroupCategory() + ", getGroupId()="
 				+ getGroupId() + ", getGroupName()=" + getGroupName() + ", getGroupYear()=" + getGroupYear() + ", getHasCue()="
 				+ getHasCue() + ", getHasLog()=" + getHasLog() + ", getLeechers()=" + getLeechers() + ", getMedia()="
