@@ -10,30 +10,60 @@ import api.son.MySon;
  * @author Gwindow
  */
 public class WhatStatus {
-	/** The status. */
-	private Status status;
+	/**
+	 * The irc.
+	 */
+	private String irc;
 
 	/**
-	 * Inits the.
-	 * 
+	 * The site.
+	 */
+	private String site;
+
+	/**
+	 * The tracker.
+	 */
+	private String tracker;
+
+	/**
+	 * Load the WhatStatus information
+	 *
 	 * @return the what status
 	 */
-	public static WhatStatus init() {
-		String url = "http://whatstatus.info/api/status";
+	public static WhatStatus status(){
+		String url = "https://whatstatus.info/api/status";
 		return (WhatStatus) MySon.toObjectOther(url, WhatStatus.class);
 	}
 
 	/**
-	 * Gets the status.
-	 * 
-	 * @return the status
+	 * Check if the site is up
+	 *
+	 * @return true if the site is up
 	 */
-	public Status getStatus() {
-		return status;
+	public boolean siteUp(){
+		return site.equalsIgnoreCase("1");
+	}
+
+	/**
+	 * Check if the IRC is up
+	 *
+	 * @return true if the IRC is up
+	 */
+	public boolean ircUp(){
+		return irc.equalsIgnoreCase("1");
+	}
+
+	/**
+	 * Check if the tracker is up
+	 *
+	 * @return true if the tracker is up
+	 */
+	public boolean trackerUp(){
+		return tracker.equalsIgnoreCase("1");
 	}
 
 	@Override
-	public String toString() {
-		return "WhatStatus [getStatus()=" + getStatus() + "]";
+	public String toString(){
+		return "Status [getIrc()=" + irc + ", getSite()=" + site + ", getTracker()=" + tracker + "]";
 	}
 }
