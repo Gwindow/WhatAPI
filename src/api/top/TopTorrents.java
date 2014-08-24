@@ -46,8 +46,8 @@ public class TopTorrents {
 		return response;
 	}
 
-	public String getStatus(){
-		return status;
+	public boolean getStatus(){
+		return status.equalsIgnoreCase("success");
 	}
 
 	public String getError(){
