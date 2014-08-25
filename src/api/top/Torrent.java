@@ -11,64 +11,68 @@ import java.util.List;
  */
 public class Torrent {
 
+	/**
+	 * The torrent id.
+	 */
+	private Number torrentId;
+
+	/**
+	 * The group id.
+	 */
+	private Number groupId;
+
 	/** The artist. */
 	private String artist;
 
 	/**
-	 * The total number of bytes downloaded on this torrent.
+	 * The group name.
 	 */
-	private Number data;
-
-	/** The encoding. */
-	private String encoding;
-
-	/** The format. */
-	private String format;
-
-	/** The group category. */
-	private Number groupCategory;
-
-	/** The group id. */
-	private Number groupId;
-
-	/** The group name. */
 	private String groupName;
 
-	/** The group year. */
+	/**
+	 * The group category.
+	 */
+	private Number groupCategory;
+
+	/**
+	 * The group year.
+	 */
 	private Number groupYear;
 
-	/** The has cue. */
-	private boolean hasCue;
-
-	/** The has log. */
-	private boolean hasLog;
-
-	/** The leechers. */
-	private Number leechers;
-
-	/** The media. */
-	private String media;
-
-	/** The remaster title. */
+	/**
+	 * The remaster title.
+	 */
 	private String remasterTitle;
 
-	/** The scene. */
+	/**
+	 * The format.
+	 */
+	private String format;
+
+	/**
+	 * The encoding.
+	 */
+	private String encoding;
+
+	/**
+	 * The has log.
+	 */
+	private boolean hasLog;
+
+	/**
+	 * The has cue.
+	 */
+	private boolean hasCue;
+
+	/**
+	 * The media.
+	 */
+	private String media;
+
+	/**
+	 * The scene.
+	 */
 	private boolean scene;
-
-	/** The seeders. */
-	private Number seeders;
-
-	/** The snatched. */
-	private Number snatched;
-
-    /** The size of the torrent */
-    private Number size;
-
-	/** The tags. */
-	private List<String> tags;
-
-	/** The torrent id. */
-	private Number torrentId;
 
 	/**
 	 * The remaster year if this torrent is a remaster/other edition
@@ -76,17 +80,33 @@ public class Torrent {
 	 */
 	private Number year;
 
-	/** The name. */
-	private String name;
+	/**
+	 * The tags.
+	 */
+	private List<String> tags;
 
 	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
+	 * The snatched.
 	 */
-	public String getName() {
-		return name;
-	}
+	private Number snatched;
+
+	/**
+	 * The leechers.
+	 */
+	private Number leechers;
+
+	/**
+	 * The seeders.
+	 */
+	private Number seeders;
+
+	/**
+	 * The total number of bytes downloaded on this torrent.
+	 */
+	private Number data;
+
+    /** The size of the torrent */
+    private Number size;
 
 	/**
 	 * Gets the artist.
@@ -316,15 +336,18 @@ public class Torrent {
 	public String getShortTitle(){
 		StringBuilder title = new StringBuilder();
 		title.append(getEditionTitle());
-		title.append("/")
-			.append(media)
-			.append("/");
-		//Display FLAC or 320/V0/V2 as appropriate.
-		if (format.equalsIgnoreCase("MP3")){
-			title.append(encoding);
+		if (!media.isEmpty()){
+			title.append("/").append(media);
 		}
-		else {
-			title.append(format);
+		if (!format.isEmpty()){
+			title.append("/");
+			//Display FLAC or 320/V0/V2 as appropriate.
+			if (format.equalsIgnoreCase("MP3")){
+				title.append(encoding);
+			}
+			else {
+				title.append(format);
+			}
 		}
 		return title.toString();
 	}

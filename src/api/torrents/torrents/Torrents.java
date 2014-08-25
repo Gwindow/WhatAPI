@@ -449,24 +449,23 @@ public class Torrents {
 	 */
 	public String getShortTitle(){
 		StringBuilder title = new StringBuilder();
-		if (remasterTitle.isEmpty()){
-			title.append("Original Release");
+		title.append(getEditionTitle());
+		if (!media.isEmpty()){
+			title.append("/").append(media);
 		}
-		else {
-			title.append(remasterTitle);
-		}
-		title.append("/")
-			.append(media)
-			.append("/");
-		//Display FLAC or 320/V0/V2 as appropriate.
-		if (format.equalsIgnoreCase("MP3")){
-			title.append(encoding);
-		}
-		else {
-			title.append(format);
+		if (!format.isEmpty()){
+			title.append("/");
+			//Display FLAC or 320/V0/V2 as appropriate.
+			if (format.equalsIgnoreCase("MP3")){
+				title.append(encoding);
+			}
+			else {
+				title.append(format);
+			}
 		}
 		return title.toString();
 	}
+
 
 	/**
 	 * Get a string describing the title of this edition. May instead want to change
