@@ -80,7 +80,12 @@ public class Stats {
 			if (ratio.equalsIgnoreCase("\u221e")){
 				ratio = "Infinity";
 			}
-			r = Double.parseDouble(ratio);
+			try {
+				r = Double.parseDouble(ratio);
+			}
+			catch (NumberFormatException e){
+				return null;
+			}
 		}
 		return r;
 	}
