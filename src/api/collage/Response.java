@@ -1,6 +1,11 @@
 package api.collage;
 
+import api.util.Tuple;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Response stores the actual information returned by the API about
@@ -111,6 +116,44 @@ public class Response {
 
 	public List<TorrentGroup> getTorrentgroups() {
 		return torrentgroups;
+	}
+
+	/**
+	 * Compute and return the top 5 tags for the collage
+	 *
+	 * @return the top 5 tags in the collage and their frequencies. Fewer than 5 tags
+	 * may be returned if the collage has less than 5 tags
+	 */
+	public List<Tuple<String, Integer>> topTags() {
+		Hashtable<String, Integer> tags = new Hashtable<String, Integer>();
+		for (TorrentGroup group : torrentgroups) {
+			List<String> groupTags = group.getTags();
+			for (String t : groupTags) {
+				Integer count = tags.get(t);
+				if (count == null) {
+					tags.put(t, 1);
+				} else {
+					tags.put(t, count + 1);
+				}
+			}
+		}
+		// Find the top 5 tags
+		List<Tuple<String, Integer>> top = new ArrayList<Tuple<String, Integer>>(5);
+		for (Map.Entry<String, Integer> t : tags.entrySet()) {
+			if (top.size() < 5) {
+				top.add(new Tuple<String, Integer>(t.getKey(), t.getValue()));
+			} else {
+				// Find if there's an element in the list that has a frequency lower than
+				// this tag and replace it
+				for (Tuple<String, Integer> k : top) {
+					if (k.getB() < t.getValue()) {
+						k.set(t.getKey(), t.getValue());
+						break;
+					}
+				}
+			}
+		}
+		return top;
 	}
 
 	@Override
