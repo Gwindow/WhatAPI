@@ -55,7 +55,7 @@ public class Tuple<A, B> {
 	 */
 	@Override
 	public String toString() {
-		return a + "," + b;
+		return "(" + a + ", " + b + ")";
 	}
 
 	/**
@@ -111,4 +111,14 @@ public class Tuple<A, B> {
 		this.a = a;
 	}
 
+	/**
+	 * Set both values of the tuple
+	 *
+	 * @param a value for a
+	 * @param b value for b
+	 */
+	public void set(A a, B b) {
+		this.a = a;
+		this.b = b;
+	}
 }
