@@ -1,5 +1,7 @@
 package api.torrents.torrents;
 
+import java.util.List;
+
 /**
  * The Class Group.
  * 
@@ -49,6 +51,11 @@ public class Group {
 
     /** If the TorrentGroup is bookmarked */
     private boolean isBookmarked;
+
+	/**
+	 * The tags for the torrent group
+	 */
+	private List<String> tags;
 
 	/**
 	 * Gets the catalogue number.
@@ -200,8 +207,12 @@ public class Group {
 		return this.getYear() + " - Original Release" + " / " + this.getRecordLabel() + " / " + this.getCatalogueNumber();
 	}
 
-    /**
-     * Check if the group is bookmarked
+	public List<String> getTags() {
+		return tags;
+	}
+
+	/**
+	 * Check if the group is bookmarked
      *
      * @return True if torrent is bookmarked
      */
@@ -231,6 +242,7 @@ public class Group {
 				+ ", getCategoryName()=" + getCategoryName() + ", getId()=" + getId() + ", getMusicInfo()=" + getMusicInfo()
 				+ ", getName()=" + getName() + ", getRecordLabel()=" + getRecordLabel() + ", getReleaseType()="
 				+ getReleaseType() + ", getTime()=" + getTime() + ", isVanityHouse()=" + isVanityHouse() + ", getWikiBody()="
-				+ getWikiBody() + ", getWikiImage()=" + getWikiImage() + ", getYear()=" + getYear() + "]";
+				+ getWikiBody() + ", getWikiImage()=" + getWikiImage() + ", getYear()=" + getYear()
+				+ ", getTags() = " + tags  + "]";
 	}
 }
