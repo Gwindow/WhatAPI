@@ -15,8 +15,8 @@ Dependencies
 Example
 -------
 ```Java
-//set the site and login
-MySoup.setSite("ssl.what.cd");
+//set the site and login, e.g. to a local Gazelle install
+MySoup.setSite("localhost");
 MySoup.login("login.php", username, password);
 //create an object
 User user = User.userFromId(id);
